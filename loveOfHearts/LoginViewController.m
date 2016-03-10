@@ -1,0 +1,223 @@
+//
+//  ViewController.m
+//  喔喔农机
+//
+//  Created by 于恩聪 on 15/12/17.
+//  Copyright © 2015年 于恩聪. All rights reserved.
+//
+
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
+#import "PasswordViewController.h"
+#import "Networking.h"
+
+@interface LoginViewController (){
+    UIView *backView;
+    
+    UIView *logoView;
+    
+    UITextField *userName;
+    UITextField *password;
+    
+    UIButton *registerButton;
+    UIButton *findPasswordButton;
+    UIButton *sureButton;
+    
+}
+
+@end
+
+@implementation LoginViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self initUI];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)initUI{
+    [self.view setBackgroundColor:BACKGROUND_COLOR];
+    
+    backView = [UIView new];
+    [backView setBackgroundColor:BACKGROUND_COLOR];
+    [self.view addSubview:backView];
+    
+    userName = [UITextField new];
+    password = [UITextField new];
+
+    [userName.layer setCornerRadius:CORNER_RIDUS];
+    [userName setKeyboardType:UIKeyboardTypeDefault];
+    [userName setPlaceholder:@"  输入用户名"];
+    
+    UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
+    [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
+    [userName setLeftView:userLeftView];
+    [userName setLeftViewMode:UITextFieldViewModeAlways];
+    [userName setBackgroundColor:[UIColor whiteColor]];
+    
+    [password.layer setCornerRadius:CORNER_RIDUS];
+    [password setPlaceholder:@"  输入密码"];
+    [password setSecureTextEntry:YES];
+    [password setKeyboardType:UIKeyboardTypeDefault];
+    [password setBackgroundColor:[UIColor whiteColor]];
+    
+    UIImageView *passwordLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userpassword"]];
+    [passwordLeftView setFrame:CGRectMake(0, 0, 50, 50)];
+    [password setLeftView:passwordLeftView];
+    [password setLeftViewMode:UITextFieldViewModeAlways];
+    
+    
+    sureButton = [UIButton new];
+    [sureButton setBackgroundColor:[UIColor whiteColor]];
+    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
+    [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    
+    [sureButton.layer setCornerRadius:CORNER_RIDUS];
+    
+    [sureButton addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
+    [sureButton addTarget:self action:@selector(touchInsideButton:) forControlEvents:UIControlEventTouchDown];
+    
+    [self.view addSubview:sureButton];
+    
+    [backView addSubview:userName];
+    [backView addSubview:password];
+    [backView addSubview:sureButton];
+    
+    registerButton = [UIButton new];
+    findPasswordButton = [UIButton new];
+    
+    [registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [registerButton setTitle:@"注册账号" forState:UIControlStateNormal];
+    [registerButton.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+    [registerButton addTarget:self action:@selector(register) forControlEvents:UIControlEventTouchUpInside];
+
+    [findPasswordButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [findPasswordButton setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [findPasswordButton.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+    [findPasswordButton addTarget:self action:@selector(findPassword) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:registerButton];
+    [self.view addSubview:findPasswordButton];
+    
+    [self makeConstraints];
+}
+//旋转支持
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    // Return YES for supported orientations
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self updateConstraints];
+}
+
+
+
+//布局
+- (void)makeConstraints{
+    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 190));
+    }];
+    
+    [userName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(backView).with.offset(10);
+        make.right.equalTo(backView).with.offset(-10);
+        make.top.equalTo(backView).with.offset(10);
+        make.height.equalTo(@50);
+    }];
+    
+    [password mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(userName);
+        make.left.equalTo(userName);
+        make.top.equalTo(backView).with.offset(70);
+        make.height.equalTo(userName);
+    }];
+    [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(userName);
+        make.left.equalTo(userName);
+        make.bottom.equalTo(backView).with.offset(-10);
+        make.height.equalTo(@50);
+    }];
+    [registerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).with.offset(SCREEN_WIDTH / 2 - 100);
+        make.bottom.equalTo(self.view).with.offset(-20);
+        make.height.equalTo(@20);
+        make.width.equalTo(@100);
+    }];
+    [findPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).with.offset( - SCREEN_WIDTH / 2 + 100);
+        make.bottom.equalTo(registerButton);
+        make.height.equalTo(@20);
+        make.width.equalTo(@100);
+    }];
+
+}
+
+- (void)updateConstraints{
+    [backView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 190));
+        
+    }];
+    
+    [registerButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).with.offset(SCREEN_WIDTH / 2 - 100);
+        make.bottom.equalTo(self.view).with.offset(-20);
+        make.height.equalTo(@20);
+        make.width.equalTo(@100);
+    }];
+    
+    [findPasswordButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).with.offset( - SCREEN_WIDTH / 2 + 100);
+        make.bottom.equalTo(registerButton);
+        make.height.equalTo(@20);
+        make.width.equalTo(@100);
+    }];
+}
+
+
+
+//响应
+- (void)login{
+    [sureButton setBackgroundColor:DEFAULT_COLOR];
+    
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    //由storyboard根据myView的storyBoardID来获取我们要切换的视图
+    UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"main"];
+    
+    //由navigationController推向我们要推向的view
+    [self showViewController:myView sender:nil];
+    
+    if (userName.text && password.text) {
+        if([Networking loginwithUsername:userName.text and:password.text andUIViewController:self]){
+            NSLog(@"登陆成功");
+        }else{
+            NSLog(@"登陆失败");
+        }
+        
+    }
+}
+- (void)touchInsideButton:(UIButton *)sender{
+    [sender setBackgroundColor:HIGH_COLOR];
+}
+
+- (void)register{
+    RegisterViewController *registerView = [RegisterViewController new];
+    [self showViewController:registerView sender:self];
+}
+
+- (void)findPassword{
+    PasswordViewController *passwordView = [PasswordViewController new];
+    [self showViewController:passwordView sender:self];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+@end

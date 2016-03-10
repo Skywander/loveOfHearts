@@ -7,14 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56145DAFAAE7E1FBB80390D1 /* libPods.a */; };
+		D3C96EF01C911A0E00F27D10 /* Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C96EEF1C911A0E00F27D10 /* Networking.m */; };
+		D3C96EF21C911B8000F27D10 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF11C911B8000F27D10 /* libicucore.tbd */; };
+		D3C96EF41C911B8A00F27D10 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF31C911B8A00F27D10 /* libz.tbd */; };
+		D3C96EF61C911B9300F27D10 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF51C911B9300F27D10 /* libstdc++.tbd */; };
+		D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF71C911BA100F27D10 /* MessageUI.framework */; };
+		D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */; };
 		D3FEEF991C90FF7A00300710 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEF981C90FF7A00300710 /* main.m */; };
-		D3FEEF9C1C90FF7A00300710 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEF9B1C90FF7A00300710 /* AppDelegate.m */; };
-		D3FEEF9F1C90FF7A00300710 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEF9E1C90FF7A00300710 /* ViewController.m */; };
 		D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA01C90FF7A00300710 /* Main.storyboard */; };
 		D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA31C90FF7A00300710 /* Assets.xcassets */; };
 		D3FEEFA71C90FF7A00300710 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA51C90FF7A00300710 /* LaunchScreen.storyboard */; };
 		D3FEEFB21C90FF7A00300710 /* loveOfHeartsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFB11C90FF7A00300710 /* loveOfHeartsTests.m */; };
 		D3FEEFBD1C90FF7A00300710 /* loveOfHeartsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFBC1C90FF7A00300710 /* loveOfHeartsUITests.m */; };
+		D3FEEFD01C90FFDE00300710 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */; };
+		D3FEEFD41C91006300300710 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD11C91006300300710 /* ViewController.m */; };
+		D3FEEFD51C91006300300710 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD31C91006300300710 /* TopView.m */; };
+		D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD71C910AE100300710 /* LoginViewController.m */; };
+		D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD91C910AE100300710 /* RegisterViewController.m */; };
+		D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFDE1C910B3400300710 /* PasswordViewController.m */; };
+		D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFDF1C910B3400300710 /* NewPasswordViewController.m */; };
+		D3FEEFE91C910B4400300710 /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFE41C910B4400300710 /* SMS_SDKLocalizable.strings */; };
+		D3FEEFEA1C910B4400300710 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3FEEFE61C910B4400300710 /* MOBFoundation.framework */; };
+		D3FEEFEB1C910B4400300710 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3FEEFE71C910B4400300710 /* SMS_SDK.framework */; };
+		D3FEEFEE1C910B5B00300710 /* username.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFEC1C910B5B00300710 /* username.png */; };
+		D3FEEFEF1C910B5B00300710 /* userpassword.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFED1C910B5B00300710 /* userpassword.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +52,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56145DAFAAE7E1FBB80390D1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D3C96EEE1C911A0E00F27D10 /* Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Networking.h; sourceTree = "<group>"; };
+		D3C96EEF1C911A0E00F27D10 /* Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Networking.m; sourceTree = "<group>"; };
+		D3C96EF11C911B8000F27D10 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		D3C96EF31C911B8A00F27D10 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D3C96EF51C911B9300F27D10 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		D3C96EF71C911BA100F27D10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/PrivateFrameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D3FEEF941C90FF7A00300710 /* loveOfHearts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loveOfHearts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FEEF981C90FF7A00300710 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D3FEEF9A1C90FF7A00300710 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D3FEEF9B1C90FF7A00300710 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D3FEEF9D1C90FF7A00300710 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D3FEEF9E1C90FF7A00300710 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D3FEEFA11C90FF7A00300710 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D3FEEFA31C90FF7A00300710 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3FEEFA61C90FF7A00300710 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +73,29 @@
 		D3FEEFB81C90FF7A00300710 /* loveOfHeartsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = loveOfHeartsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FEEFBC1C90FF7A00300710 /* loveOfHeartsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = loveOfHeartsUITests.m; sourceTree = "<group>"; };
 		D3FEEFBE1C90FF7A00300710 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3FEEFCA1C90FF9700300710 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D3FEEFCB1C90FFA300300710 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		D3FEEFCD1C90FFCD00300710 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D3FEEFCE1C90FFDA00300710 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D3FEEFD11C91006300300710 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D3FEEFD21C91006300300710 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
+		D3FEEFD31C91006300300710 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
+		D3FEEFD71C910AE100300710 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		D3FEEFD81C910AE100300710 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		D3FEEFD91C910AE100300710 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		D3FEEFDC1C910AEB00300710 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		D3FEEFDD1C910B3400300710 /* NewPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPasswordViewController.h; sourceTree = "<group>"; };
+		D3FEEFDE1C910B3400300710 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		D3FEEFDF1C910B3400300710 /* NewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPasswordViewController.m; sourceTree = "<group>"; };
+		D3FEEFE01C910B3400300710 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		D3FEEFE51C910B4400300710 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
+		D3FEEFE61C910B4400300710 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
+		D3FEEFE71C910B4400300710 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
+		D3FEEFE81C910B4400300710 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
+		D3FEEFEC1C910B5B00300710 /* username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = username.png; sourceTree = "<group>"; };
+		D3FEEFED1C910B5B00300710 /* userpassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userpassword.png; sourceTree = "<group>"; };
+		F44883B1174E267EA4ADAC78 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +103,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */,
+				D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */,
+				D3C96EF61C911B9300F27D10 /* libstdc++.tbd in Frameworks */,
+				D3C96EF41C911B8A00F27D10 /* libz.tbd in Frameworks */,
+				D3C96EF21C911B8000F27D10 /* libicucore.tbd in Frameworks */,
+				D3FEEFEA1C910B4400300710 /* MOBFoundation.framework in Frameworks */,
+				D3FEEFEB1C910B4400300710 /* SMS_SDK.framework in Frameworks */,
+				078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +131,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65BEE6D796BF49FA8A7C4D05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */,
+				D3C96EF71C911BA100F27D10 /* MessageUI.framework */,
+				D3C96EF51C911B9300F27D10 /* libstdc++.tbd */,
+				D3C96EF31C911B8A00F27D10 /* libz.tbd */,
+				D3C96EF11C911B8000F27D10 /* libicucore.tbd */,
+				56145DAFAAE7E1FBB80390D1 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D3FEEF8B1C90FF7A00300710 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +151,8 @@
 				D3FEEFB01C90FF7A00300710 /* loveOfHeartsTests */,
 				D3FEEFBB1C90FF7A00300710 /* loveOfHeartsUITests */,
 				D3FEEF951C90FF7A00300710 /* Products */,
+				EDEF6BB7F17F4D865181FF73 /* Pods */,
+				65BEE6D796BF49FA8A7C4D05 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +169,16 @@
 		D3FEEF961C90FF7A00300710 /* loveOfHearts */ = {
 			isa = PBXGroup;
 			children = (
-				D3FEEF9A1C90FF7A00300710 /* AppDelegate.h */,
-				D3FEEF9B1C90FF7A00300710 /* AppDelegate.m */,
-				D3FEEF9D1C90FF7A00300710 /* ViewController.h */,
-				D3FEEF9E1C90FF7A00300710 /* ViewController.m */,
+				D3FEEFE31C910B4400300710 /* SMS_SDK */,
+				D3FEEFD61C910ACF00300710 /* Login */,
+				D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */,
+				D3FEEFCE1C90FFDA00300710 /* AppDelegate.h */,
+				D3FEEFCD1C90FFCD00300710 /* PrefixHeader.pch */,
+				D3FEEFCB1C90FFA300300710 /* Constant.h */,
+				D3FEEFCA1C90FF9700300710 /* ViewController.h */,
+				D3FEEFD11C91006300300710 /* ViewController.m */,
+				D3FEEFD21C91006300300710 /* TopView.h */,
+				D3FEEFD31C91006300300710 /* TopView.m */,
 				D3FEEFA01C90FF7A00300710 /* Main.storyboard */,
 				D3FEEFA31C90FF7A00300710 /* Assets.xcassets */,
 				D3FEEFA51C90FF7A00300710 /* LaunchScreen.storyboard */,
@@ -140,6 +214,44 @@
 			path = loveOfHeartsUITests;
 			sourceTree = "<group>";
 		};
+		D3FEEFD61C910ACF00300710 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D3C96EEE1C911A0E00F27D10 /* Networking.h */,
+				D3C96EEF1C911A0E00F27D10 /* Networking.m */,
+				D3FEEFEC1C910B5B00300710 /* username.png */,
+				D3FEEFED1C910B5B00300710 /* userpassword.png */,
+				D3FEEFDD1C910B3400300710 /* NewPasswordViewController.h */,
+				D3FEEFDE1C910B3400300710 /* PasswordViewController.m */,
+				D3FEEFDF1C910B3400300710 /* NewPasswordViewController.m */,
+				D3FEEFE01C910B3400300710 /* PasswordViewController.h */,
+				D3FEEFDC1C910AEB00300710 /* LoginViewController.h */,
+				D3FEEFD71C910AE100300710 /* LoginViewController.m */,
+				D3FEEFD81C910AE100300710 /* RegisterViewController.h */,
+				D3FEEFD91C910AE100300710 /* RegisterViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		D3FEEFE31C910B4400300710 /* SMS_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				D3FEEFE41C910B4400300710 /* SMS_SDKLocalizable.strings */,
+				D3FEEFE61C910B4400300710 /* MOBFoundation.framework */,
+				D3FEEFE71C910B4400300710 /* SMS_SDK.framework */,
+			);
+			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
+		EDEF6BB7F17F4D865181FF73 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */,
+				F44883B1174E267EA4ADAC78 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +259,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3FEEFC11C90FF7A00300710 /* Build configuration list for PBXNativeTarget "loveOfHearts" */;
 			buildPhases = (
+				BEE22DD9101F8E2B4FC7191C /* Check Pods Manifest.lock */,
 				D3FEEF901C90FF7A00300710 /* Sources */,
 				D3FEEF911C90FF7A00300710 /* Frameworks */,
 				D3FEEF921C90FF7A00300710 /* Resources */,
+				023D6CDE20C1583099911B3C /* Embed Pods Frameworks */,
+				57996EF593574BC934FAF5FA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,6 +340,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D3FEEF8B1C90FF7A00300710;
 			productRefGroup = D3FEEF951C90FF7A00300710 /* Products */;
@@ -243,6 +359,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3FEEFEE1C910B5B00300710 /* username.png in Resources */,
+				D3FEEFEF1C910B5B00300710 /* userpassword.png in Resources */,
+				D3FEEFE91C910B4400300710 /* SMS_SDKLocalizable.strings in Resources */,
 				D3FEEFA71C90FF7A00300710 /* LaunchScreen.storyboard in Resources */,
 				D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */,
 				D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */,
@@ -265,14 +384,68 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		023D6CDE20C1583099911B3C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57996EF593574BC934FAF5FA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEE22DD9101F8E2B4FC7191C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D3FEEF901C90FF7A00300710 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3FEEF9F1C90FF7A00300710 /* ViewController.m in Sources */,
-				D3FEEF9C1C90FF7A00300710 /* AppDelegate.m in Sources */,
+				D3FEEFD41C91006300300710 /* ViewController.m in Sources */,
+				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
+				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
+				D3FEEFD01C90FFDE00300710 /* AppDelegate.m in Sources */,
+				D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */,
+				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,
+				D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */,
+				D3C96EF01C911A0E00F27D10 /* Networking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +495,15 @@
 				D3FEEFA61C90FF7A00300710 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D3FEEFE41C910B4400300710 /* SMS_SDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3FEEFE51C910B4400300710 /* en */,
+				D3FEEFE81C910B4400300710 /* zh-Hans */,
+			);
+			name = SMS_SDKLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,8 +591,16 @@
 		};
 		D3FEEFC21C90FF7A00300710 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/loveOfHearts/SMS_SDK",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/loveOfHearts/PrefixHeader.pch";
 				INFOPLIST_FILE = loveOfHearts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.runners.loveOfHearts;
@@ -420,10 +610,19 @@
 		};
 		D3FEEFC31C90FF7A00300710 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F44883B1174E267EA4ADAC78 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/loveOfHearts/SMS_SDK",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/loveOfHearts/PrefixHeader.pch";
 				INFOPLIST_FILE = loveOfHearts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.runners.loveOfHearts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -496,6 +695,7 @@
 				D3FEEFC31C90FF7A00300710 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3FEEFC41C90FF7A00300710 /* Build configuration list for PBXNativeTarget "loveOfHeartsTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +704,7 @@
 				D3FEEFC61C90FF7A00300710 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D3FEEFC71C90FF7A00300710 /* Build configuration list for PBXNativeTarget "loveOfHeartsUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +713,7 @@
 				D3FEEFC91C90FF7A00300710 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,12 +1,15 @@
 //
 //  AppDelegate.m
-//  loveOfHearts
+//  爱之心
 //
-//  Created by 于恩聪 on 16/3/10.
+//  Created by 于恩聪 on 16/3/9.
 //  Copyright © 2016年 于恩聪. All rights reserved.
 //
 
 #import "AppDelegate.h"
+
+#import <SMS_SDK/SMSSDK.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +20,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //键盘管理
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
+    //短信验证码
+    [SMSSDK registerApp:@"da719593615f" withSecret:@"8fa14cec08625888dd27bfb4df589ac6"];
     return YES;
 }
 
