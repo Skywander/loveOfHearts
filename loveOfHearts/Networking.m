@@ -8,83 +8,77 @@
 
 #import "Networking.h"
 #import "PasswordViewController.h"
-
+#import "JSONKit.h"
 @implementation Networking
 
-bool isSuccess;
+bool loginMessage;
 
-bool over;
+//1 success 2 重复 3 失败
+int registerMessage;
 
 NSString *returnStr;
 
 AFHTTPSessionManager *manager;
 
-+ (BOOL)registerwithDict:(id)dict{
++ (void)registerwithDict:(id)dict{
     if (!manager) {
         manager = [AFHTTPSessionManager new];
-
     }
     
-    [manager POST:[NSString stringWithFormat:@"%@%@",HTTP,@"user/"]
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    [manager POST:[NSString stringWithFormat:@"%@register",HTTP]
        parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
-           //
+           ;
        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-           NSLog(@"register success");
-           isSuccess = YES;
+           NSString *responseMessage = [responseObject objectForKey:@"msg"];
+           
+           if ([responseMessage isEqualToString:@"success"]) {
+               registerMessage = 1;
+           }else if ([responseMessage isEqualToString:@"already exist"]) {
+               registerMessage = 2;
+           } else{
+               registerMessage = 3;
+           }
+           
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-           isSuccess = NO;
-           NSLog(@"register failure");
+           NSLog(@"register failure as %@",error);
+           registerMessage = 3;
        }];
-    NSLog(@"%@",[NSString stringWithFormat:@"%@%@",HTTP,@"user/"]);
     
-    return isSuccess;
 }
 
-+ (BOOL)loginwithUsername:(NSString *)username and:(NSString *)password andUIViewController:(UIViewController *)viewController{
-    NSLog(@"%@",password);
-    isSuccess = NO;
-    over = NO;
++ (int)getRegisterMessage{
+    return registerMessage;
+}
+
++ (void)loginwithUsername:(NSString *)username and:(NSString *)password{
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    [manager GET:[NSString stringWithFormat:@"%@%@%@",HTTP,@"user/",username]
-      parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-      } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-          NSDictionary *responseDict = (NSDictionary *)responseObject;
-          
-          NSNumber *code = [responseDict objectForKey:@"code"];
-          
-          if ([code intValue] == 100) {
-              NSArray *dataStr = [responseDict objectForKey:@"data"];
-              
-              NSDictionary *dataDict = [dataStr objectAtIndex:0];
-              
-              NSString *getPassword = [dataDict objectForKey:@"password"];
-              
-              NSLog(@"%@",getPassword);
-              
-              if ([getPassword isEqualToString:password]) {
-                  
-                  isSuccess = YES;
-                  PasswordViewController *password = [PasswordViewController new];
-                  [viewController presentViewController:password animated:YES completion:^{
-                      //
-                  }];
-                  
-              }else{
-                  isSuccess = NO;
-              }
-          }else{
-              isSuccess = NO;
-          }
-          over = YES;
-      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          NSLog(@"login failure");
-          isSuccess = NO;
-          over = NO;
-      }];
+    NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:username,@"userId",password,@"userPw",nil];
+    
+    [manager POST:[NSString stringWithFormat:@"%@login",HTTP] parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        int returnType = [[responseObject objectForKey:@"type"] intValue];
+        
+        if (returnType == 100) {
+            NSLog(@"return is 100,login success");
+            loginMessage = true;
+        }else{
+            loginMessage = false;
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        loginMessage = false;
+    }];
+}
 
-    return isSuccess;
++ (BOOL)getLoginMessage{
+    return  loginMessage;
 }
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "Mymapview.h"
+#import "HomeMenuView.h"
 
 #define START_X 0
 #define START_Y 0
@@ -15,6 +17,8 @@
 @interface ViewController ()
 {
     TopView *topView;
+    Mymapview *mapView;
+    HomeMenuView *menuView;
 }
 
 @end
@@ -25,6 +29,10 @@
     [super viewDidLoad];
     
     [self initTopView];
+    
+    [self initMapView];
+    
+    [self initHomeMenuView];
 
 }
 
@@ -34,6 +42,21 @@
     
     [topView setAddress:@"哈工大"];
 }
+
+- (void)initMapView{
+    mapView = [Mymapview sharedInstance];
+    
+    [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    
+    [self.view addSubview:mapView];
+}
+
+- (void)initHomeMenuView{
+    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(10, 74, 40, 280)];
+    
+    [self.view addSubview:menuView];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

@@ -37,7 +37,11 @@
 
 #define CORNER_RIDUS 6.f
 
-#define HTTP @"http://api.carpela.me:8080/lender-api/"
+#define HTTP @"http://xgbdlbs.com/XGBDPlatforms/"
 
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
 #define DEFAULT_COLOR [UIColor whiteColor]
+
+//地图
+
+#define APIKey @"506a94aa036dd736c0d2ab802d756fd9"

@@ -9,7 +9,8 @@
 @interface Networking : NSObject
 
 
-+ (BOOL)registerwithDict:(id)dict;
-+ (BOOL)loginwithUsername:(NSString *)username and:(NSString *)password andUIViewController:(UIViewController *)viewController;
-
++ (void)registerwithDict:(id)dict;
++ (void)loginwithUsername:(NSString *)username and:(NSString *)password;
++(BOOL) getLoginMessage;
++(int)getRegisterMessage;
 @end

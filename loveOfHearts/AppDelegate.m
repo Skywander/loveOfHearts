@@ -10,6 +10,7 @@
 
 #import <SMS_SDK/SMSSDK.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
+#import <MAMapKit/MAMapKit.h>
 
 @interface AppDelegate ()
 
@@ -29,6 +30,11 @@
     manager.enableAutoToolbar = NO;
     //短信验证码
     [SMSSDK registerApp:@"da719593615f" withSecret:@"8fa14cec08625888dd27bfb4df589ac6"];
+    
+    
+    //地图
+    
+    [MAMapServices sharedServices].apiKey = @"506a94aa036dd736c0d2ab802d756fd9";
     return YES;
 }
 

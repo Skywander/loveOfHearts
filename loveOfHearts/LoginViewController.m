@@ -23,6 +23,9 @@
     UIButton *findPasswordButton;
     UIButton *sureButton;
     
+    //
+    NSTimer *returnMessageInterval;
+    
 }
 
 @end
@@ -50,7 +53,7 @@
 
     [userName.layer setCornerRadius:CORNER_RIDUS];
     [userName setKeyboardType:UIKeyboardTypeDefault];
-    [userName setPlaceholder:@"  输入用户名"];
+    [userName setPlaceholder:@"  输入手机号码"];
     
     UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
     [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
@@ -72,7 +75,7 @@
     
     sureButton = [UIButton new];
     [sureButton setBackgroundColor:[UIColor whiteColor]];
-    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
+    [sureButton setTitle:@"登录" forState:UIControlStateNormal];
     [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
     
@@ -186,22 +189,29 @@
 - (void)login{
     [sureButton setBackgroundColor:DEFAULT_COLOR];
     
-    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    //由storyboard根据myView的storyBoardID来获取我们要切换的视图
-    UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"main"];
-    
-    //由navigationController推向我们要推向的view
-    [self showViewController:myView sender:nil];
-    
     if (userName.text && password.text) {
-        if([Networking loginwithUsername:userName.text and:password.text andUIViewController:self]){
-            NSLog(@"登陆成功");
-        }else{
-            NSLog(@"登陆失败");
-        }
+        [Networking loginwithUsername:userName.text and:password.text];
+    }
+    
+    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:3 target:self
+                                                                    selector:@selector(getLoginMessage)
+                                                                    userInfo:nil
+                                                                     repeats:NO
+                                      ];
+}
+
+- (void)getLoginMessage{
+    
+    if ([Networking getLoginMessage]) {
+        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"main"];
         
+        [self showViewController:myView sender:nil];
+    }else{
+        NSLog(@"login false");
     }
 }
+
 - (void)touchInsideButton:(UIButton *)sender{
     [sender setBackgroundColor:HIGH_COLOR];
 }

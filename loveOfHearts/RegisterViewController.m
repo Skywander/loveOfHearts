@@ -17,7 +17,6 @@
     UITextField *password;
     UITextField *passwordAgain;
     UITextField *code;
-    UITextField *phoneNumber;
     
     UIView *codeView;
     UIButton *codeButton;
@@ -26,12 +25,14 @@
     //验证码
     NSMutableArray* _areaArray;
     NSString *_str;
+    NSString *phoneNumber;
     BOOL codeIsRight;
     //
     
     int timeCount;
     NSTimer *timer;
-
+    NSTimer *getMessageTimer;
+    NSTimer *codeTimer;
 }
 
 @end
@@ -56,10 +57,11 @@
     
     [self initNavigation];
     
-    username = [self textFieldWithImageName:@"username" andPlaceholder:@" 输入用户名"];
+    username = [self textFieldWithImageName:@"username" andPlaceholder:@" 输入手机号码"];
     password = [self textFieldWithImageName:@"userpassword" andPlaceholder:@" 输入密码"];
+    password.secureTextEntry = YES;
     passwordAgain = [self textFieldWithImageName:@"userpassword" andPlaceholder:@" 确认密码"];
-    phoneNumber = [self textFieldWithImageName:@"username" andPlaceholder:@" 输入手机号码"];
+    passwordAgain.secureTextEntry = YES;
     //验证码
     codeView = [UIView new];
     [codeView setBackgroundColor:BACKGROUND_COLOR];
@@ -89,7 +91,7 @@
     //确定
     sureButton = [UIButton new];
     [sureButton setBackgroundColor:[UIColor whiteColor]];
-    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
+    [sureButton setTitle:@"注册" forState:UIControlStateNormal];
     [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
     
@@ -173,17 +175,10 @@
         make.height.equalTo(@(CELL_HEIGHT));
     }];
     
-    [phoneNumber mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(username);
-        make.right.equalTo(username);
-        make.top.equalTo(passwordAgain).with.offset(CELL_HEIGHT + OFFSET);
-        make.height.equalTo(@(CELL_HEIGHT));
-    }];
-    
     [codeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(username);
         make.right.equalTo(username);
-        make.top.equalTo(phoneNumber).with.offset(CELL_HEIGHT + OFFSET);
+        make.top.equalTo(passwordAgain).with.offset(CELL_HEIGHT + OFFSET);
         make.height.equalTo(@(CELL_HEIGHT));
     }];
     [code mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -206,9 +201,6 @@
         make.height.equalTo(@(CELL_HEIGHT));
     }];
 }
-- (void)updateConstraints{
-    
-}
 
 //响应
 
@@ -220,30 +212,59 @@
 
 - (void)clickSureButton{
     [sureButton setBackgroundColor:DEFAULT_COLOR];
+    if (password.text.length <= 6) {
+        NSLog(@"密码太短");
+        return;
+    }
+    
+    if (![password.text isEqualToString:passwordAgain.text]) {
+        NSLog(@"两次输入不一致");
+        return;
+    }
+    
+    [self checkCode];
+    
+    codeTimer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                 target:self
+                                               selector:@selector(registerAccount)
+                                               userInfo:nil
+                                                repeats:NO];
     
 
-//    if ([self checkCode]) {
-//        NSLog(@"验证码输入正确");
-//    }
-    NSDictionary *paramater = @{
-                                @"phonenumber":@"13100962027",
-                                @"name":@"Skywander",
-                                @"password":@"blackstar",
-                                };
-    [Networking registerwithDict:paramater];
 }
+- (void)registerAccount{
+    if (codeIsRight) {
+        
+        NSLog(@"code is rightn");
+        NSDictionary *paramater = @{
+                                    @"userId":phoneNumber,
+                                    @"userPw":password.text,
+                                    };
+        [Networking registerwithDict:paramater];
+        
+        getMessageTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getReturnMessage) userInfo:nil repeats:NO];
+    }else{
+        NSLog(@"code is wrong");
+    }
+}
+
+- (void)getReturnMessage{
+    NSLog(@"returen message");
+   int returnNumber =  [Networking getRegisterMessage];
+    
+    if (returnNumber == 1){
+        NSLog(@"success");
+    }else if(returnNumber == 2){
+        NSLog(@"重复注册");
+    }else{
+        NSLog(@"注册失败");
+    }
+}
+
 - (void)touchInside:(UIButton *)sender{
     [sender setBackgroundColor:HIGH_COLOR];
 }
 - (void)getCode{
-    
-    timeCount = 60;
-    timer = [NSTimer scheduledTimerWithTimeInterval:1
-                                             target:self
-                                           selector:@selector(startTimer)
-                                           userInfo:nil
-                                            repeats:YES
-             ];
     
     [codeButton setBackgroundColor:DEFAULT_COLOR];
     
@@ -258,7 +279,7 @@
             compareResult = 1;
             NSString* rule1 = [dict1 valueForKey:@"rule"];
             NSPredicate* pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",rule1];
-            BOOL isMatch = [pred evaluateWithObject:phoneNumber.text];
+            BOOL isMatch = [pred evaluateWithObject:username.text];
             if (!isMatch)
             {
                 [self alertWithTitle:@"手机号码不正确"];
@@ -270,15 +291,15 @@
     
     if (!compareResult)
     {
-        if (phoneNumber.text.length!=11)
+        if (username.text.length!=11)
         {
             [self alertWithTitle:@"手机号码不正确"];
             return;
         }
     }
     
-    NSString* str = [NSString stringWithFormat:@"%@:%@ %@",@"发送验证码到",@"+86",phoneNumber.text];
-    _str = [NSString stringWithFormat:@"%@",phoneNumber.text];
+    NSString* str = [NSString stringWithFormat:@"%@:%@ %@",@"发送验证码到",@"+86",username.text];
+    _str = [NSString stringWithFormat:@"%@",username.text];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:str
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert
@@ -286,7 +307,7 @@
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString* str2 = [@"+86" stringByReplacingOccurrencesOfString:@"+" withString:@""];
         
-        [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phoneNumber.text
+        [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:username.text
                                        zone:str2
                            customIdentifier:nil
                                      result:^(NSError *error)
@@ -295,6 +316,15 @@
              if (!error)
              {
                  NSLog(@"验证码发送成功");
+                 phoneNumber = username.text;
+                 
+                 timeCount = 60;
+                 timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                          target:self
+                                                        selector:@selector(startTimer)
+                                                        userInfo:nil
+                                                         repeats:YES
+                          ];
              }
              else
              {
@@ -319,7 +349,7 @@
     
 
 }
-- (BOOL)checkCode{
+- (void)checkCode{
     [self.view endEditing:YES];
     
     codeIsRight = NO;
@@ -330,7 +360,7 @@
     }
     else
     {
-        [SMSSDK commitVerificationCode:code.text phoneNumber:phoneNumber.text zone:@"86" result:^(NSError *error) {
+        [SMSSDK commitVerificationCode:code.text phoneNumber:username.text zone:@"86" result:^(NSError *error) {
             
             if (!error) {
                 
@@ -344,8 +374,6 @@
             }
         }];
     }
-    return codeIsRight;
-    
 }
 - (void)startTimer{
     
