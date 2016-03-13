@@ -10,6 +10,7 @@
 #import "RegisterViewController.h"
 #import "PasswordViewController.h"
 #import "Networking.h"
+#import "Alert.h"
 
 @interface LoginViewController (){
     UIView *backView;
@@ -26,6 +27,9 @@
     //
     NSTimer *returnMessageInterval;
     
+    //userId userPassword
+    NSString *userId;
+    NSString *userPassword;
 }
 
 @end
@@ -34,11 +38,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initData];
+    
     [self initUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)initData{
+    NSString *tempID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
+    
+    NSString *tempPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"userPassword"];
+    
+    
+    if (tempID && tempPassword) {
+        userId = tempID;
+        userPassword = tempPassword;
+    }else{
+        userPassword = @"  输入密码";
+        userId = @"  输入手机号码";
+    }
+    
 }
 
 - (void)initUI{
@@ -53,7 +76,8 @@
 
     [userName.layer setCornerRadius:CORNER_RIDUS];
     [userName setKeyboardType:UIKeyboardTypeDefault];
-    [userName setPlaceholder:@"  输入手机号码"];
+//    [userName setPlaceholder:userId];
+    [userName setText:userId];
     
     UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
     [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
@@ -62,7 +86,8 @@
     [userName setBackgroundColor:[UIColor whiteColor]];
     
     [password.layer setCornerRadius:CORNER_RIDUS];
-    [password setPlaceholder:@"  输入密码"];
+//    [password setPlaceholder:userPassword];
+    [password setText:userPassword];
     [password setSecureTextEntry:YES];
     [password setKeyboardType:UIKeyboardTypeDefault];
     [password setBackgroundColor:[UIColor whiteColor]];
@@ -205,6 +230,11 @@
     if ([Networking getLoginMessage]) {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"main"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"userPassword"]];
+        
         
         [self showViewController:myView sender:nil];
     }else{

@@ -9,7 +9,6 @@
 #import "PasswordViewController.h"
 #import "NewPasswordViewController.h"
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
-#define DEFAULT_COLOR [UIColor whiteColor]
 
 @interface PasswordViewController (){
     UITextField *phoneNumber;

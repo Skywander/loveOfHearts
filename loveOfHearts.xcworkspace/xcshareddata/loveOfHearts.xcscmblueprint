@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C1A330677A42E8BDB9B395467C27A0A608B9069B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BE324A21B025612F998CC87103A6D511267A716D" : 0,
+    "C1A330677A42E8BDB9B395467C27A0A608B9069B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5C5F4A40-CB33-4E79-B7AB-9068B502BA59",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BE324A21B025612F998CC87103A6D511267A716D" : "Runner\/",
+    "C1A330677A42E8BDB9B395467C27A0A608B9069B" : "loveOfHearts\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "loveOfHearts",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "loveOfHearts.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Skywander\/-.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BE324A21B025612F998CC87103A6D511267A716D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Skywander\/loveOfHearts.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C1A330677A42E8BDB9B395467C27A0A608B9069B"
+    }
+  ]
+}

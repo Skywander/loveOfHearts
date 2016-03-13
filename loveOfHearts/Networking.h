@@ -11,6 +11,6 @@
 
 + (void)registerwithDict:(id)dict;
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password;
-+(BOOL) getLoginMessage;
-+(int)getRegisterMessage;
++ (BOOL)getLoginMessage;
++ (int)getRegisterMessage;
 @end

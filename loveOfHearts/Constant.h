@@ -12,24 +12,11 @@
 
 #endif /* Header_h */
 
-//通用属性值
+//长度
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-
-//首页顶部颜色
-#define TOP_COLOR [UIColor redColor]
-
-//登录相关设置
-#define BACKGROUND_COLOR [UIColor colorWithRed:236/255.0 green:236/255.0 blue:239/255.0 alpha:1]
-
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-
-#define NAVI_COLOR [UIColor whiteColor]
-#define NAVI_FONT_COLOR [UIColor grayColor]
-
 
 #define CELL_HEIGHT 40
 
@@ -37,11 +24,25 @@
 
 #define CORNER_RIDUS 6.f
 
-#define HTTP @"http://xgbdlbs.com/XGBDPlatforms/"
+
+//颜色
+#define TOP_COLOR [UIColor redColor]
+
+#define DEFAULT_COLOR [UIColor grayColor]
 
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
-#define DEFAULT_COLOR [UIColor whiteColor]
+
+#define NAVI_COLOR [UIColor whiteColor]
+
+#define NAVI_FONT_COLOR [UIColor grayColor]
+
+#define BACKGROUND_COLOR [UIColor colorWithRed:236/255.0 green:236/255.0 blue:239/255.0 alpha:1]
+
+//网络
+
+#define HTTP @"http://xgbdlbs.com/XGBDPlatforms/"
+
 
 //地图
 
-#define APIKey @"506a94aa036dd736c0d2ab802d756fd9"
+#define APIKey @"f328f5a236476245ea06d0c86476cb64"

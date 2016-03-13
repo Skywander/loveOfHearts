@@ -28,6 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *identifierForVendor = [[UIDevice currentDevice].identifierForVendor UUIDString];
+
+    NSLog(@"%@",identifierForVendor);
+    
+    
     [self initTopView];
     
     [self initMapView];

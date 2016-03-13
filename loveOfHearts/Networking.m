@@ -9,14 +9,13 @@
 #import "Networking.h"
 #import "PasswordViewController.h"
 #import "JSONKit.h"
+#import "Alert.h"
 @implementation Networking
 
 bool loginMessage;
 
-//1 success 2 重复 3 失败
+//1成功 2 重复 3 失败
 int registerMessage;
-
-NSString *returnStr;
 
 AFHTTPSessionManager *manager;
 
@@ -39,16 +38,11 @@ AFHTTPSessionManager *manager;
            } else{
                registerMessage = 3;
            }
-           
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"register failure as %@",error);
            registerMessage = 3;
        }];
     
-}
-
-+ (int)getRegisterMessage{
-    return registerMessage;
 }
 
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password{
@@ -66,10 +60,13 @@ AFHTTPSessionManager *manager;
         int returnType = [[responseObject objectForKey:@"type"] intValue];
         
         if (returnType == 100) {
-            NSLog(@"return is 100,login success");
+            
             loginMessage = true;
+            
         }else{
+            
             loginMessage = false;
+            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -80,5 +77,10 @@ AFHTTPSessionManager *manager;
 + (BOOL)getLoginMessage{
     return  loginMessage;
 }
+
++ (int)getRegisterMessage{
+    return registerMessage;
+}
+
 
 @end
