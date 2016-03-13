@@ -30,6 +30,9 @@
 		D3DF044A1C950E2600832CD9 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04491C950E2600832CD9 /* Command.m */; };
 		D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF044C1C950FA500832CD9 /* PhoneCanMakeList.m */; };
 		D3DF04501C952FFA00832CD9 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF044F1C952FFA00832CD9 /* Alert.m */; };
+		D3DF04541C95416200832CD9 /* AddWatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04531C95416200832CD9 /* AddWatchViewController.m */; };
+		D3DF04571C95425600832CD9 /* AddWatchByInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04561C95425600832CD9 /* AddWatchByInput.m */; };
+		D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF045A1C9543FE00832CD9 /* SYQRCodeViewController.m */; };
 		D3FEEF991C90FF7A00300710 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEF981C90FF7A00300710 /* main.m */; };
 		D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA01C90FF7A00300710 /* Main.storyboard */; };
 		D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA31C90FF7A00300710 /* Assets.xcassets */; };
@@ -102,6 +105,12 @@
 		D3DF044C1C950FA500832CD9 /* PhoneCanMakeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCanMakeList.m; sourceTree = "<group>"; };
 		D3DF044E1C952FFA00832CD9 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
 		D3DF044F1C952FFA00832CD9 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
+		D3DF04521C95416200832CD9 /* AddWatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWatchViewController.h; sourceTree = "<group>"; };
+		D3DF04531C95416200832CD9 /* AddWatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWatchViewController.m; sourceTree = "<group>"; };
+		D3DF04551C95425600832CD9 /* AddWatchByInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWatchByInput.h; sourceTree = "<group>"; };
+		D3DF04561C95425600832CD9 /* AddWatchByInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWatchByInput.m; sourceTree = "<group>"; };
+		D3DF04591C9543FE00832CD9 /* SYQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeViewController.h; sourceTree = "<group>"; };
+		D3DF045A1C9543FE00832CD9 /* SYQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeViewController.m; sourceTree = "<group>"; };
 		D3FEEF941C90FF7A00300710 /* loveOfHearts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loveOfHearts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FEEF981C90FF7A00300710 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3FEEFA11C90FF7A00300710 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -258,12 +267,33 @@
 				D3DF044F1C952FFA00832CD9 /* Alert.m */,
 			);
 			name = PhoneSettting;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D3DF04511C95411000832CD9 /* AddWatch */ = {
+			isa = PBXGroup;
+			children = (
+				D3DF04551C95425600832CD9 /* AddWatchByInput.h */,
+				D3DF04561C95425600832CD9 /* AddWatchByInput.m */,
+				D3DF04521C95416200832CD9 /* AddWatchViewController.h */,
+				D3DF04531C95416200832CD9 /* AddWatchViewController.m */,
+			);
+			name = AddWatch;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D3DF04581C9543ED00832CD9 /* ActionView */ = {
+			isa = PBXGroup;
+			children = (
+				D3DF04591C9543FE00832CD9 /* SYQRCodeViewController.h */,
+				D3DF045A1C9543FE00832CD9 /* SYQRCodeViewController.m */,
+			);
+			name = ActionView;
 			sourceTree = "<group>";
 		};
 		D3FEEF8B1C90FF7A00300710 = {
 			isa = PBXGroup;
 			children = (
-				D3DF04291C9502D700832CD9 /* PhoneSettting */,
 				D3FEEF961C90FF7A00300710 /* loveOfHearts */,
 				D3FEEFB01C90FF7A00300710 /* loveOfHeartsTests */,
 				D3FEEFBB1C90FF7A00300710 /* loveOfHeartsUITests */,
@@ -286,6 +316,9 @@
 		D3FEEF961C90FF7A00300710 /* loveOfHearts */ = {
 			isa = PBXGroup;
 			children = (
+				D3DF04581C9543ED00832CD9 /* ActionView */,
+				D3DF04511C95411000832CD9 /* AddWatch */,
+				D3DF04291C9502D700832CD9 /* PhoneSettting */,
 				D3A2A3F41C92AB31009B1D0E /* HomeView */,
 				D3A2A3E41C92A0A0009B1D0E /* MapView */,
 				D3A2A3E31C92A080009B1D0E /* Tool */,
@@ -554,6 +587,7 @@
 			files = (
 				D3FEEFD41C91006300300710 /* ViewController.m in Sources */,
 				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
+				D3DF04541C95416200832CD9 /* AddWatchViewController.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
 				D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */,
 				D3DF044A1C950E2600832CD9 /* Command.m in Sources */,
@@ -561,7 +595,9 @@
 				D3DF04501C952FFA00832CD9 /* Alert.m in Sources */,
 				D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */,
 				D3DF04441C950CB000832CD9 /* SosphoneSetting.m in Sources */,
+				D3DF04571C95425600832CD9 /* AddWatchByInput.m in Sources */,
 				D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */,
+				D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */,
 				D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */,
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,

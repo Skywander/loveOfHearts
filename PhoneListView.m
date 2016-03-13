@@ -28,6 +28,7 @@
 @end
 @implementation PhoneListView
 @synthesize phbArray;
+@synthesize userAccount,watchID;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -174,11 +175,21 @@
         NSLog(@"pushStringone : %@ pushStringTwo: %@",pushStringone,pushStringtwo);
         
         if (pushStringone.length != 0) {
-            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:@"18644060065",@"userId",@"1151102004",@"wid",[pushStringone substringWithRange:range1],@"PHB", nil];
+            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      userAccount,@"userId",
+                                      watchID,@"wid",
+                                      [pushStringone substringWithRange:range1],@"PHB",
+                                      nil
+                                      ];
             [Command commandWithAddress:@"phones" andParamater:tempDict];
         }
         if (pushStringtwo.length != 0) {
-            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:@"18644060065",@"userId",@"1151102004",@"wid",[pushStringone substringWithRange:range1],@"PHB2", nil];
+            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      userAccount,@"userId",
+                                      watchID,@"wid",
+                                      [pushStringone substringWithRange:range1],@"PHB2",
+                                      nil
+                                      ];
             [Command commandWithAddress:@"phones" andParamater:tempDict];
 
         }

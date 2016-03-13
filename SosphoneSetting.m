@@ -26,6 +26,7 @@
 @implementation SosphoneSetting
 @synthesize centerNumber;
 @synthesize sosArray;
+@synthesize userAccount,watchID;
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self initData];
@@ -119,12 +120,22 @@
     
     NSString *tempString = [NSString stringWithFormat:@"%@,%@,%@",textFields[0].text,textFields[1].text,textFields[2].text];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"18644060065", @"userId",@"1151102004",@"wid",tempString,@"sos",nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          userAccount, @"userId",
+                          watchID,@"wid",
+                          tempString,@"sos",
+                          nil
+                          ];
     
     [Command commandWithAddress:@"sos" andParamater:dict];
     
     if (textFields[3].text) {
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@"18644060065", @"userId",@"1151102004",@"wid",textFields[3].text,@"centerNumber",nil];
+        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              userAccount, @"userId",
+                              watchID,@"wid",
+                              textFields[3].text,@"centerNumber",
+                              nil
+                              ];
         
         [Command commandWithAddress:@"centernumber" andParamater:dict];
     }

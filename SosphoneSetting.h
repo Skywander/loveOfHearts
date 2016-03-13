@@ -16,4 +16,8 @@
 
 @property (nonatomic,strong) NSArray *sosArray;
 
+@property (nonatomic,strong) NSString *userAccount;
+
+@property (nonatomic,strong) NSString *watchID;
+
 @end

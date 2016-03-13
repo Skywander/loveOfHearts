@@ -23,15 +23,13 @@
     NSString *phoneNumbersOne;
     NSString *phoneNumbersTwo;
     CGFloat listOffset;
-    
-    NSString *userAccount;
-    NSString *watchID;
 }
 @end
 
 @implementation PhoneCanMakeList
 @synthesize whitelist_1;
 @synthesize whitelist_2;
+@synthesize userAccount,watchID;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
@@ -188,7 +186,7 @@
         
         NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                   userAccount,@"userId",
-                                  @"1151102004",@"wid",
+                                  watchID,@"wid",
                                   [phoneNumbersOne substringWithRange:range1],@"whitelist1",
                                   nil
                                   ];
@@ -196,7 +194,7 @@
         
         NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     userAccount,@"userId",
-                                    @"1151102004",@"wid",
+                                    watchID,@"wid",
                                     [phoneNumbersTwo substringWithRange:range1],@"whitelist2",
                                     nil
                                     ];
@@ -223,10 +221,8 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"text : %@",textField.text);
-    [phoneNumbersList replaceObjectAtIndex:textField.tag withObject:textField.text];
     
-    NSLog(@"phoneList : %@",phoneNumbersList);
+    [phoneNumbersList replaceObjectAtIndex:textField.tag withObject:textField.text];
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];

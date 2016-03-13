@@ -63,6 +63,8 @@ AFHTTPSessionManager *manager;
             
             loginMessage = true;
             
+            NSLog(@"%@",responseObject);
+            
         }else{
             
             loginMessage = false;
@@ -73,6 +75,23 @@ AFHTTPSessionManager *manager;
         loginMessage = false;
     }];
 }
++ (void)addWatchWithParamaters:(NSDictionary *)paramaters{
+    NSLog(@"%@",paramaters);
+    
+    if (!manager) {
+        manager = [AFHTTPSessionManager new];
+    }
+    [manager POST:[NSString stringWithFormat:@"%@bind",HTTP] parameters:paramaters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 + (BOOL)getLoginMessage{
     return  loginMessage;

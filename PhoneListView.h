@@ -13,5 +13,8 @@
 
 @property (nonatomic,strong) NSMutableArray *phbArray;
 
+@property (nonatomic,strong) NSString *userAccount;
+@property (nonatomic,strong) NSString *watchID;
+
 
 @end

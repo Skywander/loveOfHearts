@@ -14,4 +14,6 @@
 @property (nonatomic,strong) NSArray *whitelist_1;
 @property (nonatomic,strong) NSArray *whitelist_2;
 
+@property (nonatomic,strong) NSString *userAccount;
+@property (nonatomic,strong) NSString *watchID;
 @end

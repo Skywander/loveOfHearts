@@ -51,7 +51,7 @@
 - (void)initData{
     NSString *tempID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
     
-    NSString *tempPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"userPassword"];
+    NSString *tempPassword = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@.password",tempID]];
     
     
     if (tempID && tempPassword) {
@@ -233,7 +233,7 @@
         
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
         
-        [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"userPassword"]];
+        [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"%@.password",userName.text]];
         
         
         [self showViewController:myView sender:nil];
