@@ -229,7 +229,7 @@
     
     if ([Networking getLoginMessage]) {
         UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"main"];
+        UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"ViewController"];
         
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
         

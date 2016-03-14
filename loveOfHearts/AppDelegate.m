@@ -11,6 +11,12 @@
 #import <SMS_SDK/SMSSDK.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 
+#import "IIViewDeckController.h"
+#import "IISideController.h"
+
+#import "RightViewController.h"
+#import "ViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -30,6 +36,23 @@
     //短信验证码
     [SMSSDK registerApp:@"da719593615f" withSecret:@"8fa14cec08625888dd27bfb4df589ac6"];
     
+    RightViewController *rightController = [RightViewController new];
+    
+    RightViewController *leftController = [RightViewController new];
+    
+    ViewController *centerController = [ViewController new];
+    
+    
+    IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
+                                                                                   leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
+                                                                                                       leftController]
+                                                                                  rightViewController:[IISideController autoConstrainedSideControllerWithViewController:rightController]];
+    
+    deckController.navigationController.navigationBar.hidden = YES;
+
+    self.window.rootViewController = deckController;
+    
+    [self.window makeKeyAndVisible];
 
     return YES;
 }

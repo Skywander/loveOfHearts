@@ -10,6 +10,8 @@ pod "Masonry"
 pod "AFNetworking"
 
 
+pod “ViewDeck”
+
 
 target :loveOfHeartsTests, :exclusive => true do
 # pod 'Kiwi'

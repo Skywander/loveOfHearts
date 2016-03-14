@@ -41,6 +41,10 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+}
+
 - (void)initTopView{
     topView = [[TopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
     [self.view addSubview:topView];

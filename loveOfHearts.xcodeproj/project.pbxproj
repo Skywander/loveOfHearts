@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56145DAFAAE7E1FBB80390D1 /* libPods.a */; };
+		D362B9161C9653790037E29E /* CommentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B9151C9653790037E29E /* CommentAnimation.m */; };
+		D362B91E1C967A230037E29E /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9181C967A220037E29E /* menu.png */; };
+		D362B91F1C967A230037E29E /* device.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9191C967A230037E29E /* device.png */; };
+		D362B9201C967A230037E29E /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B91A1C967A230037E29E /* chat.png */; };
+		D362B9211C967A230037E29E /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B91B1C967A230037E29E /* location.png */; };
+		D362B9221C967A230037E29E /* self.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B91C1C967A230037E29E /* self.png */; };
+		D362B9231C967A230037E29E /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B91D1C967A230037E29E /* phone.png */; };
+		D362B9271C96A4D30037E29E /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B9261C96A4D30037E29E /* RightViewController.m */; };
+		D362B92C1C96AF9B0037E29E /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B92A1C96AF9B0037E29E /* zoomout.png */; };
+		D362B92D1C96AF9B0037E29E /* zoomin.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B92B1C96AF9B0037E29E /* zoomin.png */; };
 		D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A3EC1C92A422009B1D0E /* Mymapview.m */; };
 		D3A2A3F71C92AB55009B1D0E /* HomeMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A3F61C92AB55009B1D0E /* HomeMenuView.m */; };
 		D3C96EF01C911A0E00F27D10 /* Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C96EEF1C911A0E00F27D10 /* Networking.m */; };
@@ -73,6 +83,18 @@
 /* Begin PBXFileReference section */
 		56145DAFAAE7E1FBB80390D1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D362B9141C9653790037E29E /* CommentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAnimation.h; sourceTree = "<group>"; };
+		D362B9151C9653790037E29E /* CommentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAnimation.m; sourceTree = "<group>"; };
+		D362B9181C967A220037E29E /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		D362B9191C967A230037E29E /* device.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device.png; sourceTree = "<group>"; };
+		D362B91A1C967A230037E29E /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
+		D362B91B1C967A230037E29E /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		D362B91C1C967A230037E29E /* self.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = self.png; sourceTree = "<group>"; };
+		D362B91D1C967A230037E29E /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		D362B9251C96A4D30037E29E /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		D362B9261C96A4D30037E29E /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		D362B92A1C96AF9B0037E29E /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
+		D362B92B1C96AF9B0037E29E /* zoomin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomin.png; sourceTree = "<group>"; };
 		D3A2A3EB1C92A422009B1D0E /* Mymapview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mymapview.h; sourceTree = "<group>"; };
 		D3A2A3EC1C92A422009B1D0E /* Mymapview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mymapview.m; sourceTree = "<group>"; };
 		D3A2A3F51C92AB55009B1D0E /* HomeMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuView.h; sourceTree = "<group>"; };
@@ -211,9 +233,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D362B9171C9679C90037E29E /* ImageSource */ = {
+			isa = PBXGroup;
+			children = (
+				D362B9291C96AE4F0037E29E /* MapZoom */,
+				D362B9281C96AE3E0037E29E /* HomeView */,
+			);
+			name = ImageSource;
+			sourceTree = "<group>";
+		};
+		D362B9241C96A48A0037E29E /* RightView */ = {
+			isa = PBXGroup;
+			children = (
+				D362B9251C96A4D30037E29E /* RightViewController.h */,
+				D362B9261C96A4D30037E29E /* RightViewController.m */,
+			);
+			name = RightView;
+			sourceTree = "<group>";
+		};
+		D362B9281C96AE3E0037E29E /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				D362B9181C967A220037E29E /* menu.png */,
+				D362B9191C967A230037E29E /* device.png */,
+				D362B91A1C967A230037E29E /* chat.png */,
+				D362B91B1C967A230037E29E /* location.png */,
+				D362B91C1C967A230037E29E /* self.png */,
+				D362B91D1C967A230037E29E /* phone.png */,
+			);
+			name = HomeView;
+			sourceTree = "<group>";
+		};
+		D362B9291C96AE4F0037E29E /* MapZoom */ = {
+			isa = PBXGroup;
+			children = (
+				D362B92A1C96AF9B0037E29E /* zoomout.png */,
+				D362B92B1C96AF9B0037E29E /* zoomin.png */,
+			);
+			name = MapZoom;
+			sourceTree = "<group>";
+		};
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D3FEEFE31C910B4400300710 /* SMS_SDK */,
+				D3C96EFB1C9167FD00F27D10 /* JsonKit */,
+				D362B9141C9653790037E29E /* CommentAnimation.h */,
+				D362B9151C9653790037E29E /* CommentAnimation.m */,
 				D3C96EEE1C911A0E00F27D10 /* Networking.h */,
 				D3C96EEF1C911A0E00F27D10 /* Networking.m */,
 				D3DF04481C950E2600832CD9 /* Command.h */,
@@ -235,6 +301,7 @@
 		D3A2A3F41C92AB31009B1D0E /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				D362B9241C96A48A0037E29E /* RightView */,
 				D3FEEFD21C91006300300710 /* TopView.h */,
 				D3FEEFD31C91006300300710 /* TopView.m */,
 				D3FEEFCA1C90FF9700300710 /* ViewController.h */,
@@ -316,14 +383,13 @@
 		D3FEEF961C90FF7A00300710 /* loveOfHearts */ = {
 			isa = PBXGroup;
 			children = (
+				D362B9171C9679C90037E29E /* ImageSource */,
 				D3DF04581C9543ED00832CD9 /* ActionView */,
 				D3DF04511C95411000832CD9 /* AddWatch */,
 				D3DF04291C9502D700832CD9 /* PhoneSettting */,
 				D3A2A3F41C92AB31009B1D0E /* HomeView */,
 				D3A2A3E41C92A0A0009B1D0E /* MapView */,
 				D3A2A3E31C92A080009B1D0E /* Tool */,
-				D3C96EFB1C9167FD00F27D10 /* JsonKit */,
-				D3FEEFE31C910B4400300710 /* SMS_SDK */,
 				D3FEEFD61C910ACF00300710 /* Login */,
 				D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */,
 				D3FEEFCE1C90FFDA00300710 /* AppDelegate.h */,
@@ -507,10 +573,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D362B9211C967A230037E29E /* location.png in Resources */,
+				D362B9221C967A230037E29E /* self.png in Resources */,
+				D362B9201C967A230037E29E /* chat.png in Resources */,
 				D3FEEFEE1C910B5B00300710 /* username.png in Resources */,
 				D3FEEFEF1C910B5B00300710 /* userpassword.png in Resources */,
+				D362B91F1C967A230037E29E /* device.png in Resources */,
+				D362B9231C967A230037E29E /* phone.png in Resources */,
 				D3FEEFE91C910B4400300710 /* SMS_SDKLocalizable.strings in Resources */,
+				D362B91E1C967A230037E29E /* menu.png in Resources */,
+				D362B92C1C96AF9B0037E29E /* zoomout.png in Resources */,
 				D3FEEFA71C90FF7A00300710 /* LaunchScreen.storyboard in Resources */,
+				D362B92D1C96AF9B0037E29E /* zoomin.png in Resources */,
 				D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */,
 				D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */,
 			);
@@ -596,9 +670,11 @@
 				D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */,
 				D3DF04441C950CB000832CD9 /* SosphoneSetting.m in Sources */,
 				D3DF04571C95425600832CD9 /* AddWatchByInput.m in Sources */,
+				D362B9161C9653790037E29E /* CommentAnimation.m in Sources */,
 				D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */,
 				D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */,
 				D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */,
+				D362B9271C96A4D30037E29E /* RightViewController.m in Sources */,
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,

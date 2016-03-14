@@ -12,7 +12,6 @@
 #define LABEL_COLOR [UIColor grayColor]
 
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
-#define DEFAULT_COLOR [UIColor whiteColor]
 
 
 
