@@ -11,6 +11,11 @@
 #import "PasswordViewController.h"
 #import "Networking.h"
 #import "Alert.h"
+#import "ViewController.h"
+#import "RightViewController.h"
+
+#import "IIViewDeckController.h"
+#import "IISideController.h"
 
 @interface LoginViewController (){
     UIView *backView;
@@ -37,6 +42,8 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
+    NSLog(@"viewcontroller draw view");
+    
     [super viewDidLoad];
     
     [self initData];
@@ -76,7 +83,6 @@
 
     [userName.layer setCornerRadius:CORNER_RIDUS];
     [userName setKeyboardType:UIKeyboardTypeDefault];
-//    [userName setPlaceholder:userId];
     [userName setText:userId];
     
     UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
@@ -86,7 +92,6 @@
     [userName setBackgroundColor:[UIColor whiteColor]];
     
     [password.layer setCornerRadius:CORNER_RIDUS];
-//    [password setPlaceholder:userPassword];
     [password setText:userPassword];
     [password setSecureTextEntry:YES];
     [password setKeyboardType:UIKeyboardTypeDefault];
@@ -212,8 +217,6 @@
 
 //响应
 - (void)login{
-    [sureButton setBackgroundColor:DEFAULT_COLOR];
-    
     if (userName.text && password.text) {
         [Networking loginwithUsername:userName.text and:password.text];
     }
@@ -228,15 +231,29 @@
 - (void)getLoginMessage{
     
     if ([Networking getLoginMessage]) {
-        UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        UIViewController *myView = [story instantiateViewControllerWithIdentifier:@"ViewController"];
         
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
         
         [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"%@.password",userName.text]];
         
+        RightViewController *rightController = [RightViewController new];
         
-        [self showViewController:myView sender:nil];
+        RightViewController *leftController = [RightViewController new];
+        
+        ViewController *centerController = [ViewController new];
+        
+        
+        IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
+                                                                                       leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
+                                                                                                           leftController]
+                                                                                      rightViewController:[IISideController autoConstrainedSideControllerWithViewController:rightController]];
+        
+        deckController.navigationController.navigationBar.hidden = YES;
+        
+        [self presentViewController:deckController animated:YES completion:^{
+            ;
+        }];
+        
     }else{
         NSLog(@"login false");
     }

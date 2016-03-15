@@ -10,6 +10,7 @@
 #import "PasswordViewController.h"
 #import "JSONKit.h"
 #import "Alert.h"
+#import "AccountMessage.h"
 @implementation Networking
 
 bool loginMessage;
@@ -62,8 +63,19 @@ AFHTTPSessionManager *manager;
         if (returnType == 100) {
             
             loginMessage = true;
+            //生成userinfor 的对象
             
             NSLog(@"%@",responseObject);
+            
+            NSDictionary *rlist = [[[responseObject objectForKey:@"data"] objectForKey:@"rlist"] objectAtIndex:0];
+            
+            NSDictionary *wlist = [[[responseObject objectForKey:@"data"] objectForKey:@"wlist"] objectAtIndex:0];
+                        
+            AccountMessage *accountMessage = [AccountMessage sharedInstance];
+            
+            [accountMessage setUserInfor:rlist];
+            
+            [accountMessage setWatchInfor:wlist];
             
         }else{
             
