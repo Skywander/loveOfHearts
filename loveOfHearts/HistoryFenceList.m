@@ -177,7 +177,6 @@ static HistoryFenceList *historyFenceList;
     if ([indexPath section] == 0) {
         NewFenceView *createFence = [NewFenceView new];
         createFence.hidesBottomBarWhenPushed = YES;
-        createFence.fencesArray = fencesArray;
         [self presentViewController:createFence animated:YES completion:^{
             ;
         }];

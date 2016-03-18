@@ -8,7 +8,6 @@
 
 #import "HistoryViewController.h"
 #import "Fence.h"
-#import "Networking.h"
 #import "NewFenceView.h"
 #import "Navview.h"
 
@@ -16,29 +15,15 @@
 {
     double pointX;
     double pointY;
-    double radius;
     
     CLLocationCoordinate2D touchPoints[10];
     
-    Fence *fence;
-    NSString *startTime;
-    NSString *endTime;
-    
-    UILabel *timeLabel;
-    UILabel *typeLabel;
-    
-    NSString *shouhuan_id;
-    NSString *user_id;
+    MAMapView *mapView;
 }
 
 @end
 
 @implementation HistoryViewController
-@synthesize mapView,resetButton,deleteButton;
-@synthesize deleteAlertView,resetAlertView;
-@synthesize fencenameList,dangerFencenames;
-@synthesize zoomoutButton,zoominButton;
-@synthesize fenceName;
 @synthesize myMapview;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +34,6 @@
     [self initNavigation];
     [self initMapView];
     [self getAndDrawFence];
-//    [self initLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -109,40 +93,6 @@
 
 }
 
-- (void)initLabel{
-    CGFloat basicY = 83;
-    
-    CGFloat basicMove = 20;
-    
-    NSLog(@"time : %@",fence.time);
-    
-    timeLabel = [self labelWithTitle:[NSString stringWithFormat:@"监护时间:%@",fence.time] andY:basicY];
-    
-    NSMutableArray *alarmArray = [NSMutableArray arrayWithObjects:@"进入警报",@"离开警报",@"进出警报", nil];
-    
-    NSString *tempStr = [alarmArray objectAtIndex:[fence.type intValue] - 1];
-    
-    typeLabel = [self labelWithTitle:[NSString stringWithFormat:@"警告类型:%@",tempStr] andY:basicY + basicMove];
-}
-
-- (UILabel *)labelWithTitle:(NSString *)labeltext andY:(CGFloat)y{
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, y, SCREEN_WIDTH - 20, 20)];
-    [label setText:labeltext];
-    [label setTextAlignment:NSTextAlignmentLeft];
-    [label setTextColor:DEFAULT_COLOR];
-    [label setBackgroundColor:[UIColor clearColor]];
-    [label setFont:[UIFont systemFontOfSize:12]];
-    
-    [self.view addSubview:label];
-    
-    return label;
-}
-- (void)zoomIn {
-    mapView.zoomLevel = mapView.zoomLevel * 0.8;
-}
-- (void)zoomOut {
-    mapView.zoomLevel = mapView.zoomLevel * 1.2;
-}
 
 //画annotation的回调函数
 - (MAAnnotationView *)mapView:(MAMapView *)_mapView viewForAnnotation:(id<MAAnnotation>)annotation{

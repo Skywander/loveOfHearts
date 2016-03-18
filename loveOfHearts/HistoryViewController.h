@@ -8,27 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapKit.h>
-#import "Constant.h"
 #import "Mymapview.h"
 
 @interface HistoryViewController : UIViewController<MAMapViewDelegate>
 {
     MAMapPoint points[100];
 }
-@property (nonatomic,strong) UIButton *resetButton;
-@property (nonatomic,strong) UIButton *deleteButton;
-@property (nonatomic,strong) UIAlertView *deleteAlertView;
-@property (nonatomic,strong) UIAlertView *resetAlertView;
-@property (nonatomic,strong) NSMutableArray *fencenameList;
-@property (nonatomic,strong) NSMutableArray *dangerFencenames;
-
-@property MAMapView *mapView;
-@property (nonatomic,strong) UIButton *zoominButton;
-@property (nonatomic,strong) UIButton *zoomoutButton;
-
-@property (nonatomic,strong) NSString *fenceName;
 
 @property (nonatomic,strong) NSString *fencesDataArray;
 
 @property (nonatomic,strong) Mymapview *myMapview;
+
 @end

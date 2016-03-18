@@ -53,7 +53,6 @@
 
 @implementation NewFenceView
 @synthesize coordinate;
-@synthesize fencesArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];

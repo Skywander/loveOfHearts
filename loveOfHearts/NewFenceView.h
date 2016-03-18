@@ -9,6 +9,4 @@
 #import <UIKit/UIKit.h>
 @interface NewFenceView : UIViewController
 
-@property (strong,nonatomic) NSMutableArray *fencesArray;
-
 @end
