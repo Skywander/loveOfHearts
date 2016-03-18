@@ -11,6 +11,9 @@
 #import "Command.h"
 #import <AFNetworking/AFNetworking.h>
 #import "AccountMessage.h"
+#import "Rail.h"
+#import "HistoryFenceList.h"
+
 @implementation Command
 
 + (void)commandWithName:(NSString *)command andParameter:(NSString *)paramater{
@@ -52,10 +55,13 @@
         if ([address isEqualToString:@"centernumber"]) {
             [AccountMessage sharedInstance].centernumber = [paramater objectForKey:@"centernumber"];
         }
+  
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure : %@",error);
     }];
 }
+
+
 
 
 @end

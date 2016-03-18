@@ -10,6 +10,7 @@
 #import "Fence.h"
 #import "Networking.h"
 #import "NewFenceView.h"
+#import "Navview.h"
 
 @interface HistoryViewController()
 {
@@ -44,12 +45,11 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self initData];
+    
+    [self initNavigation];
     [self initMapView];
     [self getAndDrawFence];
-
-    [self initButton];
-    [self initLabel];
+//    [self initLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,76 +59,43 @@
     [mapView removeAnnotations:mapView.annotations];
 }
 
-- (void)initData{
-    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
-    shouhuan_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"shouhuan_id"];
+- (void)initNavigation{
+    Navview *navigationView = [Navview new];
+    
+    [self.view addSubview:navigationView];
 }
+
 - (void)getAndDrawFence {
-    return ;
+    int pointCount = 0;
     
-    if (fence.fence.length > 60) {
-        
-        NSScanner *scanner = [NSScanner scannerWithString:fence.fence];
-        
-        int pointCount = 0;
-        do{
-            [scanner scanDouble:&pointX];
-            
-            if (scanner.scanLocation < fence.fence.length) {
-                scanner.scanLocation ++;
-            }
-            
-            if (![scanner isAtEnd]) {
-                [scanner scanDouble:&pointY];
-                scanner.scanLocation ++;
-            }
-            if (pointY && pointX) {
-                CLLocationCoordinate2D location= CLLocationCoordinate2DMake(pointY, pointX);
-                touchPoints[pointCount] = location;
-                points[pointCount] = MAMapPointMake(pointY, pointX);
-                pointCount ++;
-                
-                MAPointAnnotation *tempAnimation = [MAPointAnnotation new];
-                tempAnimation.coordinate = location;
-                [mapView addAnnotation:tempAnimation];
-            }
-        }while (![scanner isAtEnd]);
-        
-        MAPolygon *polygon =[MAPolygon polygonWithCoordinates:touchPoints count:pointCount];
-        [mapView setCenterCoordinate:touchPoints[0]];
-        [mapView addOverlay:polygon];
-    }
-    if (fence.fence.length < 60) {
     
-        NSScanner *scanner = [NSScanner scannerWithString:fence.fence];
+    
+    NSArray *fencesArray = [self.fencesDataArray componentsSeparatedByString:@";"];
+    
+    for (NSString *tempString in fencesArray) {
+        NSArray *pointArray = [tempString componentsSeparatedByString:@","];
         
-        [scanner scanDouble:&pointX];
+        CLLocationCoordinate2D location = CLLocationCoordinate2DMake([[pointArray objectAtIndex:1] doubleValue], [[pointArray objectAtIndex:0] doubleValue]);
         
-        scanner.scanLocation ++;
-            
-        [scanner scanDouble:&pointY];
+        touchPoints[pointCount] = location;
+        points[pointCount] = MAMapPointMake(pointY, pointX);
+        pointCount ++;
         
-        scanner.scanLocation ++;
+        MAPointAnnotation *tempAnimation = [MAPointAnnotation new];
+        tempAnimation.coordinate = location;
+        [mapView addAnnotation:tempAnimation];
         
-        [scanner scanDouble:&radius];
-        
-        CLLocationCoordinate2D location= CLLocationCoordinate2DMake(pointY, pointX);
-        
-        MAPointAnnotation *touchAnnotation = [MAPointAnnotation new];
-        touchAnnotation.coordinate = location;
-        
-        MACircle *pointCircle = [MACircle circleWithCenterCoordinate:location radius:radius];
-        [mapView addOverlay:pointCircle];
-        
-        [mapView addAnnotation:touchAnnotation];
-        [mapView setCenterCoordinate:location];
     }
+    
+    MAPolygon *polygon =[MAPolygon polygonWithCoordinates:touchPoints count:pointCount];
+    [mapView setCenterCoordinate:touchPoints[0]];
+    [mapView addOverlay:polygon];
 }
 
 - (void)initMapView{
     [self.view setBackgroundColor:DEFAULT_COLOR];
     myMapview = [Mymapview sharedInstance];
-    [myMapview setFrame:CGRectMake(10, 70,SCREEN_WIDTH - 20,SCREEN_HEIGHT - 160)];
+    [myMapview setFrame:CGRectMake(0, 64,SCREEN_WIDTH,SCREEN_HEIGHT - 84)];
     
     mapView = myMapview.mapView;
     mapView.delegate = self;
@@ -140,52 +107,6 @@
     
     [self.view sendSubviewToBack:myMapview];
 
-}
-
-- (void) initButton {
-    
-    zoominButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, SCREEN_HEIGHT - 125, 35, 35)];
-    [zoominButton setBackgroundColor:[UIColor clearColor]];
-    [zoominButton setBackgroundImage:[UIImage imageNamed:@"zoomin"] forState:UIControlStateNormal];
-    [zoominButton setBackgroundImage:[UIImage imageNamed:@"zoominPress"] forState:UIControlStateHighlighted];
-    [zoominButton addTarget:self action:@selector(zoomIn) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:zoominButton];
-    
-    zoomoutButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, SCREEN_HEIGHT - 160, 35, 35)];
-    [zoomoutButton setBackgroundColor:[UIColor clearColor]];
-    [zoomoutButton setBackgroundImage:[UIImage imageNamed:@"zoomout"] forState:UIControlStateNormal];
-    [zoomoutButton setBackgroundImage:[UIImage imageNamed:@"zoomoutPress"] forState:UIControlStateHighlighted];
-    [zoomoutButton addTarget:self action:@selector(zoomOut) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:zoomoutButton];
-    
-    resetButton = [UIButton new];
-    [resetButton setFrame:CGRectMake(10, SCREEN_HEIGHT-83, SCREEN_WIDTH - 20, 35)];
-    [resetButton setTitle:@"重新规划区域" forState:UIControlStateNormal];
-    [resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [resetButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-    [resetButton setBackgroundColor:[UIColor whiteColor]];
-    [resetButton.layer setBorderWidth:0.2];
-    [resetButton.layer setBorderColor:[UIColor grayColor].CGColor];
-    [resetButton.layer setCornerRadius:5.0];
-    resetButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:resetButton];
-    
-    deleteButton = [UIButton new];
-    [deleteButton setFrame:CGRectMake(10, SCREEN_HEIGHT-43, SCREEN_WIDTH-20, 35)];
-    [deleteButton setTitle:@"删除电子围栏" forState:UIControlStateNormal];
-    deleteButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [deleteButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-    [deleteButton setBackgroundColor:[UIColor whiteColor]];
-    [deleteButton.layer setBorderColor:[UIColor grayColor].CGColor];
-    [deleteButton.layer setBorderWidth:0.2];
-    [deleteButton.layer setCornerRadius:5.0];
-    [self.view addSubview:deleteButton];
-    
-    [resetButton addTarget:self action:@selector(resetArea ) forControlEvents:UIControlEventTouchUpInside];
-    
-    [deleteButton addTarget:self action:@selector(deleteArea) forControlEvents:UIControlEventTouchUpInside];
-    
 }
 
 - (void)initLabel{
@@ -221,15 +142,6 @@
 }
 - (void)zoomOut {
     mapView.zoomLevel = mapView.zoomLevel * 1.2;
-}
-- (void)resetArea {
-    NewFenceView *newFenceView = [NewFenceView new];
-    newFenceView.fence = fence;
-    self.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:newFenceView animated:YES];
-}
-- (void)deleteArea {
-
 }
 
 //画annotation的回调函数
@@ -316,28 +228,6 @@
     
     return nil;
 }
-//alert 的回调函数
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView == deleteAlertView) {
-        if (buttonIndex == 1) {
-            NSLog(@"取消删除");
-        }
-        if (buttonIndex == 0) {
-            NSLog(@"确定删除");
-        }
-        deleteButton.backgroundColor = [UIColor whiteColor];
-        [deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }
-    if (alertView == resetAlertView) {
-        if (buttonIndex == 0) {
-            NSLog(@"reset");
-        }
-        if (buttonIndex == 1) {
-            NSLog(@"cancel reset");
-        }
-        resetButton.backgroundColor = [UIColor whiteColor];
-        [resetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }
-}
+
 
 @end

@@ -10,6 +10,7 @@
 
 @interface Command : NSObject
 
+
 + (void)commandWithName:(NSString *)command andParameter:(NSString *)paramater;
 
 

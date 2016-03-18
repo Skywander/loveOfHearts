@@ -28,5 +28,7 @@
 
 @property (nonatomic,strong) NSString *fenceName;
 
+@property (nonatomic,strong) NSString *fencesDataArray;
+
 @property (nonatomic,strong) Mymapview *myMapview;
 @end

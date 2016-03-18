@@ -14,14 +14,18 @@
 #import "Navview.h"
 #import "AccountMessage.h"
 #import "Command.h"
+
+static HistoryFenceList *historyFenceList;
 @interface HistoryFenceList ()
 {
     //
     NSMutableArray *fencesArray;
+    NSMutableArray *fencesDataArray;
     NSString *fenceName;
     
     NSString *user_id;
     NSString *shouhuan_id;
+    AccountMessage *accountMessage;
     
 }
 @end
@@ -30,18 +34,25 @@
 
 @synthesize sections,section0,section1,fencenameList;
 @synthesize table;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initData];
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(initView) userInfo:nil repeats:NO];
+}
+
+- (void)initView{
     [self initSection];
     [self initTable];
     [self initNavigation];
 }
 
 - (void)initData{
-    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
-    shouhuan_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"shouhuan_id"];
+    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
+    
+    [self getWatchMessage];
 }
 - (void)initNavigation {
     Navview *navigationView = [Navview new];
@@ -49,13 +60,11 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getWatchMessage];
-    [self initSection];
-    [self initTable];
+//    [self getWatchMessage];
+//    [self initSection];
+//    [self initTable];
 }
 - (void)initSection {
-    fencenameList = [[NSUserDefaults standardUserDefaults] objectForKey:@"fencenameList"];
-    fencesArray = [NSMutableArray new];
     if (!fencenameList) {
         fencenameList = [NSMutableArray new];
     } else{
@@ -73,17 +82,45 @@
     table.showsVerticalScrollIndicator = NO;
     table.delegate = self;
     table.dataSource = self;
-    table.frame = CGRectMake(10, 40, [UIScreen mainScreen].bounds.size.width - 20, [UIScreen mainScreen].bounds.size.height - 100);
+    table.frame = CGRectMake(10, 64, [UIScreen mainScreen].bounds.size.width - 20, [UIScreen mainScreen].bounds.size.height - 100);
     table.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
     [self.view addSubview:table];
     
 }
 
 - (void)getWatchMessage {
+    fencesArray = [NSMutableArray new];
+    
+    fencesDataArray = [NSMutableArray new];
+
+    
+    accountMessage = [AccountMessage sharedInstance];
+    
+    shouhuan_id = accountMessage.wid;
+    
     NSDictionary *paramater = @{
-                                    [AccountMessage sharedInstance].wid:@"wid"
+                                @"wid":accountMessage.wid
                                 };
-    [Command commandWithAddress:@"getfences" andParamater:paramater];
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager new];
+    
+    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
+    [sessionManager POST:[NSString stringWithFormat:@"%@%@",HTTP,@"getfences"] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray *dataArray = [responseObject objectForKey:@"data"];
+        
+        for (NSDictionary *dict in dataArray) {
+            NSLog(@"%@",dict);
+            [fencesArray addObject:[dict objectForKey:@"fencename"]];
+            [fencesDataArray addObject:[dict objectForKey:@"fencearea"]];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure : %@",error);
+    }];
 }
 
 
@@ -112,6 +149,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([indexPath section] == 0) {
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"createFenceBackView.jpg"]];
+        [cell.textLabel setText:@"创建围栏"];
+        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     if ([indexPath row] == 0 &&[indexPath section] == 1) {
@@ -139,15 +178,22 @@
         NewFenceView *createFence = [NewFenceView new];
         createFence.hidesBottomBarWhenPushed = YES;
         createFence.fencesArray = fencesArray;
-        [self.navigationController pushViewController:createFence animated:YES];
+        [self presentViewController:createFence animated:YES completion:^{
+            ;
+        }];
         return;
     }
-    NSString *selectedFenceName = [[sections objectAtIndex:[indexPath section]]objectAtIndex:[indexPath row] - 1];
-    HistoryViewController *history = [HistoryViewController new];
-    history.fenceName = selectedFenceName;
-    history.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:history animated:YES];
-    
+    if ([indexPath section] == 1 && [indexPath row] > 0) {
+        HistoryViewController *history = [HistoryViewController new];
+        
+        NSLog(@"%ld %ld",[indexPath row],[indexPath section]);
+        
+        history.fencesDataArray = [fencesDataArray objectAtIndex:[indexPath row] - 1];
+        [self presentViewController:history animated:YES completion:^{
+            ;
+        }];
+    }
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath section] == 0) {

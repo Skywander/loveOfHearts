@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASValueTrackingSlider.h"
-#import "Fence.h"
 @interface NewFenceView : UIViewController
 
-@property (strong, nonatomic) ASValueTrackingSlider *slider;
-
-@property (strong,nonatomic) Fence *fence;
 @property (strong,nonatomic) NSMutableArray *fencesArray;
 
 @end

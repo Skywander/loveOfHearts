@@ -17,4 +17,5 @@
 
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) UITableView *table;
+
 @end
