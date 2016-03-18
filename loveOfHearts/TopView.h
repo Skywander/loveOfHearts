@@ -10,6 +10,8 @@
 
 @interface TopView : UIView
 
+@property (nonatomic,strong) UIButton *expandButton;
+
 - (void)setAddress:(NSString *)address;
 
 @end

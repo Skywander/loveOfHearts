@@ -10,6 +10,8 @@
 #import "Constant.h"
 #import "Alert.h"
 #import "Command.h"
+#import "Navview.h"
+#import "AccountMessage.h"
 @interface PhoneCanMakeList()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     UITableView *phoneListView;
@@ -23,6 +25,8 @@
     NSString *phoneNumbersOne;
     NSString *phoneNumbersTwo;
     CGFloat listOffset;
+    
+    AccountMessage *accountMessage;
 }
 @end
 
@@ -30,6 +34,7 @@
 @synthesize whitelist_1;
 @synthesize whitelist_2;
 @synthesize userAccount,watchID;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
@@ -41,6 +46,16 @@
     self.view = scrollView;
 }
 - (void)initData {
+    accountMessage = [AccountMessage sharedInstance];
+    
+    whitelist_1 = [accountMessage.whitelist1 componentsSeparatedByString:@","];
+    
+    whitelist_2 = [accountMessage.whitelist2 componentsSeparatedByString:@","];
+    
+    watchID = accountMessage.wid;
+
+    NSLog(@"%@ %@",whitelist_2,whitelist_1);
+    
     listOffset = 0;
     phoneArray = [NSMutableArray new];
     
@@ -50,7 +65,6 @@
     phoneNumbersTwo = [NSString new];
     
     userAccount = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
-    watchID = [[NSUserDefaults standardUserDefaults] objectForKey:@"watchID"];
 }
 
 
@@ -71,6 +85,14 @@
     [phoneListView setSectionHeaderHeight:4];
 
     [self.view addSubview:phoneListView];
+    
+    [self initNavigation];
+}
+- (void)initNavigation{
+    
+    Navview *navigationView = [[Navview alloc] init];
+    [self.view addSubview:navigationView];
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,11 +115,11 @@
         
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(60, 1, SCREEN_WIDTH - 74, 34)];
         
-        if ([indexPath row] < 5 && [indexPath row] < whitelist_1.count) {
+        if ([indexPath row] < 5 ) {
             [textField setText:[whitelist_1 objectAtIndex:[indexPath row]]];
         }
         
-        if ([indexPath row] >= 5 && [indexPath row] < whitelist_2.count) {
+        if ([indexPath row] >= 5) {
             [textField setText:[whitelist_2 objectAtIndex:[indexPath row] - 5]];
         }
         
@@ -137,69 +159,37 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    phoneNumbersOne = [NSString new];
-    phoneNumbersTwo = [NSString new];
+    phoneNumbersOne = textFields[0].text;
+    phoneNumbersTwo = textFields[5].text;
     
-    if ([indexPath section] == 1) {
-        for (int i = 0; i < 5; i ++) {
-            NSString *tempStr = textFields[i].text;
-            
-            if (tempStr.length > 0 && tempStr.length != 11) {
-                [self presentViewController:[Alert getAlertWithTitle:@"输入号码错误"] animated:YES completion:^{
-                    ;
-                }];
-                phoneArray = [NSMutableArray new];
-                phoneNumbersOne = [NSString new];
-                [textFields[i] becomeFirstResponder];
-                return;
-            }
-            [phoneArray addObject:tempStr];
-            if (tempStr) {
-                phoneNumbersOne = [NSString stringWithFormat:@"%@,%@",phoneNumbersOne,tempStr];
-            }
-        }
+    for (int i = 1; i < 5; i ++) {
+        NSString *tempStr = textFields[i].text;
         
-        for (int i = 5; i < 10; i++) {
-            NSString *tempStr = textFields[i].text;
-            
-            if (tempStr.length > 0 && tempStr.length != 11) {
-                [self presentViewController:[Alert getAlertWithTitle:@"输入号码错误"] animated:YES completion:^{
-                    ;
-                }];
-                
-                [textFields[i] becomeFirstResponder];
-                phoneArray = [NSMutableArray new];
-                phoneNumbersTwo = [NSString new];
-                return;
-            }
-            if (tempStr) {
-                phoneNumbersTwo = [NSString stringWithFormat:@"%@,%@",phoneNumbersTwo,tempStr];
-            }
-
-            [phoneArray addObject:tempStr];
-            
-        }
-        NSRange range1 = {1,phoneNumbersOne.length - 1};
-        NSRange range2 = {1,phoneNumbersTwo.length - 1};
-
-        NSLog(@"one : %@ two : %@",[phoneNumbersOne substringWithRange:range1],[phoneNumbersTwo substringWithRange:range2]);
-        
+        phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
+    }
+    for (int i = 6; i < 10; i++) {
+        NSString *tempStr = textFields[i].text;
+        phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
+    }
+    
+    NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
+    
         NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                   userAccount,@"userId",
                                   watchID,@"wid",
-                                  [phoneNumbersOne substringWithRange:range1],@"whitelist1",
+                                  phoneNumbersOne,@"whitelist1",
                                   nil
                                   ];
-        [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
+    [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
         
-        NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
+    NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     userAccount,@"userId",
                                     watchID,@"wid",
-                                    [phoneNumbersTwo substringWithRange:range1],@"whitelist2",
+                                    phoneNumbersTwo,@"whitelist2",
                                     nil
                                     ];
-        [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
-    }
+    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {

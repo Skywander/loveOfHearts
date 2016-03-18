@@ -20,7 +20,6 @@
 @implementation RightViewController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
@@ -33,7 +32,7 @@
 }
 
 - (void)initButton{
-    NSArray *buttonNames = [NSArray arrayWithObjects:@"babyManage",@"authority",@"relativeNumber",@"1",@"2",@"fences",@"historyTrack",@"findWatch",@"otherSetting",@"exit", nil];
+    NSArray *buttonNames = [NSArray arrayWithObjects:@"babyManage",@"authority",@"relativeNumber",@"phoneText",@"whitelist",@"fences",@"historyTrack",@"findWatch",@"otherSetting",@"exit", nil];
     
     float y = 64;
     
@@ -62,9 +61,11 @@
 }
 
 - (void)clickButton:(UIButton *)button{
-    [self presentViewController:[RightVieFactory factoryWithTag:(int)button.tag] animated:YES completion:^{
-        ;
-    }];
+    if ([RightVieFactory factoryWithTag:(int)button.tag]) {
+        [self presentViewController:[RightVieFactory factoryWithTag:(int)button.tag] animated:YES completion:^{
+            ;
+        }];
+    }
 
 }
 

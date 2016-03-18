@@ -61,6 +61,7 @@
     [menuButton setBackgroundColor:BUTTON_BACKCOLOR];
     
     signalButton = [UIButton new];
+    [signalButton setBackgroundImage:[UIImage imageNamed:@"signal100"] forState:UIControlStateNormal];
     [signalButton setBackgroundColor:BUTTON_BACKCOLOR];
     
     locationButton = [UIButton new];

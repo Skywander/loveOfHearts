@@ -13,7 +13,7 @@
 #import "AccountMessage.h"
 @implementation Networking
 
-bool loginMessage;
+int loginMessage;
 
 //1成功 2 重复 3 失败
 int registerMessage;
@@ -47,6 +47,7 @@ AFHTTPSessionManager *manager;
 }
 
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password{
+    loginMessage = 0;
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
@@ -60,12 +61,16 @@ AFHTTPSessionManager *manager;
         
         int returnType = [[responseObject objectForKey:@"type"] intValue];
         
+        NSLog(@"user : %@,password : %@",username,password);
+        
+        NSLog(@"responseObject::%@",responseObject);
+        
         if (returnType == 100) {
             
-            loginMessage = true;
+            loginMessage = 1;
             //生成userinfor 的对象
             
-            NSLog(@"%@",responseObject);
+            NSLog(@"reponseObject : %@",responseObject);
             
             NSDictionary *rlist = [[[responseObject objectForKey:@"data"] objectForKey:@"rlist"] objectAtIndex:0];
             
@@ -79,12 +84,12 @@ AFHTTPSessionManager *manager;
             
         }else{
             
-            loginMessage = false;
+            loginMessage = 2;
             
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        loginMessage = false;
+        loginMessage = 2;
     }];
 }
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters{
@@ -105,7 +110,7 @@ AFHTTPSessionManager *manager;
 }
 
 
-+ (BOOL)getLoginMessage{
++ (int)getLoginMessage{
     return  loginMessage;
 }
 

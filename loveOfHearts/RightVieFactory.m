@@ -10,6 +10,8 @@
 #import "SosphoneSetting.h"
 #import "PhoneListView.h"
 #import "PhoneCanMakeList.h"
+#import "BabyManageViewController.h"
+#import "HistoryFenceList.h"
 
 @implementation RightVieFactory
 
@@ -18,7 +20,7 @@
     
     switch (tag) {
         case 1:
-            ;
+            viewController = [BabyManageViewController new];
             break;
         case 2:
             ;
@@ -33,7 +35,7 @@
             viewController = [PhoneListView new];
             break;
         case 6:
-            ;
+            viewController = [HistoryFenceList new];
             break;
         case 7:
             ;

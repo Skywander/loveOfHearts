@@ -11,7 +11,7 @@
 
 @interface PhoneListView : UIViewController
 
-@property (nonatomic,strong) NSMutableArray *phbArray;
+@property (nonatomic,strong) NSArray *phbArray;
 
 @property (nonatomic,strong) NSString *userAccount;
 @property (nonatomic,strong) NSString *watchID;

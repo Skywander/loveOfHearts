@@ -24,6 +24,8 @@
 
 #define CORNER_RIDUS 6.f
 
+#define NAVIGATION_HEIGHT 44
+
 
 //颜色
 #define TOP_COLOR [UIColor redColor]
@@ -37,6 +39,8 @@
 #define NAVI_FONT_COLOR [UIColor grayColor]
 
 #define BACKGROUND_COLOR [UIColor colorWithRed:236/255.0 green:236/255.0 blue:239/255.0 alpha:1]
+
+#define DEFAULT_PINK [UIColor colorWithRed:248/255.0 green:142/255.0 blue:198/255.0 alpha:1]
 
 //网络
 

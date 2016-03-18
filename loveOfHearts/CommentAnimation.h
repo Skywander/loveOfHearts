@@ -12,8 +12,6 @@
  */
 @interface CommentAnimation : CABasicAnimation
 
-+(CABasicAnimation *)animationShanShuo:(CFTimeInterval)duration repeatCount:(float)count isRemoveOnCompletion:(BOOL)isreMove fromValue:(id)fromValue toValue:(id)toValue;
-
 /**
  *  移动动画
  *

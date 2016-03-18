@@ -9,6 +9,8 @@
 #import "TopView.h"
 
 #define SELF_HEIGHT self.frame.size.height
+
+#define EXPAND_BUTTON_WIDTH 30
 @interface TopView()
 {
     UILabel *nameLabel;
@@ -23,7 +25,7 @@
 @end
 
 @implementation TopView
-
+@synthesize expandButton;
 - (id)init{
     self = [self init];
     return self;
@@ -34,7 +36,7 @@
     self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y + 20, frame.size.width, frame.size.height)];
     
     if (self) {
-        [self setBackgroundColor:TOP_COLOR];
+        [self setBackgroundColor:DEFAULT_PINK];
         
         [self initLabel];
         
@@ -82,11 +84,11 @@
     [self addSubview:photoView];
     
     //addView
+    expandButton = [UIButton new];
     
-    UIView * addView = [UIView new];
-    [addView setBackgroundColor:[UIColor grayColor]];
-    [addView setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height, 0, self.frame.size.height, self.frame.size.height)];
-    [self addSubview:addView];
+    [expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height,(SELF_HEIGHT - EXPAND_BUTTON_WIDTH) / 2,EXPAND_BUTTON_WIDTH, EXPAND_BUTTON_WIDTH)];
+    [self addSubview:expandButton];
     
 }
 

@@ -16,24 +16,25 @@
 
 @interface ViewController ()
 {
-    TopView *topView;
     Mymapview *mapView;
     HomeMenuView *menuView;
+    TopView *topView;
 }
 
 @end
 
 @implementation ViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+        
     [self initTopView];
     
     [self initMapView];
     
     [self initHomeMenuView];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{

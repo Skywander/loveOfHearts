@@ -220,17 +220,13 @@
     if (userName.text && password.text) {
         [Networking loginwithUsername:userName.text and:password.text];
     }
-    
-    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:3 target:self
-                                                                    selector:@selector(getLoginMessage)
-                                                                    userInfo:nil
-                                                                     repeats:NO
-                                      ];
+    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getLoginMessage) userInfo:nil repeats:NO];
+
 }
 
 - (void)getLoginMessage{
     
-    if ([Networking getLoginMessage]) {
+    if ([Networking getLoginMessage] == 1){
         
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
         

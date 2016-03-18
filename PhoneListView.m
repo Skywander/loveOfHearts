@@ -10,6 +10,8 @@
 #import "Constant.h"
 #import "Alert.h"
 #import "Command.h"
+#import "AccountMessage.h"
+#import "Navview.h"
 
 @interface PhoneListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -40,6 +42,12 @@
 - (void)getData {
     pushStringtwo = [NSString new];
     pushStringone = [NSString new];
+    
+    phbArray = [[AccountMessage sharedInstance].phb componentsSeparatedByString:@","];
+    
+    NSArray *tempArray = [[AccountMessage sharedInstance].phb componentsSeparatedByString:@","];
+    
+    phbArray = [phbArray arrayByAddingObjectsFromArray:tempArray];
 }
 
 - (void)initUI {
@@ -52,6 +60,9 @@
     [listView setDataSource:self];
     [listView setDelegate:self];
     [self.view addSubview:listView];
+    
+    Navview *navigationView = [Navview new];
+    [self.view addSubview:navigationView];
     
     backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [backView setBackgroundColor:[UIColor clearColor]];

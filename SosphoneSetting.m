@@ -10,6 +10,8 @@
 #import "Constant.h"
 #import "Command.h"
 #import "Alert.h"
+#import "Navview.h"
+#import "AccountMessage.h"
 
 #define DEFAULT_COLOR [UIColor grayColor]
 
@@ -34,6 +36,12 @@
 }
 
 - (void)initData {
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    
+    sosArray = [accountMessage.sos componentsSeparatedByString:@","];
+    
+    centerNumber = accountMessage.centernumber;
+    
     nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"监听号码设置", nil];
     
     newPhoneArray = [NSMutableArray new];
@@ -90,6 +98,11 @@
     [sureButton.layer setCornerRadius:6.f];
     
     [self.view addSubview:sureButton];
+    
+    
+    Navview *navigationView = [Navview new];
+    
+    [self.view addSubview:navigationView];
 }
 
 - (void)clickSureButton {

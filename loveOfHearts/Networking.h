@@ -12,6 +12,6 @@
 + (void)registerwithDict:(id)dict;
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password;
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters;
-+ (BOOL)getLoginMessage;
++ (int)getLoginMessage;
 + (int)getRegisterMessage;
 @end
