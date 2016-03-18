@@ -60,8 +60,6 @@
 		D3D025301C9BEC10002713B1 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D0252A1C9BEC10002713B1 /* libopencore-amrnb.a */; };
 		D3D025311C9BEC10002713B1 /* PRNAmrPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0252C1C9BEC10002713B1 /* PRNAmrPlayer.m */; };
 		D3D025321C9BEC10002713B1 /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0252E1C9BEC10002713B1 /* PRNAmrRecorder.m */; };
-		D3D025381C9BEE4C002713B1 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025351C9BEE4C002713B1 /* ASValuePopUpView.m */; };
-		D3D025391C9BEE4C002713B1 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025371C9BEE4C002713B1 /* ASValueTrackingSlider.m */; };
 		D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0253B1C9C0CBB002713B1 /* Rail.m */; };
 		D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */; };
 		D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248C1C94542F00E85F97 /* Security.framework */; };
@@ -195,10 +193,6 @@
 		D3D0252C1C9BEC10002713B1 /* PRNAmrPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrPlayer.m; sourceTree = "<group>"; };
 		D3D0252D1C9BEC10002713B1 /* PRNAmrRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRNAmrRecorder.h; sourceTree = "<group>"; };
 		D3D0252E1C9BEC10002713B1 /* PRNAmrRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrRecorder.m; sourceTree = "<group>"; };
-		D3D025341C9BEE4C002713B1 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
-		D3D025351C9BEE4C002713B1 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
-		D3D025361C9BEE4C002713B1 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
-		D3D025371C9BEE4C002713B1 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
 		D3D0253A1C9C0CBA002713B1 /* Rail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rail.h; sourceTree = "<group>"; };
 		D3D0253B1C9C0CBB002713B1 /* Rail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rail.m; sourceTree = "<group>"; };
 		D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -434,7 +428,6 @@
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				D3D025331C9BEE3F002713B1 /* ASValue */,
 				D3D025261C9BEBB3002713B1 /* AMR */,
 				D3D0251F1C9BEB77002713B1 /* IQActionSheetPicker */,
 				D3FEEFE31C910B4400300710 /* SMS_SDK */,
@@ -454,19 +447,9 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
-		D3A2A3E41C92A0A0009B1D0E /* MapView */ = {
-			isa = PBXGroup;
-			children = (
-				D3A2A3EB1C92A422009B1D0E /* Mymapview.h */,
-				D3A2A3EC1C92A422009B1D0E /* Mymapview.m */,
-			);
-			name = MapView;
-			sourceTree = "<group>";
-		};
 		D3A2A3F41C92AB31009B1D0E /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				D3A2A3E41C92A0A0009B1D0E /* MapView */,
 				D362B9241C96A48A0037E29E /* RightView */,
 				D3FEEFD21C91006300300710 /* TopView.h */,
 				D3FEEFD31C91006300300710 /* TopView.m */,
@@ -490,6 +473,8 @@
 		D3D0250C1C9BEAF0002713B1 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				D3A2A3EB1C92A422009B1D0E /* Mymapview.h */,
+				D3A2A3EC1C92A422009B1D0E /* Mymapview.m */,
 				D3D0251C1C9BEB2C002713B1 /* Fence.h */,
 				D3D0251D1C9BEB2C002713B1 /* Fence.m */,
 				D3D0250D1C9BEB03002713B1 /* HistoryTrackViewController.h */,
@@ -532,17 +517,6 @@
 				D3D025271C9BEBC8002713B1 /* AMRMedia-Prefix.pch */,
 			);
 			name = AMR;
-			sourceTree = "<group>";
-		};
-		D3D025331C9BEE3F002713B1 /* ASValue */ = {
-			isa = PBXGroup;
-			children = (
-				D3D025341C9BEE4C002713B1 /* ASValuePopUpView.h */,
-				D3D025351C9BEE4C002713B1 /* ASValuePopUpView.m */,
-				D3D025361C9BEE4C002713B1 /* ASValueTrackingSlider.h */,
-				D3D025371C9BEE4C002713B1 /* ASValueTrackingSlider.m */,
-			);
-			name = ASValue;
 			sourceTree = "<group>";
 		};
 		D3DF04291C9502D700832CD9 /* PhoneSettting */ = {
@@ -922,7 +896,6 @@
 				D362B9441C978E910037E29E /* AccountMessage.m in Sources */,
 				D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */,
 				D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */,
-				D3D025381C9BEE4C002713B1 /* ASValuePopUpView.m in Sources */,
 				D3D025321C9BEC10002713B1 /* PRNAmrRecorder.m in Sources */,
 				D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */,
 				D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */,
@@ -932,7 +905,6 @@
 				D362B9271C96A4D30037E29E /* RightViewController.m in Sources */,
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
 				D3D025091C9BDADE002713B1 /* Navview.m in Sources */,
-				D3D025391C9BEE4C002713B1 /* ASValueTrackingSlider.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,
 				D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */,

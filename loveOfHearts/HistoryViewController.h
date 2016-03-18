@@ -10,7 +10,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import "Mymapview.h"
 
-@interface HistoryViewController : UIViewController<MAMapViewDelegate>
+@interface HistoryViewController : UIViewController
 {
     MAMapPoint points[100];
 }

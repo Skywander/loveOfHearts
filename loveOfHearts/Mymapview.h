@@ -11,11 +11,9 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import <MAMapKit/MAMapServices.h>
 
-@interface Mymapview : UIView<AMapSearchDelegate,MAMapViewDelegate>
+@interface Mymapview : UIView<MAAnnotation,MAMapViewDelegate>
 
 @property (strong,nonatomic) MAMapView *mapView;
-//@property (strong,nonatomic) AMapSearchAPI *_search;
-
 
 + (instancetype)sharedInstance;
 
