@@ -9,7 +9,9 @@
 #import "NewFenceMessage.h"
 #import "Constant.h"
 #import "IQActionSheetPickerView.h"
-#import "Networking.h"
+#import "Command.h"
+#import "Navview.h"
+#import "AccountMessage.h"
 #define BASIC_HEIGHT 36
 #define BASIC_SPACE 4
 #define BASIC_DISTANCE 40
@@ -37,26 +39,21 @@
 @end
 
 @implementation NewFenceMessage
-@synthesize fence;
 @synthesize fencesArray;
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initData];
     
     [self initUI];
     
     [self initDatePicker];
     
-    NSLog(@"%@",self.fence);
 }
 
-- (void)initData{
-    type = @"1";
-}
 
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
+    Navview *naviView = [Navview new];
+    [self.view addSubview:naviView];
     
     //围栏姓名
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, SCREEN_WIDTH - 20, BASIC_HEIGHT)];
@@ -199,6 +196,17 @@
 }
 
 - (void)clickSureButton{
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    
+    NSDictionary *paramater = @{
+                                @"userId":[[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"],
+                                @"wid":accountMessage.wid,
+                                @"fenceType":@"1",
+                                @"alertType":@"0",
+                                @"area":self.fenceData,
+                                @"name":fenceNameTextField.text 
+                                };
+    [Command commandWithAddress:@"addfence" andParamater:paramater];
     return;
 }
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date

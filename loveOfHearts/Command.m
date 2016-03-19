@@ -13,21 +13,33 @@
 #import "AccountMessage.h"
 #import "Rail.h"
 #import "HistoryFenceList.h"
+#import "AccountMessage.h"
 
 @implementation Command
 
-+ (void)commandWithName:(NSString *)command andParameter:(NSString *)paramater{
++ (void)commandWithName:(NSString *)command{
     
-    AFHTTPSessionManager *sessionManager;
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
-    [sessionManager POST:[NSString stringWithFormat:@"%@",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager new];
+    
+    NSDictionary *paramater = @{
+                                @"userId":accountMessage.userId,
+                                @"wid":accountMessage.wid
+                                    };
+    
+    NSLog(@"%@",paramater);
+    
+    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
+    [sessionManager POST:[NSString stringWithFormat:@"%@%@",HTTP,command] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        ;
+        NSLog(@"%@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        ;
+        NSLog(@"%@",error);
     }];
 }
 

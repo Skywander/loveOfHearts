@@ -10,8 +10,6 @@
 
 #import "AddWatchByInput.h"
 #import "Constant.h"
-#import <AFNetworking/AFNetworking.h>
-#import "Alert.h"
 #import "Networking.h"
 @interface AddWatchByInput()
 {
@@ -43,7 +41,7 @@
     
     basicY = 70;
     
-    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
+    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
 }
 
 - (void)initUI{
@@ -103,33 +101,18 @@
 
 - (void)clickSureButton {
     if (relationField.text.length <= 0 || idField.text.length <= 0 ) {
-        [self presentViewController:[Alert getAlertWithTitle:@"完善信息"] animated:YES completion:^{
-            ;
-        }];
-        return;
     }
     
     shouhuan_id = idField.text;
     
     relation = relationField.text;
     
-    [self addWatch];
+    [self addShouhuan];
 
 }
 
-- (void)addWatch{
-    
-    if (!user_id || !shouhuan_id || !relation) {
-        return;
-    }
-    
-    NSDictionary *parameters = @{
-                                 @"userId":user_id,
-                                 @"wid":shouhuan_id,
-                                 @"relations":relation,
-                                 @"type":@"1"
-                                 };
-    [Networking addWatchWithParamaters:parameters];
+- (void)addShouhuan{
+
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -8,6 +8,7 @@
 
 #import "RightViewController.h"
 #import "RightVieFactory.h"
+#import "Command.h"
 
 #define RIGHT_BUTTON_WIDTH 465/2.0
 
@@ -61,12 +62,22 @@
 }
 
 - (void)clickButton:(UIButton *)button{
+    if (button.tag == 8) {
+        NSLog(@"找手表");
+        
+        [self findWatch];
+    }
+    
     if ([RightVieFactory factoryWithTag:(int)button.tag]) {
         [self presentViewController:[RightVieFactory factoryWithTag:(int)button.tag] animated:YES completion:^{
             ;
         }];
     }
 
+}
+
+- (void)findWatch{
+    [Command commandWithName:@"findwatch"];
 }
 
 @end

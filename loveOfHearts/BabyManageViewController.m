@@ -7,9 +7,21 @@
 //
 
 #import "BabyManageViewController.h"
+#import "AccountMessage.h"
+#import "Networking.h"
+
+#define VIEW_HEIGHT 80
 
 @interface BabyManageViewController ()
-
+{
+    NSTimer *timer;
+    
+    Networking *netWorking;
+    
+    AccountMessage *accountMessage;
+    
+    NSArray *deviceArray;
+}
 @end
 
 @implementation BabyManageViewController
@@ -17,12 +29,85 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:DEFAULT_COLOR];
-    
     [self initNavigation];
+    
+    [self getData];
+    
+}
+
+- (void)getData{    
+    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
+    
+    NSDictionary *paramater = @{
+                                    @"userId":userId
+                                    };
+    
+    netWorking = [Networking new];
+    
+    [netWorking getDevicesMessageWithParamaters:paramater];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getDeviceMessage) userInfo:nil repeats:YES];
+}
+
+- (void)getDeviceMessage{
+    if ([netWorking getDeviceMessage].count > 0) {
+        deviceArray = [netWorking getDeviceMessage];
+        
+        NSLog(@"deviceArray : %@",deviceArray);
+        
+        [timer invalidate];
+        
+        [self initView];
+    }
+}
+
+- (void)initView{
+    float y = 70;
+    for (NSDictionary *dict in deviceArray) {
+        UIView *view = [self viewWithWatchID:[dict objectForKey:@"wid"] andY:y];
+        y = y + VIEW_HEIGHT + 10;
+        [self.view addSubview:view];
+    }
+}
+
+- (UIView *)viewWithWatchID:(NSString *)watchId andY:(float)y{
+    UIView *view = [UIView new];
+    
+    [view setFrame:CGRectMake(10, y, SCREEN_WIDTH - 20, VIEW_HEIGHT)];
+    
+    [view setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView *subView = [UIView new];
+    
+    subView.backgroundColor = [UIColor blackColor];
+    
+    [subView setFrame:CGRectMake(0, 0, VIEW_HEIGHT, VIEW_HEIGHT)];
+    
+    [view addSubview: subView];
+    
+    UILabel *watchIdLabel = [UILabel new];
+    
+    [watchIdLabel setFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, VIEW_HEIGHT)];
+    
+    [watchIdLabel setBackgroundColor:[UIColor clearColor]];
+    
+    [watchIdLabel setText:watchId];
+    
+    [watchIdLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [view addSubview:watchIdLabel];
+    
+    
+    [view.layer setCornerRadius:6.f];
+    [view.layer setBorderColor:[UIColor grayColor].CGColor];
+    [view.layer setBorderWidth:0.3f];
+    
+    return view;
 }
 
 - (void)initNavigation{
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
     UIView *view = [UIView new];
     
     [view setBackgroundColor:DEFAULT_PINK];

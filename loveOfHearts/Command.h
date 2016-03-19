@@ -11,7 +11,7 @@
 @interface Command : NSObject
 
 
-+ (void)commandWithName:(NSString *)command andParameter:(NSString *)paramater;
++ (void)commandWithName:(NSString *)command;
 
 
 + (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater;

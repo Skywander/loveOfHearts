@@ -748,9 +748,4 @@
 
 }
 
-- (void)showAlertnoRecord{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"没有消息记录" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alert show];
-}
-
 @end

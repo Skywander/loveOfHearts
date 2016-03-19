@@ -11,6 +11,15 @@
 #import "JSONKit.h"
 #import "Alert.h"
 #import "AccountMessage.h"
+
+@interface Networking()
+{
+    NSArray *devicelist;
+    NSArray *userslist;
+}
+
+@end
+
 @implementation Networking
 
 int loginMessage;
@@ -19,6 +28,7 @@ int loginMessage;
 int registerMessage;
 
 AFHTTPSessionManager *manager;
+
 
 + (void)registerwithDict:(id)dict{
     if (!manager) {
@@ -104,11 +114,59 @@ AFHTTPSessionManager *manager;
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
 }
 
+- (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater{
+    if (!manager) {
+        manager = [AFHTTPSessionManager new];
+    }
+    devicelist = [NSArray new];
+    [manager POST:[NSString stringWithFormat:@"%@devicelist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        devicelist = [responseObject objectForKey:@"data"];
+        
+        NSLog(@"networking : %@",devicelist);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+- (void)getUsersMessageWithParamaters:(NSDictionary *)paramater{
+    if (!manager) {
+        manager = [AFHTTPSessionManager new];
+    }
+    userslist = [NSArray new];
+    [manager POST:[NSString stringWithFormat:@"%@powerlist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        userslist = [responseObject objectForKey:@"data"];
+        
+        NSLog(@"networking : %@",devicelist);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+- (NSArray *)getUsersArray{
+    return userslist;
+}
+     
+     
 
 + (int)getLoginMessage{
     return  loginMessage;
@@ -116,6 +174,10 @@ AFHTTPSessionManager *manager;
 
 + (int)getRegisterMessage{
     return registerMessage;
+}
+
+- (NSArray *)getDeviceMessage{
+    return devicelist;
 }
 
 

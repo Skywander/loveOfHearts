@@ -133,8 +133,6 @@
 
         }
     }
-    [Command commandWithName:@"SOS" andParameter:[NSString stringWithFormat:@"%@,%@,%@",textFields[0].text,textFields[1].text,textFields[2].text]];
-    NSLog(@"newPhoneArray:%@",newPhoneArray);
     
     NSString *tempString = [NSString stringWithFormat:@"%@,%@,%@",textFields[0].text,textFields[1].text,textFields[2].text];
     

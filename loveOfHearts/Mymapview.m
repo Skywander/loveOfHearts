@@ -18,6 +18,7 @@ static Mymapview *mymapview;
 
 @implementation Mymapview
 @synthesize mapView;
+@synthesize coordinate;
 //@synthesize _search;
 + (instancetype) sharedInstance {
     if (mymapview) {

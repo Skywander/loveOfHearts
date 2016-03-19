@@ -12,6 +12,8 @@
 #import "PhoneCanMakeList.h"
 #import "BabyManageViewController.h"
 #import "HistoryFenceList.h"
+#import "AuthorityViewController.h"
+#import "OtherSettingViewController.h"
 
 @implementation RightVieFactory
 
@@ -23,6 +25,7 @@
             viewController = [BabyManageViewController new];
             break;
         case 2:
+            viewController = [AuthorityViewController new];
             ;
             break;
         case 3:
@@ -44,10 +47,9 @@
             ;
             break;
         case 9:
-            ;
+            viewController = [OtherSettingViewController new];
             break;
         case 10:
-            ;
             break;
             
         default:

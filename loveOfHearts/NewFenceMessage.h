@@ -11,7 +11,7 @@
 
 @interface NewFenceMessage : UIViewController
 
-@property (strong,nonatomic) Fence *fence;
+@property (nonatomic,strong) NSString *fenceData;
 
 @property (strong,nonatomic) NSMutableArray *fencesArray;
 
