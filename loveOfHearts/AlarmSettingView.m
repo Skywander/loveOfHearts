@@ -178,7 +178,7 @@
     
     [Command commandWithAddress:@"clock" andParamater:paramater];
     
-    [accountMessage setSilencetime:timeString];
+    [accountMessage setClock:timeString];
     
 }
 

@@ -276,7 +276,7 @@
                                 };
     [Command commandWithAddress:@"silence" andParamater:paramaters];
     
-    [accountMessage setClock:paramater];
+    [accountMessage setSilencetime:paramater];
     
 }
 
