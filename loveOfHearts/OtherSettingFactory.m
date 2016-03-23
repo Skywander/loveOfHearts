@@ -22,6 +22,7 @@
             viewController = [RedFlowerViewController new];
             break;
         case 2:
+            viewController = [HealthViewController new];
             break;
         case 3:
             viewController = [AlarmSettingView new];
@@ -37,8 +38,9 @@
             viewController = [ChangePassword new];
             break;
         case 8:
+            viewController = [CallPoliceViewController new];
             break;
-        case 10:
+        case 9:
             break;
         default:
             break;

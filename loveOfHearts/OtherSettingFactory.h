@@ -13,6 +13,7 @@
 #import "NoDisturbingTime.h"
 #import "ChangePassword.h"
 #import "AlarmSettingView.h"
+#import "HealthViewController.h"
 @interface OtherSettingFactory : NSObject
 
 + (UIViewController *)factoryWithTag:(int)i;

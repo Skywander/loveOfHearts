@@ -18,7 +18,7 @@
         
         [self setBackgroundColor:DEFAULT_PINK];
         
-        UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(2, 2, 30, 40)];
+        UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 20, 20)];
         
         [returnButton setBackgroundImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
         

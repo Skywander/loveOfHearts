@@ -10,18 +10,20 @@
 #import "Constant.h"
 #import "Command.h"
 #import "Navview.h"
+#import "AccountMessage.h"
 @interface CallPoliceViewController()
 {
     UIButton *sosButton;
     UIButton *lowPowerButton;
     UIButton *takeDownWatch;
-    UIButton *pedometerButton;
     UIButton *messageButton;
     
     UISwitch *swits[5];
     NSMutableArray *switsState;
     
     UIButton *sureButton;
+    
+    AccountMessage *accountMessage ;
 }
 
 @end
@@ -39,14 +41,14 @@
 }
 
 - (void)initData {
-    NSMutableArray *tempArray = [[NSUserDefaults standardUserDefaults ]objectForKey:@"CallPoliceSettingState"];
-    if (tempArray) {
-        switsState = [NSMutableArray arrayWithArray:tempArray];
-    }
+    switsState = [NSMutableArray new];
     
-    if (!switsState) {
-        switsState = [NSMutableArray arrayWithObjects:@"0",@"0",@"0",@"0",@"0",nil];
-    }
+    accountMessage = [AccountMessage sharedInstance];
+    
+    [switsState addObject:accountMessage.smsonoff];
+    [switsState addObject:accountMessage.lowbat];
+    [switsState addObject:accountMessage.remove];
+    [switsState addObject:accountMessage.sossms];
     
     NSLog(@"switState%@",switsState);
 }
@@ -57,27 +59,26 @@
     Navview *navigation = [Navview new];
     [self.view addSubview:navigation];
     
-    CGFloat basicMove = 40;
+    CGFloat basicMove = 60;
 
-    sosButton = [self buttonWthName:@"      SOS短信报警" andPointY:70];
+    sosButton = [self buttonWthName:@"      短信开关" andPointY:70];
     
-    lowPowerButton = [self buttonWthName:@"     低电短信报警" andPointY:70 + basicMove];
+    lowPowerButton = [self buttonWthName:@"     低电报警" andPointY:70 + basicMove];
     
-    takeDownWatch = [self buttonWthName:@"      取下手表报警" andPointY:70 + basicMove * 2];
+    takeDownWatch = [self buttonWthName:@"      脱落报警" andPointY:70 + basicMove * 2];
     
-    pedometerButton = [self buttonWthName:@"      计步功能" andPointY:70  + basicMove * 3];
     
-    messageButton = [self buttonWthName:@"      短信" andPointY:70 + basicMove * 4];
+    messageButton = [self buttonWthName:@"      SOS报警" andPointY:70 + basicMove * 3];
     
     sureButton = [self buttonWthName:@"确定" andPointY:0];
-    [sureButton setFrame:CGRectMake(6, 70 + basicMove * 6, SCREEN_WIDTH - 12, 36)];
+    [sureButton setFrame:CGRectMake(6, 70 + basicMove * 5, SCREEN_WIDTH - 12, 36)];
     [sureButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [sureButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
     [sureButton addTarget:self action:@selector(clickSureButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (UIButton *)buttonWthName:(NSString *)name andPointY:(CGFloat)y {
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, 36)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, 50)];
     [button setTitle:name forState:UIControlStateNormal];
     [button setTitleColor:DEFAULT_COLOR forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentLeft)];
@@ -95,7 +96,7 @@
         swits[i] = swit;
         [swit setTag:i];
         
-        if ([[switsState objectAtIndex:i] isEqualToString:@"1"]) {
+        if ([[switsState objectAtIndex:i] intValue] == 1) {
             [swit setOn:YES animated:NO];
             
         }else {
@@ -118,9 +119,42 @@
 
 
 - (void)clickSureButton {
+    NSString *userId = accountMessage.userId;
+    NSString *wid = accountMessage.wid;
     
-    [[NSUserDefaults standardUserDefaults] setObject:switsState forKey:@"CallPoliceSettingState"];
+    NSLog(@"userid : %@ wid : %@",userId,wid);
     
+    NSDictionary *sosDict = @{
+                                @"userId":userId,
+                                @"wid":wid,
+                                @"onoroff":[switsState objectAtIndex:1]
+                              };
+    [Command commandWithAddress:@"sossms" andParamater:sosDict];
+    
+    NSDictionary *lowpowerDict = @{
+                                   @"userId":userId,
+                                   @"wid":wid,
+                                   @"lowbat":[switsState objectAtIndex:2]
+                                   };
+    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict];
+    
+    NSDictionary *offDict = @{
+                                @"userId":userId,
+                                @"wid":wid,
+                                @"remove":[switsState objectAtIndex:3]
+                              };
+    
+    NSLog(@"%@ ",[switsState objectAtIndex:3]);
+     
+    [Command commandWithAddress:@"remove" andParamater:offDict];
+
+    NSDictionary *smsDict = @{
+                                @"userId":userId,
+                                @"wid":wid,
+                                @"smsonoff":[switsState objectAtIndex:0]
+                              };
+    
+    [Command commandWithAddress:@"smsonoff" andParamater:smsDict];
     
 }
 

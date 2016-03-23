@@ -11,6 +11,7 @@
 #import "Networking.h"
 #import "Command.h"
 #import "Navview.h"
+#import "AccountMessage.h"
 
 @interface RedFlowerViewController()
 {
@@ -25,6 +26,8 @@
     NSString *shouhuan_id;
     NSString *user_id;
     
+    AccountMessage *accountMessage;
+    
 }
 @end
 
@@ -33,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self initUI];
 }
 
@@ -43,6 +47,10 @@
     Navview *navigation = [Navview new];
     [self.view addSubview:navigation];
     
+    accountMessage = [AccountMessage sharedInstance];
+    
+    flower_count = accountMessage.flower;
+    
     countLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 70, SCREEN_WIDTH - 12, 36)];
     
     [countLabel setTextAlignment:NSTextAlignmentCenter];
@@ -51,6 +59,7 @@
     [countLabel.layer setBorderColor:[UIColor grayColor].CGColor];
     [countLabel.layer setBorderWidth:0.3f];
     [countLabel.layer setCornerRadius:6.f];
+    [countLabel setText:[NSString stringWithFormat:@"小红花的数量%@",accountMessage.flower]];
     
     [self.view addSubview:countLabel];
     
@@ -95,6 +104,8 @@
     
     [countLabel setText:[NSString stringWithFormat:@"小红花的数量:%@",flower_count]];
     
+    [accountMessage setFlower:flower_count];
+    
     [self makeSureChange];
 
 }
@@ -109,7 +120,13 @@
 }
 
 - (void)makeSureChange{
-    NSLog(@"flower_count : %@",flower_count);
+
+    NSDictionary *dict = @{
+                            @"userId":accountMessage.userId,
+                            @"wid":accountMessage.wid,
+                            @"flowerNum":flower_count
+                           };
     
+    [Command commandWithAddress:@"flower" andParamater:dict];
 }
 @end

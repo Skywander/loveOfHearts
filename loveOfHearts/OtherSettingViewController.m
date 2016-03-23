@@ -60,7 +60,7 @@
     return 50;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 10;
 }
 
 
@@ -74,13 +74,11 @@
     }
     NSString *imageString = [NSString stringWithFormat:@"otherSetting%ld",[indexPath row] + 1];
     
+    NSString *selectedImageString = [NSString stringWithFormat:@"otherSelected%ld",[indexPath row] + 1];
+    
     [cell setBackgroundColor:DEFAULT_COLOR];
     
-    UIView *selectedView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageString]];
-    UIView *selectoverView = [[UIView alloc] initWithFrame:cell.frame];
-    [selectoverView setBackgroundColor:[UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:0.1]];
-    [selectedView addSubview:selectoverView];
-    [cell setSelectedBackgroundView:selectedView];
+    [cell setSelectedBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedImageString]]];
     
     [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:imageString]]];
     
