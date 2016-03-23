@@ -44,6 +44,8 @@
 
 #define DEFAULT_FONT_COLOR [UIColor blackColor]
 
+#define SELECTED_FONT_COLOR [UIColor colorWithRed:248/255.0 green:142/255.0 blue:198/255.0 alpha:1]
+
 //网络
 
 #define HTTP @"http://xgbdlbs.com/XGBDPlatforms/"

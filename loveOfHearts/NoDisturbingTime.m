@@ -9,7 +9,6 @@
 #import "NoDisturbingTime.h"
 #import "IQActionSheetPickerView.h"
 #import "Command.h"
-#import "Constant.h"
 #import "Networking.h"
 #import "Navview.h"
 #import "AccountMessage.h"
@@ -29,9 +28,6 @@
     UIButton *selectedButton;
     
     NSString *paramater;
-    
-    NSString *user_id;
-    NSString *shouhuan_id;
     
     NSString *nodisturbTime;
     
@@ -57,7 +53,7 @@
     
     basicY = 70;
     
-    contentArray = [NSMutableArray arrayWithObjects:@"时间段1",@"时间段2",@"时间段3",@"时间段4",nil];
+    contentArray = [NSMutableArray arrayWithObjects:@"时间段一",@"时间段二",@"时间段三",@"时间段四",nil];
     
     picker = [[IQActionSheetPickerView alloc] initWithTitle:@"选择时间" delegate:self];
     [picker setTag:8];
@@ -77,7 +73,6 @@
         [timeArray addObjectsFromArray:singleArray];
     }
     
-    NSLog(@"timeArray : %@",timeArray);
 }
 
 - (void)initUI{
@@ -93,7 +88,7 @@
     
     [titleLabel setText:@"温馨提示:宝贝正在学习，请勿打扰"];
     
-    [titleLabel setTextColor:[UIColor blackColor]];
+    [titleLabel setTextColor:DEFAULT_FONT_COLOR];
     
     [titleLabel setFont:[UIFont systemFontOfSize:15]];
     
@@ -118,7 +113,7 @@
     [sureButton.layer setCornerRadius:6.f];
     
     [sureButton setTitle:@"确定" forState:UIControlStateNormal];
-    [sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [sureButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
     [sureButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     
@@ -147,7 +142,7 @@
     //时间段
     UILabel *firstlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 3 - 4, 40)];
     
-    [firstlabel setTextColor:[UIColor blackColor]];
+    [firstlabel setTextColor:DEFAULT_FONT_COLOR];
     
     [firstlabel setText:[contentArray objectAtIndex:(y - basicY) / basicMove - 1]];
     
@@ -161,7 +156,7 @@
     [secondLabel setUserInteractionEnabled:YES];
     [secondLabel setText:@":"];
     
-    [secondLabel setTextColor:[UIColor blackColor]];
+    [secondLabel setTextColor:DEFAULT_FONT_COLOR];
     
     [secondLabel setTextAlignment:NSTextAlignmentCenter];
     
@@ -172,7 +167,7 @@
     
     [firstButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     
-    [firstButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [firstButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     
     [firstButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -184,7 +179,7 @@
     
     UIButton *secondButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 3 - 2,0, SCREEN_WIDTH / 3 - 4, 40)];
     
-    [secondButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [secondButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     
     [secondButton setTitle:[timeArray objectAtIndex:timeCount++] forState:UIControlStateNormal];
     
@@ -203,21 +198,12 @@
 
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date
 {
-    switch (pickerView.tag)
-    {
-        case 8:
-        {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateStyle:NSDateFormatterNoStyle];
-            formatter.dateFormat = @"HH:mm";
-            [selectedButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
-            [selectedButton setTitleColor:DEFAULT_COLOR forState:UIControlStateNormal];
-        }
-            break;
-            
-        default:
-            break;
-    }
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    formatter.dateFormat = @"HH:mm";
+    [selectedButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+    [selectedButton setTitleColor:SELECTED_FONT_COLOR forState:UIControlStateNormal];
+
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
