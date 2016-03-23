@@ -59,7 +59,7 @@
     Navview *navigation = [Navview new];
     [self.view addSubview:navigation];
     
-    CGFloat basicMove = 60;
+    CGFloat basicMove = 55;
 
     sosButton = [self buttonWthName:@"      短信开关" andPointY:70];
     
@@ -71,7 +71,7 @@
     messageButton = [self buttonWthName:@"      SOS报警" andPointY:70 + basicMove * 3];
     
     sureButton = [self buttonWthName:@"确定" andPointY:0];
-    [sureButton setFrame:CGRectMake(6, 70 + basicMove * 5, SCREEN_WIDTH - 12, 36)];
+    [sureButton setFrame:CGRectMake(6, 70 + basicMove * 5, SCREEN_WIDTH - 12, 50)];
     [sureButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [sureButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
     [sureButton addTarget:self action:@selector(clickSureButton) forControlEvents:UIControlEventTouchUpInside];
@@ -80,23 +80,25 @@
 - (UIButton *)buttonWthName:(NSString *)name andPointY:(CGFloat)y {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, 50)];
     [button setTitle:name forState:UIControlStateNormal];
-    [button setTitleColor:DEFAULT_COLOR forState:UIControlStateNormal];
+    [button setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentLeft)];
     [button.layer setCornerRadius:6.f];
     [button.layer setBorderColor:[UIColor grayColor].CGColor];
     [button.layer setBorderWidth:0.3f];
     if (y != 0) {
         UISwitch *swit = [UISwitch new];
-        [swit setFrame:CGRectMake(SCREEN_WIDTH - 12 - 60, 3, 10, 40)];
-        [swit setOnTintColor:DEFAULT_COLOR];
+        [swit setFrame:CGRectMake(SCREEN_WIDTH - 12 - 60, 5, 10, 40)];
+        [swit setOnTintColor:DEFAULT_PINK];
         [swit addTarget:self action:@selector(clickSwitch:) forControlEvents:UIControlEventTouchUpInside];
         [button addSubview:swit];
         
-        int i = (y - 70)/40;
+        int i = (y - 70)/55;
         swits[i] = swit;
         [swit setTag:i];
         
+        
         if ([[switsState objectAtIndex:i] intValue] == 1) {
+            
             [swit setOn:YES animated:NO];
             
         }else {
@@ -127,31 +129,30 @@
     NSDictionary *sosDict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"onoroff":[switsState objectAtIndex:1]
+                                @"onoroff":[switsState objectAtIndex:0]
                               };
     [Command commandWithAddress:@"sossms" andParamater:sosDict];
     
     NSDictionary *lowpowerDict = @{
                                    @"userId":userId,
                                    @"wid":wid,
-                                   @"lowbat":[switsState objectAtIndex:2]
+                                   @"lowbat":[switsState objectAtIndex:1]
                                    };
     [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict];
     
     NSDictionary *offDict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"remove":[switsState objectAtIndex:3]
+                                @"remove":[switsState objectAtIndex:2]
                               };
     
-    NSLog(@"%@ ",[switsState objectAtIndex:3]);
-     
+    
     [Command commandWithAddress:@"remove" andParamater:offDict];
 
     NSDictionary *smsDict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"smsonoff":[switsState objectAtIndex:0]
+                                @"smsonoff":[switsState objectAtIndex:3]
                               };
     
     [Command commandWithAddress:@"smsonoff" andParamater:smsDict];
