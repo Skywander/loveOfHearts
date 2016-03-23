@@ -30,15 +30,15 @@
     [self.view setBackgroundColor:DEFAULT_COLOR];
         
     [self initTopView];
-    
-    [self initMapView];
-    
+        
     [self initHomeMenuView];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
+    
+    [self initMapView];
 }
 
 - (void)initTopView{
@@ -54,6 +54,8 @@
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     
     [self.view addSubview:mapView];
+    
+    [self.view sendSubviewToBack:mapView];
 }
 
 - (void)initHomeMenuView{
