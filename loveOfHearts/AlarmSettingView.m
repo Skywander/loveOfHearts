@@ -39,8 +39,6 @@
 @implementation AlarmSettingView
 @synthesize alarmArray,switsState;
 - (void)viewDidLoad{
-    NSLog(@"viewdidlocad");
-    
     [super viewDidLoad];
     
     [self initDatePicker];
@@ -111,7 +109,7 @@
     [button setBackgroundColor:[UIColor whiteColor]];
     
     [button setTitle:name forState:UIControlStateNormal];
-    [button setTitleColor:DEFAULT_COLOR forState:UIControlStateNormal];
+    [button setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
     
@@ -125,7 +123,7 @@
 
         UISwitch *swit = [UISwitch new];
         [swit setFrame:CGRectMake(SCREEN_WIDTH - 12 - 60, 3, 10, 40)];
-        [swit setOnTintColor:DEFAULT_COLOR];
+        [swit setOnTintColor:DEFAULT_PINK];
         
         [swit addTarget:self action:@selector(clickSwitch:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -157,12 +155,9 @@
 
 - (void)clickSwitch:(UISwitch *)sender{
     if (sender.isOn) {
-        NSLog(@"%@",switsState);
-        
         [switsState replaceObjectAtIndex:sender.tag withObject:@"1"];
     }
     if (!sender.isOn) {
-        NSLog(@"%@",switsState);
         [switsState replaceObjectAtIndex:sender.tag withObject:@"0"];
     }
 }
@@ -193,6 +188,8 @@
             formatter.dateFormat = @"HH:mm";
 
             [selectedAlarm setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
+            
+            [selectedAlarm setTitleColor:SELECTED_FONT_COLOR forState:UIControlStateNormal];
         }
             break;
             

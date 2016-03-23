@@ -20,6 +20,12 @@
     
     NSString *userId;
     NSString *wid;
+    
+    NSString *modeChoice;
+    
+    UIImageView *selectedView;
+    
+    int mode;
 }
 
 @end
@@ -31,42 +37,61 @@
     
     [self initData];
     
+    [self initView];
+    
+    
     Navview *navigation = [Navview new];
     [self.view addSubview:navigation];
-    
-    [self initTableView];
     
 }
 
 - (void)initData{
-    AccountMessage *accountMessage = [AccountMessage new];
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     userId = accountMessage.userId;
     
     wid = accountMessage.wid;
+    
+    modeChoice = accountMessage.mode;
+    
+    if ([modeChoice intValue] == 60) {
+        mode = 0;
+    }
+    
+    if ([modeChoice intValue] == 600){
+        mode = 1;
+    }
+    
+    if ([modeChoice intValue] == 1800) {
+        mode = 2;
+    }
 }
 
 
-- (void)initTableView{
+- (void)initView{
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
     dataSource = [NSArray arrayWithObjects:@"跟随模式",@"标准模式",@"省电模式",nil];
 
     
     listView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    [listView setFrame:CGRectMake(6, 10, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 30)];
+    [listView setFrame:CGRectMake(6, 44, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 30)];
     
     [listView setBackgroundColor:[UIColor blackColor]];
     
     listView.delegate = self;
     listView.dataSource = self;
     
-    listView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
+    listView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    listView.scrollEnabled = NO;
     listView.showsVerticalScrollIndicator = NO;
     listView.backgroundColor = DEFAULT_COLOR;
     listView.delaysContentTouches = NO;
 
     [self.view addSubview:listView];
+    
+    selectedView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 10, 30, 30)];
+    selectedView.image = [UIImage imageNamed:@"yes"];
     
 }
 
@@ -92,8 +117,8 @@
     }
 
     
-    UILabel *label = [[UILabel alloc] initWithFrame:cell.frame];
-    [label setTextAlignment:NSTextAlignmentCenter];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 3, SCREEN_WIDTH - 10, 44)];
+    [label setTextAlignment:NSTextAlignmentLeft];
     [label setText:[dataSource objectAtIndex:[indexPath row]]];
     [label setTextColor:[UIColor blackColor]];
     [label setFont:[UIFont systemFontOfSize:15.f]];
@@ -104,6 +129,12 @@
     
     [cell.layer setBorderColor:[UIColor grayColor].CGColor];
     [cell.layer setBorderWidth:0.3f];
+    
+    NSLog(@"%d %ld",mode,[indexPath row]);
+    
+    if (mode == [indexPath row]) {
+        [cell addSubview:selectedView];
+    }
     
     return cell;
 }
@@ -116,7 +147,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [[tableView.visibleCells objectAtIndex:[indexPath row]] addSubview:selectedView];
 }
 
 
