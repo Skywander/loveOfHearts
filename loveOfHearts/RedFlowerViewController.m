@@ -54,7 +54,7 @@
     countLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 70, SCREEN_WIDTH - 12, 36)];
     
     [countLabel setTextAlignment:NSTextAlignmentCenter];
-    [countLabel setTextColor:DEFAULT_COLOR];
+    [countLabel setTextColor:DEFAULT_FONT_COLOR];
     
     [countLabel.layer setBorderColor:[UIColor grayColor].CGColor];
     [countLabel.layer setBorderWidth:0.3f];
@@ -66,7 +66,7 @@
     addButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 112, SCREEN_WIDTH - 12, 36)];
     [addButton setTitle:@"奖励一朵小红花" forState:UIControlStateNormal];
     [addButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [addButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [addButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];
     
     [addButton.layer setCornerRadius:6.f];
     [addButton.layer setBorderColor:[UIColor grayColor].CGColor];
@@ -79,7 +79,7 @@
     clearButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 154, SCREEN_WIDTH - 12, 36)];
     [clearButton setTitle:@"清空小红花" forState:UIControlStateNormal];
     [clearButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [clearButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [clearButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];
     
     [clearButton.layer setCornerRadius:6.f];
     [clearButton.layer setBorderWidth:0.3f];

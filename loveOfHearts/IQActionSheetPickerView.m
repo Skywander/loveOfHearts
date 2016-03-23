@@ -79,7 +79,7 @@
 
             UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:(UIBarButtonItemStyleDone) target:self action:@selector(pickerCancelClicked:)];
             [cancelButton setTitle:@"取消"];
-            [cancelButton setTintColor:DEFAULT_FONT_COLOR];
+            [cancelButton setTintColor:SELECTED_FONT_COLOR];
             
             [items addObject:cancelButton];
             
@@ -107,7 +107,7 @@
             //  Create a done button to show on keyboard to resign it. Adding a selector to resign it.
 //            UIBarButtonItem *doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(pickerDoneClicked:)];
             UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(pickerDoneClicked:)];
-            [doneButton setTintColor:DEFAULT_FONT_COLOR];
+            [doneButton setTintColor:SELECTED_FONT_COLOR];
             [items addObject:doneButton];
             UIBarButtonItem *_rightNilButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
             [items addObject:_rightNilButton];
