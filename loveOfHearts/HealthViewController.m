@@ -82,15 +82,15 @@
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, 50)];
     [button setBackgroundColor:[UIColor whiteColor]];
     [button setTitle:name forState:UIControlStateNormal];
-    [button setTitleColor:DEFAULT_COLOR forState:UIControlStateNormal];
+    [button setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentLeft)];
     [button.layer setCornerRadius:6.f];
     [button.layer setBorderColor:[UIColor grayColor].CGColor];
     [button.layer setBorderWidth:0.3f];
     if (y != 0) {
         UISwitch *swit = [UISwitch new];
-        [swit setFrame:CGRectMake(SCREEN_WIDTH - 12 - 60, 3, 10, 40)];
-        [swit setOnTintColor:DEFAULT_COLOR];
+        [swit setFrame:CGRectMake(SCREEN_WIDTH - 12 - 60, 5, 10, 40)];
+        [swit setOnTintColor:DEFAULT_PINK];
         [swit addTarget:self action:@selector(clickSwitch:) forControlEvents:UIControlEventTouchUpInside];
         [button addSubview:swit];
         
@@ -131,7 +131,7 @@
         NSDictionary *dict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"turn":@"00:00-11:11"
+                                @"turn":@"00:00-23:59"
                                };
         
         [Command commandWithAddress:@"turn" andParamater:dict];
