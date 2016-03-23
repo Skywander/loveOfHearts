@@ -7,10 +7,10 @@
 //
 
 #import "ModeChoiceViewController.h"
-#import "Constant.h"
 #import "IQActionSheetPickerView.h"
 #import "Navview.h"
 #import "AccountMessage.h"
+#import "Command.h"
 
 @interface ModeChoiceViewController()<UITableViewDataSource,UITableViewDelegate,IQActionSheetPickerViewDelegate>
 
@@ -24,6 +24,8 @@
     NSString *modeChoice;
     
     UIImageView *selectedView;
+    
+    AccountMessage *accountMessage;
     
     int mode;
 }
@@ -46,7 +48,7 @@
 }
 
 - (void)initData{
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    accountMessage = [AccountMessage sharedInstance];
     
     userId = accountMessage.userId;
     
@@ -148,6 +150,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [[tableView.visibleCells objectAtIndex:[indexPath row]] addSubview:selectedView];
+    
+    NSString *space = [NSString new];
+    
+    if ([indexPath row] == 0) {
+        space = @"60";
+    }
+    if ([indexPath row] == 1) {
+        space = @"600";
+    }
+    if ([indexPath row] == 2){
+        space = @"1800";
+    }
+    
+    NSDictionary *dict = @{
+                           @"userId":userId,
+                           @"wid":wid,
+                           @"space":space
+                           };
+    
+    [Command commandWithAddress:@"uploadspacetime" andParamater:dict];
+    
+    accountMessage.mode = space;
 }
 
 
