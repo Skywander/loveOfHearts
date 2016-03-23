@@ -32,9 +32,10 @@
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
     //列表
-    listView = [[UITableView alloc] initWithFrame:CGRectMake(3, 64, SCREEN_WIDTH - 6, SCREEN_HEIGHT - 30) style:UITableViewStyleGrouped];
+    listView = [[UITableView alloc] initWithFrame:CGRectMake(3, 34, SCREEN_WIDTH - 6, SCREEN_HEIGHT - 30) style:UITableViewStyleGrouped];
+    listView.scrollEnabled = NO;
     [listView setBackgroundColor:DEFAULT_COLOR];
-    listView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
+    listView.separatorStyle = UITableViewCellSeparatorStyleNone;
     listView.showsHorizontalScrollIndicator = NO;
     listView.showsVerticalScrollIndicator = NO;
     listView.dataSource = self;
@@ -57,7 +58,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 48;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;

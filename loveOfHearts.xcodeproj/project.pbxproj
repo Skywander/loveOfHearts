@@ -74,6 +74,16 @@
 		D3D8C5801CA27F8000512F5B /* otherSelected2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5761CA27F8000512F5B /* otherSelected2.png */; };
 		D3D8C5811CA27F8000512F5B /* otherSelected1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5771CA27F8000512F5B /* otherSelected1.png */; };
 		D3D8C5841CA282B600512F5B /* HealthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5831CA282B600512F5B /* HealthViewController.m */; };
+		D3D8C58F1CA2A46100512F5B /* SbabyManage.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5851CA2A46100512F5B /* SbabyManage.png */; };
+		D3D8C5901CA2A46100512F5B /* Sauthority.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5861CA2A46100512F5B /* Sauthority.png */; };
+		D3D8C5911CA2A46100512F5B /* SrelativeNumber.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5871CA2A46100512F5B /* SrelativeNumber.png */; };
+		D3D8C5921CA2A46100512F5B /* SphoneText.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5881CA2A46100512F5B /* SphoneText.png */; };
+		D3D8C5931CA2A46100512F5B /* Swhitelist.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5891CA2A46100512F5B /* Swhitelist.png */; };
+		D3D8C5941CA2A46100512F5B /* Sfences.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58A1CA2A46100512F5B /* Sfences.png */; };
+		D3D8C5951CA2A46100512F5B /* ShistoryTrack.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58B1CA2A46100512F5B /* ShistoryTrack.png */; };
+		D3D8C5961CA2A46100512F5B /* SfindWatch.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58C1CA2A46100512F5B /* SfindWatch.png */; };
+		D3D8C5971CA2A46100512F5B /* SotherSetting.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58D1CA2A46100512F5B /* SotherSetting.png */; };
+		D3D8C5981CA2A46100512F5B /* Sexit.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58E1CA2A46100512F5B /* Sexit.png */; };
 		D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */; };
 		D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248C1C94542F00E85F97 /* Security.framework */; };
 		D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248E1C94543D00E85F97 /* UIKit.framework */; };
@@ -239,6 +249,16 @@
 		D3D8C5771CA27F8000512F5B /* otherSelected1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = otherSelected1.png; sourceTree = "<group>"; };
 		D3D8C5821CA282B600512F5B /* HealthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthViewController.h; sourceTree = "<group>"; };
 		D3D8C5831CA282B600512F5B /* HealthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthViewController.m; sourceTree = "<group>"; };
+		D3D8C5851CA2A46100512F5B /* SbabyManage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SbabyManage.png; sourceTree = "<group>"; };
+		D3D8C5861CA2A46100512F5B /* Sauthority.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sauthority.png; sourceTree = "<group>"; };
+		D3D8C5871CA2A46100512F5B /* SrelativeNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SrelativeNumber.png; sourceTree = "<group>"; };
+		D3D8C5881CA2A46100512F5B /* SphoneText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SphoneText.png; sourceTree = "<group>"; };
+		D3D8C5891CA2A46100512F5B /* Swhitelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Swhitelist.png; sourceTree = "<group>"; };
+		D3D8C58A1CA2A46100512F5B /* Sfences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sfences.png; sourceTree = "<group>"; };
+		D3D8C58B1CA2A46100512F5B /* ShistoryTrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShistoryTrack.png; sourceTree = "<group>"; };
+		D3D8C58C1CA2A46100512F5B /* SfindWatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SfindWatch.png; sourceTree = "<group>"; };
+		D3D8C58D1CA2A46100512F5B /* SotherSetting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SotherSetting.png; sourceTree = "<group>"; };
+		D3D8C58E1CA2A46100512F5B /* Sexit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sexit.png; sourceTree = "<group>"; };
 		D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DE248C1C94542F00E85F97 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3DE248E1C94543D00E85F97 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -435,6 +455,16 @@
 		D362B92E1C96E3FB0037E29E /* RightList */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C5851CA2A46100512F5B /* SbabyManage.png */,
+				D3D8C5861CA2A46100512F5B /* Sauthority.png */,
+				D3D8C5871CA2A46100512F5B /* SrelativeNumber.png */,
+				D3D8C5881CA2A46100512F5B /* SphoneText.png */,
+				D3D8C5891CA2A46100512F5B /* Swhitelist.png */,
+				D3D8C58A1CA2A46100512F5B /* Sfences.png */,
+				D3D8C58B1CA2A46100512F5B /* ShistoryTrack.png */,
+				D3D8C58C1CA2A46100512F5B /* SfindWatch.png */,
+				D3D8C58D1CA2A46100512F5B /* SotherSetting.png */,
+				D3D8C58E1CA2A46100512F5B /* Sexit.png */,
 				D362B9501C97AB510037E29E /* babyManage.png */,
 				D362B9511C97AB510037E29E /* phoneText.png */,
 				D362B9521C97AB510037E29E /* whitelist.png */,
@@ -902,14 +932,18 @@
 				D3D8C56D1CA27EFF00512F5B /* otherSetting6.png in Resources */,
 				D362B94F1C97AA210037E29E /* signal100.png in Resources */,
 				D362B93B1C96E44F0037E29E /* findWatch.png in Resources */,
+				D3D8C5921CA2A46100512F5B /* SphoneText.png in Resources */,
 				D362B95B1C97ABF40037E29E /* -.png in Resources */,
 				D362B9211C967A230037E29E /* location.png in Resources */,
 				D3D8C57E1CA27F8000512F5B /* otherSelected4.png in Resources */,
 				D3D8C5791CA27F8000512F5B /* otherSelected6.png in Resources */,
 				D362B9531C97AB510037E29E /* babyManage.png in Resources */,
+				D3D8C5941CA2A46100512F5B /* Sfences.png in Resources */,
 				D362B9221C967A230037E29E /* self.png in Resources */,
 				D3E51B5F1C9D0EBD001732BF /* otherSetting4.png in Resources */,
 				D3D8C5811CA27F8000512F5B /* otherSelected1.png in Resources */,
+				D3D8C5951CA2A46100512F5B /* ShistoryTrack.png in Resources */,
+				D3D8C58F1CA2A46100512F5B /* SbabyManage.png in Resources */,
 				D362B9201C967A230037E29E /* chat.png in Resources */,
 				D3FEEFEE1C910B5B00300710 /* username.png in Resources */,
 				D3E51B5D1C9D0EBD001732BF /* otherSetting2.png in Resources */,
@@ -917,20 +951,25 @@
 				D3D8C56B1CA27EDE00512F5B /* otherSetting5.png in Resources */,
 				D3D0250B1C9BDE05002713B1 /* return.png in Resources */,
 				D362B9391C96E44F0037E29E /* fences.png in Resources */,
+				D3D8C5971CA2A46100512F5B /* SotherSetting.png in Resources */,
 				D362B91F1C967A230037E29E /* device.png in Resources */,
 				D3E51B5C1C9D0EBD001732BF /* otherSetting1.png in Resources */,
 				D362B9231C967A230037E29E /* phone.png in Resources */,
 				D3FEEFE91C910B4400300710 /* SMS_SDKLocalizable.strings in Resources */,
 				D362B93E1C96E44F0037E29E /* authority.png in Resources */,
+				D3D8C5961CA2A46100512F5B /* SfindWatch.png in Resources */,
 				D3E51B631C9D0EBD001732BF /* otherSetting10.png in Resources */,
 				D362B9381C96E44F0037E29E /* relativeNumber.png in Resources */,
 				D362B91E1C967A230037E29E /* menu.png in Resources */,
+				D3D8C5911CA2A46100512F5B /* SrelativeNumber.png in Resources */,
 				D3D8C57C1CA27F8000512F5B /* otherSelected9.png in Resources */,
 				D362B94D1C97AA210037E29E /* signal60.png in Resources */,
 				D362B93A1C96E44F0037E29E /* historyTrack.png in Resources */,
 				D3D8C57A1CA27F8000512F5B /* otherSelected8.png in Resources */,
 				D362B94B1C97AA210037E29E /* signal20.png in Resources */,
 				D3E51B621C9D0EBD001732BF /* otherSetting9.png in Resources */,
+				D3D8C5901CA2A46100512F5B /* Sauthority.png in Resources */,
+				D3D8C5931CA2A46100512F5B /* Swhitelist.png in Resources */,
 				D3D8C57B1CA27F8000512F5B /* otherSelected10.png in Resources */,
 				D362B95A1C97ABF40037E29E /* +.png in Resources */,
 				D362B92C1C96AF9B0037E29E /* zoomout.png in Resources */,
@@ -941,6 +980,7 @@
 				D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */,
 				D3E51B611C9D0EBD001732BF /* otherSetting7.png in Resources */,
 				D3E51B5E1C9D0EBD001732BF /* otherSetting3.png in Resources */,
+				D3D8C5981CA2A46100512F5B /* Sexit.png in Resources */,
 				D362B94C1C97AA210037E29E /* signal40.png in Resources */,
 				D362B94E1C97AA210037E29E /* signal80.png in Resources */,
 				D3D8C57D1CA27F8000512F5B /* otherSelected7.png in Resources */,

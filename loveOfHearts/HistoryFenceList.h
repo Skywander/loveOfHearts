@@ -15,7 +15,6 @@
 @property (strong,nonatomic) NSArray *sections;
 @property (nonatomic,strong) NSMutableArray *fencenameList;
 
-@property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) UITableView *table;
 
 @end

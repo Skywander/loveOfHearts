@@ -27,6 +27,8 @@ static HistoryFenceList *historyFenceList;
     NSString *shouhuan_id;
     AccountMessage *accountMessage;
     
+    NSTimer *timer;
+    
 }
 @end
 
@@ -40,10 +42,16 @@ static HistoryFenceList *historyFenceList;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initData];
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(initView) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initView) userInfo:nil repeats:YES];
 }
 
 - (void)initView{
+    if (fencesArray.count <= 0) {
+        return;
+    }
+    
+    [timer invalidate];
+    
     [self initSection];
     [self initTable];
     [self initNavigation];

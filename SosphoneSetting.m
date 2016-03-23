@@ -13,8 +13,6 @@
 #import "Navview.h"
 #import "AccountMessage.h"
 
-#define DEFAULT_COLOR [UIColor grayColor]
-
 @interface SosphoneSetting()
 {
     UITextField *textFields[4];

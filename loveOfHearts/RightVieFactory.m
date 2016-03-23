@@ -21,35 +21,35 @@
     UIViewController *viewController;
     
     switch (tag) {
-        case 1:
+        case 0:
             viewController = [BabyManageViewController new];
             break;
-        case 2:
+        case 1:
             viewController = [AuthorityViewController new];
             ;
             break;
-        case 3:
+        case 2:
             viewController = [SosphoneSetting new];
             break;
-        case 4:
+        case 3:
             viewController = [PhoneCanMakeList new];
             break;
-        case 5:
+        case 4:
             viewController = [PhoneListView new];
             break;
-        case 6:
+        case 5:
             viewController = [HistoryFenceList new];
+            break;
+        case 6:
+            ;
             break;
         case 7:
             ;
             break;
         case 8:
-            ;
-            break;
-        case 9:
             viewController = [OtherSettingViewController new];
             break;
-        case 10:
+        case 9:
             break;
             
         default:

@@ -30,7 +30,7 @@
 //颜色
 #define TOP_COLOR [UIColor redColor]
 
-#define DEFAULT_COLOR [UIColor grayColor]
+#define DEFAULT_COLOR [UIColor colorWithRed:236/255.0 green:236/255.0 blue:239/255.0 alpha:1]
 
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
 

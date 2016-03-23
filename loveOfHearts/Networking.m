@@ -142,6 +142,7 @@ AFHTTPSessionManager *manager;
 }
 
 - (void)getUsersMessageWithParamaters:(NSDictionary *)paramater{
+    
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }

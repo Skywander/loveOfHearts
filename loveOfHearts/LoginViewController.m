@@ -42,8 +42,6 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
-    NSLog(@"viewcontroller draw view");
-    
     [super viewDidLoad];
     
     [self initData];
@@ -220,13 +218,19 @@
     if (userName.text && password.text) {
         [Networking loginwithUsername:userName.text and:password.text];
     }
-    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getLoginMessage) userInfo:nil repeats:NO];
+    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getLoginMessage) userInfo:nil repeats:YES];
 
 }
 
 - (void)getLoginMessage{
     
-    if ([Networking getLoginMessage] == 1){
+    int loginMessage = [Networking getLoginMessage];
+    
+    if (loginMessage == 0) {
+        return;
+    }
+    
+    if (loginMessage == 1){
         
         [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
         
@@ -253,6 +257,8 @@
     }else{
         NSLog(@"login false");
     }
+    
+    [returnMessageInterval invalidate];
 }
 
 - (void)touchInsideButton:(UIButton *)sender{
