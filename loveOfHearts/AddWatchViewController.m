@@ -8,15 +8,13 @@
 
 #import "AddWatchViewController.h"
 #import "SYQRCodeViewController.h"
-#import "Constant.h"
 #import "AddWatchByInput.h"
-#import "Alert.h"
+#import "Navview.h"
 
 @interface AddWatchViewController()
 {
     UIButton *idButton;
     UIButton *codeButton;
-    
     
     NSTimer *timer;
 }
@@ -32,10 +30,14 @@
 - (void)initUI {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    Navview *navigation = [Navview new];
+    
+    [self.view addSubview:navigation];
+    
     idButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 74, SCREEN_WIDTH - 12, 36)];
     [idButton setTitle:@"通过ID添加手表" forState:UIControlStateNormal];
     [idButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [idButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [idButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];
     
     [idButton.layer setBorderColor:[UIColor grayColor].CGColor];
     [idButton.layer setBorderWidth:0.3f];
@@ -48,7 +50,7 @@
     codeButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 116, SCREEN_WIDTH - 12, 36)];
     [codeButton setTitle:@"扫描二维码添加手表" forState:UIControlStateNormal];
     [codeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [codeButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [codeButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];
     
     [codeButton.layer setCornerRadius:6.f];
     [codeButton .layer setBorderWidth:0.3f];
@@ -60,8 +62,10 @@
 }
 - (void)addWatchByID {
     AddWatchByInput *addwatch = [AddWatchByInput new];
-    addwatch.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:addwatch animated:YES];
+
+    [self presentViewController:addwatch animated:YES completion:^{
+        ;
+    }];
 }
 
 - (void)addWatchByCode {
@@ -70,7 +74,6 @@
         //        self.saomiaoLabel.text = qrString;
                 
         AddWatchByInput *addWatch = [AddWatchByInput new];
-        addWatch.shouhuan_id = qrString;
         addWatch.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:addWatch animated:YES];
     };
@@ -82,12 +85,9 @@
         [aqrvc dismissViewControllerAnimated:NO completion:nil];
         //        self.saomiaoLabel.text = @"cancle~";
     };
-    timer =  [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(resetBar) userInfo:nil repeats:NO];
+
     [self.navigationController pushViewController:qrcodevc animated:YES];
 }
 
-- (void)resetBar {
-    self.hidesBottomBarWhenPushed = NO;
-}
 
 @end

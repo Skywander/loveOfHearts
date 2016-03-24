@@ -9,8 +9,8 @@
 //
 
 #import "AddWatchByInput.h"
-#import "Constant.h"
 #import "Networking.h"
+#import "Navview.h"
 @interface AddWatchByInput()
 {
     CGFloat basicY;
@@ -19,7 +19,7 @@
     UITextField *relationField;
     UITextField *idField;
     
-    NSString *user_id;
+
         
     NSString *relation;
 }
@@ -27,7 +27,6 @@
 @end
 
 @implementation AddWatchByInput
-@synthesize shouhuan_id;
 - (void)viewDidLoad{
     [super viewDidLoad];
     
@@ -41,11 +40,14 @@
     
     basicY = 70;
     
-    user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
 }
 
 - (void)initUI{
     [self.view setBackgroundColor:DEFAULT_COLOR];
+    
+    Navview *navigation = [Navview new];
+    
+    [self.view addSubview:navigation];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6, basicY + basicMove * 2, SCREEN_WIDTH - 12, 36)];
     
@@ -78,9 +80,6 @@
     [idField.layer setCornerRadius:6.f];
     [idField setKeyboardType:UIKeyboardTypeNumberPad];
     
-    if (shouhuan_id) {
-        [idField setText:shouhuan_id];
-    }
     
     [self.view addSubview:idField];
     
@@ -102,8 +101,6 @@
 - (void)clickSureButton {
     if (relationField.text.length <= 0 || idField.text.length <= 0 ) {
     }
-    
-    shouhuan_id = idField.text;
     
     relation = relationField.text;
     

@@ -48,6 +48,8 @@
 @property (nonatomic,strong)NSString *whitelist2;
 @property (nonatomic,strong)NSString *wsim;
 
+@property (nonatomic,strong) UIImage *image;
+
 + (instancetype)sharedInstance;
 
 - (void)setUserInfor:(NSDictionary *)dict;

@@ -21,12 +21,17 @@
     NSMutableArray *newPhoneArray;
     
     UIButton *sureButton;
+    
+    NSString *userAccount;
+    NSString *watchID;
+    NSArray *sosArray;
+    NSString *centerNumber;
+    
+    AccountMessage *accountMessage;
 }
 @end
 @implementation SosphoneSetting
-@synthesize centerNumber;
-@synthesize sosArray;
-@synthesize userAccount,watchID;
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self initData];
@@ -34,7 +39,7 @@
 }
 
 - (void)initData {
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    accountMessage = [AccountMessage sharedInstance];
     
     sosArray = [accountMessage.sos componentsSeparatedByString:@","];
     
@@ -43,10 +48,6 @@
     nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"监听号码设置", nil];
     
     newPhoneArray = [NSMutableArray new];
-    
-    NSString *user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"];
-        
-    NSLog(@"userid:%@",user_id);
 
 }
 - (void)initUI {
@@ -79,7 +80,7 @@
                 NSLog(@"over");
             }
             if (centerNumber && i == 3) {
-                [textField setText:self.centerNumber];
+                [textField setText:centerNumber];
             }
 
         }        
@@ -142,6 +143,7 @@
                           ];
     
     [Command commandWithAddress:@"sos" andParamater:dict];
+    accountMessage.sos = tempString;
     
     if (textFields[3].text) {
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -152,6 +154,7 @@
                               ];
         
         [Command commandWithAddress:@"centernumber" andParamater:dict];
+        accountMessage.centernumber = textFields[3].text;
     }
 }
 

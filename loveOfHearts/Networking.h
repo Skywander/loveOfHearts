@@ -16,6 +16,8 @@
 - (NSArray *)getDeviceMessage;
 
 - (void)getUsersMessageWithParamaters:(NSDictionary *)paramater;
+
+- (void)getWatchPortiartWithDict:(NSDictionary *)dict;
 - (NSArray *)getUsersArray;
 
 + (int)getLoginMessage;

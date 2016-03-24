@@ -163,6 +163,38 @@ AFHTTPSessionManager *manager;
     }];
 }
 
+- (void)getWatchPortiartWithDict:(NSDictionary *)dict{
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    manager.responseSerializer = [AFImageResponseSerializer new];
+    
+    [manager POST:[NSString stringWithFormat:@"%@downloadheadimg",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+//        accountMessage.image = responseObject;
+        
+        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[dict objectForKey:@"wid"]];
+        
+        NSData *imageData = UIImagePNGRepresentation(responseObject);
+        
+        [imageData writeToFile:imagePath atomically:NO];
+        
+        
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"watchImageError : %@",error);
+    }];
+    
+
+}
+
 - (NSArray *)getUsersArray{
     return userslist;
 }

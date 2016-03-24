@@ -10,6 +10,4 @@
 
 @interface AddWatchByInput : UIViewController
 
-@property (nonatomic,strong) NSString *shouhuan_id;
-
 @end

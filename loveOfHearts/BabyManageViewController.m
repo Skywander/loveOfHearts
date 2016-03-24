@@ -9,6 +9,9 @@
 #import "BabyManageViewController.h"
 #import "AccountMessage.h"
 #import "Networking.h"
+#import "Navview.h"
+#import "AddWatchViewController.h"
+#import "PersonInforViewController.h"
 
 #define VIEW_HEIGHT 80
 
@@ -36,7 +39,9 @@
 }
 
 - (void)getData{    
-    NSString *userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
+    accountMessage = [AccountMessage sharedInstance];
+    
+    NSString *userId = accountMessage.userId;
     
     NSDictionary *paramater = @{
                                     @"userId":userId
@@ -53,8 +58,6 @@
     if ([netWorking getDeviceMessage].count > 0) {
         deviceArray = [netWorking getDeviceMessage];
         
-        NSLog(@"deviceArray : %@",deviceArray);
-        
         [timer invalidate];
         
         [self initView];
@@ -64,6 +67,14 @@
 - (void)initView{
     float y = 70;
     for (NSDictionary *dict in deviceArray) {
+        
+        NSDictionary *paramater = @{
+                               @"wid":[dict objectForKey:@"wid"],
+                               @"fileName":[NSString stringWithFormat:@"%@.png",[dict objectForKey:@"wid"]]
+                               };
+        
+        [netWorking getWatchPortiartWithDict:paramater];
+        
         UIView *view = [self viewWithWatchID:[dict objectForKey:@"wid"] andY:y];
         y = y + VIEW_HEIGHT + 10;
         [self.view addSubview:view];
@@ -77,13 +88,24 @@
     
     [view setBackgroundColor:[UIColor whiteColor]];
     
-    UIView *subView = [UIView new];
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    subView.backgroundColor = [UIColor blackColor];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,watchId];
     
-    [subView setFrame:CGRectMake(0, 0, VIEW_HEIGHT, VIEW_HEIGHT)];
+    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
     
-    [view addSubview: subView];
+    NSLog(@" imageView : %@",[UIImage imageWithData:imageData]);
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:imageData]];
+    
+    [imageView setFrame:CGRectMake(20, 20, VIEW_HEIGHT - 40, VIEW_HEIGHT - 40)];
+    
+    [imageView.layer setBorderWidth:0.3f];
+    [imageView.layer setCornerRadius:(VIEW_HEIGHT - 40)/2];
+    
+    [imageView setClipsToBounds:YES];
+    
+    [view addSubview:imageView];
     
     UILabel *watchIdLabel = [UILabel new];
     
@@ -102,28 +124,28 @@
     [view.layer setBorderColor:[UIColor grayColor].CGColor];
     [view.layer setBorderWidth:0.3f];
     
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [view addGestureRecognizer:singleTap];
+    
     return view;
 }
 
+-(void)handleSingleTap:(UITapGestureRecognizer *)sender
+
+{
+    
+    PersonInforViewController *personInforView = [PersonInforViewController new];
+    
+    [self presentViewController:personInforView animated:YES completion:^{
+        ;
+    }];
+    
+}
+
 - (void)initNavigation{
+    
     [self.view setBackgroundColor:DEFAULT_COLOR];
-    
-    UIView *view = [UIView new];
-    
-    [view setBackgroundColor:DEFAULT_PINK];
-    
-    [view setFrame:CGRectMake(0, 20, SCREEN_WIDTH, NAVIGATION_HEIGHT)];
-    
-    //返回按键
-    
-    UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
-    
-    [returnButton setBackgroundColor:[UIColor blackColor]];
-    
-    [returnButton addTarget:self action:@selector(returnLastView) forControlEvents:UIControlEventTouchUpInside];
-    
-    [view addSubview:returnButton];
-    
+  
     //添加
     
     UIButton *expandButton = [UIButton new];
@@ -135,22 +157,25 @@
     [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-     
-    [view addSubview:expandButton];
-     
-    [self.view addSubview:view];
     
+    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
+
+
+    Navview *navigationView = [Navview new];
+    
+    [navigationView addSubview:expandButton];
+    
+    [self.view addSubview:navigationView];
 }
 
-- (void)returnLastView{
-    [self dismissViewControllerAnimated:YES completion:^{
+
+- (void)expand{
+    AddWatchViewController *add = [AddWatchViewController new];
+    
+    [self presentViewController:add animated:YES completion:^{
         ;
     }];
 }
-
-//- (void)expand{
-//    ;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -85,6 +85,9 @@
 		D3D8C5971CA2A46100512F5B /* SotherSetting.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58D1CA2A46100512F5B /* SotherSetting.png */; };
 		D3D8C5981CA2A46100512F5B /* Sexit.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C58E1CA2A46100512F5B /* Sexit.png */; };
 		D3D8C59A1CA2C5EC00512F5B /* yes.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5991CA2C5EB00512F5B /* yes.png */; };
+		D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C59C1CA2D0A700512F5B /* AddWatchViewController.m */; };
+		D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C59E1CA3815600512F5B /* tablecell.png */; };
+		D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */; };
 		D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */; };
 		D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248C1C94542F00E85F97 /* Security.framework */; };
 		D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248E1C94543D00E85F97 /* UIKit.framework */; };
@@ -99,7 +102,6 @@
 		D3DF044A1C950E2600832CD9 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04491C950E2600832CD9 /* Command.m */; };
 		D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF044C1C950FA500832CD9 /* PhoneCanMakeList.m */; };
 		D3DF04501C952FFA00832CD9 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF044F1C952FFA00832CD9 /* Alert.m */; };
-		D3DF04541C95416200832CD9 /* AddWatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04531C95416200832CD9 /* AddWatchViewController.m */; };
 		D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF045A1C9543FE00832CD9 /* SYQRCodeViewController.m */; };
 		D3E51B2C1C9CECC0001732BF /* AuthorityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E51B2B1C9CECC0001732BF /* AuthorityViewController.m */; };
 		D3E51B491C9CFB92001732BF /* OtherSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E51B351C9CFB92001732BF /* OtherSettingViewController.m */; };
@@ -261,6 +263,11 @@
 		D3D8C58D1CA2A46100512F5B /* SotherSetting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SotherSetting.png; sourceTree = "<group>"; };
 		D3D8C58E1CA2A46100512F5B /* Sexit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sexit.png; sourceTree = "<group>"; };
 		D3D8C5991CA2C5EB00512F5B /* yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yes.png; sourceTree = "<group>"; };
+		D3D8C59B1CA2D0A700512F5B /* AddWatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWatchViewController.h; sourceTree = "<group>"; };
+		D3D8C59C1CA2D0A700512F5B /* AddWatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWatchViewController.m; sourceTree = "<group>"; };
+		D3D8C59E1CA3815600512F5B /* tablecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablecell.png; sourceTree = "<group>"; };
+		D3D8C5A01CA3BF5400512F5B /* PersonInforViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInforViewController.h; sourceTree = "<group>"; };
+		D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInforViewController.m; sourceTree = "<group>"; };
 		D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DE248C1C94542F00E85F97 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3DE248E1C94543D00E85F97 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -280,8 +287,6 @@
 		D3DF044C1C950FA500832CD9 /* PhoneCanMakeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneCanMakeList.m; sourceTree = "<group>"; };
 		D3DF044E1C952FFA00832CD9 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = ../Alert.h; sourceTree = "<group>"; };
 		D3DF044F1C952FFA00832CD9 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = ../Alert.m; sourceTree = "<group>"; };
-		D3DF04521C95416200832CD9 /* AddWatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWatchViewController.h; sourceTree = "<group>"; };
-		D3DF04531C95416200832CD9 /* AddWatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWatchViewController.m; sourceTree = "<group>"; };
 		D3DF04591C9543FE00832CD9 /* SYQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYQRCodeViewController.h; sourceTree = "<group>"; };
 		D3DF045A1C9543FE00832CD9 /* SYQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYQRCodeViewController.m; sourceTree = "<group>"; };
 		D3E51B2A1C9CECC0001732BF /* AuthorityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorityViewController.h; sourceTree = "<group>"; };
@@ -416,6 +421,7 @@
 		D362B9171C9679C90037E29E /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C59E1CA3815600512F5B /* tablecell.png */,
 				D3D8C5991CA2C5EB00512F5B /* yes.png */,
 				D3E51B521C9D0EA9001732BF /* OtherSetting */,
 				D3D0250A1C9BDE05002713B1 /* return.png */,
@@ -523,10 +529,16 @@
 			children = (
 				D3D0250C1C9BEAF0002713B1 /* MapView */,
 				D3DF04291C9502D700832CD9 /* PhoneSettting */,
+				D3D8C59B1CA2D0A700512F5B /* AddWatchViewController.h */,
+				D3D8C59C1CA2D0A700512F5B /* AddWatchViewController.m */,
+				D3E51B441C9CFB92001732BF /* AddWatchByInput.h */,
+				D3E51B451C9CFB92001732BF /* AddWatchByInput.m */,
 				D362B95D1C97E70C0037E29E /* BabyManageViewController.h */,
 				D362B95E1C97E70C0037E29E /* BabyManageViewController.m */,
 				D3E51B2A1C9CECC0001732BF /* AuthorityViewController.h */,
 				D3E51B2B1C9CECC0001732BF /* AuthorityViewController.m */,
+				D3D8C5A01CA3BF5400512F5B /* PersonInforViewController.h */,
+				D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */,
 			);
 			name = RightManage;
 			sourceTree = "<group>";
@@ -640,16 +652,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		D3DF04511C95411000832CD9 /* AddWatch */ = {
-			isa = PBXGroup;
-			children = (
-				D3DF04521C95416200832CD9 /* AddWatchViewController.h */,
-				D3DF04531C95416200832CD9 /* AddWatchViewController.m */,
-			);
-			name = AddWatch;
-			path = ..;
-			sourceTree = "<group>";
-		};
 		D3DF04581C9543ED00832CD9 /* ActionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -676,8 +678,6 @@
 				D3E51B411C9CFB92001732BF /* AlarmSettingView.m */,
 				D3E51B421C9CFB92001732BF /* NoDisturbingTime.h */,
 				D3E51B431C9CFB92001732BF /* NoDisturbingTime.m */,
-				D3E51B441C9CFB92001732BF /* AddWatchByInput.h */,
-				D3E51B451C9CFB92001732BF /* AddWatchByInput.m */,
 				D3E51B651C9D165E001732BF /* OtherSettingFactory.h */,
 				D3E51B661C9D165E001732BF /* OtherSettingFactory.m */,
 				D3D8C5821CA282B600512F5B /* HealthViewController.h */,
@@ -742,7 +742,6 @@
 				D362B95C1C97E6B30037E29E /* RightManage */,
 				D362B9171C9679C90037E29E /* ImageSource */,
 				D3DF04581C9543ED00832CD9 /* ActionView */,
-				D3DF04511C95411000832CD9 /* AddWatch */,
 				D3A2A3F41C92AB31009B1D0E /* HomeView */,
 				D3A2A3E31C92A080009B1D0E /* Tool */,
 				D3FEEFD61C910ACF00300710 /* Login */,
@@ -964,6 +963,7 @@
 				D3E51B631C9D0EBD001732BF /* otherSetting10.png in Resources */,
 				D362B9381C96E44F0037E29E /* relativeNumber.png in Resources */,
 				D362B91E1C967A230037E29E /* menu.png in Resources */,
+				D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */,
 				D3D8C5911CA2A46100512F5B /* SrelativeNumber.png in Resources */,
 				D3D8C57C1CA27F8000512F5B /* otherSelected9.png in Resources */,
 				D362B94D1C97AA210037E29E /* signal60.png in Resources */,
@@ -1067,11 +1067,11 @@
 				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
 				D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */,
 				D3D0251E1C9BEB2C002713B1 /* Fence.m in Sources */,
-				D3DF04541C95416200832CD9 /* AddWatchViewController.m in Sources */,
 				D3E51B511C9CFB92001732BF /* AddWatchByInput.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
 				D3D0252F1C9BEC10002713B1 /* amr_wav_converter.c in Sources */,
 				D3D025191C9BEB03002713B1 /* HistoryFenceList.m in Sources */,
+				D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */,
 				D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */,
 				D3DF044A1C950E2600832CD9 /* Command.m in Sources */,
 				D3E51B671C9D165E001732BF /* OtherSettingFactory.m in Sources */,
@@ -1103,6 +1103,7 @@
 				D362B9271C96A4D30037E29E /* RightViewController.m in Sources */,
 				D3D8C5841CA282B600512F5B /* HealthViewController.m in Sources */,
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
+				D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */,
 				D3D025091C9BDADE002713B1 /* Navview.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,
