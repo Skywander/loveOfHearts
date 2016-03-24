@@ -65,7 +65,7 @@
             [AccountMessage sharedInstance].sos = [paramater objectForKey:@"sos"];
         }
         if ([address isEqualToString:@"centernumber"]) {
-            [AccountMessage sharedInstance].centernumber = [paramater objectForKey:@"centernumber"];
+            [AccountMessage sharedInstance].centernumber = [paramater objectForKey:@"centerNumber"];
         }
   
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

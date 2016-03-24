@@ -164,7 +164,6 @@ AFHTTPSessionManager *manager;
 }
 
 - (void)getWatchPortiartWithDict:(NSDictionary *)dict{
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
@@ -175,8 +174,6 @@ AFHTTPSessionManager *manager;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-//        accountMessage.image = responseObject;
         
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         

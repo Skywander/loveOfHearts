@@ -41,6 +41,10 @@
 - (void)initData {
     accountMessage = [AccountMessage sharedInstance];
     
+    userAccount = accountMessage.userId;
+    
+    watchID = accountMessage.wid;
+    
     sosArray = [accountMessage.sos componentsSeparatedByString:@","];
     
     centerNumber = accountMessage.centernumber;
@@ -48,6 +52,8 @@
     nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"监听号码设置", nil];
     
     newPhoneArray = [NSMutableArray new];
+    
+    NSLog(@"sosArray : %@ %@",accountMessage.sos,accountMessage.centernumber);
 
 }
 - (void)initUI {
@@ -71,14 +77,10 @@
         [textField setPlaceholder:@"  输入号码"];
         [textField setKeyboardType:UIKeyboardTypeNumberPad];
         textFields[i] = textField;
-        NSLog(@"before");
         if (sosArray.count > 0) {
-            NSLog(@"after");
             if (i!=3 && sosArray.count > i && [sosArray objectAtIndex:i]) {
                 [textField setText:[sosArray objectAtIndex:i]];
-                
-                NSLog(@"over");
-            }
+                            }
             if (centerNumber && i == 3) {
                 [textField setText:centerNumber];
             }
@@ -106,10 +108,6 @@
 
 - (void)clickSureButton {
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        ;
-    }];
-    
     for (int i = 0; i < 4; i ++) {
         [newPhoneArray addObject:textFields[i].text];
         
@@ -135,27 +133,25 @@
     
     NSString *tempString = [NSString stringWithFormat:@"%@,%@,%@",textFields[0].text,textFields[1].text,textFields[2].text];
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          userAccount, @"userId",
-                          watchID,@"wid",
-                          tempString,@"sos",
-                          nil
-                          ];
+    NSLog(@"tempString : %@",tempString);
+    
+    NSDictionary *dict = @{
+                            @"userId":userAccount,
+                            @"wid":watchID,
+                            @"sos":tempString
+                           };
     
     [Command commandWithAddress:@"sos" andParamater:dict];
     accountMessage.sos = tempString;
     
-    if (textFields[3].text) {
-        NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              userAccount, @"userId",
-                              watchID,@"wid",
-                              textFields[3].text,@"centerNumber",
-                              nil
-                              ];
         
-        [Command commandWithAddress:@"centernumber" andParamater:dict];
-        accountMessage.centernumber = textFields[3].text;
-    }
+        NSDictionary *paramater = @{
+                                @"userId":userAccount,
+                                @"wid":watchID,
+                                @"centerNumber":textFields[3].text
+                               };
+        
+        [Command commandWithAddress:@"centernumber" andParamater:paramater];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
