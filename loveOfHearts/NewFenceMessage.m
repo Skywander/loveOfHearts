@@ -43,12 +43,17 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initData];
+    
     [self initUI];
     
     [self initDatePicker];
     
 }
 
+- (void)initData{
+    type = @"0";
+}
 
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
@@ -78,7 +83,7 @@
     UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70 + BASIC_DISTANCE * 2, SCREEN_WIDTH - 20, BASIC_HEIGHT)];
     [typeLabel setTextAlignment:NSTextAlignmentCenter];
     [typeLabel setText:@"围栏进出警告"];
-    [typeLabel setTextColor:DEFAULT_COLOR];
+    [typeLabel setTextColor:DEFAULT_FONT_COLOR];
     
     [self.view addSubview:typeLabel];
     
@@ -86,7 +91,7 @@
     [inButton setTitle:@"进去警告" forState:(UIControlStateNormal)];
     [inButton setTag:1];
     [inButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [inButton setTitleColor:DEFAULT_COLOR forState:UIControlStateSelected];
+    [inButton setTitleColor:DEFAULT_PINK forState:UIControlStateSelected];
     [inButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [inButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [inButton setSelected:YES];
@@ -199,10 +204,10 @@
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     NSDictionary *paramater = @{
-                                @"userId":[[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"],
+                                @"userId":accountMessage.userId,
                                 @"wid":accountMessage.wid,
                                 @"fenceType":@"1",
-                                @"alertType":@"0",
+                                @"alertType":type,
                                 @"area":self.fenceData,
                                 @"name":fenceNameTextField.text 
                                 };

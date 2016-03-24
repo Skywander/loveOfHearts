@@ -88,6 +88,8 @@
 		D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C59C1CA2D0A700512F5B /* AddWatchViewController.m */; };
 		D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C59E1CA3815600512F5B /* tablecell.png */; };
 		D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */; };
+		D3D8C5A41CA42D7000512F5B /* cellCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A31CA42D7000512F5B /* cellCorner.png */; };
+		D3D8C5A81CA42DDD00512F5B /* createFenceBackView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */; };
 		D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */; };
 		D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248C1C94542F00E85F97 /* Security.framework */; };
 		D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248E1C94543D00E85F97 /* UIKit.framework */; };
@@ -268,6 +270,8 @@
 		D3D8C59E1CA3815600512F5B /* tablecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablecell.png; sourceTree = "<group>"; };
 		D3D8C5A01CA3BF5400512F5B /* PersonInforViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInforViewController.h; sourceTree = "<group>"; };
 		D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInforViewController.m; sourceTree = "<group>"; };
+		D3D8C5A31CA42D7000512F5B /* cellCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellCorner.png; sourceTree = "<group>"; };
+		D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = createFenceBackView.jpg; sourceTree = "<group>"; };
 		D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DE248C1C94542F00E85F97 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3DE248E1C94543D00E85F97 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -421,6 +425,8 @@
 		D362B9171C9679C90037E29E /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */,
+				D3D8C5A31CA42D7000512F5B /* cellCorner.png */,
 				D3D8C59E1CA3815600512F5B /* tablecell.png */,
 				D3D8C5991CA2C5EB00512F5B /* yes.png */,
 				D3E51B521C9D0EA9001732BF /* OtherSetting */,
@@ -968,6 +974,7 @@
 				D3D8C57C1CA27F8000512F5B /* otherSelected9.png in Resources */,
 				D362B94D1C97AA210037E29E /* signal60.png in Resources */,
 				D362B93A1C96E44F0037E29E /* historyTrack.png in Resources */,
+				D3D8C5A81CA42DDD00512F5B /* createFenceBackView.jpg in Resources */,
 				D3D8C57A1CA27F8000512F5B /* otherSelected8.png in Resources */,
 				D362B94B1C97AA210037E29E /* signal20.png in Resources */,
 				D3E51B621C9D0EBD001732BF /* otherSetting9.png in Resources */,
@@ -987,6 +994,7 @@
 				D362B94C1C97AA210037E29E /* signal40.png in Resources */,
 				D362B94E1C97AA210037E29E /* signal80.png in Resources */,
 				D3D8C57D1CA27F8000512F5B /* otherSelected7.png in Resources */,
+				D3D8C5A41CA42D7000512F5B /* cellCorner.png in Resources */,
 				D362B93C1C96E44F0037E29E /* otherSetting.png in Resources */,
 				D3D8C59A1CA2C5EC00512F5B /* yes.png in Resources */,
 				D3D8C5801CA27F8000512F5B /* otherSelected2.png in Resources */,

@@ -25,12 +25,15 @@
     UITableView *listView;
     
     UIView *backView;
+    
+    NSString *userAccount;
+    NSString *watchID;
+    
+    NSArray *phbArray;
 }
 
 @end
 @implementation PhoneListView
-@synthesize phbArray;
-@synthesize userAccount,watchID;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -45,7 +48,7 @@
     
     phbArray = [[AccountMessage sharedInstance].phb componentsSeparatedByString:@","];
     
-    NSArray *tempArray = [[AccountMessage sharedInstance].phb componentsSeparatedByString:@","];
+    NSArray *tempArray = [[AccountMessage sharedInstance].phb2 componentsSeparatedByString:@","];
     
     phbArray = [phbArray arrayByAddingObjectsFromArray:tempArray];
 }

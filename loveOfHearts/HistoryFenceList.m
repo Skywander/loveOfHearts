@@ -21,6 +21,7 @@ static HistoryFenceList *historyFenceList;
     //
     NSMutableArray *fencesArray;
     NSMutableArray *fencesDataArray;
+    NSMutableArray *fencesIDArray;
     NSString *fenceName;
     
     NSString *user_id;
@@ -39,7 +40,12 @@ static HistoryFenceList *historyFenceList;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     [self initData];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initView) userInfo:nil repeats:YES];
@@ -66,12 +72,7 @@ static HistoryFenceList *historyFenceList;
     Navview *navigationView = [Navview new];
     [self.view addSubview:navigationView];
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    [self getWatchMessage];
-//    [self initSection];
-//    [self initTable];
-}
+
 - (void)initSection {
     if (!fencenameList) {
         fencenameList = [NSMutableArray new];
@@ -100,6 +101,8 @@ static HistoryFenceList *historyFenceList;
     fencesArray = [NSMutableArray new];
     
     fencesDataArray = [NSMutableArray new];
+    
+    fencesIDArray = [NSMutableArray new];
 
     
     accountMessage = [AccountMessage sharedInstance];
@@ -125,6 +128,8 @@ static HistoryFenceList *historyFenceList;
             NSLog(@"%@",dict);
             [fencesArray addObject:[dict objectForKey:@"fencename"]];
             [fencesDataArray addObject:[dict objectForKey:@"fencearea"]];
+            
+            [fencesIDArray addObject:[dict objectForKey:@"fid"]];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure : %@",error);
@@ -157,13 +162,11 @@ static HistoryFenceList *historyFenceList;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([indexPath section] == 0) {
         cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"createFenceBackView.jpg"]];
-        [cell.textLabel setText:@"创建围栏"];
-        [cell.textLabel setTextAlignment:NSTextAlignmentCenter];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     if ([indexPath row] == 0 &&[indexPath section] == 1) {
         cell.textLabel.text = @"围栏列表";
-        cell.textLabel.textColor = DEFAULT_COLOR;
+        cell.textLabel.textColor = DEFAULT_FONT_COLOR;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellCorner"]];
         [cell setBackgroundView:imageView];
@@ -196,6 +199,8 @@ static HistoryFenceList *historyFenceList;
         NSLog(@"%ld %ld",[indexPath row],[indexPath section]);
         
         history.fencesDataArray = [fencesDataArray objectAtIndex:[indexPath row] - 1];
+        
+        history.fid = [fencesIDArray objectAtIndex:[indexPath row] - 1];
         [self presentViewController:history animated:YES completion:^{
             ;
         }];

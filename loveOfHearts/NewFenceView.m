@@ -107,15 +107,13 @@
     for (int i = 0; i < tapcount; i++) {
         double pointX =  touchPoints[i].latitude;
         double pointY = touchPoints[i].longitude;
-        
-        NSLog(@"pointX:%f pointY:%f",pointX,pointY);
-        
+                
         NSString *tempStr = [NSString stringWithFormat:@"%f,%f",pointY,pointX];
         if (i == 0) {
             fenceData = [NSString stringWithFormat:@"%@",tempStr];
         }
         
-        fenceData = [NSString stringWithFormat:@"%@%@",fenceData,tempStr];
+        fenceData = [NSString stringWithFormat:@"%@;%@",fenceData,tempStr];
     }
     NewFenceMessage *fenceMessage = [NewFenceMessage new];
     

@@ -17,6 +17,8 @@
 
 @property (nonatomic,strong) NSString *fencesDataArray;
 
+@property (nonatomic,strong) NSString *fid;
+
 @property (nonatomic,strong) Mymapview *myMapview;
 
 @end

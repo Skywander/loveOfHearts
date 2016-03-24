@@ -10,6 +10,8 @@
 #import "Fence.h"
 #import "NewFenceView.h"
 #import "Navview.h"
+#import "AccountMessage.h"
+#import "Command.h"
 
 @interface HistoryViewController()
 {
@@ -44,13 +46,43 @@
 }
 
 - (void)initNavigation{
+    //添加
+    
+    UIButton *expandButton = [UIButton new];
+    
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
+    
+    [expandButton setTitle:@"删除" forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
     Navview *navigationView = [Navview new];
+    
+    [navigationView addSubview:expandButton];
     
     [self.view addSubview:navigationView];
 }
 
+- (void)expand{
+    NSDictionary *paramater = @{
+                                @"wid":[AccountMessage sharedInstance].wid,
+                                @"fid":self.fid
+                                };
+    
+    [Command commandWithAddress:@"deletefence" andParamater:paramater];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        ;
+    }];
+}
+
 - (void)getAndDrawFence {
     int pointCount = 0;
+    
+    NSLog(@"data : %@",self.fencesDataArray);
     
     NSArray *fencesArray = [self.fencesDataArray componentsSeparatedByString:@";"];
     
