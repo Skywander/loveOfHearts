@@ -159,37 +159,41 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    phoneNumbersOne = textFields[0].text;
-    phoneNumbersTwo = textFields[5].text;
-    
-    for (int i = 1; i < 5; i ++) {
-        NSString *tempStr = textFields[i].text;
+
+    [[tableView.visibleCells objectAtIndex:10] setSelected:NO];
+    if ([indexPath section] == 1) {
+        phoneNumbersOne = textFields[0].text;
+        phoneNumbersTwo = textFields[5].text;
         
-        phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
-    }
-    for (int i = 6; i < 10; i++) {
-        NSString *tempStr = textFields[i].text;
-        phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
-    }
-    
-    NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
-    
+        for (int i = 1; i < 5; i ++) {
+            NSString *tempStr = textFields[i].text;
+            
+            phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
+        }
+        for (int i = 6; i < 10; i++) {
+            NSString *tempStr = textFields[i].text;
+            phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
+        }
+        
+        NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
+        
         NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                   userAccount,@"userId",
                                   watchID,@"wid",
                                   phoneNumbersOne,@"whitelist1",
                                   nil
                                   ];
-    [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
+        [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
         
-    NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
+        NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     userAccount,@"userId",
                                     watchID,@"wid",
                                     phoneNumbersTwo,@"whitelist2",
                                     nil
                                     ];
-    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
-    
+        [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
+
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 1) {
