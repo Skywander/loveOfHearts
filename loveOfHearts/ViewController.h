@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "TopView.h"
 #import "TopView.h"
+
+#import "IIViewDeckController.h"
+#import "IISideController.h"
+
 @interface ViewController : UIViewController
+
+@property (nonatomic,strong) TopView *topView;
 
 @end
 

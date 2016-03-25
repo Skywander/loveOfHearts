@@ -14,6 +14,7 @@
 #import "HistoryFenceList.h"
 #import "AuthorityViewController.h"
 #import "OtherSettingViewController.h"
+#import "HistoryTrackViewController.h"
 
 @implementation RightVieFactory
 
@@ -41,7 +42,7 @@
             viewController = [HistoryFenceList new];
             break;
         case 6:
-            ;
+            viewController = [HistoryTrackViewController new];
             break;
         case 7:
             ;

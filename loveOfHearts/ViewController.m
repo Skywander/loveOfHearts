@@ -18,12 +18,12 @@
 {
     Mymapview *mapView;
     HomeMenuView *menuView;
-    TopView *topView;
 }
 
 @end
 
 @implementation ViewController
+@synthesize topView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,6 +46,8 @@
     [self.view addSubview:topView];
     
     [topView setAddress:@"哈工大"];
+    
+    [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)initMapView{
@@ -62,6 +64,13 @@
     menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(10, 74, 40, 280)];
     
     [self.view addSubview:menuView];
+    
+}
+
+- (void)clickExpandButton{
+    NSLog(@"click");
+    
+    [self.viewDeckController toggleRightViewAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

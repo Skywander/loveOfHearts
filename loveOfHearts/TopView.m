@@ -7,6 +7,8 @@
 //
 
 #import "TopView.h"
+#import "DB.h"
+#include "AccountMessage.h"
 
 #define SELF_HEIGHT self.frame.size.height
 
@@ -17,7 +19,7 @@
     UILabel *timeLabel;
     UILabel *addressLabel;
     
-    UIView *photoView;
+    UIImageView *photoView;
     
     NSTimer *timer;
     }
@@ -62,24 +64,26 @@
     [timeLabel setTextAlignment:NSTextAlignmentLeft];
     [timeLabel setTextColor:[UIColor blackColor]];
     [timeLabel setFont:[UIFont systemFontOfSize:14]];
-    [timeLabel setBackgroundColor:[UIColor whiteColor]];
     
     [self addSubview:timeLabel];
     //地址标签
     
     [addressLabel setFrame:CGRectMake(SELF_HEIGHT, SELF_HEIGHT / 2, timeLabel.frame.size.width, SELF_HEIGHT / 2)];
-    [addressLabel setBackgroundColor:[UIColor greenColor]];
     [addressLabel setTextAlignment:NSTextAlignmentLeft];
-    [addressLabel setTextColor:[UIColor blackColor]];
     [addressLabel setFont:[UIFont systemFontOfSize:14]];
     [self addSubview:addressLabel];
                                       
     
     //photoView
     
-    photoView = [UIView new];
+    photoView = [[UIImageView alloc] initWithImage:[DB getImageWithID:[AccountMessage sharedInstance].wid]];
     [photoView setBackgroundColor:[UIColor yellowColor]];
-    [photoView setFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.height)];
+    [photoView setFrame:CGRectMake(4, 4, self.frame.size.height - 8, self.frame.size.height - 8)];
+    
+    [photoView setClipsToBounds:YES];
+    [photoView.layer setBorderWidth:0.3F];
+    [photoView.layer setCornerRadius:photoView.frame.size.width / 2];
+    
     
     [self addSubview:photoView];
     

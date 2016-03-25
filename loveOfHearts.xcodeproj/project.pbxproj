@@ -90,6 +90,13 @@
 		D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */; };
 		D3D8C5A41CA42D7000512F5B /* cellCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A31CA42D7000512F5B /* cellCorner.png */; };
 		D3D8C5A81CA42DDD00512F5B /* createFenceBackView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */; };
+		D3D8C5AB1CA438F100512F5B /* DB.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5AA1CA438F100512F5B /* DB.m */; };
+		D3D8C5AD1CA5529200512F5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5AC1CA5529200512F5B /* libsqlite3.tbd */; };
+		D3D8C5AF1CA552AE00512F5B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5AE1CA552AE00512F5B /* MobileCoreServices.framework */; };
+		D3D8C5B11CA552D400512F5B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5B01CA552D400512F5B /* AVFoundation.framework */; };
+		D3D8C5B31CA552E500512F5B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5B21CA552E500512F5B /* CoreLocation.framework */; };
+		D3D8C5B51CA552ED00512F5B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5B41CA552ED00512F5B /* CoreBluetooth.framework */; };
+		D3D8C5BF1CA5754400512F5B /* libGeTuiSdk-1.4.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5BE1CA5754400512F5B /* libGeTuiSdk-1.4.1.a */; };
 		D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */; };
 		D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248C1C94542F00E85F97 /* Security.framework */; };
 		D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE248E1C94543D00E85F97 /* UIKit.framework */; };
@@ -272,6 +279,15 @@
 		D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInforViewController.m; sourceTree = "<group>"; };
 		D3D8C5A31CA42D7000512F5B /* cellCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellCorner.png; sourceTree = "<group>"; };
 		D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = createFenceBackView.jpg; sourceTree = "<group>"; };
+		D3D8C5A91CA438F000512F5B /* DB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB.h; sourceTree = "<group>"; };
+		D3D8C5AA1CA438F100512F5B /* DB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB.m; sourceTree = "<group>"; };
+		D3D8C5AC1CA5529200512F5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		D3D8C5AE1CA552AE00512F5B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		D3D8C5B01CA552D400512F5B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D3D8C5B21CA552E500512F5B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D3D8C5B41CA552ED00512F5B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D3D8C5BD1CA5754400512F5B /* GeTuiSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeTuiSdk.h; sourceTree = "<group>"; };
+		D3D8C5BE1CA5754400512F5B /* libGeTuiSdk-1.4.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGeTuiSdk-1.4.1.a"; sourceTree = "<group>"; };
 		D3DE248A1C94542800E85F97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D3DE248C1C94542F00E85F97 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3DE248E1C94543D00E85F97 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -363,6 +379,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D8C5BF1CA5754400512F5B /* libGeTuiSdk-1.4.1.a in Frameworks */,
+				D3D8C5B51CA552ED00512F5B /* CoreBluetooth.framework in Frameworks */,
+				D3D8C5B31CA552E500512F5B /* CoreLocation.framework in Frameworks */,
+				D3D8C5B11CA552D400512F5B /* AVFoundation.framework in Frameworks */,
+				D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */,
+				D3D8C5AF1CA552AE00512F5B /* MobileCoreServices.framework in Frameworks */,
+				D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */,
+				D3D8C5AD1CA5529200512F5B /* libsqlite3.tbd in Frameworks */,
 				D3DE249C1C9455FC00E85F97 /* libz.tbd in Frameworks */,
 				D3DE24991C94547F00E85F97 /* CoreTelephony.framework in Frameworks */,
 				D3DE24971C94546C00E85F97 /* CFNetwork.framework in Frameworks */,
@@ -371,8 +395,6 @@
 				D3DE24911C94544700E85F97 /* Foundation.framework in Frameworks */,
 				D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */,
 				D3D025301C9BEC10002713B1 /* libopencore-amrnb.a in Frameworks */,
-				D3DE248D1C94542F00E85F97 /* Security.framework in Frameworks */,
-				D3DE248B1C94542800E85F97 /* SystemConfiguration.framework in Frameworks */,
 				D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */,
 				D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */,
 				D3C96EF61C911B9300F27D10 /* libstdc++.tbd in Frameworks */,
@@ -403,6 +425,11 @@
 		65BEE6D796BF49FA8A7C4D05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C5B41CA552ED00512F5B /* CoreBluetooth.framework */,
+				D3D8C5B21CA552E500512F5B /* CoreLocation.framework */,
+				D3D8C5B01CA552D400512F5B /* AVFoundation.framework */,
+				D3D8C5AE1CA552AE00512F5B /* MobileCoreServices.framework */,
+				D3D8C5AC1CA5529200512F5B /* libsqlite3.tbd */,
 				D3DE249A1C94556D00E85F97 /* libz.1.2.5.tbd */,
 				D3DE24981C94547F00E85F97 /* CoreTelephony.framework */,
 				D3DE24961C94546C00E85F97 /* CFNetwork.framework */,
@@ -552,6 +579,7 @@
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8C5BC1CA5754400512F5B /* GtSdkLib */,
 				D362B9451C978E9C0037E29E /* AccountMessage */,
 				D3D025261C9BEBB3002713B1 /* AMR */,
 				D3D0251F1C9BEB77002713B1 /* IQActionSheetPicker */,
@@ -568,6 +596,8 @@
 				D3FEEFCB1C90FFA300300710 /* Constant.h */,
 				D3D025071C9BDADE002713B1 /* Navview.h */,
 				D3D025081C9BDADE002713B1 /* Navview.m */,
+				D3D8C5A91CA438F000512F5B /* DB.h */,
+				D3D8C5AA1CA438F100512F5B /* DB.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -642,6 +672,15 @@
 				D3D025271C9BEBC8002713B1 /* AMRMedia-Prefix.pch */,
 			);
 			name = AMR;
+			sourceTree = "<group>";
+		};
+		D3D8C5BC1CA5754400512F5B /* GtSdkLib */ = {
+			isa = PBXGroup;
+			children = (
+				D3D8C5BD1CA5754400512F5B /* GeTuiSdk.h */,
+				D3D8C5BE1CA5754400512F5B /* libGeTuiSdk-1.4.1.a */,
+			);
+			path = GtSdkLib;
 			sourceTree = "<group>";
 		};
 		D3DF04291C9502D700832CD9 /* PhoneSettting */ = {
@@ -896,6 +935,11 @@
 					D3FEEF931C90FF7A00300710 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = SA3MQDM8CW;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					D3FEEFAC1C90FF7A00300710 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -1074,6 +1118,7 @@
 				D3FEEFD41C91006300300710 /* ViewController.m in Sources */,
 				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
 				D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */,
+				D3D8C5AB1CA438F100512F5B /* DB.m in Sources */,
 				D3D0251E1C9BEB2C002713B1 /* Fence.m in Sources */,
 				D3E51B511C9CFB92001732BF /* AddWatchByInput.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
@@ -1203,6 +1248,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1246,8 +1292,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1281,8 +1329,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/loveOfHearts",
+					"$(PROJECT_DIR)/loveOfHearts/GtSdkLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.runner;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.loveofhearts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1305,9 +1354,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/loveOfHearts",
+					"$(PROJECT_DIR)/loveOfHearts/GtSdkLib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.com.runner;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.com.loveofhearts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

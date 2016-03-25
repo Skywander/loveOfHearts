@@ -87,7 +87,7 @@ static HistoryFenceList *historyFenceList;
 }
 - (void)initTable {
     table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    table.backgroundColor = [UIColor whiteColor];
+    table.backgroundColor = DEFAULT_COLOR;
     table.showsVerticalScrollIndicator = NO;
     table.delegate = self;
     table.dataSource = self;

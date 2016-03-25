@@ -35,6 +35,8 @@
     //userId userPassword
     NSString *userId;
     NSString *userPassword;
+    
+    IIViewDeckController* deckController;
 }
 
 @end
@@ -243,7 +245,7 @@
         ViewController *centerController = [ViewController new];
         
         
-        IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
+        deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
                                                                                        leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
                                                                                                            leftController]
                                                                                       rightViewController:[IISideController autoConstrainedSideControllerWithViewController:rightController]];

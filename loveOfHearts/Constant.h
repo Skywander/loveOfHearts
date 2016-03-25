@@ -53,4 +53,10 @@
 
 //地图
 
-#define APIKey @"f328f5a236476245ea06d0c86476cb64"
+#define APIKey @"506a94aa036dd736c0d2ab802d756fd9"
+
+//推送
+
+#define kGtAppId @"0YbTNzQaQf6rPQKFmo1f19"
+#define kGtAppKey @"ZcTHPl0KU86VBCL185YS06"
+#define kGtAppSecret @"rlQxDysLJ29SiM0UE3A3E3"

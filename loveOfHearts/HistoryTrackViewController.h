@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapKit.h>
-#import "Constant.h"
 @interface HistoryTrackViewController : UIViewController<MAMapViewDelegate>
-{
-    MAMapPoint points[100];
-    int i;
-    NSTimer *myTimer;
-}
-@property (nonatomic,strong) NSString *fenceChoice;
-@property (nonatomic,strong) UIButton *dateButton;
-@property MAMapView *mapView;
+
 @end
