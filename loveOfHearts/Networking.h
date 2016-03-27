@@ -20,6 +20,9 @@
 - (void)getWatchPortiartWithDict:(NSDictionary *)dict;
 - (NSArray *)getUsersArray;
 
+
+- (void)getHistoryMessageWithParamater:(NSDictionary *)dict;
+
 + (int)getLoginMessage;
 + (int)getRegisterMessage;
 @end

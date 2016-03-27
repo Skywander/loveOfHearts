@@ -125,7 +125,7 @@
 
 
 - (void)search{
-    NSLog(@"search");
+
 }
 
 - (void)chooseDate{

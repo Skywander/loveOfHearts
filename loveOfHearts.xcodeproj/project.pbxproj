@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56145DAFAAE7E1FBB80390D1 /* libPods.a */; };
+		D312FFEC1CA7861400558485 /* animationView.png in Resources */ = {isa = PBXBuildFile; fileRef = D312FFEB1CA7861400558485 /* animationView.png */; };
 		D362B9161C9653790037E29E /* CommentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B9151C9653790037E29E /* CommentAnimation.m */; };
 		D362B91E1C967A230037E29E /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9181C967A220037E29E /* menu.png */; };
 		D362B91F1C967A230037E29E /* device.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9191C967A230037E29E /* device.png */; };
@@ -170,6 +171,8 @@
 /* Begin PBXFileReference section */
 		56145DAFAAE7E1FBB80390D1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D312FFEB1CA7861400558485 /* animationView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationView.png; sourceTree = "<group>"; };
+		D312FFED1CA79AA900558485 /* MapProtocolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProtocolDelegate.h; sourceTree = "<group>"; };
 		D362B9141C9653790037E29E /* CommentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAnimation.h; sourceTree = "<group>"; };
 		D362B9151C9653790037E29E /* CommentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAnimation.m; sourceTree = "<group>"; };
 		D362B9181C967A220037E29E /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
@@ -452,6 +455,7 @@
 		D362B9171C9679C90037E29E /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D312FFEB1CA7861400558485 /* animationView.png */,
 				D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */,
 				D3D8C5A31CA42D7000512F5B /* cellCorner.png */,
 				D3D8C59E1CA3815600512F5B /* tablecell.png */,
@@ -644,6 +648,7 @@
 				D3D025161C9BEB03002713B1 /* NewFenceMessage.m */,
 				D3D0253A1C9C0CBA002713B1 /* Rail.h */,
 				D3D0253B1C9C0CBB002713B1 /* Rail.m */,
+				D312FFED1CA79AA900558485 /* MapProtocolDelegate.h */,
 			);
 			name = MapView;
 			sourceTree = "<group>";
@@ -1042,6 +1047,7 @@
 				D362B93C1C96E44F0037E29E /* otherSetting.png in Resources */,
 				D3D8C59A1CA2C5EC00512F5B /* yes.png in Resources */,
 				D3D8C5801CA27F8000512F5B /* otherSelected2.png in Resources */,
+				D312FFEC1CA7861400558485 /* animationView.png in Resources */,
 				D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,6 +16,15 @@
 
 static Mymapview *mymapview;
 
+@interface Mymapview()
+{
+    AMapSearchAPI *_searchAPI;
+    
+    NSString *detailAddress;
+}
+
+@end
+
 @implementation Mymapview
 @synthesize mapView;
 @synthesize coordinate;
@@ -32,13 +41,16 @@ static Mymapview *mymapview;
 - (instancetype)init{
     self = [super init];
     [MAMapServices sharedServices].apiKey = APIKey;
+    [AMapSearchServices sharedServices].apiKey = APIKey;
+    _searchAPI = [[AMapSearchAPI alloc] init];
+    _searchAPI.delegate = self;
 
     mapView = [[MAMapView alloc]init];
     mapView.delegate = self;
     mapView.customizeUserLocationAccuracyCircleRepresentation = YES;//允许定义精度圈的样式
     mapView.showsCompass = NO;
     mapView.showsScale = NO;
-    mapView.showsUserLocation = NO;
+    mapView.showsUserLocation = YES;
     mapView.centerCoordinate = CLLocationCoordinate2DMake(38.931694, 116.381060);
     mapView.frame = CGRectMake(0,0, self.frame.size.width,self.frame.size.height);
     mapView.layer.cornerRadius = 5.f;
@@ -47,11 +59,11 @@ static Mymapview *mymapview;
     
     mapView.touchPOIEnabled = YES;
     
-    mapView.userInteractionEnabled = NO;
-    
     [self addSubview:mapView];
     
     [self initZoomView];
+    
+    [self searchPointWithLat:39.989631 andLon:116.481018];
 
     
     return self;
@@ -144,7 +156,7 @@ static Mymapview *mymapview;
         MACircleView *circleView = [[MACircleView alloc] initWithCircle:overlay];
         
         circleView.lineWidth = 5.f;
-        circleView.strokeColor = DEFAULT_COLOR;
+        circleView.strokeColor = DEFAULT_PINK;
         circleView.fillColor = [UIColor colorWithRed:252/255.0 green:92/255.0 blue:64/255.0 alpha:0.5];
         circleView.lineJoinType = kMALineJoinRound;
         circleView.lineDash = YES;
@@ -157,7 +169,7 @@ static Mymapview *mymapview;
         MAPolylineView *polylineView = [[MAPolylineView alloc] initWithPolyline:overlay];
         
         polylineView.lineWidth = 5.f;
-        polylineView.strokeColor = DEFAULT_COLOR;
+        polylineView.strokeColor = DEFAULT_PINK;
         polylineView.lineJoinType = kMALineJoinRound;//连接类型
         polylineView.lineCapType = kMALineCapRound;//端点类型
         
@@ -169,7 +181,7 @@ static Mymapview *mymapview;
         MAPolygonView *_polygonView = [[MAPolygonView alloc] initWithPolygon:overlay];
         
         _polygonView.lineWidth = 2.f;
-        _polygonView.strokeColor = DEFAULT_COLOR;
+        _polygonView.strokeColor = DEFAULT_PINK;
         _polygonView.fillColor = [UIColor whiteColor];
         _polygonView.lineJoinType = kMALineJoinMiter;//连接类型
         
@@ -177,4 +189,50 @@ static Mymapview *mymapview;
     }
     return nil;
 }
+
+//SEARCH DELEGATE
+//实现逆地理编码的回调函数
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if(response.regeocode != nil)
+    {
+        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+        NSString *result = [NSString stringWithFormat:@"ReGeocode: %@", response.regeocode];
+        NSLog(@"ReGeo: %@", result);
+        
+        AMapAddressComponent *component = response.regeocode.addressComponent;
+        
+        NSLog(@"Mapresponse : city : %@ district : %@  neighborhoood : %@ description : %@",component.city,component.district,component.neighborhood,component.province);
+        
+        detailAddress = [NSString stringWithFormat:@"%@%@-%@%@",component.province,component.city,component.district,component.neighborhood];
+        
+        if([_mydelegate respondsToSelector:@selector(passValue:)]){
+            [_mydelegate passValue:detailAddress];
+        }
+    }
+}
+
+- (NSString *)searchPointWithLat:(double)lat andLon:(double)lon{
+    //构造AMapReGeocodeSearchRequest对象
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    
+    regeo.location = [AMapGeoPoint locationWithLatitude:lat longitude:lon];
+    regeo.radius = 10000;
+    regeo.requireExtension = YES;
+    
+    //发起逆地理编码
+    [_searchAPI AMapReGoecodeSearch: regeo];
+    
+    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+    pointAnnotation.coordinate = CLLocationCoordinate2DMake(39.989631, 116.481018);
+    pointAnnotation.title = @"方恒国际";
+    pointAnnotation.subtitle = @"阜通东大街6号";
+    
+    [mapView addAnnotation:pointAnnotation];
+    [mapView setCenterCoordinate:CLLocationCoordinate2DMake(39.989631, 116.481018)];
+    
+    return detailAddress;
+
+}
+
 @end

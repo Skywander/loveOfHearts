@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MapProtocolDelegate.h"
 #import "Mymapview.h"
 #import "HomeMenuView.h"
 
@@ -14,7 +15,7 @@
 #define START_Y 0
 #define TOP_HEIGHT 44
 
-@interface ViewController ()
+@interface ViewController ()<MapProtocolDelegate>
 {
     Mymapview *mapView;
     HomeMenuView *menuView;
@@ -45,8 +46,6 @@
     topView = [[TopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
     [self.view addSubview:topView];
     
-    [topView setAddress:@"哈工大"];
-    
     [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -55,9 +54,18 @@
     
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     
+    mapView.mydelegate = self;
+    
     [self.view addSubview:mapView];
     
     [self.view sendSubviewToBack:mapView];
+    
+    NSString *str = [mapView searchPointWithLat:39.989631 andLon:116.481018];
+    
+    NSLog(@" address : %@",str);
+    
+    [topView setAddress:str];
+
 }
 
 - (void)initHomeMenuView{
@@ -75,6 +83,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)passValue:(NSString *)string{
+    [topView setAddress:string];
 }
 
 @end

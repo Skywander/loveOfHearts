@@ -192,6 +192,10 @@ AFHTTPSessionManager *manager;
 
 }
 
+- (void)getHistoryMessageWithParamater:(NSDictionary *)dict{
+    
+}
+
 - (NSArray *)getUsersArray{
     return userslist;
 }

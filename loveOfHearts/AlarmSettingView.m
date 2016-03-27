@@ -110,6 +110,7 @@
     
     [button setTitle:name forState:UIControlStateNormal];
     [button setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [button.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
     
