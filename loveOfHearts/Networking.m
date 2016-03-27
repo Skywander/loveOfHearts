@@ -26,7 +26,6 @@
 int loginMessage;
 
 //1成功 2 重复 3 失败
-int registerMessage;
 
 AFHTTPSessionManager *manager;
 
@@ -43,21 +42,13 @@ AFHTTPSessionManager *manager;
        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
            NSString *responseMessage = [responseObject objectForKey:@"msg"];
            
-           if ([responseMessage isEqualToString:@"success"]) {
-               registerMessage = 1;
-           }else if ([responseMessage isEqualToString:@"already exist"]) {
-               registerMessage = 2;
-           } else{
-               registerMessage = 3;
-           }
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"register failure as %@",error);
-           registerMessage = 3;
        }];
     
 }
 
-+ (void)loginwithUsername:(NSString *)username and:(NSString *)password{
++ (void)loginwithUsername:(NSString *)username and:(NSString *)password block:(getDict)getDict{
     loginMessage = 0;
     if (!manager) {
         manager = [AFHTTPSessionManager new];
@@ -70,16 +61,13 @@ AFHTTPSessionManager *manager;
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        
+        getDict(responseObject);
+        
         int returnType = [[responseObject objectForKey:@"type"] intValue];
         
-        NSLog(@"user : %@,password : %@",username,password);
-        
-        NSLog(@"responseObject::%@",responseObject);
         
         if (returnType == 100) {
-            
-            loginMessage = 1;
-            //生成userinfor 的对象
             
             NSLog(@"reponseObject : %@",responseObject);
             
@@ -93,14 +81,10 @@ AFHTTPSessionManager *manager;
             
             [accountMessage setWatchInfor:wlist];
             
-        }else{
-            
-            loginMessage = 2;
-            
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        loginMessage = 2;
+        
     }];
 }
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters{
@@ -194,30 +178,10 @@ AFHTTPSessionManager *manager;
         NSLog(@"watchImageError : %@",error);
     }];
     
-
 }
 
-- (void)getHistoryMessageWithParamater:(NSDictionary *)dict{
-    
-}
-
-- (NSArray *)getUsersArray{
-    return userslist;
-}
-     
      
 
-+ (int)getLoginMessage{
-    return  loginMessage;
-}
-
-+ (int)getRegisterMessage{
-    return registerMessage;
-}
-
-- (NSArray *)getDeviceMessage{
-    return devicelist;
-}
 
 
 @end

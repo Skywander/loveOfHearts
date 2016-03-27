@@ -7,27 +7,27 @@
 //
 #import <AFNetworking/AFNetworking.h>
 
+typedef void (^getImage)(UIImage *image);
 
-typedef void (^getImage)(UIImage *image);//获取图片
+typedef void(^getDict)(NSDictionary *dict);
 
 
 @interface Networking : NSObject
 
-
 + (void)registerwithDict:(id)dict;
-+ (void)loginwithUsername:(NSString *)username and:(NSString *)password;
+
++ (void)loginwithUsername:(NSString *)username and:(NSString *)password block:(getDict)getDict;
+
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters;
+
 - (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater;
+
 - (NSArray *)getDeviceMessage;
 
 - (void)getUsersMessageWithParamaters:(NSDictionary *)paramater;
 
 - (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
-
 - (NSArray *)getUsersArray;
-
-
-- (void)getHistoryMessageWithParamater:(NSDictionary *)dict;
 
 + (int)getLoginMessage;
 + (int)getRegisterMessage;

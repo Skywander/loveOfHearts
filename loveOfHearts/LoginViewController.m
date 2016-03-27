@@ -218,50 +218,41 @@
 //响应
 - (void)login{
     if (userName.text && password.text) {
-        [Networking loginwithUsername:userName.text and:password.text];
-    }
-    returnMessageInterval = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getLoginMessage) userInfo:nil repeats:YES];
+        
+        [Networking loginwithUsername:userName.text and:password.text block:^(NSDictionary *dict) {
+            
+            int loginMessage = [[dict objectForKey:@"type"] intValue];
+        
+            
+            if (loginMessage == 100){
+                
+                [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"%@.password",userName.text]];
+                
+                RightViewController *rightController = [RightViewController new];
+                
+                RightViewController *leftController = [RightViewController new];
+                
+                ViewController *centerController = [ViewController new];
+                
+                
+                deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
+                                                                         leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
+                                                                                             leftController]
+                                                                        rightViewController:[IISideController autoConstrainedSideControllerWithViewController:rightController]];
+                
+                deckController.navigationController.navigationBar.hidden = YES;
+                
+                [self presentViewController:deckController animated:YES completion:^{
+                    ;
+                }];
+            }
 
-}
-
-- (void)getLoginMessage{
-    
-    int loginMessage = [Networking getLoginMessage];
-    
-    if (loginMessage == 0) {
-        return;
-    }
-    
-    if (loginMessage == 1){
-        
-        [[NSUserDefaults standardUserDefaults] setObject:userName.text forKey:[NSString stringWithFormat:@"userAccount"]];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"%@.password",userName.text]];
-        
-        RightViewController *rightController = [RightViewController new];
-        
-        RightViewController *leftController = [RightViewController new];
-        
-        ViewController *centerController = [ViewController new];
-        
-        
-        deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
-                                                                                       leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
-                                                                                                           leftController]
-                                                                                      rightViewController:[IISideController autoConstrainedSideControllerWithViewController:rightController]];
-        
-        deckController.navigationController.navigationBar.hidden = YES;
-        
-        [self presentViewController:deckController animated:YES completion:^{
-            ;
         }];
-        
-    }else{
-        NSLog(@"login false");
     }
-    
-    [returnMessageInterval invalidate];
 }
+
 
 - (void)touchInsideButton:(UIButton *)sender{
     [sender setBackgroundColor:HIGH_COLOR];

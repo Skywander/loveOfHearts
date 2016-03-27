@@ -564,6 +564,7 @@
 		D362B95C1C97E6B30037E29E /* RightManage */ = {
 			isa = PBXGroup;
 			children = (
+				D3E51B2D1C9CFB51001732BF /* OtherSetting */,
 				D3D0250C1C9BEAF0002713B1 /* MapView */,
 				D3DF04291C9502D700832CD9 /* PhoneSettting */,
 				D3D8C59B1CA2D0A700512F5B /* AddWatchViewController.h */,
@@ -583,6 +584,7 @@
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D3DF04581C9543ED00832CD9 /* ActionView */,
 				D3D8C5BC1CA5754400512F5B /* GtSdkLib */,
 				D362B9451C978E9C0037E29E /* AccountMessage */,
 				D3D025261C9BEBB3002713B1 /* AMR */,
@@ -788,10 +790,8 @@
 		D3FEEF961C90FF7A00300710 /* loveOfHearts */ = {
 			isa = PBXGroup;
 			children = (
-				D3E51B2D1C9CFB51001732BF /* OtherSetting */,
-				D362B95C1C97E6B30037E29E /* RightManage */,
 				D362B9171C9679C90037E29E /* ImageSource */,
-				D3DF04581C9543ED00832CD9 /* ActionView */,
+				D362B95C1C97E6B30037E29E /* RightManage */,
 				D3A2A3F41C92AB31009B1D0E /* HomeView */,
 				D3A2A3E31C92A080009B1D0E /* Tool */,
 				D3FEEFD61C910ACF00300710 /* Login */,
