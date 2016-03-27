@@ -76,7 +76,7 @@
     
     //photoView
     
-    photoView = [[UIImageView alloc] initWithImage:[DB getImageWithID:[AccountMessage sharedInstance].wid]];
+    photoView = [UIImageView new];
     [photoView setBackgroundColor:[UIColor yellowColor]];
     [photoView setFrame:CGRectMake(4, 4, self.frame.size.height - 8, self.frame.size.height - 8)];
     
@@ -98,6 +98,10 @@
 
 - (void)setAddress:(NSString *)address{
     [addressLabel setText:address];
+}
+
+- (void)setImage:(UIImage *)image{
+    [photoView setImage:image];
 }
 
 - (NSString *)getNowTime{

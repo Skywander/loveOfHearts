@@ -6,6 +6,11 @@
 //  Copyright © 2015年 于恩聪. All rights reserved.
 //
 #import <AFNetworking/AFNetworking.h>
+
+
+typedef void (^getImage)(UIImage *image);//获取图片
+
+
 @interface Networking : NSObject
 
 
@@ -17,7 +22,8 @@
 
 - (void)getUsersMessageWithParamaters:(NSDictionary *)paramater;
 
-- (void)getWatchPortiartWithDict:(NSDictionary *)dict;
+- (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
+
 - (NSArray *)getUsersArray;
 
 

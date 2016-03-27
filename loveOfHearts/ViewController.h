@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "TopView.h"
-#import "TopView.h"
-
 #import "IIViewDeckController.h"
 #import "IISideController.h"
+#import "AccountMessage.h"
+#import "Networking.h"
 
 @interface ViewController : UIViewController
 

@@ -12,6 +12,7 @@
 #import "Alert.h"
 #import "AccountMessage.h"
 
+
 @interface Networking()
 {
     NSArray *devicelist;
@@ -163,7 +164,7 @@ AFHTTPSessionManager *manager;
     }];
 }
 
-- (void)getWatchPortiartWithDict:(NSDictionary *)dict{
+- (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
@@ -183,6 +184,10 @@ AFHTTPSessionManager *manager;
         NSData *imageData = UIImagePNGRepresentation(responseObject);
         
         [imageData writeToFile:imagePath atomically:NO];
+        
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        getImage(image);
         
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

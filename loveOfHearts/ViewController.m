@@ -44,9 +44,30 @@
 
 - (void)initTopView{
     topView = [[TopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
+    
     [self.view addSubview:topView];
     
     [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    
+    NSString *wid = accountMessage.wid;
+    
+    
+    NSString *fileName = [NSString stringWithFormat:@"%@.png",wid];
+    
+    NSDictionary *paramater = @{
+                                    @"wid":wid,
+                                    @"fileName":fileName
+                                };
+    
+    Networking *netWorking = [Networking new];
+    
+    [netWorking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+        [topView setImage:image];
+    }];
+    
+    
 }
 
 - (void)initMapView{
@@ -60,11 +81,9 @@
     
     [self.view sendSubviewToBack:mapView];
     
-    NSString *str = [mapView searchPointWithLat:39.989631 andLon:116.481018];
+    NSString *address = [mapView searchPointWithLat:39.989631 andLon:116.481018];
     
-    NSLog(@" address : %@",str);
-    
-    [topView setAddress:str];
+    [topView setAddress:address];
 
 }
 
@@ -76,7 +95,6 @@
 }
 
 - (void)clickExpandButton{
-    NSLog(@"click");
     
     [self.viewDeckController toggleRightViewAnimated:YES];
 }

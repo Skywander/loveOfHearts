@@ -24,6 +24,8 @@
     AccountMessage *accountMessage;
     
     NSArray *deviceArray;
+    
+    float y;
 }
 @end
 
@@ -65,7 +67,7 @@
 }
 
 - (void)initView{
-    float y = 70;
+    y = 70;
     for (NSDictionary *dict in deviceArray) {
         
         NSDictionary *paramater = @{
@@ -73,30 +75,29 @@
                                @"fileName":[NSString stringWithFormat:@"%@.png",[dict objectForKey:@"wid"]]
                                };
         
-        [netWorking getWatchPortiartWithDict:paramater];
+        [netWorking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+            NSLog(@" image : %@",image);
+            
+            UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];
+            
+            y = y + VIEW_HEIGHT + 10;
+            
+            [self.view addSubview:view];
+        }];
         
-        UIView *view = [self viewWithWatchID:[dict objectForKey:@"wid"] andY:y];
-        y = y + VIEW_HEIGHT + 10;
-        [self.view addSubview:view];
     }
 }
 
-- (UIView *)viewWithWatchID:(NSString *)watchId andY:(float)y{
+- (UIView *)viewWithWatchImage:(UIImage *)image andY:(float)getY andWatchId:(NSString *)watchId{
     UIView *view = [UIView new];
     
-    [view setFrame:CGRectMake(10, y, SCREEN_WIDTH - 20, VIEW_HEIGHT)];
+    [view setFrame:CGRectMake(10, getY, SCREEN_WIDTH - 20, VIEW_HEIGHT)];
     
     [view setBackgroundColor:[UIColor whiteColor]];
     
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,watchId];
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    
-    NSLog(@" imageView : %@",[UIImage imageWithData:imageData]);
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:imageData]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     
     [imageView setFrame:CGRectMake(20, 20, VIEW_HEIGHT - 40, VIEW_HEIGHT - 40)];
     

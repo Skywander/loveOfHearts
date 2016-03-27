@@ -14,4 +14,6 @@
 
 - (void)setAddress:(NSString *)address;
 
+- (void)setImage:(UIImage *)image;
+
 @end
