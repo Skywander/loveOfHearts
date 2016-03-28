@@ -9,14 +9,7 @@
 #import "Networking.h"
 #import "PasswordViewController.h"
 #import "JSONKit.h"
-#import "Alert.h"
 #import "AccountMessage.h"
-
-
-@interface Networking()
-
-
-@end
 
 @implementation Networking
 
@@ -27,7 +20,7 @@ int loginMessage;
 AFHTTPSessionManager *manager;
 
 
-+ (void)registerwithDict:(id)dict{
++ (void)registerwithDict:(id)dict block:(getDict)getDict{
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
@@ -37,8 +30,7 @@ AFHTTPSessionManager *manager;
        parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
            ;
        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-           NSString *responseMessage = [responseObject objectForKey:@"msg"];
-           
+           getDict(responseObject);
        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
            NSLog(@"register failure as %@",error);
        }];

@@ -14,7 +14,7 @@ typedef void(^getDict)(NSDictionary *dict);
 
 @interface Networking : NSObject
 
-+ (void)registerwithDict:(id)dict;
++ (void)registerwithDict:(id)dict block:(getDict)getDict;
 
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password block:(getDict)getDict;
 
@@ -22,12 +22,9 @@ typedef void(^getDict)(NSDictionary *dict);
 
 + (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater  block:(getDict)getDict;
 
-- (NSArray *)getDeviceMessage;
-
 + (void)getUsersMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict;
 
 + (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
-- (NSArray *)getUsersArray;
 
-+ (int)getRegisterMessage;
+
 @end

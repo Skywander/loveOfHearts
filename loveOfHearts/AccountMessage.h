@@ -11,6 +11,7 @@
 @interface AccountMessage : NSObject
 
 @property (nonatomic,strong)NSString *admin;
+
 @property (nonatomic,strong)NSString *createdAt;
 @property (nonatomic,strong)NSString *ispowered;
 @property (nonatomic,strong)NSString *relationship;
@@ -18,7 +19,6 @@
 @property (nonatomic,strong)NSString *updatedAt;
 @property (nonatomic,strong)NSString *userId;
 @property (nonatomic,strong)NSString *wid;
-
 
 @property (nonatomic,strong)NSString *babyage;
 @property (nonatomic,strong)NSString *babybir;
@@ -50,10 +50,42 @@
 
 @property (nonatomic,strong) UIImage *image;
 
+
+//缓存
+@property (nonatomic,strong)NSString *tempbabyage;
+@property (nonatomic,strong)NSString *tempbabybir;
+@property (nonatomic,strong)NSString *tempbabyheight;
+@property (nonatomic,strong)NSString *tempbabyname;
+@property (nonatomic,strong)NSString *tempbabysex;
+@property (nonatomic,strong)NSString *tempbabyweight;
+@property (nonatomic,strong)NSString *tempcenternumber;
+@property (nonatomic,strong)NSString *tempclock;
+@property (nonatomic,strong)NSString *tempflower;
+@property (nonatomic,strong)NSString *temphead;
+@property (nonatomic,strong)NSString *tempisonline;
+@property (nonatomic,strong)NSString *templowbat;
+@property (nonatomic,strong)NSString *tempmode;
+@property (nonatomic,strong)NSString *temppedo;
+@property (nonatomic,strong)NSString *tempphb;
+@property (nonatomic,strong)NSString *tempphb2;
+@property (nonatomic,strong)NSString *temppower;
+@property (nonatomic,strong)NSString *tempremove;
+@property (nonatomic,strong)NSString *tempsilencetime;
+@property (nonatomic,strong)NSString *tempsmsonoff;
+@property (nonatomic,strong)NSString *tempsos;
+@property (nonatomic,strong)NSString *tempsossms;
+@property (nonatomic,strong)NSString *tempturn;
+@property (nonatomic,strong)NSString *tempusim;
+@property (nonatomic,strong)NSString *tempwhitelist1;
+@property (nonatomic,strong)NSString *tempwhitelist2;
+@property (nonatomic,strong)NSString *tempwsim;
+
 + (instancetype)sharedInstance;
 
 - (void)setUserInfor:(NSDictionary *)dict;
 
 - (void)setWatchInfor:(NSDictionary *)dict;
+
+- (void)updateDataWithNumber:(int)number;
 
 @end

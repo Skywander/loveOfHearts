@@ -67,4 +67,63 @@ static AccountMessage *accountMessage;
     self.wsim = [dict objectForKey:@"wsim"];
 }
 
+- (void)updateDataWithNumber:(int)number{
+    switch (number) {
+        case 1000:
+            self.mode = self.tempmode;
+            break;
+        case 1001:
+            self.flower = self.tempflower;
+            break;
+        case 1003:
+            self.phb = self.tempphb;
+            break;
+        case 1004:
+            self.phb2 = self.tempphb2;
+            break;
+        case 1005:
+            self.sos = self.tempsos;
+            break;
+        case 1006:
+            self.pedo = self.temppedo;
+            break;
+//        case 1007:
+//            self.smsonoff = self.tempsos;
+//            break;
+        case 1008:
+            self.sossms = self.tempsossms;
+            break;
+        case 1009:
+            self.centernumber = self.tempcenternumber;
+            break;
+        case 1010:
+            self.remove = self.tempremove;
+            break;
+        case 1011:
+            self.clock = self.tempclock;
+            break;
+//        case 1012:
+//            self.mode = self.tempmode;
+//            break;
+        case 1013:
+            self.lowbat = self.templowbat;
+            break;
+        case 1014:
+            self.silencetime = self.tempsilencetime;
+            break;
+        case 1015:
+            self.turn = self.tempturn;
+            break;
+        case 1016:
+            self.whitelist1 = self.tempwhitelist1;
+            break;
+        case 1017:
+            self.whitelist2 = self.tempwhitelist2;
+            break;
+
+        default:
+            break;
+    }
+}
+
 @end

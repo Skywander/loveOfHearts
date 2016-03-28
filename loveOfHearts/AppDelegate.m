@@ -58,6 +58,9 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
     // [2]:注册APNS
     [self registerRemoteNotification];
     
+    
+    [GeTuiSdk bindAlias:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"]]];
+    
     // [2-EXT]: 获取启动时收到的APN数据
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {

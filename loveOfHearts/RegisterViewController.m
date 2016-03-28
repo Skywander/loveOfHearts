@@ -31,7 +31,6 @@
     
     int timeCount;
     NSTimer *timer;
-    NSTimer *getMessageTimer;
     NSTimer *codeTimer;
 }
 
@@ -240,26 +239,19 @@
                                     @"userId":phoneNumber,
                                     @"userPw":password.text,
                                     };
-        [Networking registerwithDict:paramater];
-        
-        getMessageTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(getReturnMessage) userInfo:nil repeats:NO];
+        [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
+            int type = [[dict objectForKey:@"type"] intValue];
+            
+            if (type == 100) {
+                NSLog(@"register success");
+            }
+        }];
     }else{
         NSLog(@"code is wrong");
     }
 }
 
-- (void)getReturnMessage{
-    NSLog(@"returen message");
-   int returnNumber =  [Networking getRegisterMessage];
-    
-    if (returnNumber == 1){
-        NSLog(@"success");
-    }else if(returnNumber == 2){
-        NSLog(@"重复注册");
-    }else{
-        NSLog(@"注册失败");
-    }
-}
+
 
 - (void)touchInside:(UIButton *)sender{
     [sender setBackgroundColor:HIGH_COLOR];
