@@ -10,6 +10,8 @@
 #import "Constant.h"
 #import "Networking.h"
 #import "Navview.h"
+#import "AccountMessage.h"
+#import "Command.h"
 
 #define ICON_WIDTH 36
 
@@ -29,13 +31,22 @@
     
     NSString *oldPassword;
     NSString *newPassword;
+    
+    AccountMessage *accountMessage;
 }
 @end
 
 @implementation ChangePassword
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initData];
+    
     [self initUI];
+}
+
+- (void)initData{
+    accountMessage = [AccountMessage sharedInstance];
 }
 
 - (void)initUI {
@@ -105,6 +116,16 @@
 }
 
 - (void)makeSure {
+    
+    NSDictionary *paramater = @{
+                                @"userId":accountMessage.userId,
+                                @"userPw":oldTextField.text,
+                                @"confirm":newTextField.text
+                                };
+    
+    
+    [Command commandWithAddress:@"passwordreset" andParamater:paramater];
+    
     [self.view endEditing:YES];
 
 }
