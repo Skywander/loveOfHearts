@@ -62,7 +62,7 @@
         
         NSDictionary *paramater = @{
                                @"wid":[dict objectForKey:@"wid"],
-                               @"fileName":[NSString stringWithFormat:@"%@.png",[dict objectForKey:@"wid"]]
+                               @"fileName":accountMessage.head
                                };
         
         [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {

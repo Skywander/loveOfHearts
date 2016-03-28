@@ -147,7 +147,7 @@ AFHTTPSessionManager *manager;
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
         
-        NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[dict objectForKey:@"wid"]];
+        NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[AccountMessage sharedInstance].head];
         
         NSData *imageData = UIImagePNGRepresentation(responseObject);
         

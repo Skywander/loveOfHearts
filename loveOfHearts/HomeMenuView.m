@@ -34,7 +34,6 @@
 @end
 
 @implementation HomeMenuView
-
 - (instancetype)init{
     self = [super init];
     
@@ -146,6 +145,8 @@
     
     
 }
+
+
 
 - (void)beginAnimation{
     if (ISEXPAND) {

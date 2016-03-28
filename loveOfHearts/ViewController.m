@@ -10,6 +10,7 @@
 #import "MapProtocolDelegate.h"
 #import "Mymapview.h"
 #import "HomeMenuView.h"
+#import "ChatViewController.h"
 
 #define START_X 0
 #define START_Y 0
@@ -53,12 +54,9 @@
     
     NSString *wid = accountMessage.wid;
     
-    
-    NSString *fileName = [NSString stringWithFormat:@"%@.png",wid];
-    
     NSDictionary *paramater = @{
                                     @"wid":wid,
-                                    @"fileName":fileName
+                                    @"fileName":accountMessage.head
                                 };
     [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
         [topView setImage:image];
@@ -86,10 +84,11 @@
 
 - (void)initHomeMenuView{
     menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(10, 74, 40, 280)];
-    
+        
     [self.view addSubview:menuView];
     
 }
+
 
 - (void)clickExpandButton{
     
@@ -102,6 +101,24 @@
 
 - (void)passValue:(NSString *)string{
     [topView setAddress:string];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint point = [touch locationInView:self.view];
+    
+    if (CGRectContainsPoint(menuView.frame, point)) {
+        NSLog(@"click menu");
+        
+        ChatViewController *chatView = [ChatViewController new];
+        
+        [self presentViewController:chatView animated:YES completion:^{
+            ;
+        }];
+    }
+
 }
 
 @end

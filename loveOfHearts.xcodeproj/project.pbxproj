@@ -39,6 +39,7 @@
 		D362B95A1C97ABF40037E29E /* +.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9581C97ABF40037E29E /* +.png */; };
 		D362B95B1C97ABF40037E29E /* -.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9591C97ABF40037E29E /* -.png */; };
 		D362B95F1C97E70C0037E29E /* BabyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B95E1C97E70C0037E29E /* BabyManageViewController.m */; };
+		D39A06141CA92A4B007BB104 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39A06131CA92A4B007BB104 /* ChatViewController.m */; };
 		D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A3EC1C92A422009B1D0E /* Mymapview.m */; };
 		D3A2A3F71C92AB55009B1D0E /* HomeMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A3F61C92AB55009B1D0E /* HomeMenuView.m */; };
 		D3C96EF01C911A0E00F27D10 /* Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C96EEF1C911A0E00F27D10 /* Networking.m */; };
@@ -207,6 +208,8 @@
 		D362B9591C97ABF40037E29E /* -.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-.png"; sourceTree = "<group>"; };
 		D362B95D1C97E70C0037E29E /* BabyManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyManageViewController.h; sourceTree = "<group>"; };
 		D362B95E1C97E70C0037E29E /* BabyManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyManageViewController.m; sourceTree = "<group>"; };
+		D39A06121CA92A4B007BB104 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		D39A06131CA92A4B007BB104 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		D3A2A3EB1C92A422009B1D0E /* Mymapview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mymapview.h; sourceTree = "<group>"; };
 		D3A2A3EC1C92A422009B1D0E /* Mymapview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mymapview.m; sourceTree = "<group>"; };
 		D3A2A3F51C92AB55009B1D0E /* HomeMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuView.h; sourceTree = "<group>"; };
@@ -578,13 +581,22 @@
 			name = RightManage;
 			sourceTree = "<group>";
 		};
+		D39A06111CA92A26007BB104 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D39A06121CA92A4B007BB104 /* ChatViewController.h */,
+				D39A06131CA92A4B007BB104 /* ChatViewController.m */,
+				D3D025261C9BEBB3002713B1 /* AMR */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
 				D3DF04581C9543ED00832CD9 /* ActionView */,
 				D3D8C5BC1CA5754400512F5B /* GtSdkLib */,
 				D362B9451C978E9C0037E29E /* AccountMessage */,
-				D3D025261C9BEBB3002713B1 /* AMR */,
 				D3D0251F1C9BEB77002713B1 /* IQActionSheetPicker */,
 				D3FEEFE31C910B4400300710 /* SMS_SDK */,
 				D3C96EFB1C9167FD00F27D10 /* JsonKit */,
@@ -785,6 +797,7 @@
 		D3FEEF961C90FF7A00300710 /* loveOfHearts */ = {
 			isa = PBXGroup;
 			children = (
+				D39A06111CA92A26007BB104 /* Chat */,
 				D3FEEFD61C910ACF00300710 /* Login */,
 				D362B9171C9679C90037E29E /* ImageSource */,
 				D362B95C1C97E6B30037E29E /* RightManage */,
@@ -1138,6 +1151,7 @@
 				D3E51B4E1C9CFB92001732BF /* ModeChoiceViewController.m in Sources */,
 				D3D0251B1C9BEB03002713B1 /* NewFenceMessage.m in Sources */,
 				D362B95F1C97E70C0037E29E /* BabyManageViewController.m in Sources */,
+				D39A06141CA92A4B007BB104 /* ChatViewController.m in Sources */,
 				D362B9161C9653790037E29E /* CommentAnimation.m in Sources */,
 				D362B9441C978E910037E29E /* AccountMessage.m in Sources */,
 				D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */,

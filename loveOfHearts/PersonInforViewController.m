@@ -109,7 +109,7 @@
     
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,shouhuan_id];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,[AccountMessage sharedInstance].head];
     
     NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
     
