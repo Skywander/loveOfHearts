@@ -171,7 +171,7 @@
     
     [Command commandWithAddress:@"uploadspacetime" andParamater:dict];
     
-    accountMessage.mode = space;
+    accountMessage.tempmode = space;
 }
 
 

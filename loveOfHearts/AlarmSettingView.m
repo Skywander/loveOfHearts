@@ -174,8 +174,7 @@
     
     [Command commandWithAddress:@"clock" andParamater:paramater];
     
-    [accountMessage setClock:timeString];
-    
+    accountMessage.tempclock = timeString;
 }
 
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date

@@ -126,6 +126,8 @@
                                 @"pedo":switsState[sender.tag]
                                };
         [Command commandWithAddress:@"pedo" andParamater:dict];
+        
+        accountMessage.temppedo = [switsState objectAtIndex:0];
     }
     if (sender.tag == 1) {
         NSDictionary *dict = @{
@@ -135,6 +137,8 @@
                                };
         
         [Command commandWithAddress:@"turn" andParamater:dict];
+        
+        accountMessage.tempturn = @"00:00 - 23.59";
     }
     
 }

@@ -133,12 +133,16 @@
                               };
     [Command commandWithAddress:@"sossms" andParamater:sosDict];
     
+    accountMessage.tempsossms = [switsState objectAtIndex:0];
+    
     NSDictionary *lowpowerDict = @{
                                    @"userId":userId,
                                    @"wid":wid,
                                    @"lowbat":[switsState objectAtIndex:1]
                                    };
     [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict];
+    
+    accountMessage.templowbat = [switsState objectAtIndex:1];
     
     NSDictionary *offDict = @{
                                 @"userId":userId,
@@ -148,6 +152,8 @@
     
     
     [Command commandWithAddress:@"remove" andParamater:offDict];
+    
+    accountMessage.tempremove = [switsState objectAtIndex:2];
 
     NSDictionary *smsDict = @{
                                 @"userId":userId,
@@ -156,6 +162,8 @@
                               };
     
     [Command commandWithAddress:@"smsonoff" andParamater:smsDict];
+    
+    accountMessage.tempsmsonoff = [switsState objectAtIndex:3];
     
 }
 

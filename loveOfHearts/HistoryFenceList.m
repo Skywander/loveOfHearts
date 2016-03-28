@@ -10,7 +10,6 @@
 #import "HistoryViewController.h"
 #import "NewFenceView.h"
 #import "Networking.h"
-#import "Fence.h"
 #import "Navview.h"
 #import "AccountMessage.h"
 #import "Command.h"

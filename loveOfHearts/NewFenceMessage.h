@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Fence.h"
 
 @interface NewFenceMessage : UIViewController
 

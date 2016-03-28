@@ -7,7 +7,6 @@
 //
 
 #import "HistoryViewController.h"
-#import "Fence.h"
 #import "NewFenceView.h"
 #import "Navview.h"
 #import "AccountMessage.h"

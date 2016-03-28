@@ -54,7 +54,6 @@
 		D3D025191C9BEB03002713B1 /* HistoryFenceList.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025121C9BEB03002713B1 /* HistoryFenceList.m */; };
 		D3D0251A1C9BEB03002713B1 /* NewFenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025141C9BEB03002713B1 /* NewFenceView.m */; };
 		D3D0251B1C9BEB03002713B1 /* NewFenceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025161C9BEB03002713B1 /* NewFenceMessage.m */; };
-		D3D0251E1C9BEB2C002713B1 /* Fence.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0251D1C9BEB2C002713B1 /* Fence.m */; };
 		D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */; };
 		D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025231C9BEB8A002713B1 /* IQActionSheetViewController.m */; };
 		D3D0252F1C9BEC10002713B1 /* amr_wav_converter.c in Sources */ = {isa = PBXBuildFile; fileRef = D3D025281C9BEC10002713B1 /* amr_wav_converter.c */; };
@@ -234,8 +233,6 @@
 		D3D025141C9BEB03002713B1 /* NewFenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFenceView.m; sourceTree = "<group>"; };
 		D3D025151C9BEB03002713B1 /* NewFenceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFenceMessage.h; sourceTree = "<group>"; };
 		D3D025161C9BEB03002713B1 /* NewFenceMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFenceMessage.m; sourceTree = "<group>"; };
-		D3D0251C1C9BEB2C002713B1 /* Fence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fence.h; sourceTree = "<group>"; };
-		D3D0251D1C9BEB2C002713B1 /* Fence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fence.m; sourceTree = "<group>"; };
 		D3D025201C9BEB8A002713B1 /* IQActionSheetPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetPickerView.h; sourceTree = "<group>"; };
 		D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
 		D3D025221C9BEB8A002713B1 /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
@@ -636,8 +633,6 @@
 			children = (
 				D3A2A3EB1C92A422009B1D0E /* Mymapview.h */,
 				D3A2A3EC1C92A422009B1D0E /* Mymapview.m */,
-				D3D0251C1C9BEB2C002713B1 /* Fence.h */,
-				D3D0251D1C9BEB2C002713B1 /* Fence.m */,
 				D3D0250D1C9BEB03002713B1 /* HistoryTrackViewController.h */,
 				D3D0250E1C9BEB03002713B1 /* HistoryTrackViewController.m */,
 				D3D0250F1C9BEB03002713B1 /* HistoryViewController.h */,
@@ -1125,7 +1120,6 @@
 				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
 				D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */,
 				D3D8C5AB1CA438F100512F5B /* DB.m in Sources */,
-				D3D0251E1C9BEB2C002713B1 /* Fence.m in Sources */,
 				D3E51B511C9CFB92001732BF /* AddWatchByInput.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
 				D3D0252F1C9BEC10002713B1 /* amr_wav_converter.c in Sources */,

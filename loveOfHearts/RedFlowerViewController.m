@@ -128,5 +128,7 @@
                            };
     
     [Command commandWithAddress:@"flower" andParamater:dict];
+    
+    accountMessage.tempflower = flower_count;
 }
 @end
