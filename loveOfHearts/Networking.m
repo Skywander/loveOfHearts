@@ -164,4 +164,19 @@ AFHTTPSessionManager *manager;
     
 }
 
++ (void)getHistoryTrack:(NSDictionary *)dict block:(getDict)getDict{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+        
+    [manager POST:[NSString stringWithFormat:@"%@gethistorylocation",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+
+}
+
 @end

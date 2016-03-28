@@ -11,6 +11,7 @@
 #import "IQActionSheetPickerView.h"
 #import "Networking.h"
 #import "Navview.h"
+#import "AccountMessage.h"
 
 
 @interface HistoryTrackViewController()<IQActionSheetPickerViewDelegate>
@@ -24,6 +25,7 @@
     
     UIButton *dateButton;
 
+    AccountMessage *accountMessage;
 }
 @end
 @implementation HistoryTrackViewController
@@ -31,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    accountMessage = [AccountMessage sharedInstance];
     
     [self initUI];
 }
@@ -125,7 +128,19 @@
 
 
 - (void)search{
-
+    NSDictionary *paramater = @{
+                                @"userId":accountMessage.userId,
+                                @"wid":accountMessage.wid,
+                                @"firstResult":@"test",
+                                @"maxResult":@"100",
+                                @"dateTime":dateButton.titleLabel.text
+                                };
+    
+    NSLog(@"paramater : %@",paramater);
+    
+    [Networking getHistoryTrack:paramater block:^(NSDictionary *dict) {
+        ;
+    }];
 }
 
 - (void)chooseDate{

@@ -26,5 +26,5 @@ typedef void(^getDict)(NSDictionary *dict);
 
 + (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
 
-
++ (void)getHistoryTrack:(NSDictionary *)dict block:(getDict)getDict;
 @end
