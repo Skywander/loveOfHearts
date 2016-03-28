@@ -24,6 +24,8 @@
     NSArray *deviceArray;
     
     float y;
+    
+    UIImageView *selectedView;
 }
 @end
 
@@ -57,6 +59,11 @@
 
 
 - (void)initView{
+    
+    selectedView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yes"]];
+    
+    [selectedView setFrame:CGRectMake(SCREEN_WIDTH - 75, (VIEW_HEIGHT - 30) / 2, 30, 30)];
+    
     y = 70;
     for (NSDictionary *dict in deviceArray) {
         
@@ -71,6 +78,10 @@
             UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];
             
             y = y + VIEW_HEIGHT + 10;
+            
+            if([[dict objectForKey:@"wid"] isEqualToString:accountMessage.wid]){
+                [view addSubview:selectedView];
+            }
             
             [self.view addSubview:view];
         }];
@@ -116,7 +127,9 @@
     [view.layer setBorderWidth:0.3f];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.numberOfTapsRequired = 2;
     [view addGestureRecognizer:singleTap];
+    
     
     return view;
 }

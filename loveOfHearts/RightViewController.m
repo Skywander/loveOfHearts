@@ -55,34 +55,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)initButton{
-    NSArray *buttonNames = [NSArray arrayWithObjects:@"babyManage",@"authority",@"relativeNumber",@"phoneText",@"whitelist",@"fences",@"historyTrack",@"findWatch",@"otherSetting",@"exit", nil];
-    
-    float y = 64;
-    
-    for (NSString *buttonName in buttonNames) {
-        [self initButtonWithTitle:buttonName andY:y];
-        
-        y = y + RIGHT_BUTTON_HEIGHT + 1;
-    }
-}
-
-
-- (void)initButtonWithTitle:(NSString *)title andY:(float)y{
-    UIButton *button = [UIButton new];
-    
-//    [button setFrame:CGRectMake(10, y, RIGHT_BUTTON_WIDTH, RIGHT_BUTTON_HEIGHT)];
-    
-    [button setBackgroundImage:[UIImage imageNamed:title] forState:UIControlStateNormal];
-    
-    [self.view addSubview:button];
-    
-    [button setTag:(int)(y - 64) / (RIGHT_BUTTON_HEIGHT) + 1];
-    
-    [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
@@ -93,6 +65,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([indexPath row] == 9) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            ;
+        }];
+        
+        NSLog(@"click 9");
+        
+        return;
+    }
+    
     if ([RightVieFactory factoryWithTag:(int)[indexPath row]]) {
         [self presentViewController:[RightVieFactory factoryWithTag:(int)[indexPath row]] animated:YES completion:^{
             ;
@@ -115,20 +97,6 @@
     
 }
 
-- (void)clickButton:(UIButton *)button{
-    if (button.tag == 8) {
-        NSLog(@"找手表");
-        
-        [self findWatch];
-    }
-    
-    if ([RightVieFactory factoryWithTag:(int)button.tag]) {
-        [self presentViewController:[RightVieFactory factoryWithTag:(int)button.tag] animated:YES completion:^{
-            ;
-        }];
-    }
-
-}
 
 - (void)findWatch{
     [Command commandWithName:@"findwatch"];
