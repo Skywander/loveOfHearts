@@ -16,9 +16,7 @@
 #define VIEW_HEIGHT 80
 
 @interface BabyManageViewController ()
-{
-    NSTimer *timer;
-    
+{    
     Networking *netWorking;
     
     AccountMessage *accountMessage;
@@ -51,20 +49,14 @@
     
     netWorking = [Networking new];
     
-    [netWorking getDevicesMessageWithParamaters:paramater];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getDeviceMessage) userInfo:nil repeats:YES];
-}
-
-- (void)getDeviceMessage{
-    if ([netWorking getDeviceMessage].count > 0) {
-        deviceArray = [netWorking getDeviceMessage];
-        
-        [timer invalidate];
+    [netWorking getDevicesMessageWithParamaters:paramater block:^(NSDictionary *dict) {
+        deviceArray = [dict objectForKey:@"data"];
         
         [self initView];
-    }
+    }];
 }
+
+
 
 - (void)initView{
     y = 70;

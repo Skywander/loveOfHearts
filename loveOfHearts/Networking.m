@@ -105,7 +105,7 @@ AFHTTPSessionManager *manager;
     }];
 }
 
-- (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater{
+- (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict{
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
@@ -115,11 +115,12 @@ AFHTTPSessionManager *manager;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
-        
-        devicelist = [responseObject objectForKey:@"data"];
-        
-        NSLog(@"networking : %@",devicelist);
+//        NSLog(@"%@",responseObject);
+//        
+//        devicelist = [responseObject objectForKey:@"data"];
+//        
+//        NSLog(@"networking : %@",devicelist);
+        getDict(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
@@ -179,9 +180,5 @@ AFHTTPSessionManager *manager;
     }];
     
 }
-
-     
-
-
 
 @end
