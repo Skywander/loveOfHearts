@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "Navview.h"
 #import "OtherSettingFactory.h"
+#import "Command.h"
 
 @interface OtherSettingViewController ()
 {
@@ -46,6 +47,13 @@
     [self.view addSubview:navigatioinView];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([indexPath row] == 6) {
+        [Command commandWithName:@"poweroff"];
+        
+        return;
+    }
+    
     UIViewController *viewController = [OtherSettingFactory factoryWithTag:(int)[indexPath row]];
     
     [self presentViewController:viewController animated:YES completion:^{

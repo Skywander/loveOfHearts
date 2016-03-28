@@ -65,6 +65,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([indexPath row] == 8) {
+        [self findWatch];
+    }
+    
     if ([indexPath row] == 9) {
         [self dismissViewControllerAnimated:YES completion:^{
             ;

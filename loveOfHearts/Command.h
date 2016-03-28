@@ -16,4 +16,5 @@
 
 + (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater;
 
+
 @end
