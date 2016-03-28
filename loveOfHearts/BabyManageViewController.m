@@ -47,9 +47,7 @@
                                     @"userId":userId
                                     };
     
-    netWorking = [Networking new];
-    
-    [netWorking getDevicesMessageWithParamaters:paramater block:^(NSDictionary *dict) {
+    [Networking getDevicesMessageWithParamaters:paramater block:^(NSDictionary *dict) {
         deviceArray = [dict objectForKey:@"data"];
         
         [self initView];
@@ -67,7 +65,7 @@
                                @"fileName":[NSString stringWithFormat:@"%@.png",[dict objectForKey:@"wid"]]
                                };
         
-        [netWorking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+        [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
             NSLog(@" image : %@",image);
             
             UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];

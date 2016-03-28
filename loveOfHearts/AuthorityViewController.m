@@ -19,10 +19,6 @@
 @interface AuthorityViewController ()
 
 {
-    NSTimer *timer;
-    
-    Networking *netWorking;
-    
     NSArray *usersArray;
 }
 
@@ -48,24 +44,15 @@
     NSDictionary *dict = @{
                            @"wid":accountMessage.wid
                           };
-    
-    netWorking = [Networking new];
-    
-    [netWorking getUsersMessageWithParamaters:dict];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getUsersArray) userInfo:nil repeats:YES];
-    
-}
-
-- (void)getUsersArray{
-    if ([netWorking getUsersArray].count > 0) {
-        usersArray = [netWorking getUsersArray];
-        
-        [timer invalidate];
+    [Networking getUsersMessageWithParamaters:dict block:^(NSDictionary *dict) {
+        usersArray = [dict objectForKey:@"data"];
         
         [self initUI];
-    }
+
+    }];
 }
+
+
 
 - (void)initUI{
     

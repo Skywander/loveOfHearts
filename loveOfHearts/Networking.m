@@ -14,10 +14,7 @@
 
 
 @interface Networking()
-{
-    NSArray *devicelist;
-    NSArray *userslist;
-}
+
 
 @end
 
@@ -105,21 +102,19 @@ AFHTTPSessionManager *manager;
     }];
 }
 
-- (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict{
++ (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict{
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    devicelist = [NSArray new];
     [manager POST:[NSString stringWithFormat:@"%@devicelist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"%@",responseObject);
-//        
-//        devicelist = [responseObject objectForKey:@"data"];
-//        
-//        NSLog(@"networking : %@",devicelist);
+        
+        NSLog(@"responseObject : %@",responseObject);
+        
+
         getDict(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -127,29 +122,25 @@ AFHTTPSessionManager *manager;
     }];
 }
 
-- (void)getUsersMessageWithParamaters:(NSDictionary *)paramater{
++ (void)getUsersMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict{
     
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    userslist = [NSArray new];
     [manager POST:[NSString stringWithFormat:@"%@powerlist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
         
-        userslist = [responseObject objectForKey:@"data"];
-        
-        NSLog(@"networking : %@",devicelist);
+        getDict(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
 }
 
-- (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage{
++ (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     

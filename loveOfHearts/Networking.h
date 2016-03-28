@@ -20,13 +20,13 @@ typedef void(^getDict)(NSDictionary *dict);
 
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters;
 
-- (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater  block:(getDict)getDict;
++ (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater  block:(getDict)getDict;
 
 - (NSArray *)getDeviceMessage;
 
-- (void)getUsersMessageWithParamaters:(NSDictionary *)paramater;
++ (void)getUsersMessageWithParamaters:(NSDictionary *)paramater block:(getDict)getDict;
 
-- (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
++ (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
 - (NSArray *)getUsersArray;
 
 + (int)getRegisterMessage;

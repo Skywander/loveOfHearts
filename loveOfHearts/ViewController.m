@@ -60,10 +60,7 @@
                                     @"wid":wid,
                                     @"fileName":fileName
                                 };
-    
-    Networking *netWorking = [Networking new];
-    
-    [netWorking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+    [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
         [topView setImage:image];
     }];
     
