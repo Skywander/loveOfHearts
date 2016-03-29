@@ -215,8 +215,11 @@
     
     UIImage *imageNew = [self imageWithImage:addPic scaledToSize:imagesize];
     
+    NSData *imageData = UIImageJPEGRepresentation(imageNew, 0.5);
     
-    NSData *imageData = UIImageJPEGRepresentation(imageNew, 0.00001);
+    UIImage *newImage = [UIImage imageWithData:imageData];
+    
+    [portraitView setImage:newImage];
     //此处上传图片
 }
 //图片压缩

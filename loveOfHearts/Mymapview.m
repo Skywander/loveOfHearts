@@ -21,6 +21,8 @@ static Mymapview *mymapview;
     AMapSearchAPI *_searchAPI;
     
     NSString *detailAddress;
+    
+    MAPointAnnotation *basePoint;
 }
 
 @end
@@ -182,7 +184,7 @@ static Mymapview *mymapview;
         
         _polygonView.lineWidth = 2.f;
         _polygonView.strokeColor = DEFAULT_PINK;
-        _polygonView.fillColor = [UIColor whiteColor];
+        _polygonView.fillColor = DEFAULT_PINK;
         _polygonView.lineJoinType = kMALineJoinMiter;//连接类型
         
         return _polygonView;
@@ -233,6 +235,49 @@ static Mymapview *mymapview;
     
     return detailAddress;
 
+}
+
+- (void)showHistoryTrack:(NSMutableArray *)pointsArray{
+    //空值检测
+    if (pointsArray.count <= 0) {
+        NSLog(@"track not exist");
+        
+        return;
+    }
+    //创建基点为获取记录的第一个点
+    basePoint = [[MAPointAnnotation alloc] init];
+    
+    basePoint.coordinate = CLLocationCoordinate2DMake([[pointsArray objectAtIndex:0] doubleValue], [[pointsArray objectAtIndex:1] doubleValue]);
+    
+    [mapView addAnnotation:basePoint];
+    //对之后的点进行遍历
+    for (int i = 2; i < pointsArray.count; i = i + 2) {
+        //获取遍历点 到 基点的距离
+        MAPointAnnotation *currentPoint = [[MAPointAnnotation alloc] init];
+        currentPoint.coordinate = CLLocationCoordinate2DMake([[pointsArray objectAtIndex:i] doubleValue], [[pointsArray objectAtIndex:(i + 1)] doubleValue]);
+        
+        CLLocationDistance distance = MAMetersBetweenMapPoints(MAMapPointForCoordinate(basePoint.coordinate), MAMapPointForCoordinate(currentPoint.coordinate));
+        
+        NSLog(@"distance : %f",distance);
+        //距离在10-10000保存，将当前点设为基点
+        if (distance >= 10 && distance <= 10000) {
+            //画点和直线
+            CLLocationCoordinate2D commonPolylineCoords[2];
+            
+            commonPolylineCoords[0] = basePoint.coordinate;
+            
+            commonPolylineCoords[1] = currentPoint.coordinate;
+            
+            MAPolyline *polyline = [MAPolyline polylineWithCoordinates:commonPolylineCoords count:2];
+            
+            [mapView addAnnotation:currentPoint];
+            [mapView addOverlay:polyline];
+            
+            basePoint = currentPoint;
+        }
+        
+        mapView.centerCoordinate = basePoint.coordinate;
+    }
 }
 
 @end

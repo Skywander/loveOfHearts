@@ -24,4 +24,7 @@
 
 - (NSString *)searchPointWithLat:(double)lat andLon:(double)lon;
 
+
+- (void)showHistoryTrack:(NSMutableArray *)pointsArray;
+
 @end

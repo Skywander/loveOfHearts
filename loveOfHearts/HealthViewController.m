@@ -130,10 +130,19 @@
         accountMessage.temppedo = [switsState objectAtIndex:0];
     }
     if (sender.tag == 1) {
+        
+        NSString *timeString = [NSString new];
+        
+        if (sender.isOn) {
+            timeString = @"00:00-23:59";
+        }else{
+            timeString = @"00:00-00:00";
+        }
+        
         NSDictionary *dict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"turn":@"00:00-23:59"
+                                @"turn":timeString
                                };
         
         [Command commandWithAddress:@"turn" andParamater:dict];

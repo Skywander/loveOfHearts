@@ -22,6 +22,7 @@
     IQActionSheetPickerView *picker;
     
     MAMapView *mapView;
+    Mymapview *mymapView;
     
     UIButton *dateButton;
 
@@ -42,10 +43,6 @@
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [mapView removeOverlays:mapView.overlays];
-    [mapView removeAnnotations:mapView.annotations];
-}
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
@@ -102,7 +99,7 @@
 }
 
 - (void)initMapview{
-    Mymapview *mymapView = [Mymapview sharedInstance];
+    mymapView = [Mymapview sharedInstance];
     
     [mymapView setFrame:CGRectMake(0, 74, SCREEN_WIDTH, SCREEN_HEIGHT - 84)];
     
@@ -131,15 +128,30 @@
     NSDictionary *paramater = @{
                                 @"userId":accountMessage.userId,
                                 @"wid":accountMessage.wid,
-                                @"firstResult":@"test",
-                                @"maxResult":@"100",
+                                @"firstResult":@"0",
+                                @"maxResult":@"10000",
                                 @"dateTime":dateButton.titleLabel.text
                                 };
     
     NSLog(@"paramater : %@",paramater);
     
     [Networking getHistoryTrack:paramater block:^(NSDictionary *dict) {
-        ;
+        NSArray *dataArray = [dict objectForKey:@"data"];
+        
+        NSMutableArray *pointsArray = [NSMutableArray new];
+        
+        for (NSDictionary *tempDict in dataArray) {
+            NSString *locationLat = [tempDict objectForKey:@"lat"];
+            
+            NSString *locationLon = [tempDict objectForKey:@"lng"];
+            
+            [pointsArray addObject:locationLat];
+            [pointsArray addObject:locationLon];
+            
+        }
+        [mymapView showHistoryTrack:pointsArray];
+
+        
     }];
 }
 
