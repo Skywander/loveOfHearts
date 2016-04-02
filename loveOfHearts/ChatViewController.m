@@ -162,7 +162,7 @@
     [recordButton addTarget:self action:@selector(beginRecord) forControlEvents:UIControlEventTouchDown];
 }
 
-//点击事件
+#pragma action
 - (void)beginRecord{
     
     NSDate *date = [NSDate new];
@@ -183,20 +183,9 @@
 
 - (void)stopRecord{
     
-    [recorder stop:^(int i) {
-        NSLog(@"over");
-    }];
+    [recorder stop];
 }
-//
-//- (void)playRecord:(UIButton *)sender {
-//    [player stop];
-//    NSMutableArray *singleMessage = [messageArrays objectAtIndex:(messageArrays.count - 1 - sender.tag)];
-//    NSString *recordFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:[singleMessage objectAtIndex:0]];
-//    
-//    NSLog(@"%@",recordFile);
-//    
-//    [player playWithURL:[NSURL URLWithString:recordFile]];
-//}
+
 
 - (void)refreshTableView{
     NSDictionary *dict = @{
@@ -252,92 +241,59 @@
     for (UIView *view in cell.subviews) {
         [view removeFromSuperview];
     }
-//    cellBgView = [[UIView alloc] initWithFrame:CGRectMake(6, 7, SCREEN_WIDTH - 32, 36)];
-
-//    if ([[singleMessage objectAtIndex:2] intValue] == 0) {
-//        UIImageView *portraitView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, 30, 30)];
-//        
-//        [portraitView setImage:accountMessage.image];
-//        
-//        [portraitView.layer setCornerRadius:15.f];
-//        [portraitView.layer setCornerRadius:6.f];
-//        [portraitView setClipsToBounds:YES];
-//        
-//        [cellBgView addSubview:portraitView];
-//        //消息体
-//        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(36, 5, 150, 36) ];
-//        [playButton setTag:[indexPath row]];
-//        [playButton setBackgroundImage:[UIImage imageNamed:@"chatCell"] forState:UIControlStateNormal];
-//        [playButton addTarget:self action:@selector(playRecord:) forControlEvents:UIControlEventTouchUpInside];
-//        [playButton setClipsToBounds:YES];
-//        [playButton setTag:[indexPath row]];
-//        //静态时图标
-//        readStatus = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"readStatus"]];
-//        readStatus.frame = CGRectMake(35, 8, 10, 20);
-//        [playButton addSubview:readStatus];
-//        [cellBgView addSubview:playButton];
-//        
-//        UILabel *sendTimelabel = [UILabel new];
-//        
-//        
-//        sendTimelabel.text = [singleMessage objectAtIndex:1];
-//        sendTimelabel.textAlignment = NSTextAlignmentCenter;
-//        sendTimelabel.font = [UIFont systemFontOfSize:10];
-//        sendTimelabel.frame = CGRectMake(0, 0, SCREEN_WIDTH - 20, 10);
-//        
-//        [cell addSubview:sendTimelabel];
-//        [cell addSubview:cellBgView];
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-//    if ([[singleMessage objectAtIndex:2] intValue] == 1) {
-//        UIImageView *portraitView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 56, 3, 30, 30)];
-//        [portraitView.layer setCornerRadius:15.f];
-//        NSData *imageData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@.protrait",shouhuan_id]];
-//        
-//        if (imageData) {
-//            UIImage *portraitImage = [UIImage imageWithData:imageData];
-//            [portraitView setImage:portraitImage];
-//        }
-//        [portraitView.layer setCornerRadius:6.f];
-//        [portraitView setClipsToBounds:YES];
-//        
-//        [cellBgView addSubview:portraitView];
-//        //消息体
-//        UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 209, 5, 150, 36) ];
-//        [playButton setTag:[indexPath row]];
-//        [playButton setBackgroundImage:[UIImage imageNamed:@"chatCellright"] forState:UIControlStateNormal];
-//        [playButton addTarget:self action:@selector(playRecord:) forControlEvents:UIControlEventTouchUpInside];
-//        [playButton setClipsToBounds:YES];
-//        [playButton setTag:[indexPath row]];
-//        //静态时图标
-//        readStatus = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"readStatus"]];
-//        readStatus.frame = CGRectMake(35, 8, 10, 20);
-//        [playButton addSubview:readStatus];
-//        [cellBgView addSubview:playButton];
-//        
-//        UILabel *sendTimelabel = [UILabel new];
-//        
-//        
-//        sendTimelabel.text = [singleMessage objectAtIndex:1];
-//        sendTimelabel.textAlignment = NSTextAlignmentCenter;
-//        sendTimelabel.font = [UIFont systemFontOfSize:10];
-//        sendTimelabel.frame = CGRectMake(0, 0, SCREEN_WIDTH - 20, 10);
-//        
-//        [cell addSubview:sendTimelabel];
-//        [cell addSubview:cellBgView];
-//        
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//    }    
     UIView *subView = [CellFactory CellFactoryWithDict:[messageArrays objectAtIndex:(messageArrays.count - [indexPath row] - 1)]];
     
     [cell addSubview:subView];
     
-    
-    
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *_fileName = [NSString new];
+    
+    NSLog(@"messageArrays : %@",messageArrays);
+    
+    NSDictionary *voiceMessage = [messageArrays objectAtIndex:messageArrays.count - [indexPath row] - 1];
+    
+    _fileName = [voiceMessage objectForKey:@"filename"];
+    
+    NSString *filePath = [path stringByAppendingPathComponent:_fileName];
+    
+    NSLog(@"filename :%@",filePath);
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:filePath]) {
+        
+        NSData *_date = [NSData dataWithContentsOfFile:filePath];
+        
+        NSLog(@"data : %@",_date);
+        
+        [player setSpeakMode:YES];
+
+        [player playWithURL:[NSURL URLWithString:filePath]];
+        
+        NSLog(@"play over");
+    }else{
+        NSDictionary *paramater = @{
+                                    @"wid":[AccountMessage sharedInstance].wid,
+                                    @"filename":_fileName,
+                                    };
+        
+        [Networking downloadVoiceWithDict:paramater block:^(NSData *data) {
+            NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_fileName];
+            [data writeToFile:filePath atomically:YES];
+            
+            NSLog(@"download data : %@",data);
+        
+            
+        }];
+    }
+
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 65;
 }
@@ -350,17 +306,16 @@
     NSLog(@"==================================================================");
     
     NSString *recordFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:voiceName];
-    
-    [player playWithURL:[NSURL URLWithString:recordFile]];
 
-
-    
     NSDictionary *paramater = @{
                                 @"userId":accountMessage.userId,
                                 @"wid":accountMessage.wid
                                 };
     
     NSData *voiceData = [NSData dataWithContentsOfFile:recordFile];
+    
+    NSLog(@"voiceData : %@",voiceData);
+
     
    [Networking uploadVoiceWithDict:paramater andVoiceData:voiceData voiceName:voiceName];
 }

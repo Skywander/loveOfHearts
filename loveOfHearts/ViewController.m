@@ -14,12 +14,13 @@
 #import "Networking.h"
 #import "TopviewProltocol.h"
 #import "PersonInforViewController.h"
+#import "HomeMenuProtocol.h"
 
 #define START_X 0
 #define START_Y 0
 #define TOP_HEIGHT 44
 
-@interface ViewController ()<MapProtocolDelegate,TopviewProltocol>
+@interface ViewController ()<MapProtocolDelegate,TopviewProltocol,HomeMenuProtocol>
 {
     Mymapview *mapView;
     HomeMenuView *menuView;
@@ -108,6 +109,8 @@
 
 - (void)initHomeMenuView{
     menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(10, 74, 40, 280)];
+    
+    menuView.homeDelegat = self;
         
     [self.view addSubview:menuView];
     
@@ -135,22 +138,15 @@
     }];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    UITouch *touch = [touches anyObject];
-    
-    CGPoint point = [touch locationInView:self.view];
-    
-    if (CGRectContainsPoint(menuView.frame, point)) {
-        NSLog(@"click menu");
-        
+
+- (void)passSelectedVaule:(NSInteger)selected{
+    if (selected == 2) {
         ChatViewController *chatView = [ChatViewController new];
         
         [self presentViewController:chatView animated:YES completion:^{
-            ;
+                    ;
         }];
     }
-
 }
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeMenuProtocol.h"
+
 
 @interface HomeMenuView : UIView
+
+@property id<HomeMenuProtocol> homeDelegat;
 
 @end

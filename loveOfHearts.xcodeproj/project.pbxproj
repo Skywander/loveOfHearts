@@ -39,6 +39,10 @@
 		D362B95A1C97ABF40037E29E /* +.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9581C97ABF40037E29E /* +.png */; };
 		D362B95B1C97ABF40037E29E /* -.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9591C97ABF40037E29E /* -.png */; };
 		D362B95F1C97E70C0037E29E /* BabyManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B95E1C97E70C0037E29E /* BabyManageViewController.m */; };
+		D3787F7C1CB00554009AE58A /* amr_wav_converter.c in Sources */ = {isa = PBXBuildFile; fileRef = D3787F751CB00554009AE58A /* amr_wav_converter.c */; };
+		D3787F7D1CB00554009AE58A /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3787F771CB00554009AE58A /* libopencore-amrnb.a */; };
+		D3787F7E1CB00554009AE58A /* PRNAmrPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F791CB00554009AE58A /* PRNAmrPlayer.m */; };
+		D3787F7F1CB00554009AE58A /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */; };
 		D386B0E01CAE527E001EC590 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0DF1CAE527E001EC590 /* CellFactory.m */; };
 		D386B0E31CAE530E001EC590 /* LeftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E21CAE530E001EC590 /* LeftCellView.m */; };
 		D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E51CAE5329001EC590 /* RightCellView.m */; };
@@ -62,10 +66,6 @@
 		D3D0251B1C9BEB03002713B1 /* NewFenceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025161C9BEB03002713B1 /* NewFenceMessage.m */; };
 		D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */; };
 		D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025231C9BEB8A002713B1 /* IQActionSheetViewController.m */; };
-		D3D0252F1C9BEC10002713B1 /* amr_wav_converter.c in Sources */ = {isa = PBXBuildFile; fileRef = D3D025281C9BEC10002713B1 /* amr_wav_converter.c */; };
-		D3D025301C9BEC10002713B1 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D0252A1C9BEC10002713B1 /* libopencore-amrnb.a */; };
-		D3D025311C9BEC10002713B1 /* PRNAmrPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0252C1C9BEC10002713B1 /* PRNAmrPlayer.m */; };
-		D3D025321C9BEC10002713B1 /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0252E1C9BEC10002713B1 /* PRNAmrRecorder.m */; };
 		D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0253B1C9C0CBB002713B1 /* Rail.m */; };
 		D3D8C56B1CA27EDE00512F5B /* otherSetting5.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C56A1CA27EDE00512F5B /* otherSetting5.png */; };
 		D3D8C56D1CA27EFF00512F5B /* otherSetting6.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C56C1CA27EFF00512F5B /* otherSetting6.png */; };
@@ -235,6 +235,15 @@
 		D362B9591C97ABF40037E29E /* -.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "-.png"; sourceTree = "<group>"; };
 		D362B95D1C97E70C0037E29E /* BabyManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyManageViewController.h; sourceTree = "<group>"; };
 		D362B95E1C97E70C0037E29E /* BabyManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyManageViewController.m; sourceTree = "<group>"; };
+		D3787F751CB00554009AE58A /* amr_wav_converter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amr_wav_converter.c; sourceTree = "<group>"; };
+		D3787F761CB00554009AE58A /* amr_wav_converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amr_wav_converter.h; sourceTree = "<group>"; };
+		D3787F771CB00554009AE58A /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		D3787F781CB00554009AE58A /* PRNAmrPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRNAmrPlayer.h; sourceTree = "<group>"; };
+		D3787F791CB00554009AE58A /* PRNAmrPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrPlayer.m; sourceTree = "<group>"; };
+		D3787F7A1CB00554009AE58A /* PRNAmrRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRNAmrRecorder.h; sourceTree = "<group>"; };
+		D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrRecorder.m; sourceTree = "<group>"; };
+		D3787F801CB0055A009AE58A /* AMRMedia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMRMedia-Prefix.pch"; sourceTree = "<group>"; };
+		D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuProtocol.h; sourceTree = "<group>"; };
 		D386B0DE1CAE527E001EC590 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
 		D386B0DF1CAE527E001EC590 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		D386B0E11CAE530E001EC590 /* LeftCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCellView.h; sourceTree = "<group>"; };
@@ -277,14 +286,6 @@
 		D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
 		D3D025221C9BEB8A002713B1 /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
 		D3D025231C9BEB8A002713B1 /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
-		D3D025271C9BEBC8002713B1 /* AMRMedia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMRMedia-Prefix.pch"; sourceTree = "<group>"; };
-		D3D025281C9BEC10002713B1 /* amr_wav_converter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amr_wav_converter.c; sourceTree = "<group>"; };
-		D3D025291C9BEC10002713B1 /* amr_wav_converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amr_wav_converter.h; sourceTree = "<group>"; };
-		D3D0252A1C9BEC10002713B1 /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
-		D3D0252B1C9BEC10002713B1 /* PRNAmrPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRNAmrPlayer.h; sourceTree = "<group>"; };
-		D3D0252C1C9BEC10002713B1 /* PRNAmrPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrPlayer.m; sourceTree = "<group>"; };
-		D3D0252D1C9BEC10002713B1 /* PRNAmrRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRNAmrRecorder.h; sourceTree = "<group>"; };
-		D3D0252E1C9BEC10002713B1 /* PRNAmrRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrRecorder.m; sourceTree = "<group>"; };
 		D3D0253A1C9C0CBA002713B1 /* Rail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rail.h; sourceTree = "<group>"; };
 		D3D0253B1C9C0CBB002713B1 /* Rail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rail.m; sourceTree = "<group>"; };
 		D3D8C56A1CA27EDE00512F5B /* otherSetting5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = otherSetting5.png; sourceTree = "<group>"; };
@@ -445,10 +446,10 @@
 				D3DE24991C94547F00E85F97 /* CoreTelephony.framework in Frameworks */,
 				D3DE24971C94546C00E85F97 /* CFNetwork.framework in Frameworks */,
 				D3DE24951C94546300E85F97 /* CoreFoundation.framework in Frameworks */,
+				D3787F7D1CB00554009AE58A /* libopencore-amrnb.a in Frameworks */,
 				D3DE24931C94545B00E85F97 /* CoreGraphics.framework in Frameworks */,
 				D3DE24911C94544700E85F97 /* Foundation.framework in Frameworks */,
 				D3DE248F1C94543D00E85F97 /* UIKit.framework in Frameworks */,
-				D3D025301C9BEC10002713B1 /* libopencore-amrnb.a in Frameworks */,
 				D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */,
 				D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */,
 				D3C96EF61C911B9300F27D10 /* libstdc++.tbd in Frameworks */,
@@ -508,6 +509,7 @@
 			children = (
 				D312FFED1CA79AA900558485 /* MapProtocolDelegate.h */,
 				D34348F61CADF7670095945D /* TopviewProltocol.h */,
+				D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -766,14 +768,14 @@
 		D3D025261C9BEBB3002713B1 /* AMR */ = {
 			isa = PBXGroup;
 			children = (
-				D3D025281C9BEC10002713B1 /* amr_wav_converter.c */,
-				D3D025291C9BEC10002713B1 /* amr_wav_converter.h */,
-				D3D0252A1C9BEC10002713B1 /* libopencore-amrnb.a */,
-				D3D0252B1C9BEC10002713B1 /* PRNAmrPlayer.h */,
-				D3D0252C1C9BEC10002713B1 /* PRNAmrPlayer.m */,
-				D3D0252D1C9BEC10002713B1 /* PRNAmrRecorder.h */,
-				D3D0252E1C9BEC10002713B1 /* PRNAmrRecorder.m */,
-				D3D025271C9BEBC8002713B1 /* AMRMedia-Prefix.pch */,
+				D3787F801CB0055A009AE58A /* AMRMedia-Prefix.pch */,
+				D3787F751CB00554009AE58A /* amr_wav_converter.c */,
+				D3787F761CB00554009AE58A /* amr_wav_converter.h */,
+				D3787F771CB00554009AE58A /* libopencore-amrnb.a */,
+				D3787F781CB00554009AE58A /* PRNAmrPlayer.h */,
+				D3787F791CB00554009AE58A /* PRNAmrPlayer.m */,
+				D3787F7A1CB00554009AE58A /* PRNAmrRecorder.h */,
+				D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */,
 			);
 			name = AMR;
 			sourceTree = "<group>";
@@ -1287,7 +1289,6 @@
 				D3D8C5AB1CA438F100512F5B /* DB.m in Sources */,
 				D3E51B511C9CFB92001732BF /* AddWatchByInput.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
-				D3D0252F1C9BEC10002713B1 /* amr_wav_converter.c in Sources */,
 				D3D025191C9BEB03002713B1 /* HistoryFenceList.m in Sources */,
 				D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */,
 				D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */,
@@ -1299,7 +1300,6 @@
 				D3DF04501C952FFA00832CD9 /* Alert.m in Sources */,
 				D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */,
 				D362B9411C96ECC80037E29E /* RightVieFactory.m in Sources */,
-				D3D025311C9BEC10002713B1 /* PRNAmrPlayer.m in Sources */,
 				D3DF04441C950CB000832CD9 /* SosphoneSetting.m in Sources */,
 				D3E51B4E1C9CFB92001732BF /* ModeChoiceViewController.m in Sources */,
 				D3D0251B1C9BEB03002713B1 /* NewFenceMessage.m in Sources */,
@@ -1311,13 +1311,13 @@
 				D3E51B491C9CFB92001732BF /* OtherSettingViewController.m in Sources */,
 				D3E51B4B1C9CFB92001732BF /* RedFlowerViewController.m in Sources */,
 				D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */,
-				D3D025321C9BEC10002713B1 /* PRNAmrRecorder.m in Sources */,
 				D3E51B501C9CFB92001732BF /* NoDisturbingTime.m in Sources */,
 				D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */,
 				D3E51B4D1C9CFB92001732BF /* ChangePassword.m in Sources */,
 				D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */,
 				D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */,
 				D3E51B2C1C9CECC0001732BF /* AuthorityViewController.m in Sources */,
+				D3787F7E1CB00554009AE58A /* PRNAmrPlayer.m in Sources */,
 				D386B0E01CAE527E001EC590 /* CellFactory.m in Sources */,
 				D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */,
 				D3D025181C9BEB03002713B1 /* HistoryViewController.m in Sources */,
@@ -1332,8 +1332,10 @@
 				D3E51B4F1C9CFB92001732BF /* AlarmSettingView.m in Sources */,
 				D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */,
 				D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */,
+				D3787F7F1CB00554009AE58A /* PRNAmrRecorder.m in Sources */,
 				D3A2A3F71C92AB55009B1D0E /* HomeMenuView.m in Sources */,
 				D3C96EF01C911A0E00F27D10 /* Networking.m in Sources */,
+				D3787F7C1CB00554009AE58A /* amr_wav_converter.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

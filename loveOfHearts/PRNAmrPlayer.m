@@ -66,10 +66,6 @@
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
     [audioPlayer play];
-    
-    double time = audioPlayer.duration;
-    
-    NSLog(@"playTime : %@",[NSNumber numberWithDouble:time]);
 }
 
 

@@ -29,6 +29,8 @@
     
     float CELL_WIDTH;
     BOOL ISEXPAND;
+    
+    NSInteger buttonTag;
 }
 
 @end
@@ -55,47 +57,42 @@
 }
 
 - (void)initButton{
+    buttonTag = 0;
+    
     menuButton = [UIButton new];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
     [menuButton setBackgroundColor:BUTTON_BACKCOLOR];
     
-    signalButton = [UIButton new];
-    [signalButton setBackgroundImage:[UIImage imageNamed:@"signal100"] forState:UIControlStateNormal];
-    [signalButton setBackgroundColor:BUTTON_BACKCOLOR];
+    signalButton = [self buttonWithImageName:@"signal100"];
     
-    locationButton = [UIButton new];
-    [locationButton setBackgroundImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
-    [locationButton setBackgroundColor:BUTTON_BACKCOLOR];
+    locationButton = [self buttonWithImageName:@"location"];
     
-    chatButton = [UIButton new];
-    [chatButton setBackgroundImage:[UIImage imageNamed:@"chat"] forState:UIControlStateNormal];
-    [chatButton setBackgroundColor:BUTTON_BACKCOLOR];
+    chatButton = [self buttonWithImageName:@"chat"];
     
-    phoneButton = [UIButton new];
-    [phoneButton setBackgroundImage:[UIImage imageNamed:@"phone"] forState:UIControlStateNormal];
-    [phoneButton setBackgroundColor:BUTTON_BACKCOLOR];
+    phoneButton = [self buttonWithImageName:@"phone"];
     
-    selfButton = [UIButton new];
-    [selfButton setBackgroundImage:[UIImage imageNamed:@"self"] forState:UIControlStateNormal];
-    [selfButton setBackgroundColor:BUTTON_BACKCOLOR];
+    selfButton = [self buttonWithImageName:@"self"];
     
-    deviceButton = [UIButton new];
-    [deviceButton setBackgroundImage:[UIImage imageNamed:@"device"] forState:UIControlStateNormal];
-    [deviceButton setBackgroundColor:BUTTON_BACKCOLOR];
+    deviceButton = [self buttonWithImageName:@"device"];
     
-    
-     
-    [self addSubview:signalButton];
-    [self addSubview:locationButton];
-    [self addSubview:chatButton];
-    [self addSubview:phoneButton];
-    [self addSubview:selfButton];
-    [self addSubview:deviceButton];
     [self addSubview:menuButton];
-    
+        
     [menuButton addTarget:self action:@selector(beginAnimation) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (UIButton *)buttonWithImageName:(NSString *)imageName{
+    UIButton *button = [UIButton new];
+    [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
+    [button setBackgroundColor:BUTTON_BACKCOLOR];
     
+    [button setTag:buttonTag];
+    
+    buttonTag ++ ;
+    
+    [self addSubview:button];
+    
+    return button;
 }
 
 - (void)initConstraint{
@@ -142,10 +139,7 @@
         make.left.equalTo(self.mas_left);
         make.height.equalTo(self.mas_width);
     }];
-    
-    
 }
-
 
 
 - (void)beginAnimation{
@@ -183,9 +177,26 @@
     [locationButton.layer addAnimation:[CommentAnimation animtionToMoveX:[NSNumber numberWithFloat:CELL_WIDTH*2] andTime:0.2] forKey:nil];
 
     [signalButton.layer addAnimation:[CommentAnimation animtionToMoveX:[NSNumber numberWithFloat:CELL_WIDTH*1] andTime:0.2] forKey:nil];
+    
+}
 
+
+- (void)handleButtonSelected:(UIButton *)button{
+    NSLog(@"button tag : %ld",button.tag);
     
+    [self.homeDelegat passSelectedVaule:button.tag];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
     
+    CGPoint point = [touch locationInView:self];
+    
+    if (point.y > self.frame.size.width * 3 && point.y < self.frame.size.width * 4) {
+        [self.homeDelegat passSelectedVaule:2];
+        
+        NSLog(@"chat button selected");
+    }
 }
 
 @end

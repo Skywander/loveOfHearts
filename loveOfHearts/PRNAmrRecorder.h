@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^getReturn)(int i);
-
 @protocol PRNAmrRecorderDelegate;
 
 /**
@@ -27,7 +25,7 @@ typedef void (^getReturn)(int i);
 /**
  *  结束录音
  */
-- (void)stop:(getReturn)getReturn;
+- (void)stop;
 
 /**
  *  使用免提, 还是耳机线进行录制
