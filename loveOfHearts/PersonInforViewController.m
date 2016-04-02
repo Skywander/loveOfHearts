@@ -22,10 +22,10 @@
     UIButton *sexButton;
     UIButton *removeButton;
     
-    UITextField *remarkLabel;
-    UITextField *birthdayLabel;
-    UITextField *sexLabel;
-    UITextField *channelLabel;
+    UITextField *remarkTextField;
+    UIButton *birthdaySubButton;
+    UIButton *sexSubButton;
+    UILabel *channelLabel;
     UIImageView *portraitView;
     
     CGFloat basicMove;
@@ -75,6 +75,8 @@
     _birthday = accountMessage.babybir;
     
     shouhuan_id = accountMessage.wid;
+    
+    head = accountMessage.head;
     
     if ([accountMessage.babysex intValue] == 1) {
         _sex = @"女";
@@ -128,13 +130,6 @@
     [portraitView.layer setBorderWidth:0.3f];
     [portraitView setClipsToBounds:YES];
     
-//    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    
-//    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,[AccountMessage sharedInstance].head];
-//    
-//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    
-    
     [portraitView setImage:accountMessage.image];
 
     
@@ -148,8 +143,10 @@
     codeButton = [self buttonWithName:@"    手表ID" andPointY:basicY + basicMove];
     
     birthdayButton = [self buttonWithName:@"    生日" andPointY:basicY + basicMove * 2];
+    [birthdaySubButton addTarget:self action:@selector(updateBirthday) forControlEvents:UIControlEventTouchUpInside];
     
     sexButton = [self buttonWithName:@"    性别" andPointY:basicY + basicMove * 3];
+    [sexSubButton addTarget:self action:@selector(updateSex:) forControlEvents:UIControlEventTouchUpInside ];
     
     //日期选择
     picker = [[IQActionSheetPickerView alloc] initWithTitle:@"Date Picker" delegate:self];
@@ -173,37 +170,68 @@
     
     [button setTag:(y - basicY) / basicMove];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
-    [textField setTextAlignment:NSTextAlignmentRight];
-    [textField setTextColor:[UIColor grayColor]];
-    [textField setOpaque:YES];
     
     if (y == basicY) {
-        remarkLabel = textField;
-        [remarkLabel setText:_name];
-        [button addSubview:remarkLabel];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        
+        [textField setTextAlignment:NSTextAlignmentRight];
+        [textField setTextColor:[UIColor grayColor]];
+        [textField setOpaque:YES];
+        [textField setText:_name];
+        
+        [button addSubview:textField];
+        
+        remarkTextField = textField;
     }
     if (y == basicY + basicMove) {
-        channelLabel = textField;
+        channelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
         [channelLabel setText:shouhuan_id];
+        
+        [channelLabel setTextAlignment:NSTextAlignmentRight];
+        [channelLabel setTextColor:[UIColor grayColor]];
+        
         [button addSubview:channelLabel];
     }
     
     if (y == basicY + basicMove * 2) {
-        birthdayLabel = textField;
-        [birthdayLabel setText:_birthday];
-        [button addSubview:birthdayLabel];
+        birthdaySubButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        [birthdaySubButton setTitle:_birthday forState:UIControlStateNormal];
+        [birthdaySubButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [birthdaySubButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        
+        [button addSubview:birthdaySubButton];
     }
     
     if (y == basicY + basicMove * 3) {
-        sexLabel = textField;
-        [sexLabel setText:_sex];
-        [button addSubview:sexLabel];
+        sexSubButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        [sexSubButton setTitle:_sex forState:UIControlStateNormal];
+        [sexSubButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [sexSubButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        
+        [sexSubButton setTag:[accountMessage.babysex integerValue]];
+        
+        [button addSubview:sexSubButton];
     }
     [self.view addSubview:button];
     
     return button;
 }
+
+- (void)updateSex:(UIButton *)button{
+    NSLog(@"updateSex : %ld",button.tag);
+    
+    if (button.tag == 0) {
+        [button setTitle:@"女" forState:UIControlStateNormal];
+    }else{
+        [button setTitle:@"男" forState:UIControlStateNormal];
+    }
+    [button setTag:1 - button.tag];
+}
+
+- (void)updateBirthday{
+    [picker show];
+}
+
 - (void)getPortraitView {
     imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
@@ -218,13 +246,14 @@
 
 
 - (void)expand{
+    
     NSDictionary *paramater = @{
                                 @"wid":accountMessage.wid,
                                 @"head":head,
-                                @"babysex":@"0",
+                                @"babysex":[NSString stringWithFormat:@"%ld",(long)sexSubButton.tag],
                                 @"babyage":@"10",
-                                @"babybir":birthdayLabel.text,
-                                @"babyname":remarkLabel.text,
+                                @"babybir":birthdaySubButton.titleLabel.text,
+                                @"babyname":remarkTextField.text,
                                 @"babyheight":@"170",
                                 @"babyweight":@"50",
                                 @"usim":accountMessage.usim,
@@ -232,6 +261,7 @@
                                 };
     
     NSLog(@"paramater : %@",paramater);
+
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {
@@ -307,7 +337,7 @@
     NSLog(@"picker.date : %@",date);
     NSDateFormatter  *formatter=[[NSDateFormatter alloc] init];
     formatter.dateFormat = @"YYYY-MM-dd";
-    [birthdayLabel setText:[formatter stringFromDate:date]];
+    [birthdaySubButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -318,6 +348,9 @@
 -(BOOL)shouldAutorotate
 {
     return YES;
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 
 @end

@@ -141,7 +141,6 @@
     }];
 }
 
-
 - (void)beginAnimation{
     if (ISEXPAND) {
         CELL_WIDTH = 0;
