@@ -312,6 +312,21 @@
                                 @"wid":accountMessage.wid
                                 };
     
+    NSDictionary *dict = @{
+                           @"createdAt":@"temp",
+                           @"filename":voiceName,
+                           @"fromId":accountMessage.userId,
+                           @"isheard":@"temp",
+                           @"updatedAt":@"temp",
+                           @"wid":accountMessage.wid
+                           };
+    [messageArrays addObject:dict];
+    
+    [table reloadData];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:messageArrays.count - 1 inSection:0];
+    [table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
     NSData *voiceData = [NSData dataWithContentsOfFile:recordFile];
     
     NSLog(@"voiceData : %@",voiceData);
