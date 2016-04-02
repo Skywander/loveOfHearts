@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TEST.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>TEST002.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>loveOfHearts.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +22,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D398F7581CABDED000B8F236</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D398F7631CABDF0100B8F236</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D3FEEF931C90FF7A00300710</key>
 		<dict>
 			<key>primary</key>

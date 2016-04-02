@@ -85,7 +85,6 @@
             
             [self.view addSubview:view];
         }];
-        
     }
 }
 

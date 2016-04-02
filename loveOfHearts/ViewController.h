@@ -16,6 +16,5 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic,strong) TopView *topView;
-
 @end
 

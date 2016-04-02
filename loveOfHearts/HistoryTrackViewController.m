@@ -125,6 +125,9 @@
 
 
 - (void)search{
+    [mapView removeOverlays:mapView.overlays];
+    [mapView removeAnnotations:mapView.annotations];
+    
     NSDictionary *paramater = @{
                                 @"userId":accountMessage.userId,
                                 @"wid":accountMessage.wid,

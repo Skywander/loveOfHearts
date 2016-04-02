@@ -10,6 +10,9 @@
 #import "Navview.h"
 #import "IQActionSheetPickerView.h"
 #import "AccountMessage.h"
+#import "Networking.h"
+#import "AccountMessage.h"
+#import "Command.h"
 @interface PersonInforViewController ()<IQActionSheetPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIButton *portraitButton;
@@ -19,10 +22,10 @@
     UIButton *sexButton;
     UIButton *removeButton;
     
-    UILabel *remarkLabel;
-    UILabel *birthdayLabel;
-    UILabel *sexLabel;
-    UILabel *channelLabel;
+    UITextField *remarkLabel;
+    UITextField *birthdayLabel;
+    UITextField *sexLabel;
+    UITextField *channelLabel;
     UIImageView *portraitView;
     
     CGFloat basicMove;
@@ -41,6 +44,10 @@
     NSString *shouhuan_id;
     
     IQActionSheetPickerView *picker;
+    AccountMessage *accountMessage;
+    
+    NSString *head;
+    UIImage *portraitImage;
     
 }
 @end
@@ -61,7 +68,7 @@
 }
 
 - (void)initData{
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+    accountMessage = [AccountMessage sharedInstance];
     
     _name = accountMessage.babyname;
     
@@ -81,9 +88,23 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
+    UIButton *expandButton = [UIButton new];
+    
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
+    
+    [expandButton setTitle:@"保存" forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
+    
     Navview *navigation = [Navview new];
     
     [self.view addSubview:navigation];
+    
+    [navigation addSubview:expandButton];
     
     basicMove = 55;
     basicY = 144;
@@ -107,13 +128,14 @@
     [portraitView.layer setBorderWidth:0.3f];
     [portraitView setClipsToBounds:YES];
     
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    
+//    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,[AccountMessage sharedInstance].head];
+//    
+//    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,[AccountMessage sharedInstance].head];
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    
-    [portraitView setImage:[UIImage imageWithData:imageData]];
+    [portraitView setImage:accountMessage.image];
 
     
     [portraitButton addTarget:self action:@selector(getPortraitView) forControlEvents:UIControlEventTouchUpInside];
@@ -151,34 +173,30 @@
     
     [button setTag:(y - basicY) / basicMove];
     
-    if (button.tag != 1) {
-        [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
-    [label setTextAlignment:NSTextAlignmentRight];
-    [label setTextColor:[UIColor grayColor]];
-    [label setOpaque:YES];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+    [textField setTextAlignment:NSTextAlignmentRight];
+    [textField setTextColor:[UIColor grayColor]];
+    [textField setOpaque:YES];
     
     if (y == basicY) {
-        remarkLabel = label;
+        remarkLabel = textField;
         [remarkLabel setText:_name];
         [button addSubview:remarkLabel];
     }
     if (y == basicY + basicMove) {
-        channelLabel = label;
+        channelLabel = textField;
         [channelLabel setText:shouhuan_id];
         [button addSubview:channelLabel];
     }
     
     if (y == basicY + basicMove * 2) {
-        birthdayLabel = label;
+        birthdayLabel = textField;
         [birthdayLabel setText:_birthday];
         [button addSubview:birthdayLabel];
     }
     
     if (y == basicY + basicMove * 3) {
-        sexLabel = label;
+        sexLabel = textField;
         [sexLabel setText:_sex];
         [button addSubview:sexLabel];
     }
@@ -198,8 +216,31 @@
     }];
 }
 
-- (void)removeWatch{
+
+- (void)expand{
+    NSDictionary *paramater = @{
+                                @"wid":accountMessage.wid,
+                                @"head":head,
+                                @"babysex":@"0",
+                                @"babyage":@"10",
+                                @"babybir":birthdayLabel.text,
+                                @"babyname":remarkLabel.text,
+                                @"babyheight":@"170",
+                                @"babyweight":@"50",
+                                @"usim":accountMessage.usim,
+                                @"wsim":accountMessage.wsim
+                                };
+    
+    NSLog(@"paramater : %@",paramater);
+    
+    [Networking updateWatchInfoWithDict:paramater block:^(int i) {
+        if (i == 100) {
+            NSLog(@"success");
+            accountMessage.image = portraitImage;
+        }
+    }];
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [self dismissViewControllerAnimated:YES completion:nil];
     //    NSLog(@"%@",info);
@@ -215,11 +256,27 @@
     
     UIImage *imageNew = [self imageWithImage:addPic scaledToSize:imagesize];
     
-    NSData *imageData = UIImageJPEGRepresentation(imageNew, 0.5);
+    portraitImage = imageNew;
     
-    UIImage *newImage = [UIImage imageWithData:imageData];
+    NSData *imageData = UIImagePNGRepresentation(imageNew);
     
-    [portraitView setImage:newImage];
+    [portraitView setImage:imageNew];
+    
+    NSDate *date = [NSDate new];
+    
+    NSDateFormatter  *formatter=[[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"YYYYMMddHHddss";
+    
+    NSString *dateString =  [formatter stringFromDate:date];
+    
+    head = [NSString stringWithFormat:@"%@%@.png",accountMessage.wid,dateString];
+    
+    NSDictionary *dict = @{
+                            @"userId":[AccountMessage sharedInstance].userId,
+                            @"wid":[AccountMessage sharedInstance].wid,
+                           };
+    
+    [Networking uploadPortraitWithDict:dict andImageData:imageData imageName:head];
     //此处上传图片
 }
 //图片压缩
@@ -243,33 +300,6 @@
 }
 
 
-
-//- (void)clickButton:(UIButton *)sender {
-//    
-//    if (sender == birthdayButton) {
-//        [picker show];
-//        return;
-//    }
-//    if (sender == sexButton) {
-//        NSLog(@"change sex");
-//        if (!sexLabel.text) {
-//            [sexLabel setText:@"男"];
-//        }
-//        if (sexLabel.text) {
-//            if ([sexLabel.text intValue] == 0) {
-//                [sexLabel setText:@"女"];
-//                NSLog(@"change to girl");
-//                return;
-//            }
-//            if ([sexLabel.text intValue] == 1) {
-//                NSLog(@"change to boy");
-//                [sexLabel setText:@"男"];
-//            }
-//        }
-//    }
-//    
-//}
-
 //日期回调
 
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date
@@ -278,7 +308,6 @@
     NSDateFormatter  *formatter=[[NSDateFormatter alloc] init];
     formatter.dateFormat = @"YYYY-MM-dd";
     [birthdayLabel setText:[formatter stringFromDate:date]];
-        
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

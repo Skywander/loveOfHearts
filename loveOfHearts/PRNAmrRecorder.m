@@ -123,11 +123,13 @@
     dispatch_resume(timer);
 }
 
-- (void)stop;
+- (void)stop:(getReturn)getReturn;
 {
     if (!isRecording) return;
     
     [audioRecorder stop];
+    
+    getReturn(1);
 }
 
 - (void)setSpeakMode:(BOOL)speakMode

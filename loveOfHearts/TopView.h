@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TopviewProltocol.h"
+
 
 @interface TopView : UIView
 
 @property (nonatomic,strong) UIButton *expandButton;
+
+@property (nonatomic,strong) id<TopviewProltocol> topViewDelegat;
 
 - (void)setAddress:(NSString *)address;
 

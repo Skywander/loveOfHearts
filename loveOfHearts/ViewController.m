@@ -11,12 +11,15 @@
 #import "Mymapview.h"
 #import "HomeMenuView.h"
 #import "ChatViewController.h"
+#import "Networking.h"
+#import "TopviewProltocol.h"
+#import "PersonInforViewController.h"
 
 #define START_X 0
 #define START_Y 0
 #define TOP_HEIGHT 44
 
-@interface ViewController ()<MapProtocolDelegate>
+@interface ViewController ()<MapProtocolDelegate,TopviewProltocol>
 {
     Mymapview *mapView;
     HomeMenuView *menuView;
@@ -33,8 +36,7 @@
         
     [self initTopView];
         
-    [self initHomeMenuView];
-    
+    [self initHomeMenuView];    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -46,23 +48,46 @@
 - (void)initTopView{
     topView = [[TopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
     
+    topView.topViewDelegat = self;
+    
     [self.view addSubview:topView];
     
     [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     NSString *wid = accountMessage.wid;
     
-    NSDictionary *paramater = @{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[AccountMessage sharedInstance].head];
+    
+    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    
+    [imageData writeToFile:imagePath atomically:NO];
+    
+    UIImage *image = [UIImage imageWithData:imageData];
+    
+    if (image) {
+        NSLog(@"exist image");
+        [topView setImage:image];
+        
+        accountMessage.image = image;
+        
+    }else{
+        NSDictionary *paramater = @{
                                     @"wid":wid,
                                     @"fileName":accountMessage.head
-                                };
-    [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
-        [topView setImage:image];
-    }];
-    
-    
+                                    };
+        [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+            [topView setImage:image];
+            accountMessage.image = image;
+        }];
+        
+    }
 }
 
 - (void)initMapView{
@@ -76,9 +101,8 @@
     
     [self.view sendSubviewToBack:mapView];
     
-    NSString *address = [mapView searchPointWithLat:39.989631 andLon:116.481018];
+    [mapView searchPointWithLat:39.989631 andLon:116.481018];
     
-    [topView setAddress:address];
 
 }
 
@@ -101,6 +125,14 @@
 
 - (void)passValue:(NSString *)string{
     [topView setAddress:string];
+}
+
+- (void)presentPersonInfoView{
+    PersonInforViewController *personInfoView = [PersonInforViewController new];
+    
+    [self presentViewController:personInfoView animated:YES completion:^{
+        ;
+    }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

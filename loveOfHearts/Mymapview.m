@@ -33,6 +33,8 @@ static Mymapview *mymapview;
 //@synthesize _search;
 + (instancetype) sharedInstance {
     if (mymapview) {
+        [mymapview.mapView removeOverlays:mymapview.mapView.overlays];
+        [mymapview.mapView removeAnnotations:mymapview.mapView.annotations];
         return mymapview;
     }else {
         mymapview = [[self alloc] init];

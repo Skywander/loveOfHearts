@@ -179,4 +179,92 @@ AFHTTPSessionManager *manager;
 
 }
 
++ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
+    [manager POST:[NSString stringWithFormat:@"%@uploadheadimg",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:imageData name:@"headimg" fileName:imageName mimeType:@"image/png"];
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject : %@",responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
++ (void)updateWatchInfoWithDict:(NSDictionary *)paramaater block:(getInt)getInt{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    [manager POST:[NSString stringWithFormat:@"%@updatebabyinfo",HTTP] parameters:paramaater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSNumber *number = [responseObject objectForKey:@"type"];
+        
+        getInt([number intValue]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ;
+    }];
+}
+
++ (void)uploadVoiceWithDict:(NSDictionary *)dict andVoiceData:(NSData *)voiceData voiceName:(NSString *)voiceName{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
+    [manager POST:[NSString stringWithFormat:@"%@recorde",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:voiceData name:@"record" fileName:voiceName mimeType:@"image/png"];
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"voice responseObject : %@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"voice error %@",error);
+    }];
+}
+
++ (void)downloadVoiceWithDict:(NSDictionary *)dict block:(getData)getData{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager POST:[NSString stringWithFormat:@"%@downloadrecordes",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"RESPONSE : %@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"ERROR : %@",error);
+    }];
+}
+
++ (void)getallrecordesWithDict:(NSDictionary *)dict block:(getDict)getDict{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    [manager POST:[NSString stringWithFormat:@"%@getallrecordes",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        getDict(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ;
+    }];
+}
+
 @end

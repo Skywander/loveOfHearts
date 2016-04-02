@@ -22,7 +22,7 @@
     UIImageView *photoView;
     
     NSTimer *timer;
-    }
+}
 
 @end
 
@@ -117,6 +117,16 @@
     [timeLabel setText:[self getNowTime]];
     
     NSLog(@"%@",[self getNowTime]);
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint point = [touch locationInView:self];
+    
+    if (CGRectContainsPoint(photoView.frame, point)) {
+        [self.topViewDelegat presentPersonInfoView];
+    }
 }
 
 

@@ -11,6 +11,11 @@ typedef void (^getImage)(UIImage *image);
 
 typedef void(^getDict)(NSDictionary *dict);
 
+typedef void (^getData)(NSData *data);
+
+typedef void (^getInt)(int i);
+
+
 
 @interface Networking : NSObject
 
@@ -26,5 +31,16 @@ typedef void(^getDict)(NSDictionary *dict);
 
 + (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
 
++ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName;
+
++ (void)uploadVoiceWithDict:(NSDictionary *)dict andVoiceData:(NSData *)voiceData voiceName:(NSString *)voiceName;
+
++ (void)downloadVoiceWithDict:(NSDictionary *)dict block:(getData)getData;
+
 + (void)getHistoryTrack:(NSDictionary *)dict block:(getDict)getDict;
+
++ (void)updateWatchInfoWithDict:(NSDictionary *)paramaater block:(getInt)getInt;
+
++ (void)getallrecordesWithDict:(NSDictionary *)dict block:(getDict)getDict;
+
 @end
