@@ -13,7 +13,7 @@
 #import "AccountMessage.h"
 #import "Networking.h"
 
-@interface ViewController : UIViewController
+@interface HomeViewController : UIViewController
 
 @property (nonatomic,strong) TopView *topView;
 @end

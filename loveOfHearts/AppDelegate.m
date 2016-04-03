@@ -15,8 +15,6 @@
 #import "IIViewDeckController.h"
 #import "IISideController.h"
 
-#import "RightViewController.h"
-#import "ViewController.h"
 #import "LoginViewController.h"
 
 #define NotifyActionKey "NotifyAction"

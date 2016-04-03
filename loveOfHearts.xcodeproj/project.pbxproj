@@ -43,6 +43,7 @@
 		D3787F7D1CB00554009AE58A /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3787F771CB00554009AE58A /* libopencore-amrnb.a */; };
 		D3787F7E1CB00554009AE58A /* PRNAmrPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F791CB00554009AE58A /* PRNAmrPlayer.m */; };
 		D3787F7F1CB00554009AE58A /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */; };
+		D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */; };
 		D386B0E01CAE527E001EC590 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0DF1CAE527E001EC590 /* CellFactory.m */; };
 		D386B0E31CAE530E001EC590 /* LeftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E21CAE530E001EC590 /* LeftCellView.m */; };
 		D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E51CAE5329001EC590 /* RightCellView.m */; };
@@ -143,7 +144,7 @@
 		D3FEEFB21C90FF7A00300710 /* loveOfHeartsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFB11C90FF7A00300710 /* loveOfHeartsTests.m */; };
 		D3FEEFBD1C90FF7A00300710 /* loveOfHeartsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFBC1C90FF7A00300710 /* loveOfHeartsUITests.m */; };
 		D3FEEFD01C90FFDE00300710 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */; };
-		D3FEEFD41C91006300300710 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD11C91006300300710 /* ViewController.m */; };
+		D3FEEFD41C91006300300710 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD11C91006300300710 /* HomeViewController.m */; };
 		D3FEEFD51C91006300300710 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD31C91006300300710 /* TopView.m */; };
 		D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD71C910AE100300710 /* LoginViewController.m */; };
 		D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD91C910AE100300710 /* RegisterViewController.m */; };
@@ -244,6 +245,8 @@
 		D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRNAmrRecorder.m; sourceTree = "<group>"; };
 		D3787F801CB0055A009AE58A /* AMRMedia-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMRMedia-Prefix.pch"; sourceTree = "<group>"; };
 		D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuProtocol.h; sourceTree = "<group>"; };
+		D3787F881CB0C15F009AE58A /* HomeViewController+delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HomeViewController+delegate.h"; sourceTree = "<group>"; };
+		D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HomeViewController+delegate.m"; sourceTree = "<group>"; };
 		D386B0DE1CAE527E001EC590 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
 		D386B0DF1CAE527E001EC590 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		D386B0E11CAE530E001EC590 /* LeftCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCellView.h; sourceTree = "<group>"; };
@@ -390,12 +393,12 @@
 		D3FEEFB81C90FF7A00300710 /* loveOfHeartsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = loveOfHeartsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FEEFBC1C90FF7A00300710 /* loveOfHeartsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = loveOfHeartsUITests.m; sourceTree = "<group>"; };
 		D3FEEFBE1C90FF7A00300710 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D3FEEFCA1C90FF9700300710 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D3FEEFCA1C90FF9700300710 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		D3FEEFCB1C90FFA300300710 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		D3FEEFCD1C90FFCD00300710 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D3FEEFCE1C90FFDA00300710 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D3FEEFD11C91006300300710 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D3FEEFD11C91006300300710 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		D3FEEFD21C91006300300710 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
 		D3FEEFD31C91006300300710 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
 		D3FEEFD71C910AE100300710 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -716,10 +719,12 @@
 				D362B9241C96A48A0037E29E /* RightView */,
 				D3FEEFD21C91006300300710 /* TopView.h */,
 				D3FEEFD31C91006300300710 /* TopView.m */,
-				D3FEEFCA1C90FF9700300710 /* ViewController.h */,
-				D3FEEFD11C91006300300710 /* ViewController.m */,
+				D3FEEFCA1C90FF9700300710 /* HomeViewController.h */,
+				D3FEEFD11C91006300300710 /* HomeViewController.m */,
 				D3A2A3F51C92AB55009B1D0E /* HomeMenuView.h */,
 				D3A2A3F61C92AB55009B1D0E /* HomeMenuView.m */,
+				D3787F881CB0C15F009AE58A /* HomeViewController+delegate.h */,
+				D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */,
 			);
 			name = HomeView;
 			sourceTree = "<group>";
@@ -1283,7 +1288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3FEEFD41C91006300300710 /* ViewController.m in Sources */,
+				D3FEEFD41C91006300300710 /* HomeViewController.m in Sources */,
 				D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */,
 				D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */,
 				D3D8C5AB1CA438F100512F5B /* DB.m in Sources */,
@@ -1325,6 +1330,7 @@
 				D362B9271C96A4D30037E29E /* RightViewController.m in Sources */,
 				D3D8C5841CA282B600512F5B /* HealthViewController.m in Sources */,
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
+				D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */,
 				D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */,
 				D3D025091C9BDADE002713B1 /* Navview.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,

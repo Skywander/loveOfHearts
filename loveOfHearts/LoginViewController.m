@@ -11,7 +11,7 @@
 #import "PasswordViewController.h"
 #import "Networking.h"
 #import "Alert.h"
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "RightViewController.h"
 
 #import "IIViewDeckController.h"
@@ -234,7 +234,7 @@
                 
                 RightViewController *leftController = [RightViewController new];
                 
-                ViewController *centerController = [ViewController new];
+                HomeViewController *centerController = [HomeViewController new];
                 
                 
                 deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]

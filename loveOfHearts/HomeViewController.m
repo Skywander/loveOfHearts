@@ -6,21 +6,19 @@
 //  Copyright © 2016年 于恩聪. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "MapProtocolDelegate.h"
+#import "HomeViewController.h"
+#import "HomeViewController+delegate.h"
+
 #import "Mymapview.h"
 #import "HomeMenuView.h"
-#import "ChatViewController.h"
+
 #import "Networking.h"
-#import "TopviewProltocol.h"
-#import "PersonInforViewController.h"
-#import "HomeMenuProtocol.h"
 
 #define START_X 0
 #define START_Y 0
 #define TOP_HEIGHT 44
 
-@interface ViewController ()<MapProtocolDelegate,TopviewProltocol,HomeMenuProtocol>
+@interface HomeViewController ()
 {
     Mymapview *mapView;
     HomeMenuView *menuView;
@@ -28,7 +26,7 @@
 
 @end
 
-@implementation ViewController
+@implementation HomeViewController
 @synthesize topView;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,8 +101,6 @@
     [self.view sendSubviewToBack:mapView];
     
     [mapView searchPointWithLat:39.989631 andLon:116.481018];
-    
-
 }
 
 - (void)initHomeMenuView{
@@ -113,12 +109,10 @@
     menuView.homeDelegat = self;
         
     [self.view addSubview:menuView];
-    
 }
 
 
 - (void)clickExpandButton{
-    
     [self.viewDeckController toggleRightViewAnimated:YES];
 }
 
@@ -126,27 +120,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)passValue:(NSString *)string{
-    [topView setAddress:string];
-}
 
-- (void)presentPersonInfoView{
-    PersonInforViewController *personInfoView = [PersonInforViewController new];
-    
-    [self presentViewController:personInfoView animated:YES completion:^{
-        ;
-    }];
-}
-
-
-- (void)passSelectedVaule:(NSInteger)selected{
-    if (selected == 2) {
-        ChatViewController *chatView = [ChatViewController new];
-        
-        [self presentViewController:chatView animated:YES completion:^{
-                    ;
-        }];
-    }
-}
 
 @end
