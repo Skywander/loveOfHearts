@@ -55,7 +55,6 @@ static Mymapview *mymapview;
     mapView.showsCompass = NO;
     mapView.showsScale = NO;
     mapView.showsUserLocation = YES;
-    mapView.centerCoordinate = CLLocationCoordinate2DMake(38.931694, 116.381060);
     mapView.frame = CGRectMake(0,0, self.frame.size.width,self.frame.size.height);
     mapView.layer.cornerRadius = 5.f;
     
@@ -66,9 +65,6 @@ static Mymapview *mymapview;
     [self addSubview:mapView];
     
     [self initZoomView];
-    
-    [self searchPointWithLat:39.989631 andLon:116.481018];
-
     
     return self;
 }
@@ -130,6 +126,10 @@ static Mymapview *mymapview;
             [_mydelegate passValue:detailAddress];
         }
     }
+}
+
+- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
+    self.userLocation = userLocation;
 }
 
 - (NSString *)searchPointWithLat:(double)lat andLon:(double)lon{

@@ -196,6 +196,10 @@
         
         NSLog(@"chat button selected");
     }
+    
+    if (point.y > self.frame.size.width * 5 && point.y < self.frame.size.width * 6) {
+        [self.homeDelegat passSelectedVaule:4];
+    }
 }
 
 @end

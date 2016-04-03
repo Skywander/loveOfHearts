@@ -200,7 +200,7 @@
 		56145DAFAAE7E1FBB80390D1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		562340F4DB2D4F11AB8E1EA9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D312FFEB1CA7861400558485 /* animationView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationView.png; sourceTree = "<group>"; };
-		D312FFED1CA79AA900558485 /* MapProtocolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProtocolDelegate.h; sourceTree = "<group>"; };
+		D312FFED1CA79AA900558485 /* MapProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProtocol.h; sourceTree = "<group>"; };
 		D34348F61CADF7670095945D /* TopviewProltocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopviewProltocol.h; sourceTree = "<group>"; };
 		D362B9141C9653790037E29E /* CommentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAnimation.h; sourceTree = "<group>"; };
 		D362B9151C9653790037E29E /* CommentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAnimation.m; sourceTree = "<group>"; };
@@ -513,7 +513,7 @@
 		D34348F51CADF72D0095945D /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				D312FFED1CA79AA900558485 /* MapProtocolDelegate.h */,
+				D312FFED1CA79AA900558485 /* MapProtocol.h */,
 				D34348F61CADF7670095945D /* TopviewProltocol.h */,
 				D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */,
 			);

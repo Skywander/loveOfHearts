@@ -8,13 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "TopView.h"
-#import "IIViewDeckController.h"
-#import "IISideController.h"
 #import "AccountMessage.h"
 #import "Networking.h"
+
+#import "IIViewDeckController.h"
+#import "IISideController.h"
+
+#import "Mymapview.h"
+#import "HomeMenuView.h"
+
 
 @interface HomeViewController : UIViewController
 
 @property (nonatomic,strong) TopView *topView;
+
+@property (nonatomic,strong) MAMapView *mapView;
+
 @end
 

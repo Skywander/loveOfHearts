@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MapProtocolDelegate <NSObject>
+@protocol MapProtocol <NSObject>
 
 @required
 

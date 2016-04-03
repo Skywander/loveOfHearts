@@ -10,11 +10,11 @@
 #import "ChatViewController.h"
 #import "PersonInforViewController.h"
 
-#import "MapProtocolDelegate.h"
+#import "MapProtocol.h"
 #import "HomeMenuProtocol.h"
 #import "TopviewProltocol.h"
 
-@interface HomeViewController (delegate)<MapProtocolDelegate,HomeMenuProtocol,TopviewProltocol>
+@interface HomeViewController (delegate)<MapProtocol,HomeMenuProtocol,TopviewProltocol>
 
 - (void)passValue:(NSString *)string;
 

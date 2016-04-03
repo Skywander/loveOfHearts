@@ -79,13 +79,13 @@
     
     [firstLabel setFont:[UIFont systemFontOfSize:14]];
      
-     [firstLabel setTextAlignment:NSTextAlignmentCenter];
+    [firstLabel setTextAlignment:NSTextAlignmentCenter];
     
     UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, VIEW_HEIGTH / 2, SCREEN_WIDTH / 2 - 10, VIEW_HEIGTH /2)];
      
-     [secondLabel setTextAlignment:NSTextAlignmentCenter];
+    [secondLabel setTextAlignment:NSTextAlignmentCenter];
      
-     [secondLabel setFont:[UIFont systemFontOfSize:14]];
+    [secondLabel setFont:[UIFont systemFontOfSize:14]];
     
     [secondLabel setText:[NSString stringWithFormat:@"手表  %@",textTwo]];
     

@@ -9,11 +9,6 @@
 #import "HomeViewController.h"
 #import "HomeViewController+delegate.h"
 
-#import "Mymapview.h"
-#import "HomeMenuView.h"
-
-#import "Networking.h"
-
 #define START_X 0
 #define START_Y 0
 #define TOP_HEIGHT 44
@@ -91,6 +86,8 @@
 
 - (void)initMapView{
     mapView = [Mymapview sharedInstance];
+    
+    self.mapView = mapView.mapView;
     
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     

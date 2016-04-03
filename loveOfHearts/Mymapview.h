@@ -12,14 +12,15 @@
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 
-#import "MapProtocolDelegate.h"
+#import "MapProtocol.h"
 
 @interface Mymapview : UIView<MAAnnotation,AMapSearchDelegate>
 
 @property (strong,nonatomic) MAMapView *mapView;
 
+@property (nonatomic,strong) MAUserLocation *userLocation;
 
-@property (weak,nonatomic) id <MapProtocolDelegate>mydelegate;
+@property (weak,nonatomic) id <MapProtocol>mydelegate;
 
 + (instancetype)sharedInstance;
 

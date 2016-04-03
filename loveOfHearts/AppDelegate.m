@@ -142,10 +142,10 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         
     } else {
-        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert |
-                                                                       UIRemoteNotificationTypeSound |
-                                                                       UIRemoteNotificationTypeBadge);
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+        UIUserNotificationType apn_type = (UIUserNotificationType)(UIUserNotificationTypeSound |
+                                                                       UIUserNotificationTypeAlert |
+                                                                       UIUserNotificationTypeBadge);
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:apn_type categories:nil]];
     }
 #else
     UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert |

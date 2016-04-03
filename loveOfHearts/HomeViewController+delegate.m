@@ -23,6 +23,12 @@
             ;
         }];
     }
+    if(selected == 4){
+        [self.mapView showsUserLocation];
+        
+        [self.mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
+        
+        }
 }
 
 - (void)presentPersonInfoView{
