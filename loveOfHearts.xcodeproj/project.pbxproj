@@ -44,6 +44,7 @@
 		D3787F7E1CB00554009AE58A /* PRNAmrPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F791CB00554009AE58A /* PRNAmrPlayer.m */; };
 		D3787F7F1CB00554009AE58A /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */; };
 		D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */; };
+		D3787F8E1CB0C548009AE58A /* Mymapview+mapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F8D1CB0C548009AE58A /* Mymapview+mapDelegate.m */; };
 		D386B0E01CAE527E001EC590 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0DF1CAE527E001EC590 /* CellFactory.m */; };
 		D386B0E31CAE530E001EC590 /* LeftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E21CAE530E001EC590 /* LeftCellView.m */; };
 		D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E51CAE5329001EC590 /* RightCellView.m */; };
@@ -247,6 +248,8 @@
 		D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuProtocol.h; sourceTree = "<group>"; };
 		D3787F881CB0C15F009AE58A /* HomeViewController+delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HomeViewController+delegate.h"; sourceTree = "<group>"; };
 		D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HomeViewController+delegate.m"; sourceTree = "<group>"; };
+		D3787F8C1CB0C548009AE58A /* Mymapview+mapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Mymapview+mapDelegate.h"; sourceTree = "<group>"; };
+		D3787F8D1CB0C548009AE58A /* Mymapview+mapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Mymapview+mapDelegate.m"; sourceTree = "<group>"; };
 		D386B0DE1CAE527E001EC590 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
 		D386B0DF1CAE527E001EC590 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		D386B0E11CAE530E001EC590 /* LeftCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCellView.h; sourceTree = "<group>"; };
@@ -646,6 +649,17 @@
 			name = RightManage;
 			sourceTree = "<group>";
 		};
+		D3787F8B1CB0C511009AE58A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D3A2A3EB1C92A422009B1D0E /* Mymapview.h */,
+				D3A2A3EC1C92A422009B1D0E /* Mymapview.m */,
+				D3787F8C1CB0C548009AE58A /* Mymapview+mapDelegate.h */,
+				D3787F8D1CB0C548009AE58A /* Mymapview+mapDelegate.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		D386B0DD1CAE5258001EC590 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,10 +733,10 @@
 				D362B9241C96A48A0037E29E /* RightView */,
 				D3FEEFD21C91006300300710 /* TopView.h */,
 				D3FEEFD31C91006300300710 /* TopView.m */,
-				D3FEEFCA1C90FF9700300710 /* HomeViewController.h */,
-				D3FEEFD11C91006300300710 /* HomeViewController.m */,
 				D3A2A3F51C92AB55009B1D0E /* HomeMenuView.h */,
 				D3A2A3F61C92AB55009B1D0E /* HomeMenuView.m */,
+				D3FEEFCA1C90FF9700300710 /* HomeViewController.h */,
+				D3FEEFD11C91006300300710 /* HomeViewController.m */,
 				D3787F881CB0C15F009AE58A /* HomeViewController+delegate.h */,
 				D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */,
 			);
@@ -741,8 +755,7 @@
 		D3D0250C1C9BEAF0002713B1 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				D3A2A3EB1C92A422009B1D0E /* Mymapview.h */,
-				D3A2A3EC1C92A422009B1D0E /* Mymapview.m */,
+				D3787F8B1CB0C511009AE58A /* View */,
 				D3D0250D1C9BEB03002713B1 /* HistoryTrackViewController.h */,
 				D3D0250E1C9BEB03002713B1 /* HistoryTrackViewController.m */,
 				D3D0250F1C9BEB03002713B1 /* HistoryViewController.h */,
@@ -1296,6 +1309,7 @@
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
 				D3D025191C9BEB03002713B1 /* HistoryFenceList.m in Sources */,
 				D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */,
+				D3787F8E1CB0C548009AE58A /* Mymapview+mapDelegate.m in Sources */,
 				D3DF044D1C950FA500832CD9 /* PhoneCanMakeList.m in Sources */,
 				D386B0E31CAE530E001EC590 /* LeftCellView.m in Sources */,
 				D3DF044A1C950E2600832CD9 /* Command.m in Sources */,

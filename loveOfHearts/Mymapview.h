@@ -6,14 +6,15 @@
 //  Copyright (c) 2015年 于恩聪. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapKit.h>
+#import <MAMapKit/MAMapServices.h>
+
 #import <AMapSearchKit/AMapSearchAPI.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import <MAMapKit/MAMapServices.h>
+
 #import "MapProtocolDelegate.h"
 
-@interface Mymapview : UIView<MAAnnotation,MAMapViewDelegate,AMapSearchDelegate>
+@interface Mymapview : UIView<MAAnnotation,AMapSearchDelegate>
 
 @property (strong,nonatomic) MAMapView *mapView;
 
