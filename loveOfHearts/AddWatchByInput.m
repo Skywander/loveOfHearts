@@ -9,6 +9,7 @@
 //
 
 #import "AddWatchByInput.h"
+#import "AddWatchByInput+delegate.h"
 #import "Networking.h"
 #import "Navview.h"
 @interface AddWatchByInput()
@@ -16,10 +17,7 @@
     CGFloat basicY;
     CGFloat basicMove;
     
-    UITextField *relationField;
-    UITextField *idField;
-    
-
+    UITextField *widTextField;
         
     NSString *relation;
 }
@@ -27,18 +25,20 @@
 @end
 
 @implementation AddWatchByInput
+@synthesize listView;
 - (void)viewDidLoad{
     [super viewDidLoad];
     
     [self initData];
 
-    
     [self initUI];
 }
 - (void)initData{
-    basicMove = 40;
+    basicMove = 45;
     
     basicY = 70;
+    
+    self.relationArray = [NSArray arrayWithObjects:@"爸爸",@"妈妈",@"爷爷",@"奶奶",@"外公",@"外婆",@"叔叔",@"阿姨",@"其它",nil];
     
 }
 
@@ -49,71 +49,62 @@
     
     [self.view addSubview:navigation];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6, basicY + basicMove * 2, SCREEN_WIDTH - 12, 36)];
+    widTextField = [[UITextField alloc] initWithFrame:CGRectMake(5, basicY, SCREEN_WIDTH - 10,40)];
     
-    [label setText:@"输入关系"];
-    [label setTextAlignment:NSTextAlignmentLeft];
-    [label setTextColor:[UIColor blackColor]];
+    [widTextField.layer setCornerRadius:CORNER_RIDUS];
+    [widTextField setKeyboardType:UIKeyboardTypeDefault];
     
-    [self.view addSubview:label];
+    UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
+    [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
+    [widTextField setLeftView:userLeftView];
+    [widTextField setLeftViewMode:UITextFieldViewModeAlways];
+    [widTextField setBackgroundColor:[UIColor whiteColor]];
     
-    relationField = [[UITextField alloc] initWithFrame:CGRectMake(6, basicY + basicMove * 3, SCREEN_WIDTH - 12, 36)];
-    [relationField setBackgroundColor:[UIColor whiteColor]];
-    [relationField.layer setBorderColor:[UIColor grayColor].CGColor];
-    [relationField.layer setBorderWidth:0.3f];
-    [relationField.layer setCornerRadius:6.f];
+    [self.view addSubview:widTextField];
     
-    [self.view addSubview:relationField];
+    //下拉列表
+    self.relationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, basicY + basicMove, SCREEN_WIDTH - 10, 40)];
     
-    UILabel *idLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, basicY , SCREEN_WIDTH - 12, 36)];
+    [self.relationButton setBackgroundColor:[UIColor whiteColor]];
     
-    [idLabel setTextColor:[UIColor blackColor]];
-    [idLabel setTextAlignment:NSTextAlignmentLeft];
-    [idLabel setText:@"输入手环ID"];
+    [self.relationButton setTitle:@"选择关系" forState:UIControlStateNormal];
     
-    [self.view addSubview:idLabel];
+    [self.relationButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
-    idField = [[UITextField alloc] initWithFrame:CGRectMake(6, basicY + basicMove, SCREEN_WIDTH - 12, 36)];
-    [idField setBackgroundColor:[UIColor whiteColor]];
-    [idField.layer setBorderWidth:0.3f];
-    [idField.layer setBorderColor:[UIColor grayColor].CGColor];
-    [idField.layer setCornerRadius:6.f];
-    [idField setKeyboardType:UIKeyboardTypeNumberPad];
+    [self.relationButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    
+    [self.relationButton.layer setCornerRadius:3.f];
+    
+    [self.relationButton addTarget:self action:@selector(showListView) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.view addSubview:idField];
+    [self.view addSubview:self.relationButton];
     
+    listView = [[UITableView alloc] initWithFrame:CGRectMake(5, basicMove * 2 + basicY, SCREEN_WIDTH - 10, 360)];
+    listView.dataSource = self;
+    listView.delegate = self;
+    listView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    UIButton *sureButton = [[UIButton alloc] initWithFrame:CGRectMake(6, basicMove * 5 + basicY, SCREEN_WIDTH - 12, 36)];
-    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
-    [sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
-    [sureButton setBackgroundColor:[UIColor whiteColor]];
+    [listView setHidden:YES];
     
-    [sureButton.layer setBorderColor:[UIColor grayColor].CGColor];
-    [sureButton.layer setBorderWidth:0.3f];
-    [sureButton.layer setCornerRadius:6.f];
-    [sureButton addTarget:self action:@selector(clickSureButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:sureButton];
+    [self.view addSubview:listView];
 }
 
-- (void)clickSureButton {
-    if (relationField.text.length <= 0 || idField.text.length <= 0 ) {
-    }
-    
-    relation = relationField.text;
-    
-    [self addShouhuan];
-
-}
-
-- (void)addShouhuan{
-
+- (void)showListView{
+    [listView setHidden:NO];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+    
+    if (!listView.hidden) {
+        listView.hidden = YES;
+    }
 }
 
+- (void)addWatch{
+    NSDictionary *paramaterDict = @{
+                                    @""
+                                    };
+}
 @end

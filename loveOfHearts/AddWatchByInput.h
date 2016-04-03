@@ -10,4 +10,11 @@
 
 @interface AddWatchByInput : UIViewController
 
+@property (nonatomic,strong)NSArray *relationArray;
+
+@property (nonatomic,strong)UITableView *listView;
+
+@property (nonatomic,strong) UIButton *relationButton;
+
+
 @end
