@@ -9,13 +9,14 @@
 #import "BabyManageViewController.h"
 #import "AccountMessage.h"
 #import "Networking.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AddWatchViewController.h"
 #import "PersonInforViewController.h"
+#import "NavigationProtocol.h"
 
 #define VIEW_HEIGHT 80
 
-@interface BabyManageViewController ()
+@interface BabyManageViewController ()<NavigationProtocol>
 {    
     Networking *netWorking;
     
@@ -148,40 +149,27 @@
 - (void)initNavigation{
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
-  
-    //添加
-    
-    UIButton *expandButton = [UIButton new];
-    
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
-    
-    [expandButton setTitle:@"添加" forState:UIControlStateNormal];
-    
-    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    
-    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
 
 
-    Navview *navigationView = [Navview new];
+    Navigation *navigation = [Navigation new];
     
-    [navigationView addSubview:expandButton];
+    [navigation setDelegate:self];
     
-    [self.view addSubview:navigationView];
+    [navigation addRightViewWithName:@"添加"];
+    
+    [self.view addSubview:navigation];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
-- (void)expand{
+- (void)clickNavigationRightView{
     AddWatchViewController *add = [AddWatchViewController new];
     
     [self presentViewController:add animated:YES completion:^{
         ;
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 

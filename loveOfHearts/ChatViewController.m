@@ -15,7 +15,7 @@
 
 #import "AccountMessage.h"
 
-#import "Navview.h"
+#import "Navigation.h"
 
 #import "CellFactory.h"
 
@@ -74,7 +74,7 @@
 - (void)initUI{
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    [self.view addSubview:[Navview new]];
+    [self.view addSubview:[Navigation new]];
     
 
     [self initrecordButton];

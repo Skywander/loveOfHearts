@@ -8,7 +8,7 @@
 
 #import "HealthViewController.h"
 
-#import "Navview.h"
+#import "Navigation.h"
 
 #import "AccountMessage.h"
 
@@ -67,7 +67,7 @@
 - (void)initView{
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navview *navigationView = [Navview new];
+    Navigation *navigationView = [Navigation new];
     
     [self.view addSubview:navigationView];
     

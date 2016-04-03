@@ -8,7 +8,7 @@
 
 #import "ModeChoiceViewController.h"
 #import "IQActionSheetPickerView.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 #import "Command.h"
 
@@ -42,7 +42,7 @@
     [self initView];
     
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
 }

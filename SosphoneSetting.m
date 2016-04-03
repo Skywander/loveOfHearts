@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "Command.h"
 #import "Alert.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 
 @interface SosphoneSetting()
@@ -101,7 +101,7 @@
     [self.view addSubview:sureButton];
     
     
-    Navview *navigationView = [Navview new];
+    Navigation *navigationView = [Navigation new];
     
     [self.view addSubview:navigationView];
 }

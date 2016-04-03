@@ -11,7 +11,7 @@
 #import "AddWatchByInput.h"
 #import "AddWatchByInput+delegate.h"
 #import "Networking.h"
-#import "Navview.h"
+#import "Navigation.h"
 @interface AddWatchByInput()
 {
     CGFloat basicY;
@@ -45,7 +45,11 @@
 - (void)initUI{
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [[Navigation alloc] init];
+    
+    [navigation addRightViewWithName:@"确定"];
+    
+    [navigation setDelegate:self];
     
     [self.view addSubview:navigation];
     
@@ -102,9 +106,11 @@
     }
 }
 
-- (void)addWatch{
-    NSDictionary *paramaterDict = @{
-                                    @""
-                                    };
+- (void)clickNavigationRightView{
+    [self dismissViewControllerAnimated:YES completion:^{
+        ;
+    }];
 }
+
+
 @end

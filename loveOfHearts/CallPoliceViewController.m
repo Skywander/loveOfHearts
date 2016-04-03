@@ -9,7 +9,7 @@
 #import "CallPoliceViewController.h"
 #import "Constant.h"
 #import "Command.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 @interface CallPoliceViewController()
 {
@@ -56,7 +56,7 @@
 - (void)initUI {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
     CGFloat basicMove = 55;

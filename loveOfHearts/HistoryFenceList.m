@@ -10,7 +10,7 @@
 #import "HistoryViewController.h"
 #import "NewFenceView.h"
 #import "Networking.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 #import "Command.h"
 
@@ -68,7 +68,7 @@ static HistoryFenceList *historyFenceList;
     [self getWatchMessage];
 }
 - (void)initNavigation {
-    Navview *navigationView = [Navview new];
+    Navigation *navigationView = [Navigation new];
     [self.view addSubview:navigationView];
 }
 

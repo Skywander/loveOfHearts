@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "Alert.h"
 #import "Command.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 @interface PhoneCanMakeList()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -90,7 +90,7 @@
 }
 - (void)initNavigation{
     
-    Navview *navigationView = [[Navview alloc] init];
+    Navigation *navigationView = [[Navigation alloc] init];
     [self.view addSubview:navigationView];
 
 }

@@ -61,7 +61,7 @@
 		D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF71C911BA100F27D10 /* MessageUI.framework */; };
 		D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */; };
 		D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C96EFD1C91681000F27D10 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D3D025091C9BDADE002713B1 /* Navview.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025081C9BDADE002713B1 /* Navview.m */; };
+		D3D025091C9BDADE002713B1 /* Navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025081C9BDADE002713B1 /* Navigation.m */; };
 		D3D0250B1C9BDE05002713B1 /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D0250A1C9BDE05002713B1 /* return.png */; };
 		D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0250E1C9BEB03002713B1 /* HistoryTrackViewController.m */; };
 		D3D025181C9BEB03002713B1 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025101C9BEB03002713B1 /* HistoryViewController.m */; };
@@ -255,6 +255,7 @@
 		D3787F921CB10542009AE58A /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		D3787F941CB13C10009AE58A /* AddWatchByInput+delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AddWatchByInput+delegate.h"; sourceTree = "<group>"; };
 		D3787F951CB13C10009AE58A /* AddWatchByInput+delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AddWatchByInput+delegate.m"; sourceTree = "<group>"; };
+		D3787F981CB1448F009AE58A /* NavigationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationProtocol.h; sourceTree = "<group>"; };
 		D386B0DE1CAE527E001EC590 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
 		D386B0DF1CAE527E001EC590 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		D386B0E11CAE530E001EC590 /* LeftCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCellView.h; sourceTree = "<group>"; };
@@ -280,8 +281,8 @@
 		D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/PrivateFrameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		D3C96EFC1C91681000F27D10 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		D3C96EFD1C91681000F27D10 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		D3D025071C9BDADE002713B1 /* Navview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navview.h; sourceTree = "<group>"; };
-		D3D025081C9BDADE002713B1 /* Navview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navview.m; sourceTree = "<group>"; };
+		D3D025071C9BDADE002713B1 /* Navigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigation.h; sourceTree = "<group>"; };
+		D3D025081C9BDADE002713B1 /* Navigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navigation.m; sourceTree = "<group>"; };
 		D3D0250A1C9BDE05002713B1 /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
 		D3D0250D1C9BEB03002713B1 /* HistoryTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTrackViewController.h; sourceTree = "<group>"; };
 		D3D0250E1C9BEB03002713B1 /* HistoryTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTrackViewController.m; sourceTree = "<group>"; };
@@ -521,6 +522,7 @@
 				D312FFED1CA79AA900558485 /* MapProtocol.h */,
 				D34348F61CADF7670095945D /* TopviewProltocol.h */,
 				D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */,
+				D3787F981CB1448F009AE58A /* NavigationProtocol.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -668,6 +670,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		D3787F971CB1440C009AE58A /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				D3DF044E1C952FFA00832CD9 /* Alert.h */,
+				D3DF044F1C952FFA00832CD9 /* Alert.m */,
+				D3D025071C9BDADE002713B1 /* Navigation.h */,
+				D3D025081C9BDADE002713B1 /* Navigation.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		D386B0DD1CAE5258001EC590 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +724,7 @@
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D3787F971CB1440C009AE58A /* Entity */,
 				D34348F51CADF72D0095945D /* Protocol */,
 				D3DF04581C9543ED00832CD9 /* ActionView */,
 				D3D8C5BC1CA5754400512F5B /* GtSdkLib */,
@@ -720,15 +734,11 @@
 				D3C96EFB1C9167FD00F27D10 /* JsonKit */,
 				D362B9141C9653790037E29E /* CommentAnimation.h */,
 				D362B9151C9653790037E29E /* CommentAnimation.m */,
-				D3DF044E1C952FFA00832CD9 /* Alert.h */,
-				D3DF044F1C952FFA00832CD9 /* Alert.m */,
 				D3C96EEE1C911A0E00F27D10 /* Networking.h */,
 				D3C96EEF1C911A0E00F27D10 /* Networking.m */,
 				D3DF04481C950E2600832CD9 /* Command.h */,
 				D3DF04491C950E2600832CD9 /* Command.m */,
 				D3FEEFCB1C90FFA300300710 /* Constant.h */,
-				D3D025071C9BDADE002713B1 /* Navview.h */,
-				D3D025081C9BDADE002713B1 /* Navview.m */,
 				D3D8C5A91CA438F000512F5B /* DB.h */,
 				D3D8C5AA1CA438F100512F5B /* DB.m */,
 			);
@@ -1356,7 +1366,7 @@
 				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
 				D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */,
 				D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */,
-				D3D025091C9BDADE002713B1 /* Navview.m in Sources */,
+				D3D025091C9BDADE002713B1 /* Navigation.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,
 				D3E51B4F1C9CFB92001732BF /* AlarmSettingView.m in Sources */,

@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "Networking.h"
 #import "Command.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 
 @interface RedFlowerViewController()
@@ -44,7 +44,7 @@
 - (void)initUI {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
     accountMessage = [AccountMessage sharedInstance];

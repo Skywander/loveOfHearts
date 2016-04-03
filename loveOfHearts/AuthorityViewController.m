@@ -9,7 +9,7 @@
 #import "AuthorityViewController.h"
 #import "AccountMessage.h"
 
-#import "Navview.h"
+#import "Navigation.h"
 
 #import "Networking.h"
 
@@ -37,7 +37,7 @@
 }
 
 - (void)initNavigation{
-    Navview *naviView = [Navview new];
+    Navigation *naviView = [Navigation new];
     
     [self.view addSubview:naviView];
 }

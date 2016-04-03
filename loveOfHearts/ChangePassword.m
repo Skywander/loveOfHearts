@@ -9,7 +9,7 @@
 #import "ChangePassword.h"
 #import "Constant.h"
 #import "Networking.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 #import "Command.h"
 
@@ -52,7 +52,7 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
     basicY = 70.f;

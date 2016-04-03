@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "Command.h"
 #import "IQActionSheetPickerView.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 @interface AlarmSettingView()<IQActionSheetPickerViewDelegate>
 {
@@ -87,7 +87,7 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
     CGFloat basicY = 70;

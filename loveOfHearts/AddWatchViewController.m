@@ -9,7 +9,7 @@
 #import "AddWatchViewController.h"
 #import "SYQRCodeViewController.h"
 #import "AddWatchByInput.h"
-#import "Navview.h"
+#import "Navigation.h"
 
 @interface AddWatchViewController()
 {
@@ -30,7 +30,7 @@
 - (void)initUI {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     
     [self.view addSubview:navigation];
     

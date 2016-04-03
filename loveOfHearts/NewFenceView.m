@@ -12,7 +12,7 @@
 #import "Mymapview.h"
 #import "NewFenceMessage.h"
 #import "Alert.h"
-#import "Navview.h"
+#import "Navigation.h"
 
 @interface NewFenceView()<MAMapViewDelegate,MAAnnotation,UIAlertViewDelegate>
 
@@ -55,7 +55,7 @@
 }
 
 - (void)initNaviView{
-    Navview *naviview = [Navview new];
+    Navigation *naviview = [Navigation new];
     [self.view addSubview:naviview];
 }
 

@@ -11,7 +11,7 @@
 #import "Alert.h"
 #import "Command.h"
 #import "AccountMessage.h"
-#import "Navview.h"
+#import "Navigation.h"
 
 @interface PhoneListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -64,7 +64,7 @@
     [listView setDelegate:self];
     [self.view addSubview:listView];
     
-    Navview *navigationView = [Navview new];
+    Navigation *navigationView = [Navigation new];
     [self.view addSubview:navigationView];
     
     backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];

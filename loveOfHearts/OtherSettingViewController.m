@@ -8,7 +8,7 @@
 
 #import "OtherSettingViewController.h"
 #import "Constant.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "OtherSettingFactory.h"
 #import "Command.h"
 
@@ -43,7 +43,7 @@
     listView.delegate = self;
     [self.view addSubview:listView];
     
-    Navview *navigatioinView = [Navview new];
+    Navigation *navigatioinView = [Navigation new];
     [self.view addSubview:navigatioinView];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

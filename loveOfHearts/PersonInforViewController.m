@@ -7,13 +7,14 @@
 //
 
 #import "PersonInforViewController.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "IQActionSheetPickerView.h"
 #import "AccountMessage.h"
 #import "Networking.h"
 #import "AccountMessage.h"
 #import "Command.h"
-@interface PersonInforViewController ()<IQActionSheetPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "NavigationProtocol.h"
+@interface PersonInforViewController ()<IQActionSheetPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NavigationProtocol>
 {
     UIButton *portraitButton;
     UIButton *remarkButton;
@@ -90,23 +91,13 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    UIButton *expandButton = [UIButton new];
+    Navigation *navigation = [Navigation new];
     
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
+    [navigation addRightViewWithName:@"保存"];
     
-    [expandButton setTitle:@"保存" forState:UIControlStateNormal];
-    
-    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    
-    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
-    
-    Navview *navigation = [Navview new];
+    [navigation setDelegate:self];
     
     [self.view addSubview:navigation];
-    
-    [navigation addSubview:expandButton];
     
     basicMove = 55;
     basicY = 144;
@@ -245,8 +236,7 @@
 }
 
 
-- (void)expand{
-    
+- (void)clickNavigationRightView{
     NSDictionary *paramater = @{
                                 @"wid":accountMessage.wid,
                                 @"head":head,
@@ -261,7 +251,7 @@
                                 };
     
     NSLog(@"paramater : %@",paramater);
-
+    
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {

@@ -10,7 +10,7 @@
 #import "Mymapview.h"
 #import "IQActionSheetPickerView.h"
 #import "Networking.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 
 
@@ -46,7 +46,7 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navview *navigation = [Navview new];
+    Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
     
     //日期

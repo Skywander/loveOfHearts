@@ -1,14 +1,14 @@
 //
-//  Navview.m
+//  Navigation.m
 //  loveOfHearts
 //
 //  Created by 于恩聪 on 16/3/18.
 //  Copyright © 2016年 于恩聪. All rights reserved.
 //
 
-#import "Navview.h"
+#import "Navigation.h"
 
-@implementation Navview
+@implementation Navigation
 
 - (id)init{
     self = [super init];
@@ -25,7 +25,7 @@
         [returnButton addTarget:self action:@selector(returenLastView) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:returnButton];
-        
+
     }
     return self;
 }
@@ -39,6 +39,27 @@
         ;
     }];
     
+}
+
+
+- (void)addRightViewWithName:(NSString *)name{
+    UIButton *expandButton = [UIButton new];
+    
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
+    
+    [expandButton setTitle:name forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    
+    [expandButton addTarget:self action:@selector(expand)forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:expandButton];
+}
+
+- (void)expand{
+    [self.delegate clickNavigationRightView];
 }
 
 @end

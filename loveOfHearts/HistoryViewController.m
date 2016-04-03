@@ -8,11 +8,12 @@
 
 #import "HistoryViewController.h"
 #import "NewFenceView.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 #import "Command.h"
+#import "NavigationProtocol.h"
 
-@interface HistoryViewController()
+@interface HistoryViewController()<NavigationProtocol>
 {
     double pointX;
     double pointY;
@@ -46,26 +47,17 @@
 
 - (void)initNavigation{
     //添加
+    Navigation *navigationView = [Navigation new];
+        
+    [navigationView setDelegate:self];
     
-    UIButton *expandButton = [UIButton new];
-    
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
-    
-    [expandButton setTitle:@"删除" forState:UIControlStateNormal];
-    
-    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    
-    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
-    Navview *navigationView = [Navview new];
-    
-    [navigationView addSubview:expandButton];
+    [navigationView addRightViewWithName:@"删除"];
     
     [self.view addSubview:navigationView];
 }
 
-- (void)expand{
+
+- (void)clickNavigationRightView{
     NSDictionary *paramater = @{
                                 @"wid":[AccountMessage sharedInstance].wid,
                                 @"fid":self.fid

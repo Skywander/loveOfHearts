@@ -10,7 +10,7 @@
 #import "Constant.h"
 #import "IQActionSheetPickerView.h"
 #import "Command.h"
-#import "Navview.h"
+#import "Navigation.h"
 #import "AccountMessage.h"
 #define BASIC_HEIGHT 36
 #define BASIC_SPACE 4
@@ -57,7 +57,7 @@
 
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
-    Navview *naviView = [Navview new];
+    Navigation *naviView = [Navigation new];
     [self.view addSubview:naviView];
     
     //围栏姓名

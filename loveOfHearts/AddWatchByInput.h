@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NavigationProtocol.h"
 
-@interface AddWatchByInput : UIViewController
+@interface AddWatchByInput : UIViewController<NavigationProtocol>
 
 @property (nonatomic,strong)NSArray *relationArray;
 
