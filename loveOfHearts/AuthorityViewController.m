@@ -13,6 +13,8 @@
 
 #import "Networking.h"
 
+#import "Command.h"
+
 #import <Masonry/Masonry.h>
 
 #define VIEW_HEIGTH 80
@@ -20,6 +22,7 @@
 
 {
     NSArray *usersArray;
+    NSInteger viewTag;
 }
 
 @end
@@ -40,6 +43,8 @@
 }
 
 - (void)getUserData{
+    viewTag = 0;
+    
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     NSDictionary *dict = @{
                            @"wid":accountMessage.wid
@@ -61,7 +66,7 @@
     
     for (NSDictionary *dict in usersArray) {
         NSLog(@"dict : %@",dict);
-        UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:nil Admin:nil andY:y];
+        UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y];
         
         y+=70;
         
@@ -74,35 +79,91 @@
     
     [view setBackgroundColor:[UIColor whiteColor]];
     
-    UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH / 2 - 10, VIEW_HEIGTH / 2)];
-    [firstLabel setText:[NSString stringWithFormat:@"用户  %@",textOne]];
+    UILabel *accountLabel = [[UILabel alloc] initWithFrame:CGRectMake(5,0,SCREEN_WIDTH / 2 - 15, VIEW_HEIGTH / 2)];
+    [accountLabel setText:[NSString stringWithFormat:@"用户 : %@",textOne]];
     
-    [firstLabel setFont:[UIFont systemFontOfSize:14]];
+    [accountLabel setFont:[UIFont systemFontOfSize:14]];
      
-    [firstLabel setTextAlignment:NSTextAlignmentCenter];
+    [accountLabel setTextAlignment:NSTextAlignmentLeft];
     
-    UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, VIEW_HEIGTH / 2, SCREEN_WIDTH / 2 - 10, VIEW_HEIGTH /2)];
+    [accountLabel setTextColor:[UIColor grayColor]];
+    
+    UILabel *widLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, VIEW_HEIGTH / 2, SCREEN_WIDTH / 2 - 15, VIEW_HEIGTH /2)];
      
-    [secondLabel setTextAlignment:NSTextAlignmentCenter];
+    [widLabel setTextAlignment:NSTextAlignmentLeft];
      
-    [secondLabel setFont:[UIFont systemFontOfSize:14]];
+    [widLabel setFont:[UIFont systemFontOfSize:14]];
     
-    [secondLabel setText:[NSString stringWithFormat:@"手表  %@",textTwo]];
+    [widLabel setTextColor:[UIColor grayColor]];
     
-    [view addSubview:firstLabel];
-    [view addSubview:secondLabel];
+    [widLabel setText:[NSString stringWithFormat:@"手表 : %@",textTwo]];
     
+    [view addSubview:accountLabel];
+    [view addSubview:widLabel];
+    //管理员
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) / 3, 0, (SCREEN_WIDTH - 20) / 3 * 2, VIEW_HEIGTH)];
+    
+    [label setBackgroundColor:[UIColor clearColor]];
+    
+    NSString *authorityStr = [NSString new];
+    
+    if ([admin integerValue] == 1) {
+        authorityStr = @"管理员";
+    }else{
+        authorityStr = @"普通用户";
+    }
+    
+    [label setText:authorityStr];
+    
+    [label setFont:[UIFont systemFontOfSize:15.f]];
+    
+    [label setTextAlignment:NSTextAlignmentCenter];
+    
+    [label setTextColor:[UIColor grayColor]];
+    
+    [view addSubview:label];
+    
+    //删除按钮
+    
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH * 0.75, VIEW_HEIGTH * 0.25, VIEW_HEIGTH / 2, VIEW_HEIGTH / 2)];
+    
+    [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+    
+    [deleteButton setUserInteractionEnabled:YES];
+    
+    [deleteButton addTarget:self action:@selector(deleteUser:) forControlEvents:UIControlEventTouchUpInside];
+    
+    deleteButton.tag = viewTag;
+    
+    [view addSubview:deleteButton];
     
     [view.layer setCornerRadius:6.F];
     [view.layer setBorderColor:[UIColor grayColor].CGColor];
     [view.layer setBorderWidth:0.3F];
     
+    viewTag ++ ;
+    
     return view;
+}
+
+- (void)deleteUser:(UIButton *)sender{
+    
+    NSLog(@"delete at %ld",sender.tag);
+    
+    NSDictionary *currentDict = [usersArray objectAtIndex:sender.tag];
+    
+    NSDictionary *paramater = @{
+                                @"userId":[currentDict objectForKey:@"userId"],
+                                @"wid":[currentDict objectForKey:@"wid"],
+                                @"isAdmin":[currentDict objectForKey:@"admin"]
+                                };
+    
+    [Command commandWithAddress:@"deleterelation" andParamater:paramater];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 @end

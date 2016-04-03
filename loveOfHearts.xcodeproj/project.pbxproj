@@ -45,6 +45,7 @@
 		D3787F7F1CB00554009AE58A /* PRNAmrRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F7B1CB00554009AE58A /* PRNAmrRecorder.m */; };
 		D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */; };
 		D3787F8E1CB0C548009AE58A /* Mymapview+mapDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3787F8D1CB0C548009AE58A /* Mymapview+mapDelegate.m */; };
+		D3787F931CB10542009AE58A /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D3787F921CB10542009AE58A /* delete.png */; };
 		D386B0E01CAE527E001EC590 /* CellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0DF1CAE527E001EC590 /* CellFactory.m */; };
 		D386B0E31CAE530E001EC590 /* LeftCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E21CAE530E001EC590 /* LeftCellView.m */; };
 		D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D386B0E51CAE5329001EC590 /* RightCellView.m */; };
@@ -250,6 +251,7 @@
 		D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HomeViewController+delegate.m"; sourceTree = "<group>"; };
 		D3787F8C1CB0C548009AE58A /* Mymapview+mapDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Mymapview+mapDelegate.h"; sourceTree = "<group>"; };
 		D3787F8D1CB0C548009AE58A /* Mymapview+mapDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Mymapview+mapDelegate.m"; sourceTree = "<group>"; };
+		D3787F921CB10542009AE58A /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		D386B0DE1CAE527E001EC590 /* CellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellFactory.h; sourceTree = "<group>"; };
 		D386B0DF1CAE527E001EC590 /* CellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellFactory.m; sourceTree = "<group>"; };
 		D386B0E11CAE530E001EC590 /* LeftCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCellView.h; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 			children = (
 				D312FFEB1CA7861400558485 /* animationView.png */,
 				D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */,
+				D3787F921CB10542009AE58A /* delete.png */,
 				D3D8C5A31CA42D7000512F5B /* cellCorner.png */,
 				D3D8C59E1CA3815600512F5B /* tablecell.png */,
 				D3D8C5991CA2C5EB00512F5B /* yes.png */,
@@ -1158,6 +1161,7 @@
 				D362B9211C967A230037E29E /* location.png in Resources */,
 				D3D8C57E1CA27F8000512F5B /* otherSelected4.png in Resources */,
 				D3D8C5791CA27F8000512F5B /* otherSelected6.png in Resources */,
+				D3787F931CB10542009AE58A /* delete.png in Resources */,
 				D362B9531C97AB510037E29E /* babyManage.png in Resources */,
 				D3D8C5941CA2A46100512F5B /* Sfences.png in Resources */,
 				D362B9221C967A230037E29E /* self.png in Resources */,
