@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TopView.h"
+#import "HomeTopView.h"
 #import "AccountMessage.h"
 #import "Networking.h"
 
@@ -20,9 +20,9 @@
 
 @interface HomeViewController : UIViewController
 
-@property (nonatomic,strong) TopView *topView;
+@property (nonatomic,strong) HomeTopView *topView;
 
-@property (nonatomic,strong) MAMapView *mapView;
+//@property (nonatomic,strong) MAMapView *mapView;
 
 @end
 

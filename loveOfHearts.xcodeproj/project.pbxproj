@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56145DAFAAE7E1FBB80390D1 /* libPods.a */; };
 		D312FFEC1CA7861400558485 /* animationView.png in Resources */ = {isa = PBXBuildFile; fileRef = D312FFEB1CA7861400558485 /* animationView.png */; };
+		D34ABE981CB499BA0056F611 /* BabyMangeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D34ABE971CB499BA0056F611 /* BabyMangeCellView.m */; };
 		D362B9161C9653790037E29E /* CommentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B9151C9653790037E29E /* CommentAnimation.m */; };
 		D362B91E1C967A230037E29E /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9181C967A220037E29E /* menu.png */; };
 		D362B91F1C967A230037E29E /* device.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9191C967A230037E29E /* device.png */; };
@@ -148,7 +149,7 @@
 		D3FEEFBD1C90FF7A00300710 /* loveOfHeartsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFBC1C90FF7A00300710 /* loveOfHeartsUITests.m */; };
 		D3FEEFD01C90FFDE00300710 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */; };
 		D3FEEFD41C91006300300710 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD11C91006300300710 /* HomeViewController.m */; };
-		D3FEEFD51C91006300300710 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD31C91006300300710 /* TopView.m */; };
+		D3FEEFD51C91006300300710 /* HomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD31C91006300300710 /* HomeTopView.m */; };
 		D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD71C910AE100300710 /* LoginViewController.m */; };
 		D3FEEFDB1C910AE100300710 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFD91C910AE100300710 /* RegisterViewController.m */; };
 		D3FEEFE11C910B3400300710 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEFDE1C910B3400300710 /* PasswordViewController.m */; };
@@ -204,6 +205,9 @@
 		D312FFEB1CA7861400558485 /* animationView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationView.png; sourceTree = "<group>"; };
 		D312FFED1CA79AA900558485 /* MapProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProtocol.h; sourceTree = "<group>"; };
 		D34348F61CADF7670095945D /* TopviewProltocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopviewProltocol.h; sourceTree = "<group>"; };
+		D34ABE951CB497150056F611 /* ImageUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUpdate.h; sourceTree = "<group>"; };
+		D34ABE961CB499BA0056F611 /* BabyMangeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyMangeCellView.h; sourceTree = "<group>"; };
+		D34ABE971CB499BA0056F611 /* BabyMangeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyMangeCellView.m; sourceTree = "<group>"; };
 		D362B9141C9653790037E29E /* CommentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAnimation.h; sourceTree = "<group>"; };
 		D362B9151C9653790037E29E /* CommentAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentAnimation.m; sourceTree = "<group>"; };
 		D362B9181C967A220037E29E /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
@@ -408,8 +412,8 @@
 		D3FEEFCE1C90FFDA00300710 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D3FEEFCF1C90FFDE00300710 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D3FEEFD11C91006300300710 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		D3FEEFD21C91006300300710 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
-		D3FEEFD31C91006300300710 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
+		D3FEEFD21C91006300300710 /* HomeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTopView.h; sourceTree = "<group>"; };
+		D3FEEFD31C91006300300710 /* HomeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTopView.m; sourceTree = "<group>"; };
 		D3FEEFD71C910AE100300710 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D3FEEFD81C910AE100300710 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		D3FEEFD91C910AE100300710 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
@@ -523,6 +527,7 @@
 				D34348F61CADF7670095945D /* TopviewProltocol.h */,
 				D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */,
 				D3787F981CB1448F009AE58A /* NavigationProtocol.h */,
+				D34ABE951CB497150056F611 /* ImageUpdate.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -651,6 +656,8 @@
 				D3787F951CB13C10009AE58A /* AddWatchByInput+delegate.m */,
 				D362B95D1C97E70C0037E29E /* BabyManageViewController.h */,
 				D362B95E1C97E70C0037E29E /* BabyManageViewController.m */,
+				D34ABE961CB499BA0056F611 /* BabyMangeCellView.h */,
+				D34ABE971CB499BA0056F611 /* BabyMangeCellView.m */,
 				D3E51B2A1C9CECC0001732BF /* AuthorityViewController.h */,
 				D3E51B2B1C9CECC0001732BF /* AuthorityViewController.m */,
 				D3D8C5A01CA3BF5400512F5B /* PersonInforViewController.h */,
@@ -749,8 +756,8 @@
 			isa = PBXGroup;
 			children = (
 				D362B9241C96A48A0037E29E /* RightView */,
-				D3FEEFD21C91006300300710 /* TopView.h */,
-				D3FEEFD31C91006300300710 /* TopView.m */,
+				D3FEEFD21C91006300300710 /* HomeTopView.h */,
+				D3FEEFD31C91006300300710 /* HomeTopView.m */,
 				D3A2A3F51C92AB55009B1D0E /* HomeMenuView.h */,
 				D3A2A3F61C92AB55009B1D0E /* HomeMenuView.m */,
 				D3FEEFCA1C90FF9700300710 /* HomeViewController.h */,
@@ -1346,6 +1353,7 @@
 				D362B9161C9653790037E29E /* CommentAnimation.m in Sources */,
 				D362B9441C978E910037E29E /* AccountMessage.m in Sources */,
 				D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */,
+				D34ABE981CB499BA0056F611 /* BabyMangeCellView.m in Sources */,
 				D3E51B491C9CFB92001732BF /* OtherSettingViewController.m in Sources */,
 				D3E51B4B1C9CFB92001732BF /* RedFlowerViewController.m in Sources */,
 				D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */,
@@ -1363,7 +1371,7 @@
 				D3D0251A1C9BEB03002713B1 /* NewFenceView.m in Sources */,
 				D362B9271C96A4D30037E29E /* RightViewController.m in Sources */,
 				D3D8C5841CA282B600512F5B /* HealthViewController.m in Sources */,
-				D3FEEFD51C91006300300710 /* TopView.m in Sources */,
+				D3FEEFD51C91006300300710 /* HomeTopView.m in Sources */,
 				D3787F8A1CB0C15F009AE58A /* HomeViewController+delegate.m in Sources */,
 				D3D8C59D1CA2D0A700512F5B /* AddWatchViewController.m in Sources */,
 				D3D025091C9BDADE002713B1 /* Navigation.m in Sources */,

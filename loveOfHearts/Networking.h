@@ -43,4 +43,6 @@ typedef void (^getInt)(int i);
 
 + (void)getallrecordesWithDict:(NSDictionary *)dict block:(getDict)getDict;
 
++ (void)uploalDataWithAddress:(NSString *)address dict:(NSDictionary *)paramater block:(getInt)getInt;
+
 @end

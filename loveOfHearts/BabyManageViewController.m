@@ -13,10 +13,11 @@
 #import "AddWatchViewController.h"
 #import "PersonInforViewController.h"
 #import "NavigationProtocol.h"
+#import "ImageUpdate.h"
 
 #define VIEW_HEIGHT 80
 
-@interface BabyManageViewController ()<NavigationProtocol>
+@interface BabyManageViewController ()<NavigationProtocol,ImageUpdate>
 {    
     Networking *netWorking;
     
@@ -27,6 +28,8 @@
     float y;
     
     UIImageView *selectedView;
+    
+    NSMutableArray *watchViewArray;
 }
 @end
 
@@ -41,7 +44,9 @@
     
 }
 
-- (void)getData{    
+- (void)getData{
+    watchViewArray = [[NSMutableArray alloc] init];
+    
     accountMessage = [AccountMessage sharedInstance];
     
     NSString *userId = accountMessage.userId;
@@ -74,7 +79,6 @@
                                };
         
         [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
-            NSLog(@" image : %@",image);
             
             UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];
             
@@ -85,6 +89,8 @@
             }
             
             [self.view addSubview:view];
+            
+            [watchViewArray addObject:view];
         }];
     }
 }
@@ -137,13 +143,7 @@
 -(void)handleSingleTap:(UITapGestureRecognizer *)sender
 
 {
-    
-    PersonInforViewController *personInforView = [PersonInforViewController new];
-    
-    [self presentViewController:personInforView animated:YES completion:^{
-        ;
-    }];
-    
+    //
 }
 
 - (void)initNavigation{
@@ -170,6 +170,28 @@
     [self presentViewController:add animated:YES completion:^{
         ;
     }];
+}
+
+- (void)updateImage{
+    NSLog(@"更新图片");
+    
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint point = [touch locationInView:self.view];
+    
+    for (UIView *view in watchViewArray) {
+        if (CGRectContainsPoint(view.frame, point)) {
+            PersonInforViewController *personInforView = [PersonInforViewController new];
+            
+            [self presentViewController:personInforView animated:YES completion:^{
+                ;
+            }];
+        }
+    }
 }
 
 

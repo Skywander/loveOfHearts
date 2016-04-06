@@ -267,9 +267,8 @@
     
     if ([fileManager fileExistsAtPath:filePath]) {
         
-        NSData *_date = [NSData dataWithContentsOfFile:filePath];
-        
-        NSLog(@"data : %@",_date);
+//        NSData *_date = [NSData dataWithContentsOfFile:filePath];
+        NSLog(@"get fileName:%@",filePath);
         
         [player setSpeakMode:YES];
 
@@ -282,12 +281,11 @@
                                     @"filename":_fileName,
                                     };
         
+        NSLog(@"down fileName %@ path : %@",_fileName,filePath);
+        
         [Networking downloadVoiceWithDict:paramater block:^(NSData *data) {
             NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_fileName];
             [data writeToFile:filePath atomically:YES];
-            
-            NSLog(@"download data : %@",data);
-        
             
         }];
     }
@@ -330,7 +328,6 @@
     NSData *voiceData = [NSData dataWithContentsOfFile:recordFile];
     
     NSLog(@"voiceData : %@",voiceData);
-
     
    [Networking uploadVoiceWithDict:paramater andVoiceData:voiceData voiceName:voiceName];
 }

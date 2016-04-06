@@ -6,14 +6,14 @@
 //  Copyright © 2016年 于恩聪. All rights reserved.
 //
 
-#import "TopView.h"
+#import "HomeTopView.h"
 #import "DB.h"
 #include "AccountMessage.h"
 
 #define SELF_HEIGHT self.frame.size.height
 
 #define EXPAND_BUTTON_WIDTH 30
-@interface TopView()
+@interface HomeTopView()
 {
     UILabel *nameLabel;
     UILabel *timeLabel;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation TopView
+@implementation HomeTopView
 @synthesize expandButton;
 - (id)init{
     self = [self init];

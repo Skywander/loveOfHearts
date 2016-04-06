@@ -24,9 +24,9 @@
         }];
     }
     if(selected == 4){
-        [self.mapView showsUserLocation];
+        [[Mymapview sharedInstance].mapView showsUserLocation];
         
-        [self.mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
+        [[Mymapview sharedInstance].mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
         
         }
 }

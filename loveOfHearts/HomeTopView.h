@@ -10,7 +10,7 @@
 #import "TopviewProltocol.h"
 
 
-@interface TopView : UIView
+@interface HomeTopView : UIView
 
 @property (nonatomic,strong) UIButton *expandButton;
 

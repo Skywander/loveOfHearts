@@ -255,7 +255,7 @@
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {
-            NSLog(@"success");
+            accountMessage.image = portraitImage;
         }
     }];
 }

@@ -40,7 +40,7 @@
 }
 
 - (void)initTopView{
-    topView = [[TopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
+    topView = [[HomeTopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
     
     topView.topViewDelegat = self;
     
@@ -87,7 +87,7 @@
 - (void)initMapView{
     mapView = [Mymapview sharedInstance];
     
-    self.mapView = mapView.mapView;
+//    self.mapView = mapView.mapView;
     
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     

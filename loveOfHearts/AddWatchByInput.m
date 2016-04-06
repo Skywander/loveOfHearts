@@ -12,6 +12,8 @@
 #import "AddWatchByInput+delegate.h"
 #import "Networking.h"
 #import "Navigation.h"
+#import "AccountMessage.h"
+
 @interface AddWatchByInput()
 {
     CGFloat basicY;
@@ -20,6 +22,8 @@
     UITextField *widTextField;
         
     NSString *relation;
+    
+    AccountMessage *accountMessage;
 }
 
 @end
@@ -39,6 +43,8 @@
     basicY = 70;
     
     self.relationArray = [NSArray arrayWithObjects:@"爸爸",@"妈妈",@"爷爷",@"奶奶",@"外公",@"外婆",@"叔叔",@"阿姨",@"其它",nil];
+    
+    accountMessage = [AccountMessage sharedInstance];
     
 }
 
@@ -107,7 +113,14 @@
 }
 
 - (void)clickNavigationRightView{
-    [self dismissViewControllerAnimated:YES completion:^{
+    
+    NSDictionary *dict = @{
+                            @"userId":accountMessage.userId,
+                            @"wid":widTextField.text,
+                            @"relations":@"爷爷",
+                            @"type":@"1",
+                           };
+    [Networking uploalDataWithAddress:@"bind" dict:dict block:^(int i) {
         ;
     }];
 }

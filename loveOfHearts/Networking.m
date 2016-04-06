@@ -267,4 +267,19 @@ AFHTTPSessionManager *manager;
     }];
 }
 
++ (void)uploalDataWithAddress:(NSString *)address dict:(NSDictionary *)paramater block:(getInt)getInt{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    [manager POST:[NSString stringWithFormat:@"%@%@",HTTP,address] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"responseObject : %@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ;
+    }];
+}
+
 @end
