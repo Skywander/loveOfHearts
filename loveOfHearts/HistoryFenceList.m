@@ -46,12 +46,11 @@ static HistoryFenceList *historyFenceList;
     [self initData];
     
     [self initNavigation];
+    
+    [self initView];
 }
 
 - (void)initView{
-    if (fencesArray.count <= 0) {
-        return;
-    }
     
     [self initSection];
     [self initTable];
@@ -128,7 +127,7 @@ static HistoryFenceList *historyFenceList;
             [self initView];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"failure : %@",error);
+
     }];
 }
 

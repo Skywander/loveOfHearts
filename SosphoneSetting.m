@@ -74,14 +74,14 @@
         [textField.layer setCornerRadius:6.f];
         
         [textField setBackgroundColor:[UIColor whiteColor]];
-        [textField setPlaceholder:@"  输入号码"];
+        [textField setPlaceholder:@"  请输入号码"];
         [textField setKeyboardType:UIKeyboardTypeNumberPad];
         textFields[i] = textField;
         if (sosArray.count > 0) {
-            if (i!=3 && sosArray.count > i && [sosArray objectAtIndex:i]) {
+            if (sosArray.count > i && ![[sosArray objectAtIndex:i] isEqualToString:@" "]) {
                 [textField setText:[sosArray objectAtIndex:i]];
-                            }
-            if (centerNumber && i == 3) {
+                }
+            if (i == 3 && [centerNumber isEqualToString:@" "]) {
                 [textField setText:centerNumber];
             }
 
@@ -112,6 +112,11 @@
         [newPhoneArray addObject:textFields[i].text];
         
         if (textFields[i].text.length > 0 && textFields[i].text.length!=11) {
+            
+            
+            
+            NSLog(@"TextField:%@ length: %ld",textFields[i].text,textFields[i].text.length);
+            
             [self presentViewController:[Alert getAlertWithTitle:@"输入号码不正确"] animated:YES completion:^{
                 ;
             }];
@@ -120,7 +125,7 @@
             return;
         }
         
-        if ((i == 0 || i == 1 || i==3 ) && textFields[i].text.length <= 0) {
+        if (textFields[i].text.length <= 0) {
             [self presentViewController:[Alert getAlertWithTitle:@"请完善信息"] animated:YES completion:^{
                 ;
             }];

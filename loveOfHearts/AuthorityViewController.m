@@ -68,7 +68,7 @@
         NSLog(@"dict : %@",dict);
         UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y];
         
-        y+=70;
+        y+=90;
         
         [self.view addSubview:userView];
     }

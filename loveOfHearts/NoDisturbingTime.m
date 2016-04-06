@@ -63,16 +63,19 @@
     
     NSString *silenceTime = accountMessage.silencetime;
     
-    NSArray *silenceArray = [silenceTime componentsSeparatedByString:@","];
-    
-    timeArray = [NSMutableArray new];
-    
-    for (NSString *silence in silenceArray) {
-        NSArray *singleArray = [silence componentsSeparatedByString:@"-"];
+    if (![silenceTime isEqualToString:@" "]) {
+        NSArray *silenceArray = [silenceTime componentsSeparatedByString:@","];
         
-        [timeArray addObjectsFromArray:singleArray];
+        timeArray = [NSMutableArray new];
+        
+        for (NSString *silence in silenceArray) {
+            NSArray *singleArray = [silence componentsSeparatedByString:@"-"];
+            
+            [timeArray addObjectsFromArray:singleArray];
+        }
+    }else{
+        timeArray = [NSMutableArray arrayWithObjects:@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",@"00:00",nil];
     }
-    
 }
 
 - (void)initUI{

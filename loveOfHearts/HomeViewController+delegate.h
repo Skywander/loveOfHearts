@@ -14,12 +14,18 @@
 #import "HomeMenuProtocol.h"
 #import "TopviewProltocol.h"
 
-@interface HomeViewController (delegate)<MapProtocol,HomeMenuProtocol,TopviewProltocol>
+#import "ImageUpdate.h"
+
+#import "AccountMessage.h"
+
+@interface HomeViewController (delegate)<MapProtocol,HomeMenuProtocol,TopviewProltocol,ImageUpdate>
 
 - (void)passValue:(NSString *)string;
 
 - (void)passSelectedVaule:(NSInteger)selected;
 
 - (void)presentPersonInfoView;
+
+- (void)updateImage;
 
 @end

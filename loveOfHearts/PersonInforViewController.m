@@ -49,6 +49,7 @@
     
     NSString *head;
     UIImage *portraitImage;
+    BOOL UploadImageSuccess;
     
 }
 @end
@@ -204,7 +205,7 @@
         [sexSubButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [sexSubButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         
-//        [sexSubButton setTag:[accountMessage.babysex integerValue]];
+        [sexSubButton setTag:[accountMessage.babysex integerValue]];
         
         [button addSubview:sexSubButton];
     }
@@ -260,7 +261,17 @@
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {
-            accountMessage.image = portraitImage;
+            if (UploadImageSuccess) {
+                accountMessage.image = portraitImage;
+                
+                accountMessage.head = head;
+                
+                [self.delegate updateImage];
+                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    ;
+                }];
+            }
         }
     }];
 }
@@ -300,7 +311,11 @@
                             @"wid":[AccountMessage sharedInstance].wid,
                            };
     
-    [Networking uploadPortraitWithDict:dict andImageData:imageData imageName:head];
+    [Networking uploadPortraitWithDict:dict andImageData:imageData imageName:head block:^(int i) {
+        if (i == 100) {
+            UploadImageSuccess = YES;
+        }
+    }];
     //此处上传图片
 }
 //图片压缩

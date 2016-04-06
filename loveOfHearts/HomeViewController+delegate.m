@@ -34,8 +34,14 @@
 - (void)presentPersonInfoView{
     PersonInforViewController *personInfoView = [PersonInforViewController new];
     
+    personInfoView.delegate = self;
+    
     [self presentViewController:personInfoView animated:YES completion:^{
         ;
     }];
+}
+
+- (void)updateImage{
+    [self.topView setImage:[AccountMessage sharedInstance].image];
 }
 @end

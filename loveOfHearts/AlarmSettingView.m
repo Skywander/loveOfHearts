@@ -78,10 +78,18 @@
         
         NSArray *singleArray = [clockStirng componentsSeparatedByString:@"-"];
         
-        [alarmArray addObject:[singleArray objectAtIndex:0]];
-         
-         [switsState addObject:[singleArray objectAtIndex:1]];
+        if (singleArray.count == 2) {
+            
+            [alarmArray addObject:[singleArray objectAtIndex:0]];
+            
+            [switsState addObject:[singleArray objectAtIndex:1]];
+        }
     }
+    
+    if (switsState.count != 3) {
+        switsState = [NSMutableArray arrayWithObjects:@"0",@"0",@"0", nil];
+    }
+    
     NSLog(@"alrarmArray : %@ %@",alarmArray,switsState);
 }
 - (void)initUI {
@@ -93,9 +101,9 @@
     CGFloat basicY = 70;
     CGFloat basicMove = 54;
     
-    firstAlarm = [self buttonWthName:@"08:00   " andPointY:basicY];
+    firstAlarm = [self buttonWthName:@"00:00   " andPointY:basicY];
     
-    secondAlarm = [self buttonWthName:@"19:00   " andPointY:basicY + basicMove];
+    secondAlarm = [self buttonWthName:@"00:00   " andPointY:basicY + basicMove];
     
     thirdAlarm = [self buttonWthName:@"00:00   " andPointY:basicMove * 2 + basicY];
     
@@ -134,13 +142,13 @@
         swits[i] = swit;
         [swit setTag:i];
         
-        if ([[switsState objectAtIndex:i] isEqualToString:@"1"]) {
+        if (switsState.count > i && [[switsState objectAtIndex:i] isEqualToString:@"1"]) {
             [swit setOn:YES animated:NO];
 
         }else {
             [swit setOn:NO animated:NO];
         }
-        if ([alarmArray objectAtIndex:i]) {
+        if (alarmArray.count > i && [alarmArray objectAtIndex:i]) {
             [button setTitle:[alarmArray objectAtIndex:i] forState:UIControlStateNormal];
         }
     }

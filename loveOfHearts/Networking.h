@@ -31,7 +31,7 @@ typedef void (^getInt)(int i);
 
 + (void)getWatchPortiartWithDict:(NSDictionary *)dict blockcompletion:(getImage)getImage;
 
-+ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName;
++ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName block:(getInt)getInt;
 
 + (void)uploadVoiceWithDict:(NSDictionary *)dict andVoiceData:(NSData *)voiceData voiceName:(NSString *)voiceName;
 

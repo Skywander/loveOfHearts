@@ -59,7 +59,13 @@
     [countLabel.layer setBorderColor:[UIColor grayColor].CGColor];
     [countLabel.layer setBorderWidth:0.3f];
     [countLabel.layer setCornerRadius:6.f];
-    [countLabel setText:[NSString stringWithFormat:@"小红花的数量%@",accountMessage.flower]];
+    
+    if ([accountMessage.flower isEqualToString:@" "]) {
+        [countLabel setText:@"小红花的数量 : 0"];
+    }else{
+        [countLabel setText:[NSString stringWithFormat:@"小红花的数量 : %@",accountMessage.flower]];
+
+    }
     
     [self.view addSubview:countLabel];
     
@@ -102,7 +108,7 @@
     num++;
     flower_count = [NSString stringWithFormat:@"%d",num];
     
-    [countLabel setText:[NSString stringWithFormat:@"小红花的数量:%@",flower_count]];
+    [countLabel setText:[NSString stringWithFormat:@"小红花的数量 : %@",flower_count]];
     
     [accountMessage setFlower:flower_count];
     
@@ -113,7 +119,7 @@
 - (void)clearRedFlowers {
     flower_count = [NSString stringWithFormat:@"%d",0];
     
-    [countLabel setText:[NSString stringWithFormat:@"小红花的数量:%d",0]];
+    [countLabel setText:[NSString stringWithFormat:@"小红花的数量 : %d",0]];
     
     [self makeSureChange];
 

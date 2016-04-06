@@ -12,7 +12,7 @@
 #import "Command.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
-@interface PhoneCanMakeList()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface PhoneCanMakeList()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NavigationProtocol>
 {
     UITableView *phoneListView;
     NSMutableArray *phoneArray;
@@ -96,6 +96,11 @@
 - (void)initNavigation{
     
     Navigation *navigationView = [[Navigation alloc] init];
+    
+    [navigationView addRightViewWithName:@"确定"];
+    
+    [navigationView setDelegate:self];
+    
     [self.view addSubview:navigationView];
 
 }
@@ -111,14 +116,14 @@
     [cell setBackgroundColor:DEFAULT_COLOR];
     
     if ([indexPath section] == 0) {
-        UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(1, 1, 60, 34)];
+        UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(1, 2, 60,(SCREEN_HEIGHT - 100)/10 - 4)];
         
         [_label setText:[NSString stringWithFormat:@"白名单%ld",(long)[indexPath row] + 1]];
-        
+                
         [_label setFont:[UIFont systemFontOfSize:14]];
         
         
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(60, 1, SCREEN_WIDTH - 74, 34)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(60, 2, SCREEN_WIDTH - 74, (SCREEN_HEIGHT - 100) / 10 - 4)];
         
         if (phoneNumbersList.count > [indexPath row]) {
             
@@ -152,72 +157,55 @@
         [cell addSubview:_label];
 
     }
-    if ([indexPath section] == 1) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(1, 1, SCREEN_WIDTH - 14, 34)];
-        [label setBackgroundColor:[UIColor whiteColor]];
-        
-        [label.layer setBorderWidth:0.3f];
-        [label.layer setBorderColor:[UIColor grayColor].CGColor];
-        [label.layer setCornerRadius:6.f];
-        [label setClipsToBounds:YES];
-        
-        [label setTextAlignment:NSTextAlignmentCenter];
-        [label setText:@"确认"];
-        [cell addSubview:label];
-    }
+
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    [[tableView.visibleCells objectAtIndex:10] setSelected:NO];
-    if ([indexPath section] == 1) {
-        phoneNumbersOne = textFields[0].text;
-        phoneNumbersTwo = textFields[5].text;
+- (void)clickNavigationRightView{
+    
+    phoneNumbersOne = textFields[0].text;
+    phoneNumbersTwo = textFields[5].text;
+    
+    for (int i = 1; i < 5; i ++) {
+        NSString *tempStr = textFields[i].text;
         
-        for (int i = 1; i < 5; i ++) {
-            NSString *tempStr = textFields[i].text;
-            
-            phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
-        }
-        for (int i = 6; i < 10; i++) {
-            NSString *tempStr = textFields[i].text;
-            phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
-        }
-        
-        NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
-        
-        NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  userAccount,@"userId",
-                                  watchID,@"wid",
-                                  phoneNumbersOne,@"whitelist1",
-                                  nil
-                                  ];
-        [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
-        
-        NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    userAccount,@"userId",
-                                    watchID,@"wid",
-                                    phoneNumbersTwo,@"whitelist2",
-                                    nil
-                                    ];
-        [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
-
+        phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
     }
+    for (int i = 6; i < 10; i++) {
+        NSString *tempStr = textFields[i].text;
+        phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
+    }
+    
+    NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
+    
+    NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              userAccount,@"userId",
+                              watchID,@"wid",
+                              phoneNumbersOne,@"whitelist1",
+                              nil
+                              ];
+    [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
+    
+    NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                userAccount,@"userId",
+                                watchID,@"wid",
+                                phoneNumbersTwo,@"whitelist2",
+                                nil
+                                ];
+    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
+
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 1) {
-        return 1;
-    }
     return 10;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 36;
+    return (SCREEN_HEIGHT - 100) / 10;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -225,10 +213,6 @@
     [backView setHidden:NO];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    [phoneNumbersList replaceObjectAtIndex:textField.tag withObject:textField.text];
-}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     if (!backView.hidden) {

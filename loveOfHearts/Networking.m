@@ -157,8 +157,8 @@ AFHTTPSessionManager *manager;
         
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"watchImageError : %@",error);
-    }];
+            getImage(nil);
+        }];
     
 }
 
@@ -177,11 +177,11 @@ AFHTTPSessionManager *manager;
 
 }
 
-+ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName{
++ (void)uploadPortraitWithDict:(NSDictionary *)dict andImageData:(NSData *)imageData imageName:(NSString *)imageName block:(getInt)getInt{
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
     
@@ -192,6 +192,8 @@ AFHTTPSessionManager *manager;
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"responseObject : %@",responseObject);
+        
+        getInt([[responseObject objectForKey:@"type"] intValue]);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
