@@ -112,10 +112,15 @@
         phoneFields[[indexPath row]] = phoneField;
         
         if ([indexPath row] * 2 < phbArray.count && [phbArray objectAtIndex:[indexPath row] * 2]) {
-            [nameField setText:[phbArray objectAtIndex:[indexPath row] * 2]];
+            
+            if (![[phbArray objectAtIndex:[indexPath row] * 2] isEqualToString:@" "]) {
+                [nameField setText:[phbArray objectAtIndex:[indexPath row] * 2]];
+            }
         }
         if ([indexPath row] * 2 + 1 < phbArray.count && [phbArray objectAtIndex:[indexPath row] * 2 + 1]) {
-            [phoneField setText:[phbArray objectAtIndex:[indexPath row] * 2 + 1]];
+            if (![[phbArray objectAtIndex:[indexPath row] * 2 + 1] isEqualToString:@" "]) {
+                [phoneField setText:[phbArray objectAtIndex:[indexPath row] * 2 + 1]];
+            }
         }
         
         [cell addSubview:phoneField];

@@ -25,10 +25,8 @@ static HistoryFenceList *historyFenceList;
     
     NSString *user_id;
     NSString *shouhuan_id;
+    
     AccountMessage *accountMessage;
-    
-    NSTimer *timer;
-    
 }
 @end
 
@@ -47,7 +45,7 @@ static HistoryFenceList *historyFenceList;
     
     [self initData];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initView) userInfo:nil repeats:YES];
+    [self initNavigation];
 }
 
 - (void)initView{
@@ -55,11 +53,8 @@ static HistoryFenceList *historyFenceList;
         return;
     }
     
-    [timer invalidate];
-    
     [self initSection];
     [self initTable];
-    [self initNavigation];
 }
 
 - (void)initData{
@@ -129,6 +124,8 @@ static HistoryFenceList *historyFenceList;
             [fencesDataArray addObject:[dict objectForKey:@"fencearea"]];
             
             [fencesIDArray addObject:[dict objectForKey:@"fid"]];
+            
+            [self initView];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure : %@",error);

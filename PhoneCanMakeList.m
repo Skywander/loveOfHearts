@@ -59,7 +59,12 @@
     listOffset = 0;
     phoneArray = [NSMutableArray new];
     
-    phoneNumbersList = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
+    if (whitelist_1.count != 0 && whitelist_2.count != 0) {
+        phoneNumbersList = [NSMutableArray arrayWithArray:[whitelist_1 arrayByAddingObjectsFromArray:whitelist_2]];
+    }else{
+        phoneNumbersList = [NSMutableArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
+
+    }
     
     phoneNumbersOne = [NSString new];
     phoneNumbersTwo = [NSString new];
@@ -115,12 +120,18 @@
         
         UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(60, 1, SCREEN_WIDTH - 74, 34)];
         
-        if ([indexPath row] < 5 ) {
-            [textField setText:[whitelist_1 objectAtIndex:[indexPath row]]];
+        if (phoneNumbersList.count > [indexPath row]) {
+            
+            NSString *cellString = [phoneNumbersList objectAtIndex:[indexPath row]];
+            
+            if (cellString.length == 11) {
+                [textField setText:[phoneNumbersList objectAtIndex:[indexPath row]]];
+            }else{
+                [textField setPlaceholder:@"请输入手机号码"];
+            }
         }
-        
-        if ([indexPath row] >= 5) {
-            [textField setText:[whitelist_2 objectAtIndex:[indexPath row] - 5]];
+        else{
+            [textField setPlaceholder:@"请输入手机号码"];
         }
         
         [textField setDelegate:self];
