@@ -65,25 +65,30 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)initData{
     accountMessage = [AccountMessage sharedInstance];
     
-    _name = accountMessage.babyname;
+    NSLog(@"%@",accountMessage.babyname);
     
+    _name = accountMessage.babyname;
+
+
     _birthday = accountMessage.babybir;
     
     shouhuan_id = accountMessage.wid;
     
     head = accountMessage.head;
     
+        
     if ([accountMessage.babysex intValue] == 1) {
         _sex = @"女";
     } else{
         _sex = @"男";
     }
+    
+
 }
 
 
@@ -199,7 +204,7 @@
         [sexSubButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [sexSubButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         
-        [sexSubButton setTag:[accountMessage.babysex integerValue]];
+//        [sexSubButton setTag:[accountMessage.babysex integerValue]];
         
         [button addSubview:sexSubButton];
     }

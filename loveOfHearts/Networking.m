@@ -49,7 +49,7 @@ AFHTTPSessionManager *manager;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        NSLog(@"%@",responseObject);
         
         getDict(responseObject);
         
@@ -57,8 +57,6 @@ AFHTTPSessionManager *manager;
         
         
         if (returnType == 100) {
-            
-            NSLog(@"reponseObject : %@",responseObject);
             
             NSDictionary *rlist = [[[responseObject objectForKey:@"data"] objectForKey:@"rlist"] objectAtIndex:0];
             
@@ -159,7 +157,7 @@ AFHTTPSessionManager *manager;
         
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"watchImageError : %@",error);
+//        NSLog(@"watchImageError : %@",error);
     }];
     
 }

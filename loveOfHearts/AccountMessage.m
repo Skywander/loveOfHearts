@@ -27,7 +27,16 @@ static AccountMessage *accountMessage;
     return self;
 }
 
-- (void)setUserInfor:(NSDictionary *)dict{
+- (void)setUserInfor:(NSDictionary *)_dict{
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_dict];
+
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isEqual:[NSNull null]]) {
+            [dict setValue:@" " forKey:key];
+        }
+    }];
+    
     self.admin = [dict objectForKey:@"admin"];
     self.createdAt = [dict objectForKey:@"createdAt"];
     self.ispowered = [dict objectForKey:@"ispowerd"];
@@ -37,7 +46,16 @@ static AccountMessage *accountMessage;
     self.wid = [dict objectForKey:@"wid"];
 }
 
-- (void)setWatchInfor:(NSDictionary *)dict{
+- (void)setWatchInfor:(NSDictionary *)_dict{
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_dict];
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isEqual:[NSNull null]]) {
+            [dict setValue:@" " forKey:key];
+        }
+    }];
+    
     self.babyage = [dict objectForKey:@"babyage"];
     self.babybir = [dict objectForKey:@"babybir"];
     self.babyheight = [dict objectForKey:@"babyheight"];

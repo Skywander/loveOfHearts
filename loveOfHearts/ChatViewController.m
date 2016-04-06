@@ -267,8 +267,9 @@
     
     if ([fileManager fileExistsAtPath:filePath]) {
         
-//        NSData *_date = [NSData dataWithContentsOfFile:filePath];
-        NSLog(@"get fileName:%@",filePath);
+        NSData *_date = [NSData dataWithContentsOfFile:filePath];
+        
+        NSLog(@"get fileName:%@",_date);
         
         [player setSpeakMode:YES];
 
@@ -278,15 +279,16 @@
     }else{
         NSDictionary *paramater = @{
                                     @"wid":[AccountMessage sharedInstance].wid,
-                                    @"filename":_fileName,
+                                    @"fileName":_fileName,
                                     };
         
         NSLog(@"down fileName %@ path : %@",_fileName,filePath);
         
         [Networking downloadVoiceWithDict:paramater block:^(NSData *data) {
             NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_fileName];
-            [data writeToFile:filePath atomically:YES];
+            [data writeToFile:filePath atomically:NO];
             
+            NSLog(@"downLoadData : %@",data);
         }];
     }
 
