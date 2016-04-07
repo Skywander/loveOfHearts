@@ -38,8 +38,14 @@
 - (void) initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
+    UIView *navigation = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
+    
+    [navigation setBackgroundColor:DEFAULT_PINK];
+    
+    [self.view addSubview:navigation];
+    
     //列表
-    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 34, RIGHT_CELL_WIDTH, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
+    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 70, RIGHT_CELL_WIDTH, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     listView.scrollEnabled = NO;
     [listView setBackgroundColor:DEFAULT_COLOR];
     listView.separatorStyle = UITableViewCellSeparatorStyleNone;

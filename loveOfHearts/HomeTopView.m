@@ -59,17 +59,17 @@
     
     //时间标签
     
-    [timeLabel setFrame:CGRectMake(self.frame.size.height, 0, 200, self.frame.size.height / 2)];
+    [timeLabel setFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.frame.size.height / 2)];
     [timeLabel setText:[self getNowTime]];
-    [timeLabel setTextAlignment:NSTextAlignmentLeft];
+    [timeLabel setTextAlignment:NSTextAlignmentCenter];
     [timeLabel setTextColor:[UIColor blackColor]];
     [timeLabel setFont:[UIFont systemFontOfSize:14]];
     
     [self addSubview:timeLabel];
     //地址标签
     
-    [addressLabel setFrame:CGRectMake(SELF_HEIGHT, SELF_HEIGHT / 2, timeLabel.frame.size.width, SELF_HEIGHT / 2)];
-    [addressLabel setTextAlignment:NSTextAlignmentLeft];
+    [addressLabel setFrame:CGRectMake(0, SELF_HEIGHT / 2, SCREEN_WIDTH, SELF_HEIGHT / 2)];
+    [addressLabel setTextAlignment:NSTextAlignmentCenter];
     [addressLabel setFont:[UIFont systemFontOfSize:14]];
     [self addSubview:addressLabel];
                                       

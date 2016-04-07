@@ -101,7 +101,7 @@
 }
 
 - (void)initHomeMenuView{
-    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(10, 74, 40, 280)];
+    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 74, 36, 180)];
     
     menuView.homeDelegat = self;
         
