@@ -8,7 +8,6 @@
 
 #import "Networking.h"
 #import "PasswordViewController.h"
-#import "JSONKit.h"
 #import "AccountMessage.h"
 
 @implementation Networking

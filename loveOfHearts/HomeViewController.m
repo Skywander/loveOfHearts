@@ -25,19 +25,26 @@
 @implementation HomeViewController
 @synthesize topView;
 - (void)viewDidLoad {
+    
+    NSLog(@"view did load");
     [super viewDidLoad];
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
         
     [self initTopView];
         
-    [self initHomeMenuView];    
+    [self initHomeMenuView];
+    
+    [self initNotification];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden = YES;
     
     [self initMapView];
+    
+    NSLog(@"view will appear");
+    
 }
 
 - (void)initTopView{
@@ -49,13 +56,12 @@
     
     [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     [DB getImageWithWatchId:accountMessage.wid filename:accountMessage.head block:^(UIImage *image) {
         [topView setImage:image];
     }];
+
 }
 
 - (void)initMapView{
@@ -85,6 +91,16 @@
 
 - (void)clickExpandButton{
     [self.viewDeckController toggleRightViewAnimated:YES];
+}
+
+- (void)initNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"HomeviewUpdateImage" object:nil];
+}
+
+- (void)updateImage:(NSNotification *)sender{
+    UIImage *image = (UIImage *)sender.object;
+    
+    [topView setImage:image];
 }
 
 - (void)didReceiveMemoryWarning {

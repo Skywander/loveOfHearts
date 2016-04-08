@@ -243,6 +243,7 @@
 
 
 - (void)clickNavigationRightView{
+        
     NSDictionary *paramater = @{
                                 @"wid":accountMessage.wid,
                                 @"head":head,

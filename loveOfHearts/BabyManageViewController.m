@@ -14,7 +14,6 @@
 #import "PersonInforViewController.h"
 #import "NavigationProtocol.h"
 #import "ImageUpdate.h"
-#import "BabyMangeCellView.h"
 #import "DB.h"
 
 #define VIEW_HEIGHT 80
@@ -87,7 +86,6 @@
             
             [self.view addSubview:view];
             
-            //            [watchViewArray addObject:view];
             [watchViewArray setObject:view forKey:[NSString stringWithFormat:@"%@",[dict objectForKey:@"wid"]]];
 
         }];
@@ -183,7 +181,16 @@
     CGPoint point = [touch locationInView:self.view];
     
     [watchViewArray enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        
         UIView *view = (UIView *)obj;
+        
+        UIImageView *imageView = [UIImageView new];
+        
+        for (UIView *subView in view.subviews) {
+            if ([subView isKindOfClass:[UIImageView class]]) {
+                imageView = (UIImageView *)subView;
+            }
+        }
         
         if (CGRectContainsPoint(view.frame, point)) {
             
@@ -196,8 +203,13 @@
             [Networking getWatchMessageWithParamater:paramater block:^(NSDictionary *dict) {
                 
                 [accountMessage setWatchInfor:[dict objectForKey:@"data"]];
-                
-                NSLog(@"%@",accountMessage.wid);
+                //创建通知
+                NSNotification *notification =[NSNotification notificationWithName:@"HomeviewUpdateImage" object:imageView.image userInfo:nil];
+                //通过通知中心发送通知
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
+                [self.navigationController popViewControllerAnimated:YES];
+
+                accountMessage.image = imageView.image;
                 
             }];
             

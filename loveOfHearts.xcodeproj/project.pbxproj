@@ -63,7 +63,6 @@
 		D3C96EF61C911B9300F27D10 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF51C911B9300F27D10 /* libstdc++.tbd */; };
 		D3C96EF81C911BA100F27D10 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF71C911BA100F27D10 /* MessageUI.framework */; };
 		D3C96EFA1C911BB800F27D10 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */; };
-		D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C96EFD1C91681000F27D10 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D3D025091C9BDADE002713B1 /* Navigation.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025081C9BDADE002713B1 /* Navigation.m */; };
 		D3D0250B1C9BDE05002713B1 /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D0250A1C9BDE05002713B1 /* return.png */; };
 		D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0250E1C9BEB03002713B1 /* HistoryTrackViewController.m */; };
@@ -286,8 +285,6 @@
 		D3C96EF51C911B9300F27D10 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		D3C96EF71C911BA100F27D10 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D3C96EF91C911BB800F27D10 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/PrivateFrameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		D3C96EFC1C91681000F27D10 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		D3C96EFD1C91681000F27D10 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		D3D025071C9BDADE002713B1 /* Navigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Navigation.h; sourceTree = "<group>"; };
 		D3D025081C9BDADE002713B1 /* Navigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Navigation.m; sourceTree = "<group>"; };
 		D3D0250A1C9BDE05002713B1 /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
@@ -741,7 +738,6 @@
 				D362B9451C978E9C0037E29E /* AccountMessage */,
 				D3D0251F1C9BEB77002713B1 /* IQActionSheetPicker */,
 				D3FEEFE31C910B4400300710 /* SMS_SDK */,
-				D3C96EFB1C9167FD00F27D10 /* JsonKit */,
 				D362B9141C9653790037E29E /* CommentAnimation.h */,
 				D362B9151C9653790037E29E /* CommentAnimation.m */,
 				D3C96EEE1C911A0E00F27D10 /* Networking.h */,
@@ -769,15 +765,6 @@
 				D3787F891CB0C15F009AE58A /* HomeViewController+delegate.m */,
 			);
 			name = HomeView;
-			sourceTree = "<group>";
-		};
-		D3C96EFB1C9167FD00F27D10 /* JsonKit */ = {
-			isa = PBXGroup;
-			children = (
-				D3C96EFC1C91681000F27D10 /* JSONKit.h */,
-				D3C96EFD1C91681000F27D10 /* JSONKit.m */,
-			);
-			name = JsonKit;
 			sourceTree = "<group>";
 		};
 		D3D0250C1C9BEAF0002713B1 /* MapView */ = {
@@ -1347,7 +1334,6 @@
 				D3E51B4C1C9CFB92001732BF /* CallPoliceViewController.m in Sources */,
 				D3FEEFD01C90FFDE00300710 /* AppDelegate.m in Sources */,
 				D3DF04501C952FFA00832CD9 /* Alert.m in Sources */,
-				D3C96EFE1C91681000F27D10 /* JSONKit.m in Sources */,
 				D362B9411C96ECC80037E29E /* RightVieFactory.m in Sources */,
 				D3DF04441C950CB000832CD9 /* SosphoneSetting.m in Sources */,
 				D3E51B4E1C9CFB92001732BF /* ModeChoiceViewController.m in Sources */,

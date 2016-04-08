@@ -14,8 +14,10 @@
     //cache
     AccountMessage *_accoutMessage = [AccountMessage sharedInstance];
 
-    if ([_accoutMessage.wid isEqualToString:watchId] && [_accoutMessage.image isKindOfClass:[UIImage class]]) {
+    if ([_accoutMessage.head isEqualToString:filename] && [_accoutMessage.image isKindOfClass:[UIImage class]]) {
         getImage(_accoutMessage.image);
+        
+        NSLog(@"image cache");
         
         return;
     }
@@ -32,13 +34,14 @@
         
         UIImage *image = [UIImage imageWithData:imageData];
         
-        if ([_accoutMessage.wid isEqualToString:watchId]) {
-            
+        if ([_accoutMessage.head isEqualToString:filename]) {
             _accoutMessage.image = image;
 
         }
         
         getImage(image);
+        
+        NSLog(@"image file");
         
         return;
     }
@@ -53,10 +56,12 @@
         if (image) {
             getImage(image);
             
+            NSLog(@"image net");
+            
             if ([_accoutMessage.wid isEqualToString:watchId]) {
-                _accoutMessage.image = image;
-
+                _accoutMessage.wid = watchId;
             }
+            
             NSData *imageData = UIImagePNGRepresentation(image);
             
             [imageData writeToFile:imagePath atomically:NO];
