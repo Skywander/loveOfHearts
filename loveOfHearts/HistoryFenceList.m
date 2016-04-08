@@ -156,7 +156,7 @@ static HistoryFenceList *historyFenceList;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([indexPath section] == 0) {
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"createFenceBackView.jpg"]];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"createFenceBackView"]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     if ([indexPath row] == 0 &&[indexPath section] == 1) {

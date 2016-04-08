@@ -23,6 +23,8 @@
 {
     NSArray *usersArray;
     NSInteger viewTag;
+    
+    NSMutableDictionary *_viewDict;
 }
 
 @end
@@ -55,6 +57,8 @@
         [self initUI];
 
     }];
+    
+    _viewDict = [NSMutableDictionary new];
 }
 
 
@@ -67,6 +71,9 @@
     for (NSDictionary *dict in usersArray) {
         NSLog(@"dict : %@",dict);
         UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y];
+        
+        
+        [_viewDict setObject:userView forKey:[dict objectForKey:@"wid"]];
         
         y+=90;
         
@@ -152,13 +159,25 @@
     
     NSDictionary *currentDict = [usersArray objectAtIndex:sender.tag];
     
+    NSLog(@"%@",currentDict);
+    
     NSDictionary *paramater = @{
                                 @"userId":[currentDict objectForKey:@"userId"],
                                 @"wid":[currentDict objectForKey:@"wid"],
-                                @"isAdmin":[currentDict objectForKey:@"admin"]
+                                @"isadmin":[currentDict objectForKey:@"admin"]
                                 };
     
-    [Command commandWithAddress:@"deleterelation" andParamater:paramater];
+    [Networking deleteWatchWithDict:paramater block:^(NSDictionary *dict) {
+        NSInteger type = [[dict objectForKey:@"type"] integerValue];
+        
+        if (type == 100) {
+            [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
+                    [(UIView *)obj removeFromSuperview];
+                }
+            }];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
