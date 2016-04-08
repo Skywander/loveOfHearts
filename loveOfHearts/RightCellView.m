@@ -11,16 +11,19 @@
 @implementation RightCellView
 
 + (UIView *)initWithDict:(NSDictionary *)dict{
-    NSLog(@"create right view");
     
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 6, 62)];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH - 6, 62)];
+    
+    [rightView.layer setCornerRadius:6.f];
+    
+    [rightView setClipsToBounds:YES];
     
     NSString *createData = [dict objectForKey:@"createdAt"];
     
     NSString *_createDate = [createData stringByReplacingOccurrencesOfString:@"T" withString:@" "];
 
     
-    NSString *isheard = [dict objectForKey:@"isheard"];
+  //  NSString *isheard = [dict objectForKey:@"isheard"];
     
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 6, 8)];
     //date
@@ -31,8 +34,20 @@
     
     [rightView addSubview:dateLabel];
     
-    [rightView setBackgroundColor:[UIColor redColor]];
+    [rightView setBackgroundColor:DEFAULT_COLOR];
     
+    //头像
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    
+    [imageView setFrame:CGRectMake(SCREEN_WIDTH - 48, 14, 42, 42)];
+    
+    [imageView.layer setCornerRadius:21];
+    
+    [imageView setClipsToBounds:YES];
+    
+    [rightView addSubview:imageView];
+
     return rightView;
 }
 

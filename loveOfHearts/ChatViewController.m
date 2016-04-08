@@ -73,7 +73,7 @@
 }
 
 - (void)initUI{
-    [self.view setBackgroundColor:DEFAULT_COLOR];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self.view addSubview:[Navigation new]];
 
@@ -89,7 +89,9 @@
     player = [[PRNAmrPlayer alloc] init];
 
     accountMessage = [AccountMessage sharedInstance];
+    
     shouhuan_id = accountMessage.wid;
+    
     user_id = accountMessage.userId;
     
     messageArrays = [NSMutableArray new];
@@ -105,12 +107,18 @@
     
     [Networking getallrecordesWithDict:dict block:^(NSDictionary *dict) {
         
+        NSLog(@"DICT : %@",dict);
+        
         NSArray *dataArray = [dict objectForKey:@"data"];
+            
+        NSLog(@"DATAARRAY : %@",dataArray);
         
-        messageArrays = [NSMutableArray arrayWithArray:dataArray];
-        
-        [self initTable];
-        
+        if (dataArray.count > 1) {
+            messageArrays = [NSMutableArray arrayWithArray:dataArray];
+            
+            [self initTable];
+
+        }
     }];
     
     fileDirectoryPath = [NSString stringWithFormat:@"%@/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0],accountMessage.wid];
@@ -136,11 +144,11 @@
         
 
         table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        table.backgroundColor = DEFAULT_COLOR;
+        table.backgroundColor = [UIColor whiteColor];
         table.showsVerticalScrollIndicator = NO;
         table.delegate = self;
         table.dataSource = self;
-        table.frame = CGRectMake(3, 64, [UIScreen mainScreen].bounds.size.width - 6, [UIScreen mainScreen].bounds.size.height - 104);
+        table.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 104);
         table.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
         [self.view addSubview:table];
         [self.view sendSubviewToBack:table];
@@ -153,18 +161,28 @@
 }
 
 - (void)initrecordButton {
-    recordButton = [[UIButton alloc] initWithFrame:CGRectMake(6, SCREEN_HEIGHT - 85, SCREEN_WIDTH - 12
+    
+    UIView *_recordBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
+    
+    [_recordBack setBackgroundColor:DEFAULT_PINK];
+        
+    
+    [self.view addSubview:_recordBack];
+    
+    recordButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 10, SCREEN_WIDTH - 12
         , 30)];
     [recordButton setTitle:@"按住说话" forState:UIControlStateNormal];
     [recordButton setTitle:@"松开结束" forState:UIControlStateHighlighted];
     
     [recordButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [recordButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [recordButton setTitleColor:DEFAULT_PINK forState:UIControlStateHighlighted];
     
-    [recordButton setBackgroundImage:[UIImage imageNamed:@"voiceBtn"] forState:UIControlStateNormal];
-    [recordButton setBackgroundImage:[UIImage imageNamed:@"voiceBtnPress"] forState:UIControlStateHighlighted];
+    [recordButton setBackgroundColor:[UIColor whiteColor]];
     
-    [self.view addSubview:recordButton];
+    [recordButton.layer setCornerRadius:6.f];
+    [recordButton setClipsToBounds:YES];
+    
+    [_recordBack addSubview:recordButton];
     
     [recordButton addTarget:self action:@selector(stopRecord) forControlEvents:UIControlEventTouchUpInside];
     [recordButton addTarget:self action:@selector(beginRecord) forControlEvents:UIControlEventTouchDown];
@@ -253,6 +271,8 @@
     
     [cell addSubview:subView];
     
+    [cell setBackgroundColor:[UIColor whiteColor]];
+    
     return cell;
 }
 
@@ -317,6 +337,13 @@
                            @"wid":accountMessage.wid
                            };
     [messageArrays addObject:dict];
+    
+    if (!table) {
+        
+        NSLog(@"NOT EXISE TABLE");
+        
+        [self initTable];
+    }
     
     [table reloadData];
     

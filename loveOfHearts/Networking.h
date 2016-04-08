@@ -45,4 +45,5 @@ typedef void (^getInt)(int i);
 
 + (void)uploalDataWithAddress:(NSString *)address dict:(NSDictionary *)paramater block:(getInt)getInt;
 
++ (void)getWatchMessageWithParamater:(NSDictionary *)paramater block:(getDict)getDict;
 @end

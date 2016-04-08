@@ -282,4 +282,18 @@ AFHTTPSessionManager *manager;
     }];
 }
 
++ (void)getWatchMessageWithParamater:(NSDictionary *)paramater block:(getDict)getDict{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
+    
+    [manager POST:[NSString stringWithFormat:@"%@getsinglewatchinfo",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        getDict(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        ;
+    }];
+}
+
 @end

@@ -12,16 +12,19 @@
 @implementation LeftCellView
 
 + (UIView *)initWithDict:(NSDictionary *)dict{
+        
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(6, 0, SCREEN_WIDTH - 12, 62)];
     
-    NSLog(@"create left view");
+    [leftView setBackgroundColor:DEFAULT_COLOR];
     
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 6, 62)];
+    [leftView.layer setCornerRadius:6.f];
     
+    [leftView setClipsToBounds:YES];
+    //date
     NSString *createData = [dict objectForKey:@"createdAt"];
     
     NSString *_createDate = [createData stringByReplacingOccurrencesOfString:@"T" withString:@" "];
     
-    //date
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 6, 8)];
     
     [dateLabel setText:_createDate];
@@ -42,8 +45,6 @@
     [leftView addSubview:imageView];
     
     [leftView addSubview:dateLabel];
-    
-    [leftView setBackgroundColor:[UIColor yellowColor]];
     
     return leftView;
 }

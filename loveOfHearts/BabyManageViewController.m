@@ -185,12 +185,26 @@
     
     for (UIView *view in watchViewArray) {
         if (CGRectContainsPoint(view.frame, point)) {
-            PersonInforViewController *personInforView = [PersonInforViewController new];
+            NSInteger index = [watchViewArray indexOfObject:view];
             
-            [self presentViewController:personInforView animated:YES completion:^{
-                ;
+            NSDictionary *_watchDict = [deviceArray objectAtIndex:index];
+            
+            NSString *wid = [_watchDict objectForKey:@"wid"];
+            
+            NSLog(@"wid");
+            
+            NSDictionary *paramater = @{
+                                        @"wid":wid
+                                        };
+            
+            [Networking getWatchMessageWithParamater:paramater block:^(NSDictionary *dict) {
+                
+                [accountMessage setWatchInfor:[dict objectForKey:@"data"]];
+                
+                NSLog(@"%@",accountMessage.wid);
             }];
         }
+        
     }
 }
 

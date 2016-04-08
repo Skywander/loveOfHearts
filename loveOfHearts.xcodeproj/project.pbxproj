@@ -10,6 +10,8 @@
 		078A96509B3DEEDCF116ACA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 56145DAFAAE7E1FBB80390D1 /* libPods.a */; };
 		D312FFEC1CA7861400558485 /* animationView.png in Resources */ = {isa = PBXBuildFile; fileRef = D312FFEB1CA7861400558485 /* animationView.png */; };
 		D315189E1CB74A5200FA872A /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D315189D1CB74A5200FA872A /* delete.png */; };
+		D31518A01CB74D4300FA872A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D315189F1CB74D4300FA872A /* logo.png */; };
+		D31518A21CB74FB500FA872A /* createFenceBackView.png in Resources */ = {isa = PBXBuildFile; fileRef = D31518A11CB74FB500FA872A /* createFenceBackView.png */; };
 		D34ABE981CB499BA0056F611 /* BabyMangeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D34ABE971CB499BA0056F611 /* BabyMangeCellView.m */; };
 		D362B9161C9653790037E29E /* CommentAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B9151C9653790037E29E /* CommentAnimation.m */; };
 		D362B91E1C967A230037E29E /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = D362B9181C967A220037E29E /* menu.png */; };
@@ -100,7 +102,6 @@
 		D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C59E1CA3815600512F5B /* tablecell.png */; };
 		D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */; };
 		D3D8C5A41CA42D7000512F5B /* cellCorner.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A31CA42D7000512F5B /* cellCorner.png */; };
-		D3D8C5A81CA42DDD00512F5B /* createFenceBackView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */; };
 		D3D8C5AB1CA438F100512F5B /* DB.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D8C5AA1CA438F100512F5B /* DB.m */; };
 		D3D8C5AD1CA5529200512F5B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5AC1CA5529200512F5B /* libsqlite3.tbd */; };
 		D3D8C5AF1CA552AE00512F5B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D8C5AE1CA552AE00512F5B /* MobileCoreServices.framework */; };
@@ -205,6 +206,8 @@
 		D312FFEB1CA7861400558485 /* animationView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = animationView.png; sourceTree = "<group>"; };
 		D312FFED1CA79AA900558485 /* MapProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapProtocol.h; sourceTree = "<group>"; };
 		D315189D1CB74A5200FA872A /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		D315189F1CB74D4300FA872A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		D31518A11CB74FB500FA872A /* createFenceBackView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createFenceBackView.png; sourceTree = "<group>"; };
 		D34348F61CADF7670095945D /* TopviewProltocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopviewProltocol.h; sourceTree = "<group>"; };
 		D34ABE951CB497150056F611 /* ImageUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUpdate.h; sourceTree = "<group>"; };
 		D34ABE961CB499BA0056F611 /* BabyMangeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyMangeCellView.h; sourceTree = "<group>"; };
@@ -335,7 +338,6 @@
 		D3D8C5A01CA3BF5400512F5B /* PersonInforViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonInforViewController.h; sourceTree = "<group>"; };
 		D3D8C5A11CA3BF5400512F5B /* PersonInforViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonInforViewController.m; sourceTree = "<group>"; };
 		D3D8C5A31CA42D7000512F5B /* cellCorner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cellCorner.png; sourceTree = "<group>"; };
-		D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = createFenceBackView.jpg; sourceTree = "<group>"; };
 		D3D8C5A91CA438F000512F5B /* DB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB.h; sourceTree = "<group>"; };
 		D3D8C5AA1CA438F100512F5B /* DB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB.m; sourceTree = "<group>"; };
 		D3D8C5AC1CA5529200512F5B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -535,9 +537,10 @@
 		D362B9171C9679C90037E29E /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D315189F1CB74D4300FA872A /* logo.png */,
 				D315189D1CB74A5200FA872A /* delete.png */,
 				D312FFEB1CA7861400558485 /* animationView.png */,
-				D3D8C5A71CA42DDD00512F5B /* createFenceBackView.jpg */,
+				D31518A11CB74FB500FA872A /* createFenceBackView.png */,
 				D3D8C5A31CA42D7000512F5B /* cellCorner.png */,
 				D3D8C59E1CA3815600512F5B /* tablecell.png */,
 				D3D8C5991CA2C5EB00512F5B /* yes.png */,
@@ -1210,12 +1213,13 @@
 				D362B91E1C967A230037E29E /* menu.png in Resources */,
 				D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */,
 				D3D8C5911CA2A46100512F5B /* SrelativeNumber.png in Resources */,
+				D31518A01CB74D4300FA872A /* logo.png in Resources */,
 				D3D8C57C1CA27F8000512F5B /* otherSelected9.png in Resources */,
 				D362B94D1C97AA210037E29E /* signal60.png in Resources */,
 				D362B93A1C96E44F0037E29E /* historyTrack.png in Resources */,
-				D3D8C5A81CA42DDD00512F5B /* createFenceBackView.jpg in Resources */,
 				D3D8C57A1CA27F8000512F5B /* otherSelected8.png in Resources */,
 				D362B94B1C97AA210037E29E /* signal20.png in Resources */,
+				D31518A21CB74FB500FA872A /* createFenceBackView.png in Resources */,
 				D3E51B621C9D0EBD001732BF /* otherSetting9.png in Resources */,
 				D3D8C5901CA2A46100512F5B /* Sauthority.png in Resources */,
 				D3D8C5931CA2A46100512F5B /* Swhitelist.png in Resources */,

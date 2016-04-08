@@ -82,6 +82,7 @@ static AccountMessage *accountMessage;
     self.usim = [dict objectForKey:@"usim"];
     self.whitelist1 = [dict objectForKey:@"whitelist1"];
     self.whitelist2 = [dict objectForKey:@"whitelist2"];
+    self.wid = [dict objectForKey:@"wid"];
     self.wsim = [dict objectForKey:@"wsim"];
 }
 
