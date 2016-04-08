@@ -14,6 +14,8 @@
 #import "PersonInforViewController.h"
 #import "NavigationProtocol.h"
 #import "ImageUpdate.h"
+#import "BabyMangeCellView.h"
+#import "DB.h"
 
 #define VIEW_HEIGHT 80
 
@@ -29,7 +31,7 @@
     
     UIImageView *selectedView;
     
-    NSMutableArray *watchViewArray;
+    NSMutableDictionary *watchViewArray;
 }
 @end
 
@@ -45,7 +47,7 @@
 }
 
 - (void)getData{
-    watchViewArray = [[NSMutableArray alloc] init];
+    watchViewArray = [[NSMutableDictionary alloc] init];
     
     accountMessage = [AccountMessage sharedInstance];
     
@@ -73,12 +75,7 @@
     y = 70;
     for (NSDictionary *dict in deviceArray) {
         
-        NSDictionary *paramater = @{
-                               @"wid":[dict objectForKey:@"wid"],
-                               @"fileName":accountMessage.head
-                               };
-        
-        [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
+        [DB getImageWithWatchId:[dict objectForKey:@"wid"] filename:[dict objectForKey:@"headimg"] block:^(UIImage *image) {
             
             UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];
             
@@ -90,7 +87,9 @@
             
             [self.view addSubview:view];
             
-            [watchViewArray addObject:view];
+            //            [watchViewArray addObject:view];
+            [watchViewArray setObject:view forKey:[NSString stringWithFormat:@"%@",[dict objectForKey:@"wid"]]];
+
         }];
     }
 }
@@ -183,15 +182,12 @@
     
     CGPoint point = [touch locationInView:self.view];
     
-    for (UIView *view in watchViewArray) {
+    [watchViewArray enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        UIView *view = (UIView *)obj;
+        
         if (CGRectContainsPoint(view.frame, point)) {
-            NSInteger index = [watchViewArray indexOfObject:view];
             
-            NSDictionary *_watchDict = [deviceArray objectAtIndex:index];
-            
-            NSString *wid = [_watchDict objectForKey:@"wid"];
-            
-            NSLog(@"wid");
+            NSString *wid = (NSString *)key;
             
             NSDictionary *paramater = @{
                                         @"wid":wid
@@ -202,10 +198,14 @@
                 [accountMessage setWatchInfor:[dict objectForKey:@"data"]];
                 
                 NSLog(@"%@",accountMessage.wid);
+                
             }];
+            
+            [view addSubview:selectedView];
+
         }
-        
-    }
+    }];
+    
 }
 
 

@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Networking.h"
+#import "AccountMessage.h"
+
+typedef void (^getImage)(UIImage *image);
 
 @interface DB : NSObject
 
-+ (UIImage *)getImageWithID:(NSString *)imageID;
++ (void)getImageWithWatchId:(NSString *)watchId filename:(NSString *)filename block:(getImage)getImage;
 
 @end

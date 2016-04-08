@@ -141,20 +141,12 @@ AFHTTPSessionManager *manager;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        
-        
-        NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[AccountMessage sharedInstance].head];
-        
+
         NSData *imageData = UIImagePNGRepresentation(responseObject);
-        
-        [imageData writeToFile:imagePath atomically:NO];
         
         UIImage *image = [UIImage imageWithData:imageData];
         
         getImage(image);
-        
         
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             getImage(nil);

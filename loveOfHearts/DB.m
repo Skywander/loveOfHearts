@@ -10,16 +10,62 @@
 
 @implementation DB
 
-+ (UIImage *)getImageWithID:(NSString *)imageID{
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
++ (void)getImageWithWatchId:(NSString *)watchId filename:(NSString *)filename block:(getImage)getImage{
+    //cache
+    AccountMessage *_accoutMessage = [AccountMessage sharedInstance];
+
+    if ([_accoutMessage.wid isEqualToString:watchId] && [_accoutMessage.image isKindOfClass:[UIImage class]]) {
+        getImage(_accoutMessage.image);
+        
+        return;
+    }
+    //file
+    NSFileManager *_fileManager = [NSFileManager defaultManager];
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",path,imageID];
+    NSString *_path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+
     
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",_path,filename];
     
-    UIImage *image = [UIImage imageWithData:imageData];
+    if ([_fileManager fileExistsAtPath:imagePath]) {
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        if ([_accoutMessage.wid isEqualToString:watchId]) {
+            
+            _accoutMessage.image = image;
+
+        }
+        
+        getImage(image);
+        
+        return;
+    }
+    //net
+    NSDictionary *paramater = @{
+                                    @"wid":watchId,
+                                    @"fileName":filename
+                                };
     
-    return image;
+    [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image){
+        
+        if (image) {
+            getImage(image);
+            
+            if ([_accoutMessage.wid isEqualToString:watchId]) {
+                _accoutMessage.image = image;
+
+            }
+            NSData *imageData = UIImagePNGRepresentation(image);
+            
+            [imageData writeToFile:imagePath atomically:NO];
+            
+        }
+        return ;
+        
+    }];
+    
 }
 
 @end

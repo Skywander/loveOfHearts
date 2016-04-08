@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "HomeViewController+delegate.h"
+#import "DB.h"
 
 #define START_X 0
 #define START_Y 0
@@ -52,36 +53,9 @@
     
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
-    NSString *wid = accountMessage.wid;
-    
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",documentPath,[AccountMessage sharedInstance].head];
-    
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    
-    [imageData writeToFile:imagePath atomically:NO];
-    
-    UIImage *image = [UIImage imageWithData:imageData];
-    
-    if (image) {
-        NSLog(@"exist image");
+    [DB getImageWithWatchId:accountMessage.wid filename:accountMessage.head block:^(UIImage *image) {
         [topView setImage:image];
-        
-        accountMessage.image = image;
-        
-    }else{
-        NSDictionary *paramater = @{
-                                    @"wid":wid,
-                                    @"fileName":accountMessage.head
-                                    };
-        [Networking getWatchPortiartWithDict:paramater blockcompletion:^(UIImage *image) {
-            [topView setImage:image];
-            accountMessage.image = image;
-        }];
-        
-    }
+    }];
 }
 
 - (void)initMapView{

@@ -53,18 +53,15 @@
     
     [watchIdLabel setTextAlignment:NSTextAlignmentCenter];
     
+    self.wid = watchId;
+    
     [view addSubview:watchIdLabel];
     
     
     [view.layer setCornerRadius:6.f];
     [view.layer setBorderColor:[UIColor grayColor].CGColor];
     [view.layer setBorderWidth:0.3f];
-    
-//    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-//    singleTap.numberOfTapsRequired = 2;
-//    [view addGestureRecognizer:singleTap];
-    
-    
+        
     return view;
 }
 

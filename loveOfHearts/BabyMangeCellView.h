@@ -12,4 +12,8 @@
 
 @property (nonatomic,strong) UIImage *portrait;
 
+@property (nonatomic,strong) NSString *wid;
+
+- (UIView *)viewWithWatchImage:(UIImage *)image andY:(float)getY andWatchId:(NSString *)watchId;
+
 @end
