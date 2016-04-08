@@ -35,6 +35,10 @@
     
     [imageView setFrame:CGRectMake(6, 14, 42, 42)];
     
+    [imageView.layer setCornerRadius:21];
+    
+    [imageView setClipsToBounds:YES];
+    
     [leftView addSubview:imageView];
     
     [leftView addSubview:dateLabel];

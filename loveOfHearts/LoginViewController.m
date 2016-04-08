@@ -64,11 +64,7 @@
     if (tempID && tempPassword) {
         userId = tempID;
         userPassword = tempPassword;
-    }else{
-        userPassword = @"  输入密码";
-        userId = @"  输入手机号码";
     }
-    
 }
 
 - (void)initUI{
@@ -83,7 +79,12 @@
 
     [userName.layer setCornerRadius:CORNER_RIDUS];
     [userName setKeyboardType:UIKeyboardTypeDefault];
-    [userName setText:userId];
+    
+    if (userId) {
+        [userName setText:userId];
+    }else{
+        [userName setPlaceholder:@"请输入用户名(手机号码)"];
+    }
     
     UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
     [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
@@ -92,7 +93,13 @@
     [userName setBackgroundColor:[UIColor whiteColor]];
     
     [password.layer setCornerRadius:CORNER_RIDUS];
-    [password setText:userPassword];
+    
+    if (userPassword) {
+        [password setText:userPassword];
+    }else{
+        [password setPlaceholder:@"请输入密码"];
+    }
+    
     [password setSecureTextEntry:YES];
     [password setKeyboardType:UIKeyboardTypeDefault];
     [password setBackgroundColor:[UIColor whiteColor]];

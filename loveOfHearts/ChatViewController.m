@@ -23,9 +23,6 @@
 #define FILTRATE_WIDTH 100
 #define FILTRATE_CELL_HEIGHT 36
 
-#define PATH_OF_DOCUMENT  [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-
-
 @interface ChatViewController()<PRNAmrRecorderDelegate,UIGestureRecognizerDelegate>
 {
     PRNAmrRecorder *recorder;
@@ -42,10 +39,14 @@
     UIButton *recordButton;
     
     NSString *voiceName;
+    NSString *timeString;
     NSInteger getVoiceStartLocation;
     
     //pull refresh
     UIRefreshControl *refreshViewController;
+    
+    NSString *fileDirectoryPath;
+    NSFileManager *fileManager;
 }
 @end
 @implementation ChatViewController
@@ -75,7 +76,6 @@
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
     [self.view addSubview:[Navigation new]];
-    
 
     [self initrecordButton];
 
@@ -109,11 +109,19 @@
         
         messageArrays = [NSMutableArray arrayWithArray:dataArray];
         
-        NSLog(@"repsonse : %@",dict);
-        
         [self initTable];
         
     }];
+    
+    fileDirectoryPath = [NSString stringWithFormat:@"%@/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0],accountMessage.wid];
+    
+     fileManager = [NSFileManager defaultManager];
+    
+    bool inter = YES;
+    
+    if (![fileManager fileExistsAtPath:fileDirectoryPath isDirectory:&inter]) {
+        [fileManager createDirectoryAtPath:fileDirectoryPath withIntermediateDirectories:inter attributes:nil error:nil];
+    }
 
 }
 
@@ -168,13 +176,13 @@
     NSDate *date = [NSDate new];
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"YYYY_MM_dd_HHmmss"];
-    NSString *timeString = [formatter stringFromDate:date];
+    timeString = [formatter stringFromDate:date];
     
     voiceName = [NSString stringWithFormat:@"%@.amr",timeString];
     
     NSLog(@"voiceName : %@",voiceName);
     
-    NSString *recordFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:voiceName];
+    NSString *recordFile = [fileDirectoryPath stringByAppendingPathComponent:voiceName];
     
     [recorder setSpeakMode:NO];
     
@@ -249,21 +257,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *_fileName = [NSString new];
+    NSDictionary *voiceMessageDict = [messageArrays objectAtIndex:messageArrays.count - [indexPath row] - 1];
     
-    NSLog(@"messageArrays : %@",messageArrays);
+    NSString *_fileName = [voiceMessageDict objectForKey:@"filename"];
     
-    NSDictionary *voiceMessage = [messageArrays objectAtIndex:messageArrays.count - [indexPath row] - 1];
-    
-    _fileName = [voiceMessage objectForKey:@"filename"];
-    
-    NSString *filePath = [path stringByAppendingPathComponent:_fileName];
-    
-    NSLog(@"filename :%@",filePath);
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [fileDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",_fileName]];
     
     if ([fileManager fileExistsAtPath:filePath]) {
         
@@ -282,13 +281,11 @@
                                     @"fileName":_fileName,
                                     };
         
-        NSLog(@"down fileName %@ path : %@",_fileName,filePath);
-        
         [Networking downloadVoiceWithDict:paramater block:^(NSData *data) {
-            NSString *filePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_fileName];
+
             [data writeToFile:filePath atomically:NO];
             
-            NSLog(@"downLoadData : %@",data);
+            [player playWithURL:[NSURL URLWithString:filePath]];
         }];
     }
 
@@ -297,15 +294,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 65;
 }
+
+
+
+#pragma record over,upload voice
 - (void)recorder:(PRNAmrRecorder *)aRecorder didRecordWithFile:(PRNAmrFileInfo *)fileInfo
 {
-    NSLog(@"==================================================================");
-    NSLog(@"record with file : %@", fileInfo.fileUrl);
-    NSLog(@"file size: %llu", fileInfo.fileSize);
-    NSLog(@"file duration : %f", fileInfo.duration);
-    NSLog(@"==================================================================");
     
-    NSString *recordFile = [PATH_OF_DOCUMENT stringByAppendingPathComponent:voiceName];
+    NSString *recordFile = [fileDirectoryPath stringByAppendingPathComponent:voiceName];
 
     NSDictionary *paramater = @{
                                 @"userId":accountMessage.userId,
@@ -313,11 +309,11 @@
                                 };
     
     NSDictionary *dict = @{
-                           @"createdAt":@"temp",
+                           @"createdAt":timeString,
                            @"filename":voiceName,
                            @"fromId":accountMessage.userId,
-                           @"isheard":@"temp",
-                           @"updatedAt":@"temp",
+                           @"isheard":@"0",
+                           @"updatedAt":timeString,
                            @"wid":accountMessage.wid
                            };
     [messageArrays addObject:dict];
