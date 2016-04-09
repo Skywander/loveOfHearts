@@ -18,6 +18,16 @@
 
 
 - (void)passSelectedVaule:(NSInteger)selected{
+    if(selected == 4){
+        [[Mymapview sharedInstance].mapView showsUserLocation];
+        
+        [[Mymapview sharedInstance].mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
+        
+        }
+    if (selected == 3) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",[AccountMessage sharedInstance].wsim]]];
+
+    }
     if (selected == 2) {
         ChatViewController *chatView = [ChatViewController new];
         
@@ -25,12 +35,6 @@
             ;
         }];
     }
-    if(selected == 4){
-        [[Mymapview sharedInstance].mapView showsUserLocation];
-        
-        [[Mymapview sharedInstance].mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
-        
-        }
     if (selected == 1) {
         [Command commandWithName:@"cr" block:^(NSInteger type) {
             if (type == 100) {

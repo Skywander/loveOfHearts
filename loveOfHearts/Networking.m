@@ -200,7 +200,7 @@ AFHTTPSessionManager *manager;
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSNumber *number = [responseObject objectForKey:@"type"];
-        
+                
         getInt([number intValue]);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

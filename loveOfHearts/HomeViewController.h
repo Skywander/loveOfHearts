@@ -22,7 +22,5 @@
 
 @property (nonatomic,strong) HomeTopView *topView;
 
-//@property (nonatomic,strong) MAMapView *mapView;
-
 @end
 

@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ImageUpdate.h"
 
 @interface PersonInforViewController : UIViewController
-
-@property id<ImageUpdate> delegate;
 
 @end

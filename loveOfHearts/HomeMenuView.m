@@ -192,22 +192,33 @@
     
     CGPoint point = [touch locationInView:self];
     
-    if (point.y > self.frame.size.width * 3 && point.y < self.frame.size.width * 4) {
-        
-        [self.homeDelegat passSelectedVaule:2];
-        
-    }
-    
     if (point.y > self.frame.size.width * 5 && point.y < self.frame.size.width * 6) {
         
         [self.homeDelegat passSelectedVaule:4];
         
     }
+    if (point.y > self.frame.size.width * 4 && point.y < self.frame.size.width * 5) {
+        
+        [self.homeDelegat passSelectedVaule:3];
+        
+    }
+
+    if (point.y > self.frame.size.width * 3 && point.y < self.frame.size.width * 4) {
+        
+        [self.homeDelegat passSelectedVaule:2];
+        
+    }
+
     if (point.y > self.frame.size.width * 2 && point.y < self.frame.size.width * 3) {
         
         [self.homeDelegat passSelectedVaule:1];
         
     }
+    if (point.y > self.frame.size.width * 1 && point.y < self.frame.size.width * 2) {
+        
+        [self.homeDelegat passSelectedVaule:0];
+    }
+
 }
 
 @end

@@ -267,7 +267,18 @@
                 
                 accountMessage.head = head;
                 
-                [self.delegate updateImage];
+                accountMessage.image = portraitImage;
+
+                accountMessage.babysex = [NSString stringWithFormat:@"%ld",(long)sexSubButton.tag];
+                
+                accountMessage.babyname = remarkTextField.text;
+                
+                accountMessage.babybir = birthdaySubButton.titleLabel.text;
+                
+                //创建通知
+                NSNotification *notification =[NSNotification notificationWithName:@"HomeviewUpdateImage" object:portraitImage userInfo:nil];
+                //通过通知中心发送通知
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
                 [self dismissViewControllerAnimated:YES completion:^{
                     ;

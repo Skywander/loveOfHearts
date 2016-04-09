@@ -23,7 +23,7 @@ static AccountMessage *accountMessage;
 
 - (id)init{
     self = [super init];
-        
+    
     return self;
 }
 
@@ -106,9 +106,9 @@ static AccountMessage *accountMessage;
         case 1006:
             self.pedo = self.temppedo;
             break;
-//        case 1007:
-//            self.smsonoff = self.tempsos;
-//            break;
+        case 1007:
+            self.smsonoff = self.tempsos;
+            break;
         case 1008:
             self.sossms = self.tempsossms;
             break;
@@ -121,9 +121,9 @@ static AccountMessage *accountMessage;
         case 1011:
             self.clock = self.tempclock;
             break;
-//        case 1012:
-//            self.mode = self.tempmode;
-//            break;
+        case 1012:
+            self.mode = self.tempmode;
+            break;
         case 1013:
             self.lowbat = self.templowbat;
             break;

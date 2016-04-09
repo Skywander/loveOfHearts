@@ -220,7 +220,6 @@
 		D31518B11CB9613F00FA872A /* reset_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset_press.png; sourceTree = "<group>"; };
 		D31518B21CB9613F00FA872A /* reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset.png; sourceTree = "<group>"; };
 		D34348F61CADF7670095945D /* TopviewProltocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopviewProltocol.h; sourceTree = "<group>"; };
-		D34ABE951CB497150056F611 /* ImageUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUpdate.h; sourceTree = "<group>"; };
 		D34ABE961CB499BA0056F611 /* BabyMangeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BabyMangeCellView.h; sourceTree = "<group>"; };
 		D34ABE971CB499BA0056F611 /* BabyMangeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BabyMangeCellView.m; sourceTree = "<group>"; };
 		D362B9141C9653790037E29E /* CommentAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentAnimation.h; sourceTree = "<group>"; };
@@ -549,7 +548,6 @@
 				D34348F61CADF7670095945D /* TopviewProltocol.h */,
 				D3787F811CB0120E009AE58A /* HomeMenuProtocol.h */,
 				D3787F981CB1448F009AE58A /* NavigationProtocol.h */,
-				D34ABE951CB497150056F611 /* ImageUpdate.h */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";

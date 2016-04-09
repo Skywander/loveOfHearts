@@ -13,12 +13,11 @@
 #import "AddWatchViewController.h"
 #import "PersonInforViewController.h"
 #import "NavigationProtocol.h"
-#import "ImageUpdate.h"
 #import "DB.h"
 
 #define VIEW_HEIGHT 80
 
-@interface BabyManageViewController ()<NavigationProtocol,ImageUpdate>
+@interface BabyManageViewController ()<NavigationProtocol>
 {    
     Networking *netWorking;
     

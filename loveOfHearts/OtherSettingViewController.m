@@ -62,6 +62,16 @@
         return;
     }
     
+    if ([indexPath row] == 5) {
+        [Command commandWithName:@"monitor" block:^(NSInteger type) {
+            if (type == 100) {
+                NSLog(@"success");
+            }
+        }];
+        
+        return;
+    }
+    
     UIViewController *viewController = [OtherSettingFactory factoryWithTag:(int)[indexPath row]];
     
     [self presentViewController:viewController animated:YES completion:^{

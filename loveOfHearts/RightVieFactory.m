@@ -32,10 +32,10 @@
         case 2:
             viewController = [SosphoneSetting new];
             break;
-        case 3:
+        case 4:
             viewController = [PhoneCanMakeList new];
             break;
-        case 4:
+        case 3:
             viewController = [PhoneListView new];
             break;
         case 5:

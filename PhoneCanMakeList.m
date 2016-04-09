@@ -188,7 +188,7 @@
     [Command commandWithAddress:@"whitelist1" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempwhitelist1 = phoneNumbersOne;
-            NSLog(@"success");
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
     

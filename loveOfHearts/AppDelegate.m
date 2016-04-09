@@ -221,8 +221,9 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payloadData options:NSJSONReadingAllowFragments error:nil];
     
+    NSLog(@"dit : %@",dict);
+    
     NSDictionary *data = [dict objectForKey:@"data"];
-
     
     NSInteger type = [[dict objectForKey:@"type"] integerValue];
     

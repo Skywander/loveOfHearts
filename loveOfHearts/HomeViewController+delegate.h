@@ -14,8 +14,6 @@
 #import "HomeMenuProtocol.h"
 #import "TopviewProltocol.h"
 
-#import "ImageUpdate.h"
-
 #import "AccountMessage.h"
 
 @interface HomeViewController (delegate)<MapProtocol,HomeMenuProtocol,TopviewProltocol>

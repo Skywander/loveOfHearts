@@ -63,9 +63,7 @@
 
 - (void)initMapView{
     mapView = [Mymapview sharedInstance];
-    
-//    self.mapView = mapView.mapView;
-    
+        
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     
     mapView.mydelegate = self;
@@ -73,6 +71,8 @@
     [self.view addSubview:mapView];
     
     [self.view sendSubviewToBack:mapView];
+    
+    [mapView searchPointWithLat:39.5427 andLon:116.2317];
 }
 
 - (void)initHomeMenuView{

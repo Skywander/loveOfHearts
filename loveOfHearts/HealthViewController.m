@@ -127,9 +127,7 @@
                                };
         [Command commandWithAddress:@"pedo" andParamater:dict block:^(NSInteger type) {
             if (type == 100) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    ;
-                }];
+                ;
             }
         }];
         
@@ -151,7 +149,9 @@
                                 @"turn":timeString
                                };
         
-        [Command commandWithAddress:@"turn" andParamater:dict block:nil];
+        [Command commandWithAddress:@"turn" andParamater:dict block:^(NSInteger type) {
+            ;
+        }];
         
         accountMessage.tempturn = @"00:00 - 23.59";
     }
