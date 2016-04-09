@@ -31,9 +31,7 @@
     [dateLabel setTextAlignment:NSTextAlignmentCenter];
     [dateLabel setFont:[UIFont systemFontOfSize:10]];
     [dateLabel setBackgroundColor:DEFAULT_COLOR];
-    
-    //portrait
-    
+        
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[AccountMessage sharedInstance].image];
     
     [imageView setFrame:CGRectMake(6, 14, 42, 42)];
@@ -45,6 +43,16 @@
     [leftView addSubview:imageView];
     
     [leftView addSubview:dateLabel];
+    
+    //play
+    
+    UIImageView *playView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_right0"]];
+    
+    [playView setFrame:CGRectMake(54, 16, 30, 30)];
+    
+    [playView setClipsToBounds:YES];
+    
+    [leftView addSubview:playView];
     
     return leftView;
 }

@@ -169,9 +169,15 @@
                            @"space":space
                            };
     
-    [Command commandWithAddress:@"uploadspacetime" andParamater:dict];
-    
-    accountMessage.tempmode = space;
+    [Command commandWithAddress:@"uploadspacetime" andParamater:dict block:^(NSInteger type) {
+        if (type == 100){
+            accountMessage.tempmode = space;
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
+        }
+    }];
 }
 
 

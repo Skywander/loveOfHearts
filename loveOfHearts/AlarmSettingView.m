@@ -180,7 +180,13 @@
                                 @"clockTime":timeString
                                 };
     
-    [Command commandWithAddress:@"clock" andParamater:paramater];
+    [Command commandWithAddress:@"clock" andParamater:paramater block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
+        }
+    }];
     
     accountMessage.tempclock = timeString;
 }

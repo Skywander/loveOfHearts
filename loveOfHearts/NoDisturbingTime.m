@@ -263,7 +263,11 @@
                                  @"wid":accountMessage.wid,
                                  @"silence":paramater
                                 };
-    [Command commandWithAddress:@"silence" andParamater:paramaters];
+    [Command commandWithAddress:@"silence" andParamater:paramaters block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
     
     accountMessage.tempsilencetime = paramater;
 }

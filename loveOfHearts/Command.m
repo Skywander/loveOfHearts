@@ -17,7 +17,7 @@
 
 @implementation Command
 
-+ (void)commandWithName:(NSString *)command{
++ (void)commandWithName:(NSString *)command block:(getInteger)getInteger{
     
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
@@ -38,12 +38,14 @@
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
+        getInteger([[responseObject objectForKey:@"type"] integerValue]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
+        getInteger(0);
     }];
 }
 
-+ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater{
++ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater block:(getInteger)getInteger{
 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager new];
     
@@ -67,9 +69,13 @@
         if ([address isEqualToString:@"centernumber"]) {
             [AccountMessage sharedInstance].centernumber = [paramater objectForKey:@"centerNumber"];
         }
+        
+        getInteger([[responseObject objectForKey:@"type"] integerValue]);
   
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure : %@",error);
+        
+        getInteger(0);
     }];
 }
 

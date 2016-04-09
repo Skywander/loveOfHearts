@@ -71,8 +71,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([indexPath row] == 8) {
-        [self findWatch];
+    if ([indexPath row] == 7) {
+        
+        [Command commandWithName:@"findwatch" block:^(NSInteger type) {
+            if (type == 100) {
+                NSLog(@"send success");
+            }
+        }];
     }
     
     if ([indexPath row] == 9) {
@@ -104,12 +109,6 @@
     [cell setSelectedBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"S%@",[cellNames objectAtIndex:[indexPath row]]]]]];
                              
     return cell;
-    
-}
-
-
-- (void)findWatch{
-    [Command commandWithName:@"findwatch"];
 }
 
 @end

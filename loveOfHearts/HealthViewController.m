@@ -125,7 +125,13 @@
                                 @"wid":wid,
                                 @"pedo":switsState[sender.tag]
                                };
-        [Command commandWithAddress:@"pedo" andParamater:dict];
+        [Command commandWithAddress:@"pedo" andParamater:dict block:^(NSInteger type) {
+            if (type == 100) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    ;
+                }];
+            }
+        }];
         
         accountMessage.temppedo = [switsState objectAtIndex:0];
     }
@@ -145,7 +151,7 @@
                                 @"turn":timeString
                                };
         
-        [Command commandWithAddress:@"turn" andParamater:dict];
+        [Command commandWithAddress:@"turn" andParamater:dict block:nil];
         
         accountMessage.tempturn = @"00:00 - 23.59";
     }

@@ -146,7 +146,11 @@
                             @"sos":tempString
                            };
     
-    [Command commandWithAddress:@"sos" andParamater:dict];
+    [Command commandWithAddress:@"sos" andParamater:dict block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
     accountMessage.sos = tempString;
     
         
@@ -156,7 +160,7 @@
                                 @"centerNumber":textFields[3].text
                                };
         
-        [Command commandWithAddress:@"centernumber" andParamater:paramater];
+//        [Command commandWithAddress:@"centernumber" andParamater:paramater block:nil];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -124,7 +124,11 @@
                                 };
     
     
-    [Command commandWithAddress:@"passwordreset" andParamater:paramater];
+    [Command commandWithAddress:@"passwordreset" andParamater:paramater block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
     
     [self.view endEditing:YES];
 

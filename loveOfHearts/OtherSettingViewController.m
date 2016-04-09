@@ -49,7 +49,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 6) {
-        [Command commandWithName:@"poweroff"];
+        [Command commandWithName:@"poweroff" block:^(NSInteger type) {
+            if (type == 100) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    ;
+                }];
+            }else{
+                NSLog(@"error");
+            }
+        }];
         
         return;
     }

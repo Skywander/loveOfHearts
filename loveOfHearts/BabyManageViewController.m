@@ -170,8 +170,8 @@
 }
 
 - (void)updateImage{
-    NSLog(@"更新图片");
     
+    NSLog(@"更新图片");
     
 }
 

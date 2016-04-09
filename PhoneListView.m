@@ -200,7 +200,7 @@
                                       [pushStringone substringWithRange:range1],@"PHB",
                                       nil
                                       ];
-            [Command commandWithAddress:@"phones" andParamater:tempDict];
+            [Command commandWithAddress:@"phones" andParamater:tempDict block:nil];
         }
         if (pushStringtwo.length != 0) {
             NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -209,7 +209,11 @@
                                       [pushStringone substringWithRange:range1],@"PHB2",
                                       nil
                                       ];
-            [Command commandWithAddress:@"phones" andParamater:tempDict];
+            [Command commandWithAddress:@"phones" andParamater:tempDict block:^(NSInteger type) {
+                if (type == 100) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+            }];
 
         }
     }

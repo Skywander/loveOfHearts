@@ -86,7 +86,7 @@ static AccountMessage *accountMessage;
     self.wsim = [dict objectForKey:@"wsim"];
 }
 
-- (void)updateDataWithNumber:(int)number{
+- (void)updateDataWithNumber:(NSInteger)number{
     switch (number) {
         case 1000:
             self.mode = self.tempmode;

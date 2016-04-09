@@ -185,7 +185,11 @@
                               phoneNumbersOne,@"whitelist1",
                               nil
                               ];
-    [Command commandWithAddress:@"whitelist1" andParamater:tempDict];
+    [Command commandWithAddress:@"whitelist1" andParamater:tempDict block:^(NSInteger type) {
+        if (type == 100) {
+            NSLog(@"success");
+        }
+    }];
     
     NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                 userAccount,@"userId",
@@ -193,7 +197,11 @@
                                 phoneNumbersTwo,@"whitelist2",
                                 nil
                                 ];
-    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2];
+    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2 block:^(NSInteger type) {
+        if (type == 100) {
+            NSLog(@"success");
+        }
+    }];
 
 }
 

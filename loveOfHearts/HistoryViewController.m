@@ -63,10 +63,12 @@
                                 @"fid":self.fid
                                 };
     
-    [Command commandWithAddress:@"deletefence" andParamater:paramater];
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        ;
+    [Command commandWithAddress:@"deletefence" andParamater:paramater block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
+        }
     }];
 }
 

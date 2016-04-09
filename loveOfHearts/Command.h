@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^getInteger)(NSInteger type);
+
+
 @interface Command : NSObject
 
 
-+ (void)commandWithName:(NSString *)command;
++ (void)commandWithName:(NSString *)command block:(getInteger)getInteger;
 
 
-+ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater;
++ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater block:(getInteger)getInteger;
 
 
 @end

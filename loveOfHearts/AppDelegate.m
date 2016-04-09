@@ -17,6 +17,8 @@
 
 #import "LoginViewController.h"
 
+#import "AccountMessage.h"
+
 #define NotifyActionKey "NotifyAction"
 
 NSString *const NotificationCategoryIdent = @"ACTIONABLE";
@@ -219,9 +221,16 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
 
     NSLog(@" record : %@",record);
     
-    NSString *msg = [NSString stringWithFormat:@"%@ : %@%@", [self formateTime:[NSDate date]], payloadMsg, offLine ? @"<离线消息>" : @""];
-    NSLog(@"GexinSdkReceivePayload : %@, taskId: %@, msgId :%@", msg, taskId, msgId);
+    //NSString *msg = [NSString stringWithFormat:@"%@ : %@%@", [self formateTime:[NSDate date]], payloadMsg, offLine ? @"<离线消息>" : @""];
+    NSLog(@"GexinSdkReceivePayload : %@",payloadData);
     
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payloadData options:NSJSONReadingAllowFragments error:nil];
+    
+    NSDictionary *data = [dict objectForKey:@"data"];
+    
+    NSInteger number = [[data objectForKey:@"id"] integerValue];
+    
+    [[AccountMessage sharedInstance] updateDataWithNumber:number];
     // 汇报个推自定义事件
     [GeTuiSdk sendFeedbackMessage:90001 taskId:taskId msgId:msgId];
 }

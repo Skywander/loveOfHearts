@@ -211,7 +211,13 @@
                                 @"area":self.fenceData,
                                 @"name":fenceNameTextField.text 
                                 };
-    [Command commandWithAddress:@"addfence" andParamater:paramater];
+    [Command commandWithAddress:@"addfence" andParamater:paramater block:^(NSInteger _type) {
+        if (_type == 100) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
+        }
+    }];
     return;
 }
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date

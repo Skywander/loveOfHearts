@@ -133,7 +133,7 @@
                             @"flowerNum":flower_count
                            };
     
-    [Command commandWithAddress:@"flower" andParamater:dict];
+    [Command commandWithAddress:@"flower" andParamater:dict block:nil];
     
     accountMessage.tempflower = flower_count;
 }

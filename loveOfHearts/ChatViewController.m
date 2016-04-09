@@ -47,6 +47,10 @@
     
     NSString *fileDirectoryPath;
     NSFileManager *fileManager;
+    
+    NSArray *_voicePlayImages;
+    
+    UIImageView *_voicePlayView;
 }
 @end
 @implementation ChatViewController
@@ -114,6 +118,7 @@
         NSLog(@"DATAARRAY : %@",dataArray);
         
         if (dataArray.count > 1) {
+            
             messageArrays = [NSMutableArray arrayWithArray:dataArray];
             
             [self initTable];
@@ -130,6 +135,10 @@
     if (![fileManager fileExistsAtPath:fileDirectoryPath isDirectory:&inter]) {
         [fileManager createDirectoryAtPath:fileDirectoryPath withIntermediateDirectories:inter attributes:nil error:nil];
     }
+    
+    _voicePlayImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_right0"],[UIImage imageNamed:@"voice_right1"],[UIImage imageNamed:@"voice_right2"],[UIImage imageNamed:@"voice_right3"],nil];
+    
+    _voicePlayView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 16, 30, 30)];
 
 }
 
@@ -273,6 +282,8 @@
     
     [cell setBackgroundColor:[UIColor whiteColor]];
     
+    
+    
     return cell;
 }
 
@@ -294,7 +305,6 @@
 
         [player playWithURL:[NSURL URLWithString:filePath]];
         
-        NSLog(@"play over");
     }else{
         NSDictionary *paramater = @{
                                     @"wid":[AccountMessage sharedInstance].wid,
@@ -308,7 +318,16 @@
             [player playWithURL:[NSURL URLWithString:filePath]];
         }];
     }
-
+    
+    [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayView];
+    
+    _voicePlayView.animationImages = _voicePlayImages;
+    
+    _voicePlayView.animationDuration = 1;
+    
+    _voicePlayView.animationRepeatCount = 10;
+    
+    [_voicePlayView startAnimating];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -351,8 +370,6 @@
     [table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
     NSData *voiceData = [NSData dataWithContentsOfFile:recordFile];
-    
-    NSLog(@"voiceData : %@",voiceData);
     
    [Networking uploadVoiceWithDict:paramater andVoiceData:voiceData voiceName:voiceName];
 }

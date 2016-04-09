@@ -131,7 +131,7 @@
                                 @"wid":wid,
                                 @"onoroff":[switsState objectAtIndex:0]
                               };
-    [Command commandWithAddress:@"sossms" andParamater:sosDict];
+    [Command commandWithAddress:@"sossms" andParamater:sosDict block:nil];
     
     accountMessage.tempsossms = [switsState objectAtIndex:0];
     
@@ -140,7 +140,7 @@
                                    @"wid":wid,
                                    @"lowbat":[switsState objectAtIndex:1]
                                    };
-    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict];
+    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict block:nil];
     
     accountMessage.templowbat = [switsState objectAtIndex:1];
     
@@ -151,7 +151,7 @@
                               };
     
     
-    [Command commandWithAddress:@"remove" andParamater:offDict];
+    [Command commandWithAddress:@"remove" andParamater:offDict block:nil];
     
     accountMessage.tempremove = [switsState objectAtIndex:2];
 
@@ -161,7 +161,13 @@
                                 @"smsonoff":[switsState objectAtIndex:3]
                               };
     
-    [Command commandWithAddress:@"smsonoff" andParamater:smsDict];
+    [Command commandWithAddress:@"smsonoff" andParamater:smsDict block:^(NSInteger type) {
+        if (type == 100) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
+        }
+    }];
     
     accountMessage.tempsmsonoff = [switsState objectAtIndex:3];
     

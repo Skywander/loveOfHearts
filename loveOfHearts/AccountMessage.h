@@ -86,6 +86,6 @@
 
 - (void)setWatchInfor:(NSDictionary *)dict;
 
-- (void)updateDataWithNumber:(int)number;
+- (void)updateDataWithNumber:(NSInteger)number;
 
 @end
