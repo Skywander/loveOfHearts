@@ -13,15 +13,15 @@
 #import "NewFenceMessage.h"
 #import "Alert.h"
 #import "Navigation.h"
+#import "NavigationProtocol.h"
 
-@interface NewFenceView()<MAMapViewDelegate,MAAnnotation,UIAlertViewDelegate>
+@interface NewFenceView()<MAMapViewDelegate,MAAnnotation,UIAlertViewDelegate,NavigationProtocol>
 
 {
     MAMapView *mapView;
     Mymapview *myMapview;
     
     UIButton *backButton;
-    UIButton *makeSureButton;
     
     CLLocationCoordinate2D touchCoordinate;
     MAPointAnnotation *touchAnnotation;
@@ -56,12 +56,14 @@
 
 - (void)initNaviView{
     Navigation *naviview = [Navigation new];
+    [naviview addRightViewWithName:@"保存"];
+    [naviview setDelegate:self];
     [self.view addSubview:naviview];
 }
 
 - (void)initMapView {
     myMapview = [Mymapview sharedInstance];
-    [myMapview setFrame:CGRectMake(10, 102, SCREEN_WIDTH - 20, SCREEN_HEIGHT - 150)];
+    [myMapview setFrame:CGRectMake(10, 70, SCREEN_WIDTH - 20, SCREEN_HEIGHT - 75)];
     
     mapView = myMapview.mapView;
     
@@ -72,7 +74,7 @@
 - (void)initButton {
     //返回
     backButton = [UIButton new];
-    [backButton setFrame:CGRectMake(12,74,40,40)];
+    [backButton setFrame:CGRectMake(SCREEN_WIDTH - 52,74,40,40)];
     
     [backButton setBackgroundColor:[UIColor clearColor]];
     [backButton.layer setMasksToBounds:YES];
@@ -80,48 +82,6 @@
     [backButton setBackgroundImage:[UIImage imageNamed:@"reset_press.png"] forState:UIControlStateHighlighted];
     [self.view addSubview:backButton];
     [backButton addTarget:self action:@selector(clickBackButton) forControlEvents:UIControlEventTouchUpInside];
-    //确定
-    makeSureButton = [UIButton new];
-    [makeSureButton setFrame:CGRectMake(10, SCREEN_HEIGHT-40, SCREEN_WIDTH - 20, 35)];
-    [makeSureButton setTitle:@"划定该区域" forState:UIControlStateNormal];
-    [makeSureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [makeSureButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-    [makeSureButton setBackgroundColor:[UIColor whiteColor]];
-    [makeSureButton.layer setBorderWidth:0.2];
-    [makeSureButton.layer setBorderColor:[UIColor grayColor].CGColor];
-    [makeSureButton.layer setCornerRadius:5.0];
-    makeSureButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [makeSureButton addTarget:self action:@selector(clickSureButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self.view addSubview:makeSureButton];
-    
-}
-
-
-- (void)clickSureButton {
-    NSLog(@"clickMakeSureButton");
-    
-    NSString *fenceData;
-    
-    for (int i = 0; i < tapcount; i++) {
-        double pointX =  touchPoints[i].latitude;
-        double pointY = touchPoints[i].longitude;
-                
-        NSString *tempStr = [NSString stringWithFormat:@"%f,%f",pointY,pointX];
-        if (i == 0) {
-            fenceData = [NSString stringWithFormat:@"%@",tempStr];
-        }
-        
-        fenceData = [NSString stringWithFormat:@"%@;%@",fenceData,tempStr];
-    }
-    NewFenceMessage *fenceMessage = [NewFenceMessage new];
-    
-    fenceMessage.fenceData = fenceData;
-    
-    [self presentViewController:fenceMessage animated:YES completion:^{
-        ;
-    }];
 }
 
 //撤销
@@ -142,8 +102,10 @@
 
     UITouch *touch = [[event allTouches]anyObject];
     CGPoint point = [touch locationInView:self.view];
-    NSLog(@"tapcount : %d",tapcount);
-    
+
+    if (!CGRectContainsPoint(mapView.frame, point)) {
+        return;
+    }
     if (1) {
         if (tapcount >= 10) {
             return;
@@ -177,6 +139,31 @@
         tapcount ++;
         NSLog(@"tapcount:%d",tapcount);
     }
+}
+
+- (void)clickNavigationRightView{
+    NSLog(@"clickMakeSureButton");
+    
+    NSString *fenceData;
+    
+    for (int i = 0; i < tapcount; i++) {
+        double pointX =  touchPoints[i].latitude;
+        double pointY = touchPoints[i].longitude;
+        
+        NSString *tempStr = [NSString stringWithFormat:@"%f,%f",pointY,pointX];
+        if (i == 0) {
+            fenceData = [NSString stringWithFormat:@"%@",tempStr];
+        }
+        
+        fenceData = [NSString stringWithFormat:@"%@;%@",fenceData,tempStr];
+    }
+    NewFenceMessage *fenceMessage = [NewFenceMessage new];
+    
+    fenceMessage.fenceData = fenceData;
+    
+    [self presentViewController:fenceMessage animated:YES completion:^{
+        ;
+    }];
 }
 
 @end

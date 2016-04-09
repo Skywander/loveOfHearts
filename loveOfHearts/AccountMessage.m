@@ -23,7 +23,7 @@ static AccountMessage *accountMessage;
 
 - (id)init{
     self = [super init];
-    
+        
     return self;
 }
 

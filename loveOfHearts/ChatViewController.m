@@ -63,8 +63,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable:) name:@"receiveVoice" object:nil];
-    
     [self initData];
     
     [self initUI];
@@ -140,6 +138,8 @@
     _voicePlayImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_right0"],[UIImage imageNamed:@"voice_right1"],[UIImage imageNamed:@"voice_right2"],[UIImage imageNamed:@"voice_right3"],nil];
     
     _voicePlayView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 16, 30, 30)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable:) name:@"receiveVoice" object:nil];
 
 }
 
@@ -176,6 +176,10 @@
     [messageArrays insertObject:dict atIndex:0];
     
     [table reloadData];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:messageArrays.count - 1 inSection:0];
+    
+    [table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
     NSLog(@"receive voice");
 }
