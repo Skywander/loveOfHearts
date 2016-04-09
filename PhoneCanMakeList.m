@@ -187,6 +187,7 @@
                               ];
     [Command commandWithAddress:@"whitelist1" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
+            accountMessage.tempwhitelist1 = phoneNumbersOne;
             NSLog(@"success");
         }
     }];
@@ -199,6 +200,7 @@
                                 ];
     [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2 block:^(NSInteger type) {
         if (type == 100) {
+            accountMessage.tempwhitelist2 = phoneNumbersTwo;
             NSLog(@"success");
         }
     }];

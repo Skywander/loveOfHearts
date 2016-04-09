@@ -52,8 +52,6 @@
     nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"监听号码设置", nil];
     
     newPhoneArray = [NSMutableArray new];
-    
-    NSLog(@"sosArray : %@ %@",accountMessage.sos,accountMessage.centernumber);
 
 }
 - (void)initUI {
@@ -81,7 +79,7 @@
             if (sosArray.count > i && ![[sosArray objectAtIndex:i] isEqualToString:@" "]) {
                 [textField setText:[sosArray objectAtIndex:i]];
                 }
-            if (i == 3 && [centerNumber isEqualToString:@" "]) {
+            if (i == 3 && ![centerNumber isEqualToString:@" "]) {
                 [textField setText:centerNumber];
             }
 
@@ -148,6 +146,8 @@
     
     [Command commandWithAddress:@"sos" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
+            accountMessage.tempsos = tempString;
+            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
@@ -160,7 +160,11 @@
                                 @"centerNumber":textFields[3].text
                                };
         
-//        [Command commandWithAddress:@"centernumber" andParamater:paramater block:nil];
+        [Command commandWithAddress:@"centernumber" andParamater:paramater block:^(NSInteger type) {
+            if (type == 100) {
+                accountMessage.tempcenternumber = textFields[3].text;
+            }
+        }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -43,12 +43,15 @@
 }
 
 - (void)getData {
-    pushStringtwo = [NSString new];
-    pushStringone = [NSString new];
+    AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
-    phbArray = [[AccountMessage sharedInstance].phb componentsSeparatedByString:@","];
+    userAccount = accountMessage.userId;
     
-    NSArray *tempArray = [[AccountMessage sharedInstance].phb2 componentsSeparatedByString:@","];
+    watchID = accountMessage.wid;
+    
+    phbArray = [accountMessage.phb componentsSeparatedByString:@","];
+    
+    NSArray *tempArray = [accountMessage.phb2 componentsSeparatedByString:@","];
     
     phbArray = [phbArray arrayByAddingObjectsFromArray:tempArray];
 }
@@ -150,7 +153,12 @@
         [backView setHidden:NO];
         [self.view bringSubviewToFront:backView];
         
-        for (int i = 0; i < 5; i ++) {
+        pushStringone = [NSString stringWithFormat:@"%@,%@",nameFields[0].text,phoneFields[0].text];
+        
+        pushStringone = [NSString stringWithFormat:@"%@,%@",nameFields[5].text,phoneFields[5].text];
+
+        
+        for (int i = 1; i < 5; i ++) {
             NSString *nametempStr = nameFields[i].text;
             NSString *phonetempStr = phoneFields[i].text;
             
@@ -163,12 +171,11 @@
                 [phoneFields[i] becomeFirstResponder];
                 return;
             }
-            if (phoneFields[i].text.length != 0 ) {
-                pushStringone = [NSString stringWithFormat:@"%@,%@,%@",pushStringone,nametempStr,phonetempStr];
-            }
+            
+            pushStringone = [NSString stringWithFormat:@"%@,%@,%@",pushStringone,nametempStr,phonetempStr];
         }
         
-        for (int i = 5; i < 10; i ++) {
+        for (int i = 6; i < 10; i ++) {
             NSString *nametempStr = nameFields[i].text;
             NSString *phonetempStr = phoneFields[i].text;
             
@@ -180,37 +187,34 @@
                 [phoneFields[i] becomeFirstResponder];
                 return;
             }
-            if (phoneFields[i].text.length != 0) {
-                pushStringtwo = [NSString stringWithFormat:@"%@,%@,%@",pushStringtwo,nametempStr,phonetempStr];
-            }
+            pushStringtwo = [NSString stringWithFormat:@"%@,%@,%@",pushStringtwo,nametempStr,phonetempStr];
         }
-        
-        NSRange range1 = {1,pushStringone.length - 1};
-        
-        NSRange range2 = {1,pushStringtwo.length - 1};
-        
-        NSLog(@"PHB %@ %@",[pushStringone substringWithRange:range1],[pushStringtwo substringWithRange:range2]);
         
         NSLog(@"pushStringone : %@ pushStringTwo: %@",pushStringone,pushStringtwo);
         
         if (pushStringone.length != 0) {
-            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      userAccount,@"userId",
-                                      watchID,@"wid",
-                                      [pushStringone substringWithRange:range1],@"PHB",
-                                      nil
-                                      ];
-            [Command commandWithAddress:@"phones" andParamater:tempDict block:nil];
+            NSDictionary *tempDict = @{
+                                        @"userId":userAccount,
+                                        @"wid":watchID,
+                                        @"phones":pushStringone
+                                       };
+
+            [Command commandWithAddress:@"phb" andParamater:tempDict block:^(NSInteger type) {
+                if (type == 100) {
+                    [AccountMessage sharedInstance].tempphb = pushStringone;
+                }
+            }];
         }
         if (pushStringtwo.length != 0) {
-            NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      userAccount,@"userId",
-                                      watchID,@"wid",
-                                      [pushStringone substringWithRange:range1],@"PHB2",
-                                      nil
-                                      ];
-            [Command commandWithAddress:@"phones" andParamater:tempDict block:^(NSInteger type) {
+            NSDictionary *tempDict = @{
+                                        @"userId":userAccount,
+                                        @"wid":watchID,
+                                        @"phones":pushStringtwo
+                                       };
+            [Command commandWithAddress:@"phb2" andParamater:tempDict block:^(NSInteger type) {
                 if (type == 100) {
+                    [AccountMessage sharedInstance].tempphb2 = pushStringtwo;
+                    
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
             }];
