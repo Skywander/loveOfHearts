@@ -78,12 +78,9 @@
         
         NSArray *singleArray = [clockStirng componentsSeparatedByString:@"-"];
         
-        if (singleArray.count == 2) {
-            
             [alarmArray addObject:[singleArray objectAtIndex:0]];
             
             [switsState addObject:[singleArray objectAtIndex:1]];
-        }
     }
     
     if (switsState.count != 3) {
@@ -182,6 +179,9 @@
     
     [Command commandWithAddress:@"clock" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
+            
+            accountMessage.tempclock = timeString;
+            
             [self dismissViewControllerAnimated:YES completion:^{
                 ;
             }];

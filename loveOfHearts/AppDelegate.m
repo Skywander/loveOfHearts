@@ -19,6 +19,8 @@
 
 #import "AccountMessage.h"
 
+#import "Mymapview.h"
+
 #define NotifyActionKey "NotifyAction"
 
 NSString *const NotificationCategoryIdent = @"ACTIONABLE";
@@ -219,16 +221,50 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
     
     NSString *record = [NSString stringWithFormat:@"%d, %@, %@%@", ++_lastPayloadIndex, [self formateTime:[NSDate date]], payloadMsg, offLine ? @"<离线消息>" : @""];
 
-    NSLog(@" record : %@",record);
+    NSLog(@"GeTuiSdkDidReceivePayloadData record : %@",record);
     
     //NSString *msg = [NSString stringWithFormat:@"%@ : %@%@", [self formateTime:[NSDate date]], payloadMsg, offLine ? @"<离线消息>" : @""];
-    NSLog(@"GexinSdkReceivePayload : %@",payloadData);
     
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:payloadData options:NSJSONReadingAllowFragments error:nil];
+    
+    
+    NSLog(@"dict : %@",dict);
+    
+    double lat = [[[dict objectForKey:@"data"] objectForKey:@"lat"] doubleValue];
+    
+    double lng = [[[dict objectForKey:@"data"] objectForKey:@"lng"] doubleValue];
+    
+    Mymapview *myMayView = [Mymapview sharedInstance];
+    [myMayView searchPointWithLat:lat andLon:lng];
     
     NSDictionary *data = [dict objectForKey:@"data"];
     
     NSInteger number = [[data objectForKey:@"id"] integerValue];
+    
+    if (number == 0) {
+        
+        NSString *tempTime = [NSString stringWithFormat:@"%@",[[data objectForKey:@"createdAt"] objectForKey:@"time"]];
+        
+        NSString *time = [tempTime stringByReplacingOccurrencesOfString:@".amr"withString:@""];
+        
+        NSArray *timeArray = [time componentsSeparatedByString:@"_"];
+        
+        NSString *dateString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@",[timeArray objectAtIndex:1],[timeArray objectAtIndex:2],[timeArray objectAtIndex:3],[timeArray objectAtIndex:4],[timeArray objectAtIndex:5],[timeArray objectAtIndex:6]];
+        
+        NSDictionary *voiceDict = @{
+                               @"createdAt":dateString,
+                               @"filename":[data objectForKey:@"filename"],
+                               @"fromId":[data objectForKey:@"fromId"],
+                               @"isheard":[data objectForKey:@"isheard"],
+                               @"updatedAt":dateString,
+                               @"wid":[data objectForKey:@"wid"]
+                               };
+        //创建通知
+        NSNotification *notification =[NSNotification notificationWithName:@"receiveVoice" object:voiceDict userInfo:nil];
+        //通过通知中心发送通知
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+    }
     
     [[AccountMessage sharedInstance] updateDataWithNumber:number];
     // 汇报个推自定义事件

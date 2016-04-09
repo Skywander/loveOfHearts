@@ -60,12 +60,10 @@
     [countLabel.layer setBorderWidth:0.3f];
     [countLabel.layer setCornerRadius:6.f];
     
-    if ([accountMessage.flower isEqualToString:@" "]) {
-        [countLabel setText:@"小红花的数量 : 0"];
-    }else{
+
         [countLabel setText:[NSString stringWithFormat:@"小红花的数量 : %@",accountMessage.flower]];
 
-    }
+
     
     [self.view addSubview:countLabel];
     
@@ -133,7 +131,11 @@
                             @"flowerNum":flower_count
                            };
     
-    [Command commandWithAddress:@"flower" andParamater:dict block:nil];
+    [Command commandWithAddress:@"flower" andParamater:dict block:^(NSInteger type) {
+        if (type == 100) {
+            accountMessage.tempflower = flower_count;
+        }
+    }];
     
     accountMessage.tempflower = flower_count;
 }

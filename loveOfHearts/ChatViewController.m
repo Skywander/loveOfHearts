@@ -40,6 +40,7 @@
     
     NSString *voiceName;
     NSString *timeString;
+    NSString *createTime;
     NSInteger getVoiceStartLocation;
     
     //pull refresh
@@ -47,9 +48,7 @@
     
     NSString *fileDirectoryPath;
     NSFileManager *fileManager;
-    
     NSArray *_voicePlayImages;
-    
     UIImageView *_voicePlayView;
 }
 @end
@@ -63,6 +62,8 @@
 @synthesize filtrateArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable:) name:@"receiveVoice" object:nil];
     
     [self initData];
     
@@ -169,6 +170,16 @@
     }
 }
 
+- (void)updateTable:(NSNotification *)sender{
+    NSDictionary *dict = (NSDictionary *)sender.object;
+    
+    [messageArrays insertObject:dict atIndex:0];
+    
+    [table reloadData];
+    
+    NSLog(@"receive voice");
+}
+
 - (void)initrecordButton {
     
     UIView *_recordBack = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
@@ -204,6 +215,10 @@
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"YYYY_MM_dd_HHmmss"];
     timeString = [formatter stringFromDate:date];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    createTime = [formatter stringFromDate:date];
     
     voiceName = [NSString stringWithFormat:@"%@.amr",timeString];
     
@@ -348,18 +363,18 @@
                                 };
     
     NSDictionary *dict = @{
-                           @"createdAt":timeString,
+                           @"createdAt":createTime,
                            @"filename":voiceName,
                            @"fromId":accountMessage.userId,
                            @"isheard":@"0",
-                           @"updatedAt":timeString,
+                           @"updatedAt":createTime,
                            @"wid":accountMessage.wid
                            };
-    [messageArrays addObject:dict];
+    [messageArrays insertObject:dict atIndex:0];
+    
+    NSLog(@"%ld",messageArrays.count);
     
     if (!table) {
-        
-        NSLog(@"NOT EXISE TABLE");
         
         [self initTable];
     }
@@ -367,6 +382,7 @@
     [table reloadData];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:messageArrays.count - 1 inSection:0];
+    
     [table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
     NSData *voiceData = [NSData dataWithContentsOfFile:recordFile];

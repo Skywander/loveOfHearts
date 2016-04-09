@@ -42,9 +42,6 @@
     self.navigationController.navigationBarHidden = YES;
     
     [self initMapView];
-    
-    NSLog(@"view will appear");
-    
 }
 
 - (void)initTopView{
@@ -76,8 +73,6 @@
     [self.view addSubview:mapView];
     
     [self.view sendSubviewToBack:mapView];
-    
-    [mapView searchPointWithLat:39.989631 andLon:116.481018];
 }
 
 - (void)initHomeMenuView{
@@ -101,6 +96,8 @@
     UIImage *image = (UIImage *)sender.object;
     
     [topView setImage:image];
+    
+    NSLog(@"updateImge");
 }
 
 - (void)didReceiveMemoryWarning {

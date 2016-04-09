@@ -120,7 +120,7 @@ static Mymapview *mymapview;
         
         NSLog(@"Mapresponse : city : %@ district : %@  neighborhoood : %@ description : %@",component.city,component.district,component.neighborhood,component.province);
         
-        detailAddress = [NSString stringWithFormat:@"%@%@-%@%@",component.province,component.city,component.district,component.neighborhood];
+        detailAddress = [NSString stringWithFormat:@"%@%@%@",component.city,component.district,component.neighborhood];
         
         if([_mydelegate respondsToSelector:@selector(passValue:)]){
             [_mydelegate passValue:detailAddress];
@@ -144,12 +144,10 @@ static Mymapview *mymapview;
     [_searchAPI AMapReGoecodeSearch: regeo];
     
     MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(39.989631, 116.481018);
-    pointAnnotation.title = @"方恒国际";
-    pointAnnotation.subtitle = @"阜通东大街6号";
+    pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lon);
     
     [mapView addAnnotation:pointAnnotation];
-    [mapView setCenterCoordinate:CLLocationCoordinate2DMake(39.989631, 116.481018)];
+    [mapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lon)];
     
     return detailAddress;
 

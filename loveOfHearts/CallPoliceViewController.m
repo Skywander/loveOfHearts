@@ -131,7 +131,11 @@
                                 @"wid":wid,
                                 @"onoroff":[switsState objectAtIndex:0]
                               };
-    [Command commandWithAddress:@"sossms" andParamater:sosDict block:nil];
+    [Command commandWithAddress:@"sossms" andParamater:sosDict block:^(NSInteger type) {
+        if (type == 100) {
+            accountMessage.tempsossms = [switsState objectAtIndex:0];
+        }
+    }];
     
     accountMessage.tempsossms = [switsState objectAtIndex:0];
     
@@ -140,7 +144,11 @@
                                    @"wid":wid,
                                    @"lowbat":[switsState objectAtIndex:1]
                                    };
-    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict block:nil];
+    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict block:^(NSInteger type) {
+        if (type == 100) {
+            accountMessage.templowbat = [switsState objectAtIndex:1];
+        }
+    }];
     
     accountMessage.templowbat = [switsState objectAtIndex:1];
     
@@ -151,7 +159,11 @@
                               };
     
     
-    [Command commandWithAddress:@"remove" andParamater:offDict block:nil];
+    [Command commandWithAddress:@"remove" andParamater:offDict block:^(NSInteger type) {
+        if (type == 100) {
+            accountMessage.tempremove = [switsState objectAtIndex:2];
+        }
+    }];
     
     accountMessage.tempremove = [switsState objectAtIndex:2];
 
@@ -163,6 +175,9 @@
     
     [Command commandWithAddress:@"smsonoff" andParamater:smsDict block:^(NSInteger type) {
         if (type == 100) {
+            
+            accountMessage.tempsmsonoff = [switsState objectAtIndex:3];
+            
             [self dismissViewControllerAnimated:YES completion:^{
                 ;
             }];

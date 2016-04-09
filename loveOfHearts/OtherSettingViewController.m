@@ -74,7 +74,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 48;
+    return (SCREEN_HEIGHT - 100) / 10;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
@@ -98,9 +98,6 @@
     [cell setSelectedBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedImageString]]];
     
     [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:imageString]]];
-    
-    [cell.layer setBorderColor:[UIColor grayColor].CGColor];
-    [cell.layer setBorderWidth:0.3f];
     
     return cell;
 }

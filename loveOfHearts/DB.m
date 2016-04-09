@@ -27,7 +27,9 @@
     NSString *_path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@%@.png",_path,filename];
+    NSString *imagePath = [_path stringByAppendingPathComponent:filename];
+    
+    NSLog(@"imagePath : %@",imagePath);
     
     if ([_fileManager fileExistsAtPath:imagePath]) {
         NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
@@ -59,7 +61,7 @@
             NSLog(@"image net");
             
             if ([_accoutMessage.wid isEqualToString:watchId]) {
-                _accoutMessage.wid = watchId;
+                _accoutMessage.image = image;
             }
             
             NSData *imageData = UIImagePNGRepresentation(image);

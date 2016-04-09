@@ -70,9 +70,8 @@
     
     [addressLabel setFrame:CGRectMake(0, SELF_HEIGHT / 2, SCREEN_WIDTH, SELF_HEIGHT / 2)];
     [addressLabel setTextAlignment:NSTextAlignmentCenter];
-    [addressLabel setFont:[UIFont systemFontOfSize:14]];
+    [addressLabel setFont:[UIFont systemFontOfSize:12]];
     [self addSubview:addressLabel];
-                                      
     
     //photoView
     

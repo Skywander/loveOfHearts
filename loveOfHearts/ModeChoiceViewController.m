@@ -56,15 +56,15 @@
     
     modeChoice = accountMessage.mode;
     
-    if ([modeChoice intValue] == 60) {
+    if ([modeChoice integerValue] == 60) {
         mode = 0;
     }
     
-    if ([modeChoice intValue] == 600){
+    if ([modeChoice integerValue] == 600){
         mode = 1;
     }
     
-    if ([modeChoice intValue] == 1800) {
+    if ([modeChoice integerValue] == 1800) {
         mode = 2;
     }
 }

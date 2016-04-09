@@ -8,6 +8,8 @@
 
 #import "HomeViewController+delegate.h"
 
+#import "Command.h"
+
 @implementation HomeViewController (delegate)
 
 - (void)passValue:(NSString *)string{
@@ -29,6 +31,13 @@
         [[Mymapview sharedInstance].mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
         
         }
+    if (selected == 1) {
+        [Command commandWithName:@"cr" block:^(NSInteger type) {
+            if (type == 100) {
+                NSLog(@"success");
+            }
+        }];
+    }
 }
 
 - (void)presentPersonInfoView{
