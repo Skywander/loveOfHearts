@@ -58,6 +58,8 @@
     [Networking getDevicesMessageWithParamaters:paramater block:^(NSDictionary *dict) {
         deviceArray = [dict objectForKey:@"data"];
         
+        NSLog(@"deviceList : %@",dict);
+        
         [self initView];
     }];
 }
@@ -73,7 +75,15 @@
     y = 70;
     for (NSDictionary *dict in deviceArray) {
         
-        [DB getImageWithWatchId:[dict objectForKey:@"wid"] filename:[dict objectForKey:@"headimg"] block:^(UIImage *image) {
+        NSString *fileName;
+        
+        if ([[dict objectForKey:@"babyhead"] isEqual:[NSNull null]]) {
+            fileName = @" ";
+        }else{
+            fileName = [dict objectForKey:@"babyhead"];
+        }
+        
+        [DB getImageWithWatchId:[dict objectForKey:@"wid"] filename:fileName block:^(UIImage *image) {
             
             UIView *view = [self viewWithWatchImage:image andY:y andWatchId:[dict objectForKey:@"wid"]];
             
@@ -195,11 +205,7 @@
             
             NSString *wid = (NSString *)key;
             
-            NSDictionary *paramater = @{
-                                        @"wid":wid
-                                        };
-            
-            [Networking getWatchMessageWithParamater:paramater block:^(NSDictionary *dict) {
+            [Networking getWatchMessageWithParamater:wid block:^(NSDictionary *dict) {
                 
                 [accountMessage setWatchInfor:[dict objectForKey:@"data"]];
                 //创建通知
@@ -211,7 +217,7 @@
                 accountMessage.image = imageView.image;
                 
             }];
-            
+
             [view addSubview:selectedView];
 
         }

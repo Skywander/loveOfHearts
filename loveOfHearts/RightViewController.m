@@ -45,7 +45,7 @@
     [self.view addSubview:navigation];
     
     //列表
-    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 70, RIGHT_CELL_WIDTH, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
+    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 70, SCREEN_WIDTH * 4 / 5.0, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     listView.scrollEnabled = NO;
     [listView setBackgroundColor:DEFAULT_COLOR];
     listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -73,7 +73,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([indexPath row] == 7) {
         
-        [Command commandWithName:@"findwatch" block:^(NSInteger type) {
+        [Command commandWithName:@"watch_find" block:^(NSInteger type) {
             if (type == 100) {
                 NSLog(@"send success");
             }

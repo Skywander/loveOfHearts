@@ -7,6 +7,8 @@
 //
 #import <AFNetworking/AFNetworking.h>
 
+@class WatchMessage;
+
 typedef void (^getImage)(UIImage *image);
 
 typedef void(^getDict)(NSDictionary *dict);
@@ -14,7 +16,6 @@ typedef void(^getDict)(NSDictionary *dict);
 typedef void (^getData)(NSData *data);
 
 typedef void (^getInt)(int i);
-
 
 
 @interface Networking : NSObject
@@ -45,7 +46,7 @@ typedef void (^getInt)(int i);
 
 + (void)uploalDataWithAddress:(NSString *)address dict:(NSDictionary *)paramater block:(getInt)getInt;
 
-+ (void)getWatchMessageWithParamater:(NSDictionary *)paramater block:(getDict)getDict;
++ (void)getWatchMessageWithParamater:(NSString *)paramater block:(getDict)getDict;
 
 + (void)deleteWatchWithDict:(NSDictionary *)paramater block:(getDict)getDict;
 @end

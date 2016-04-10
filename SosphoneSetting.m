@@ -12,7 +12,7 @@
 #import "Alert.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
-
+#import "Networking.h"
 @interface SosphoneSetting()
 {
     UITextField *textFields[4];
@@ -34,8 +34,15 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    [self initData];
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initUI];
+        
+    }];
 }
 
 - (void)initData {
@@ -144,7 +151,7 @@
                             @"sos":tempString
                            };
     
-    [Command commandWithAddress:@"sos" andParamater:dict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_sos" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempsos = tempString;
             
@@ -160,7 +167,7 @@
                                 @"centerNumber":textFields[3].text
                                };
         
-        [Command commandWithAddress:@"centernumber" andParamater:paramater block:^(NSInteger type) {
+        [Command commandWithAddress:@"watch_center" andParamater:paramater block:^(NSInteger type) {
             if (type == 100) {
                 accountMessage.tempcenternumber = textFields[3].text;
             }

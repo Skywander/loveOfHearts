@@ -10,6 +10,8 @@
 
 typedef void (^getInteger)(NSInteger type);
 
+typedef void (^getDict)(NSDictionary *dict);
+
 
 @interface Command : NSObject
 
@@ -18,6 +20,9 @@ typedef void (^getInteger)(NSInteger type);
 
 
 + (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater block:(getInteger)getInteger;
+
+
++ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater dictBlock:(getDict)getDict;
 
 
 @end

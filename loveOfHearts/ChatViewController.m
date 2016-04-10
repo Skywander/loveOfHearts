@@ -368,7 +368,7 @@
     
     NSDictionary *dict = @{
                            @"createdAt":createTime,
-                           @"filename":voiceName,
+                           @"fileName":voiceName,
                            @"fromId":accountMessage.userId,
                            @"isheard":@"0",
                            @"updatedAt":createTime,

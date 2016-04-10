@@ -11,6 +11,7 @@
 #import "Command.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
+#import "Networking.h"
 @interface CallPoliceViewController()
 {
     UIButton *sosButton;
@@ -36,8 +37,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self initData];
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initUI];
+        
+    }];
 }
 
 - (void)initData {
@@ -131,7 +139,7 @@
                                 @"wid":wid,
                                 @"onoroff":[switsState objectAtIndex:0]
                               };
-    [Command commandWithAddress:@"sossms" andParamater:sosDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_sossms" andParamater:sosDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempsossms = [switsState objectAtIndex:0];
         }
@@ -144,7 +152,7 @@
                                    @"wid":wid,
                                    @"lowbat":[switsState objectAtIndex:1]
                                    };
-    [Command commandWithAddress:@"lowbat" andParamater:lowpowerDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_lowbatsms" andParamater:lowpowerDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.templowbat = [switsState objectAtIndex:1];
         }
@@ -159,7 +167,7 @@
                               };
     
     
-    [Command commandWithAddress:@"remove" andParamater:offDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_removesms" andParamater:offDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempremove = [switsState objectAtIndex:2];
         }
@@ -173,7 +181,7 @@
                                 @"smsonoff":[switsState objectAtIndex:3]
                               };
     
-    [Command commandWithAddress:@"smsonoff" andParamater:smsDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_smsonoff" andParamater:smsDict block:^(NSInteger type) {
         if (type == 100) {
             
             accountMessage.tempsmsonoff = [switsState objectAtIndex:3];

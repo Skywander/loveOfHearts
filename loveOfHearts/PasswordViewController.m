@@ -7,6 +7,7 @@
 //
 
 #import "PasswordViewController.h"
+#import <SMS_SDK/SMSSDK.h>
 #import "NewPasswordViewController.h"
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
 
@@ -15,8 +16,19 @@
     UIButton *sureButton;
     
     UIView *codeView;
-    UITextField *codeField;
+    UITextField *code;
     UIButton *codeButton;
+    
+    //验证码
+    NSMutableArray* _areaArray;
+    NSString *_str;
+    NSString *_phoneNumber;
+    BOOL codeIsRight;
+    //
+    
+    int timeCount;
+    NSTimer *timer;
+    NSTimer *codeTimer;
 }
 
 @end
@@ -57,22 +69,25 @@
     [codeView setBackgroundColor:BACKGROUND_COLOR];
     [self.view addSubview:codeView];
     
-    codeField = [UITextField new];
-    [codeField setBackgroundColor:[UIColor whiteColor]];
-    [codeField setKeyboardType:UIKeyboardTypeNumberPad];
-    [codeField.layer setCornerRadius:CORNER_RIDUS];
+    code = [UITextField new];
+    [code setBackgroundColor:[UIColor whiteColor]];
+    [code setKeyboardType:UIKeyboardTypeNumberPad];
+    [code.layer setCornerRadius:CORNER_RIDUS];
     
-    [codeView addSubview:codeField];
+    [codeView addSubview:code];
     
     codeButton = [UIButton new];
     [codeButton setBackgroundColor:[UIColor whiteColor]];
     [codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [codeButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [codeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [codeButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
-    [codeButton.layer setCornerRadius:CORNER_RIDUS];
+    [codeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
-    [codeButton addTarget:self action:@selector(clickCodeButton) forControlEvents:UIControlEventTouchUpInside];
-    [codeButton addTarget:self action:@selector(touchInsideButton:) forControlEvents:UIControlEventTouchDown];
+    [codeButton.layer setCornerRadius:6.f];
+    
+    [codeButton addTarget:self action:@selector(getCode) forControlEvents:UIControlEventTouchUpInside];
+    [codeButton addTarget:self action:@selector(touchInside:) forControlEvents:UIControlEventTouchDown];
+
     
     [codeView addSubview:codeButton];
     
@@ -137,7 +152,7 @@
         make.top.equalTo(phoneNumber).with.offset(CELL_HEIGHT + OFFSET);
     }];
     
-    [codeField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [code mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(codeView);
         make.top.equalTo(codeView);
         make.bottom.equalTo(codeView);
@@ -159,9 +174,15 @@
 }
 
 - (void)clickLeftButton{
-    [self dismissViewControllerAnimated:YES completion:^{
-        //
-    }];
+    
+    [self checkCode];
+    
+    if (codeIsRight) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            //
+        }];
+
+    }
 }
 
 - (void)clickSureButton{
@@ -180,4 +201,165 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
+
+- (void)getCode{
+    
+    [codeButton setBackgroundColor:DEFAULT_COLOR];
+    
+    int compareResult = 0;
+    for (int i = 0; i<_areaArray.count; i++)
+    {
+        NSDictionary* dict1 = [_areaArray objectAtIndex:i];
+        NSString* code1 = [dict1 valueForKey:@"zone"];
+        
+        if ([code1 isEqualToString:@"86"])
+        {
+            compareResult = 1;
+            NSString* rule1 = [dict1 valueForKey:@"rule"];
+            NSPredicate* pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",rule1];
+            BOOL isMatch = [pred evaluateWithObject:phoneNumber.text];
+            if (!isMatch)
+            {
+                [self alertWithTitle:@"手机号码不正确"];
+                return;
+            }
+            break;
+        }
+    }
+    
+    if (!compareResult)
+    {
+        if (phoneNumber.text.length!=11)
+        {
+            [self alertWithTitle:@"手机号码不正确"];
+            return;
+        }
+    }
+    
+    NSString* str = [NSString stringWithFormat:@"%@:%@ %@",@"发送验证码到",@"+86",phoneNumber.text];
+    _str = [NSString stringWithFormat:@"%@",phoneNumber.text];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:str
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert
+                                          ];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString* str2 = [@"+86" stringByReplacingOccurrencesOfString:@"+" withString:@""];
+        
+        [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phoneNumber.text
+                                       zone:str2
+                           customIdentifier:nil
+                                     result:^(NSError *error)
+         {
+             
+             if (!error)
+             {
+                 NSLog(@"验证码发送成功");
+                 _phoneNumber = phoneNumber.text;
+                 
+                 timeCount = 60;
+                 timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                          target:self
+                                                        selector:@selector(startTimer)
+                                                        userInfo:nil
+                                                         repeats:YES
+                          ];
+             }
+             else
+             {
+                 [self alertWithTitle:@"验证码发送错误"];
+             }
+             
+         }];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             
+                                                         }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+    
+}
+- (void)touchInside:(UIButton *)sender{
+    [sender setBackgroundColor:HIGH_COLOR];
+}
+- (void)checkCode{
+    [self.view endEditing:YES];
+    
+    codeIsRight = NO;
+    
+    if(code.text.length != 4)
+    {
+        [self alertWithTitle:@"验证码错误"];
+    }
+    else
+    {
+        [SMSSDK commitVerificationCode:code.text phoneNumber:phoneNumber.text zone:@"86" result:^(NSError *error) {
+            
+            if (!error) {
+                
+                NSLog(@"验证成功");
+                codeIsRight = YES;
+            }
+            else
+            {
+                NSLog(@"验证失败");
+                [self alertWithTitle:@"验证错误"];
+            }
+        }];
+    }
+}
+- (void)startTimer{
+    
+    if (timeCount != 1) {
+        
+        NSString *tempString = [NSString stringWithFormat:@"%ds后重新发送",timeCount];
+        
+        [codeButton setTitle:tempString forState:UIControlStateNormal];
+        
+        [codeButton setUserInteractionEnabled:NO];
+        
+        timeCount --;
+        
+    } else{
+        [codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        
+        [codeButton setUserInteractionEnabled:YES];
+        
+        timeCount = 60;
+        
+        [timer invalidate];
+    }
+}
+
+- (void)alertWithTitle:(NSString *)title{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert
+                                          ];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             
+                                                         }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:sureAction];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        
+    }];
+}
+
+
+
+
 @end

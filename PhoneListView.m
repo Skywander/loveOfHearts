@@ -12,8 +12,9 @@
 #import "Command.h"
 #import "AccountMessage.h"
 #import "Navigation.h"
+#import "Networking.h"
 
-@interface PhoneListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface PhoneListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NavigationProtocol>
 {
     UITextField *phoneFields[10];
     UITextField *nameFields[10];
@@ -37,9 +38,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self getData];
-    
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self getData];
+        [self initUI];
+        
+    }];
 }
 
 - (void)getData {
@@ -68,6 +75,8 @@
     [self.view addSubview:listView];
     
     Navigation *navigationView = [Navigation new];
+    [navigationView setDelegate:self];
+    [navigationView addRightViewWithName:@"保存"];
     [self.view addSubview:navigationView];
     
     backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -85,7 +94,7 @@
     }
     if ([indexPath section] == 0) {
         
-        UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(1, 1, (SCREEN_WIDTH  - 15)/ 3, 34)];
+        UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(1, 1, (SCREEN_WIDTH  - 15)/ 3,(SCREEN_HEIGHT - 100) / 10 - 2)];
         [nameField setDelegate:self];
         [nameField setBackgroundColor:[UIColor whiteColor]];
         [nameField setKeyboardType:UIKeyboardTypeNumberPad];
@@ -101,7 +110,7 @@
         
         [cell addSubview:nameField];
         
-        UITextField *phoneField = [[UITextField alloc] initWithFrame:CGRectMake(2 + (SCREEN_WIDTH - 15)/ 3, 1, (SCREEN_WIDTH - 15)/ 3 * 2, 34)];
+        UITextField *phoneField = [[UITextField alloc] initWithFrame:CGRectMake(2 + (SCREEN_WIDTH - 15)/ 3, 1, (SCREEN_WIDTH - 15)/ 3 * 2, (SCREEN_HEIGHT - 100) / 10)];
         [phoneField setDelegate:self];
         [phoneField setBackgroundColor:[UIColor whiteColor]];
         [phoneField setKeyboardType:UIKeyboardTypeNumberPad];
@@ -130,110 +139,65 @@
 
         
     }
-    if ([indexPath section] == 1) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(1, 1, SCREEN_WIDTH - 14, 34)];
-        [label setBackgroundColor:[UIColor whiteColor]];
-        
-        [label.layer setBorderWidth:0.3f];
-        [label.layer setBorderColor:[UIColor grayColor].CGColor];
-        [label.layer setCornerRadius:6.f];
-        [label setClipsToBounds:YES];
-        
-        [label setTextAlignment:NSTextAlignmentCenter];
-        [label setText:@"确认"];
-        [cell addSubview:label];
-    }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] == 1) {
-        NSLog(@"确认");
-        [backView setHidden:NO];
-        [self.view bringSubviewToFront:backView];
-        
-        pushStringone = [NSString stringWithFormat:@"%@,%@",nameFields[0].text,phoneFields[0].text];
-        
-        pushStringone = [NSString stringWithFormat:@"%@,%@",nameFields[5].text,phoneFields[5].text];
-
-        
-        for (int i = 1; i < 5; i ++) {
-            NSString *nametempStr = nameFields[i].text;
-            NSString *phonetempStr = phoneFields[i].text;
-            
-            if (phoneFields[i].text.length > 0 && phoneFields[i].text.length != 11) {
-                [self presentViewController:[Alert getAlertWithTitle:@"输入的号码不正确"] animated:YES
-                            completion:^{
-                                ;
-                            }];
-                pushStringone = [NSString new];
-                [phoneFields[i] becomeFirstResponder];
-                return;
-            }
-            
-            pushStringone = [NSString stringWithFormat:@"%@,%@,%@",pushStringone,nametempStr,phonetempStr];
-        }
-        
-        for (int i = 6; i < 10; i ++) {
-            NSString *nametempStr = nameFields[i].text;
-            NSString *phonetempStr = phoneFields[i].text;
-            
-            if (phoneFields[i].text.length > 0 && phoneFields[i].text.length != 11) {
-                [self presentViewController:[Alert getAlertWithTitle:@"输入的号码不正确"] animated:YES completion:^{
-                    ;
-                }];
-                pushStringtwo = [NSString new];
-                [phoneFields[i] becomeFirstResponder];
-                return;
-            }
-            pushStringtwo = [NSString stringWithFormat:@"%@,%@,%@",pushStringtwo,nametempStr,phonetempStr];
-        }
-        
-        NSLog(@"pushStringone : %@ pushStringTwo: %@",pushStringone,pushStringtwo);
-        
-        if (pushStringone.length != 0) {
-            NSDictionary *tempDict = @{
-                                        @"userId":userAccount,
-                                        @"wid":watchID,
-                                        @"phones":pushStringone
-                                       };
-
-            [Command commandWithAddress:@"phb" andParamater:tempDict block:^(NSInteger type) {
-                if (type == 100) {
-                    [AccountMessage sharedInstance].tempphb = pushStringone;
-                }
-            }];
-        }
-        if (pushStringtwo.length != 0) {
-            NSDictionary *tempDict = @{
-                                        @"userId":userAccount,
-                                        @"wid":watchID,
-                                        @"phones":pushStringtwo
-                                       };
-            [Command commandWithAddress:@"phb2" andParamater:tempDict block:^(NSInteger type) {
-                if (type == 100) {
-                    [AccountMessage sharedInstance].tempphb2 = pushStringtwo;
-                    
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                }
-            }];
-
-        }
-    }
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 1) {
-        return 1;
-    }
+
     return 10;
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 36;
+    return (SCREEN_HEIGHT - 100) / 10;
+}
+
+- (void)clickNavigationRightView{
+
+    [self.view bringSubviewToFront:backView];
+    
+    pushStringone = [NSString stringWithFormat:@"%@,%@",nameFields[0].text,phoneFields[0].text];
+    
+    pushStringtwo = [NSString stringWithFormat:@"%@,%@",nameFields[5].text,phoneFields[5].text];
+    
+    NSLog(@"pushSting : %@ %@",pushStringone,pushStringtwo);
+    
+    for (int i = 1; i < 10; i ++) {
+        NSString *nametempStr = nameFields[i].text;
+        NSString *phonetempStr = phoneFields[i].text;
+        
+        if (phoneFields[i].text.length > 0 && phoneFields[i].text.length != 11) {
+            [self presentViewController:[Alert getAlertWithTitle:@"输入的号码不正确"] animated:YES
+                             completion:^{
+                                 ;
+                             }];
+            pushStringone = [NSString new];
+            [phoneFields[i] becomeFirstResponder];
+            return;
+        }
+        
+        pushStringone = [NSString stringWithFormat:@"%@,%@,%@",pushStringone,nametempStr,phonetempStr];
+    }
+    
+    if (pushStringone.length != 0) {
+        NSDictionary *tempDict = @{
+                                   @"userId":userAccount,
+                                   @"wid":watchID,
+                                   @"phones":pushStringone
+                                   };
+        
+        [Command commandWithAddress:@"watch_phb" andParamater:tempDict block:^(NSInteger type) {
+            if (type == 100) {
+                [AccountMessage sharedInstance].tempphb = pushStringone;
+            }
+        }];
+    
+    }
+
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

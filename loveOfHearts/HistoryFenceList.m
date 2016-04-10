@@ -110,7 +110,7 @@ static HistoryFenceList *historyFenceList;
     
     sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
     
-    [sessionManager POST:[NSString stringWithFormat:@"%@%@",HTTP,@"getfences"] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [sessionManager POST:[NSString stringWithFormat:@"%@%@",HTTP,@"fence_getFence"] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;

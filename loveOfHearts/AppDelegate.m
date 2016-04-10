@@ -234,34 +234,40 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
 
     }
     
-    if (type == 2) {
-        double lat = [[[dict objectForKey:@"data"] objectForKey:@"lat"] doubleValue];
+    if (type == 1) {
+        NSDictionary *data = [dict objectForKey:@"data"];
         
-        double lng = [[[dict objectForKey:@"data"] objectForKey:@"lng"] doubleValue];
+        if (![[data objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
+            return;
+        }
+        
+        double lat = [[data objectForKey:@"lat"] doubleValue];
+        
+        double lng = [[data objectForKey:@"lng"] doubleValue];
         
         Mymapview *myMayView = [Mymapview sharedInstance];
         [myMayView searchPointWithLat:lat andLon:lng];
+        
+        NSString *signal =  [NSString stringWithFormat:@"%@",[data objectForKey:@"gsm"]];
+        
+        NSNotification *notification =[NSNotification notificationWithName:@"updateSignal" object:signal userInfo:nil];
+        //通过通知中心发送通知
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
 
     }
     
-    if (type == 3) {
+    if (type == 2) {
         
-        NSString *filename = [data objectForKey:@"filename"];
+        NSString *createdAtDate = [data objectForKey:@"createdAt"];
         
-        
-        NSString *time = [filename stringByReplacingOccurrencesOfString:@".amr"withString:@""];
-        
-        
-        NSArray *timeArray = [time componentsSeparatedByString:@"_"];
-        
-        NSString *dateString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@",[timeArray objectAtIndex:1],[timeArray objectAtIndex:2],[timeArray objectAtIndex:3],[timeArray objectAtIndex:4],[timeArray objectAtIndex:5],[timeArray objectAtIndex:6]];
+        NSString *updatedAtDate = [data objectForKey:@"updatedAt"];
         
         NSDictionary *voiceDict = @{
-                                    @"createdAt":dateString,
+                                    @"createdAt":createdAtDate,
                                     @"filename":[data objectForKey:@"filename"],
                                     @"fromId":[data objectForKey:@"fromId"],
                                     @"isheard":[data objectForKey:@"isheard"],
-                                    @"updatedAt":dateString,
+                                    @"updatedAt":updatedAtDate,
                                     @"wid":[data objectForKey:@"wid"]
                                     };
         

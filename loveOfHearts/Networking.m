@@ -25,7 +25,7 @@ AFHTTPSessionManager *manager;
     }
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
-    [manager POST:[NSString stringWithFormat:@"%@register",HTTP]
+    [manager POST:[NSString stringWithFormat:@"%@user_register",HTTP]
        parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
            ;
        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -43,7 +43,7 @@ AFHTTPSessionManager *manager;
     }
     NSDictionary *parameter = [NSDictionary dictionaryWithObjectsAndKeys:username,@"userId",password,@"userPw",nil];
     
-    [manager POST:[NSString stringWithFormat:@"%@login",HTTP] parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_login",HTTP] parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -57,20 +57,16 @@ AFHTTPSessionManager *manager;
         
         if (returnType == 100) {
             
-            NSDictionary *rlist = [[[responseObject objectForKey:@"data"] objectForKey:@"rlist"] objectAtIndex:0];
-            
-            NSDictionary *wlist = [[[responseObject objectForKey:@"data"] objectForKey:@"wlist"] objectAtIndex:0];
-                        
+            NSDictionary *rlist = [responseObject objectForKey:@"data"];
+
             AccountMessage *accountMessage = [AccountMessage sharedInstance];
             
             [accountMessage setUserInfor:rlist];
-            
-            [accountMessage setWatchInfor:wlist];
-            
+    
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"error : %@",error);
     }];
 }
 + (void)addWatchWithParamaters:(NSDictionary *)paramaters{
@@ -79,7 +75,7 @@ AFHTTPSessionManager *manager;
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    [manager POST:[NSString stringWithFormat:@"%@bind",HTTP] parameters:paramaters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_addUser",HTTP] parameters:paramaters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -95,7 +91,7 @@ AFHTTPSessionManager *manager;
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    [manager POST:[NSString stringWithFormat:@"%@devicelist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_devicesList",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -116,7 +112,7 @@ AFHTTPSessionManager *manager;
     if (!manager) {
         manager = [AFHTTPSessionManager new];
     }
-    [manager POST:[NSString stringWithFormat:@"%@powerlist",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_authorityList",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -135,7 +131,7 @@ AFHTTPSessionManager *manager;
     
     manager.responseSerializer = [AFImageResponseSerializer new];
     
-    [manager POST:[NSString stringWithFormat:@"%@downloadheadimg",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@file_downLoadHead",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -156,7 +152,7 @@ AFHTTPSessionManager *manager;
 + (void)getHistoryTrack:(NSDictionary *)dict block:(getDict)getDict{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
         
-    [manager POST:[NSString stringWithFormat:@"%@gethistorylocation",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@w_getHistoryPath",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -176,8 +172,8 @@ AFHTTPSessionManager *manager;
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
     
-    [manager POST:[NSString stringWithFormat:@"%@uploadheadimg",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:imageData name:@"headimg" fileName:imageName mimeType:@"image/png"];
+    [manager POST:[NSString stringWithFormat:@"%@file_upLoadHead",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:imageName mimeType:@"image/png"];
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -194,7 +190,7 @@ AFHTTPSessionManager *manager;
 + (void)updateWatchInfoWithDict:(NSDictionary *)paramaater block:(getInt)getInt{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    [manager POST:[NSString stringWithFormat:@"%@updatebabyinfo",HTTP] parameters:paramaater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_updateBabyInfo",HTTP] parameters:paramaater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -215,8 +211,8 @@ AFHTTPSessionManager *manager;
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
     
-    [manager POST:[NSString stringWithFormat:@"%@recorde",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:voiceData name:@"record" fileName:voiceName mimeType:@"image/png"];
+    [manager POST:[NSString stringWithFormat:@"%@file_upLoadRecorde",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:voiceData name:@"file" fileName:voiceName mimeType:@"image/png"];
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -233,7 +229,7 @@ AFHTTPSessionManager *manager;
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [manager POST:[NSString stringWithFormat:@"%@downloadrecordes",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@file_downLoadRecorde",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -247,7 +243,7 @@ AFHTTPSessionManager *manager;
 + (void)getallrecordesWithDict:(NSDictionary *)dict block:(getDict)getDict{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    [manager POST:[NSString stringWithFormat:@"%@getallrecordes",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@w_getRecordeList",HTTP] parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
@@ -273,24 +269,30 @@ AFHTTPSessionManager *manager;
     }];
 }
 
-+ (void)getWatchMessageWithParamater:(NSDictionary *)paramater block:(getDict)getDict{
++ (void)getWatchMessageWithParamater:(NSString *)wid block:(getDict)getDict{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    [manager POST:[NSString stringWithFormat:@"%@getsinglewatchinfo",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSDictionary *paramater = @{
+                                @"wid":wid
+                                };
+    
+    [manager POST:[NSString stringWithFormat:@"%@w_getWatchInfo",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        getDict(responseObject);
+        
+        getDict([responseObject objectForKey:@"data"]);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        ;
+        getDict(nil);
     }];
 }
 
 + (void)deleteWatchWithDict:(NSDictionary *)paramater block:(getDict)getDict{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    [manager POST:[NSString stringWithFormat:@"%@deleterelation",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:[NSString stringWithFormat:@"%@user_deleteUser",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;

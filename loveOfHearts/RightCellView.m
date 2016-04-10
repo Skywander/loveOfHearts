@@ -47,6 +47,17 @@
     [imageView setClipsToBounds:YES];
     
     [rightView addSubview:imageView];
+    
+    //play
+    UIImageView *playView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_left0"]];
+    
+    [playView setFrame:CGRectMake(SCREEN_WIDTH - 80, 16, 30, 30)];
+    
+    [playView setClipsToBounds:YES];
+    
+    [rightView addSubview:playView];
+    
+
 
     return rightView;
 }

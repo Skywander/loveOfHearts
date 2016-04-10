@@ -12,6 +12,7 @@
 #import "IQActionSheetPickerView.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
+#import "Networking.h"
 @interface AlarmSettingView()<IQActionSheetPickerViewDelegate>
 {
     UIButton *firstAlarm;
@@ -41,9 +42,16 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    [self initDatePicker];
-    [self initData];
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initDatePicker];
+        [self initData];
+        [self initUI];
+        
+    }];
     
 }
 
@@ -78,9 +86,12 @@
         
         NSArray *singleArray = [clockStirng componentsSeparatedByString:@"-"];
         
+        if (singleArray.count > 1) {
             [alarmArray addObject:[singleArray objectAtIndex:0]];
             
             [switsState addObject:[singleArray objectAtIndex:1]];
+
+        }
     }
     
     if (switsState.count != 3) {
@@ -177,7 +188,7 @@
                                 @"clockTime":timeString
                                 };
     
-    [Command commandWithAddress:@"clock" andParamater:paramater block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_clock" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
             
             accountMessage.tempclock = timeString;
@@ -185,10 +196,11 @@
             [self dismissViewControllerAnimated:YES completion:^{
                 ;
             }];
+            
+            accountMessage.tempclock = timeString;
+
         }
     }];
-    
-    accountMessage.tempclock = timeString;
 }
 
 -(void)actionSheetPickerView:(IQActionSheetPickerView *)pickerView didSelectDate:(NSDate *)date

@@ -25,7 +25,9 @@
         
         }
     if (selected == 3) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",[AccountMessage sharedInstance].wsim]]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://8008808888"]];
+        
+        NSLog(@"tele");
 
     }
     if (selected == 2) {
@@ -36,7 +38,7 @@
         }];
     }
     if (selected == 1) {
-        [Command commandWithName:@"cr" block:^(NSInteger type) {
+        [Command commandWithName:@"watch_cr" block:^(NSInteger type) {
             if (type == 100) {
                 NSLog(@"success");
             }

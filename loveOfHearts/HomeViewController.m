@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "HomeViewController+delegate.h"
 #import "DB.h"
+#import "Command.h"
 
 #define START_X 0
 #define START_Y 0
@@ -36,6 +37,8 @@
     [self initHomeMenuView];
     
     [self initNotification];
+    
+    [self getBabyMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -52,12 +55,6 @@
     [self.view addSubview:topView];
     
     [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
-    
-    [DB getImageWithWatchId:accountMessage.wid filename:accountMessage.head block:^(UIImage *image) {
-        [topView setImage:image];
-    }];
 
 }
 
@@ -76,7 +73,7 @@
 }
 
 - (void)initHomeMenuView{
-    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 74, 36, 180)];
+    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 74, 45, 225)];
     
     menuView.homeDelegat = self;
         
@@ -86,10 +83,21 @@
 
 - (void)clickExpandButton{
     [self.viewDeckController toggleRightViewAnimated:YES];
+    
+    if (topView.expandButton.tag != 1000) {
+        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
+        
+        topView.expandButton.tag = 1000;
+    }else{
+        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
+        topView.expandButton.tag = 1001;
+    }
 }
 
 - (void)initNotification{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"HomeviewUpdateImage" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSignal:) name:@"updateSignal" object:nil];
 }
 
 - (void)updateImage:(NSNotification *)sender{
@@ -100,8 +108,40 @@
     NSLog(@"updateImge");
 }
 
+- (void)updateSignal:(NSNotification *)sender{
+    NSInteger signal = [sender.object integerValue];
+    
+    [menuView updateSingalWith:signal];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)getBabyMessage{
+    
+    
+    NSDictionary *paramater = @{
+                                @"wid":[AccountMessage sharedInstance].wid
+                                };
+    
+    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+        if (dict) {
+            AccountMessage *accountMessage = [AccountMessage sharedInstance];
+            
+            [accountMessage setBabyMessage:dict];
+            
+            [DB getImageWithWatchId:accountMessage.wid filename:accountMessage.head block:^(UIImage *image) {
+                [topView setImage:image];
+            }];
+        }
+    }];
+    
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+    }];
 }
 
 

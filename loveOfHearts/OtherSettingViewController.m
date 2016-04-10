@@ -49,7 +49,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 6) {
-        [Command commandWithName:@"poweroff" block:^(NSInteger type) {
+        [Command commandWithName:@"watch_poweroff" block:^(NSInteger type) {
             if (type == 100) {
                 [self dismissViewControllerAnimated:YES completion:^{
                     ;
@@ -63,7 +63,7 @@
     }
     
     if ([indexPath row] == 5) {
-        [Command commandWithName:@"monitor" block:^(NSInteger type) {
+        [Command commandWithName:@"watch_monitor" block:^(NSInteger type) {
             if (type == 100) {
                 NSLog(@"success");
             }

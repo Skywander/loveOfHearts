@@ -43,9 +43,7 @@
     [leftView addSubview:imageView];
     
     [leftView addSubview:dateLabel];
-    
     //play
-    
     UIImageView *playView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_right0"]];
     
     [playView setFrame:CGRectMake(54, 16, 30, 30)];

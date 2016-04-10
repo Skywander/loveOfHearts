@@ -37,7 +37,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initUI];
+        
+    }];
+
 }
 
 
@@ -131,7 +139,7 @@
                             @"flowerNum":flower_count
                            };
     
-    [Command commandWithAddress:@"flower" andParamater:dict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_flower" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempflower = flower_count;
         }

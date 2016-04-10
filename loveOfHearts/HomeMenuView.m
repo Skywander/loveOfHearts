@@ -221,4 +221,15 @@
 
 }
 
+- (void)updateSingalWith:(NSInteger)paramater{
+    
+    NSInteger signal = ((paramater + 20) / 20) * 20;
+    
+    if (signal == 120) {
+        signal = 100;
+    }
+    
+    [signalButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"signal%ld",signal]] forState:UIControlStateNormal];
+}
+
 @end

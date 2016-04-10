@@ -211,7 +211,7 @@
                                 @"area":self.fenceData,
                                 @"name":fenceNameTextField.text 
                                 };
-    [Command commandWithAddress:@"addfence" andParamater:paramater block:^(NSInteger _type) {
+    [Command commandWithAddress:@"fence_addFence" andParamater:paramater block:^(NSInteger _type) {
         if (_type == 100) {
             [self dismissViewControllerAnimated:YES completion:^{
                 ;

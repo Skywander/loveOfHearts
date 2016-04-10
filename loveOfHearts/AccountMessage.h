@@ -88,4 +88,6 @@
 
 - (void)updateDataWithNumber:(NSInteger)number;
 
+- (void)setBabyMessage:(NSDictionary *)_dict;
+
 @end

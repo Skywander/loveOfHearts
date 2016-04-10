@@ -12,6 +12,7 @@
 #import "Command.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
+#import "Networking.h"
 @interface PhoneCanMakeList()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NavigationProtocol>
 {
     UITableView *phoneListView;
@@ -37,8 +38,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
-    [self initUI];
+    
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initUI];
+
+    }];
 }
 -(void)loadView
 {
@@ -167,17 +176,11 @@
     phoneNumbersOne = textFields[0].text;
     phoneNumbersTwo = textFields[5].text;
     
-    for (int i = 1; i < 5; i ++) {
+    for (int i = 1; i < 10; i ++) {
         NSString *tempStr = textFields[i].text;
         
         phoneNumbersOne = [phoneNumbersOne stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
     }
-    for (int i = 6; i < 10; i++) {
-        NSString *tempStr = textFields[i].text;
-        phoneNumbersTwo = [phoneNumbersTwo stringByAppendingString:[NSString stringWithFormat:@",%@",tempStr]];
-    }
-    
-    NSLog(@"%@ %@",phoneNumbersTwo,phoneNumbersOne);
     
     NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
                               userAccount,@"userId",
@@ -185,25 +188,13 @@
                               phoneNumbersOne,@"whitelist1",
                               nil
                               ];
-    [Command commandWithAddress:@"whitelist1" andParamater:tempDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_whitelist" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempwhitelist1 = phoneNumbersOne;
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-    
-    NSDictionary *tempDict_2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                userAccount,@"userId",
-                                watchID,@"wid",
-                                phoneNumbersTwo,@"whitelist2",
-                                nil
-                                ];
-    [Command commandWithAddress:@"whitelist2" andParamater:tempDict_2 block:^(NSInteger type) {
-        if (type == 100) {
-            accountMessage.tempwhitelist2 = phoneNumbersTwo;
-            NSLog(@"success");
-        }
-    }];
+
 
 }
 

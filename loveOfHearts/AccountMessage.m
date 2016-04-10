@@ -55,17 +55,9 @@ static AccountMessage *accountMessage;
             [dict setValue:@" " forKey:key];
         }
     }];
-    
-    self.babyage = [dict objectForKey:@"babyage"];
-    self.babybir = [dict objectForKey:@"babybir"];
-    self.babyheight = [dict objectForKey:@"babyheight"];
-    self.babyname = [dict objectForKey:@"babyname"];
-    self.babysex = [dict objectForKey:@"babysex"];
-    self.babyweight = [dict objectForKey:@"babyweight"];
     self.centernumber = [dict objectForKey:@"centernumber"];
     self.clock = [dict objectForKey:@"clock"];
     self.flower = [dict objectForKey:@"flower"];
-    self.head = [dict objectForKey:@"head"];
     self.isonline = [dict objectForKey:@"isonline"];
     self.lowbat = [dict objectForKey:@"lowbat"];
     self.mode = [dict objectForKey:@"mode"];
@@ -79,11 +71,31 @@ static AccountMessage *accountMessage;
     self.sos = [dict objectForKey:@"sos"];
     self.sossms = [dict objectForKey:@"sossms"];
     self.turn = [dict objectForKey:@"turn"];
-    self.usim = [dict objectForKey:@"usim"];
     self.whitelist1 = [dict objectForKey:@"whitelist1"];
     self.whitelist2 = [dict objectForKey:@"whitelist2"];
     self.wid = [dict objectForKey:@"wid"];
+}
+
+- (void)setBabyMessage:(NSDictionary *)_dict{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_dict];
+
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isEqual:[NSNull null]]) {
+            [dict setValue:@" " forKey:key];
+        }
+    }];
+    
+    self.babyage = [dict objectForKey:@"babyage"];
+    self.babybir = [dict objectForKey:@"babybir"];
+    self.babyheight = [dict objectForKey:@"babyheight"];
+    self.babyname = [dict objectForKey:@"babyname"];
+    self.babysex = [dict objectForKey:@"babysex"];
+    self.babyweight = [dict objectForKey:@"babyweight"];
     self.wsim = [dict objectForKey:@"wsim"];
+    self.usim = [dict objectForKey:@"usim"];
+    self.head = [dict objectForKey:@"babyhead"];
+
 }
 
 - (void)updateDataWithNumber:(NSInteger)number{

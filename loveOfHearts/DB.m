@@ -12,6 +12,10 @@
 
 + (void)getImageWithWatchId:(NSString *)watchId filename:(NSString *)filename block:(getImage)getImage{
     //cache
+    
+    if ([filename isEqualToString:@" "]) {
+        getImage(nil);
+    }
     AccountMessage *_accoutMessage = [AccountMessage sharedInstance];
 
     if ([_accoutMessage.head isEqualToString:filename] && [_accoutMessage.image isKindOfClass:[UIImage class]]) {

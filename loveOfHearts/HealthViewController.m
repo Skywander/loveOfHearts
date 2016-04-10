@@ -14,6 +14,8 @@
 
 #import "Command.h"
 
+#import "Networking.h"
+
 @interface HealthViewController ()
 {
     AccountMessage *accountMessage;
@@ -38,9 +40,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initData];
-    
-    [self initView];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initView];
+        
+    }];
 }
 
 - (void)initData{
@@ -49,6 +57,14 @@
     pedo = accountMessage.pedo;
     
     roll = accountMessage.turn;
+    
+    if ([roll isEqualToString:@" "] || [roll isEqualToString:@"00:00-00:00"]) {
+        roll = @"0";
+    }
+    
+    if ([roll isEqualToString:@"00:00-23:59"]) {
+        roll = @"1";
+    }
     
     userId = accountMessage.userId;
     
@@ -125,13 +141,11 @@
                                 @"wid":wid,
                                 @"pedo":switsState[sender.tag]
                                };
-        [Command commandWithAddress:@"pedo" andParamater:dict block:^(NSInteger type) {
+        [Command commandWithAddress:@"watch_pedo" andParamater:dict block:^(NSInteger type) {
             if (type == 100) {
-                ;
+                accountMessage.temppedo = [switsState objectAtIndex:0];;
             }
         }];
-        
-        accountMessage.temppedo = [switsState objectAtIndex:0];
     }
     if (sender.tag == 1) {
         
@@ -149,11 +163,11 @@
                                 @"turn":timeString
                                };
         
-        [Command commandWithAddress:@"turn" andParamater:dict block:^(NSInteger type) {
-            ;
+        [Command commandWithAddress:@"watch_turn" andParamater:dict block:^(NSInteger type) {
+            if (type == 100) {
+                accountMessage.tempturn = timeString;
+            };
         }];
-        
-        accountMessage.tempturn = @"00:00 - 23.59";
     }
     
 }

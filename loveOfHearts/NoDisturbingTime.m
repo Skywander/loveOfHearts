@@ -43,9 +43,15 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    [self initData];
-
-    [self initUI];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initUI];
+        
+    }];
 }
 
 - (void)initData{
@@ -263,7 +269,7 @@
                                  @"wid":accountMessage.wid,
                                  @"silence":paramater
                                 };
-    [Command commandWithAddress:@"silence" andParamater:paramaters block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_silence" andParamater:paramaters block:^(NSInteger type) {
         if (type == 100) {
             
             accountMessage.tempsilencetime = paramater;

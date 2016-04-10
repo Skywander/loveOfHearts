@@ -22,12 +22,20 @@
     UIButton *birthdayButton;
     UIButton *sexButton;
     UIButton *removeButton;
+    UIButton *heightButton;
+    UIButton *weightButton;
+    UIButton *wsimButton;
+    UIButton *usimButton;
     
     UITextField *remarkTextField;
     UIButton *birthdaySubButton;
     UIButton *sexSubButton;
     UILabel *channelLabel;
     UIImageView *portraitView;
+    UITextField *heightTextField;
+    UITextField *weightTextField;
+    UITextField *usimTextField;
+    UITextField *wsimTextField;
     
     CGFloat basicMove;
     CGFloat basicY;
@@ -41,6 +49,12 @@
     NSString *_sex;
     NSString *sex;
     NSString *_clock;
+    
+    NSString *_height;
+    NSString *_weight;
+    
+    NSString *_wsim;
+    NSString *_usim;
     
     NSString *shouhuan_id;
     
@@ -59,9 +73,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initData];
+    NSDictionary *paramater = @{
+                                @"wid":[AccountMessage sharedInstance].wid
+                                };
     
-    [self initUI];
+    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+        if (dict) {
+            accountMessage = [AccountMessage sharedInstance];
+            
+            [accountMessage setBabyMessage:dict];
+            
+            [self initData];
+            
+            [self initUI];
+            
+        }
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,6 +105,14 @@
 
 
     _birthday = accountMessage.babybir;
+    
+    _height = accountMessage.babyheight;
+    
+    _weight = accountMessage.babyweight;
+    
+    _wsim = accountMessage.wsim;
+    
+    _usim = accountMessage.usim;
     
     shouhuan_id = accountMessage.wid;
     
@@ -140,6 +176,16 @@
     codeButton = [self buttonWithName:@"    手表ID" andPointY:basicY + basicMove];
     
     birthdayButton = [self buttonWithName:@"    生日" andPointY:basicY + basicMove * 2];
+    
+    heightButton = [self buttonWithName:@"   身高" andPointY:basicY + basicMove * 4];
+    
+    weightButton = [self buttonWithName:@"   体重" andPointY:basicY + basicMove * 5];
+    
+    wsimButton = [self buttonWithName:@"  手表SMI卡号" andPointY:basicY + basicMove * 6];
+    
+    usimButton = [self buttonWithName:@"   手机SIM卡号" andPointY:basicY + basicMove * 7];
+    
+    
     [birthdaySubButton addTarget:self action:@selector(updateBirthday) forControlEvents:UIControlEventTouchUpInside];
     
     sexButton = [self buttonWithName:@"    性别" andPointY:basicY + basicMove * 3];
@@ -209,6 +255,59 @@
         
         [button addSubview:sexSubButton];
     }
+    if (y == basicY + basicMove * 4) {
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        
+        [textField setTextAlignment:NSTextAlignmentRight];
+        [textField setTextColor:[UIColor grayColor]];
+        [textField setOpaque:YES];
+        [textField setText:_height];
+        [textField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [button addSubview:textField];
+        
+        heightTextField = textField;
+    }
+
+    if (y == basicY + basicMove * 5) {
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        
+        [textField setTextAlignment:NSTextAlignmentRight];
+        [textField setTextColor:[UIColor grayColor]];
+        [textField setOpaque:YES];
+        [textField setText:_weight];
+        [textField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [button addSubview:textField];
+        
+        weightTextField = textField;
+    }
+
+    if (y == basicY + basicMove * 6) {
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        
+        [textField setTextAlignment:NSTextAlignmentRight];
+        [textField setTextColor:[UIColor grayColor]];
+        [textField setOpaque:YES];
+        [textField setText:_wsim];
+        [textField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [button addSubview:textField];
+        
+        wsimTextField = textField;
+    }
+
+    if (y == basicY + basicMove * 7) {
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        
+        [textField setTextAlignment:NSTextAlignmentRight];
+        [textField setTextColor:[UIColor grayColor]];
+        [textField setOpaque:YES];
+        [textField setText:_usim];
+        [textField setKeyboardType:UIKeyboardTypeDecimalPad];
+        [button addSubview:textField];
+        
+        usimTextField = textField;
+    }
+
+    
     [self.view addSubview:button];
     
     return button;
@@ -243,6 +342,8 @@
 
 
 - (void)clickNavigationRightView{
+    
+    NSLog(@"head : %@",head);
         
     NSDictionary *paramater = @{
                                 @"wid":accountMessage.wid,
@@ -251,14 +352,13 @@
                                 @"babyage":@"10",
                                 @"babybir":birthdaySubButton.titleLabel.text,
                                 @"babyname":remarkTextField.text,
-                                @"babyheight":@"170",
-                                @"babyweight":@"50",
-                                @"usim":accountMessage.usim,
-                                @"wsim":accountMessage.wsim
+                                @"babyheight":heightTextField.text,
+                                @"babyweight":weightTextField.text,
+                                @"usim":usimTextField.text,
+                                @"wsim":wsimTextField.text
                                 };
     
     NSLog(@"paramater : %@",paramater);
-    
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {

@@ -11,6 +11,7 @@
 #import "Navigation.h"
 #import "AccountMessage.h"
 #import "Command.h"
+#import "Networking.h"
 
 @interface ModeChoiceViewController()<UITableViewDataSource,UITableViewDelegate,IQActionSheetPickerViewDelegate>
 
@@ -37,9 +38,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initData];
-    
-    [self initView];
+    [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
+        NSLog(@"watchMessage: %@",dict);
+        
+        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        
+        [self initData];
+        [self initView];
+        
+    }];
     
     
     Navigation *navigation = [Navigation new];
@@ -169,7 +176,7 @@
                            @"space":space
                            };
     
-    [Command commandWithAddress:@"uploadspacetime" andParamater:dict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_mode" andParamater:dict block:^(NSInteger type) {
         if (type == 100){
             accountMessage.tempmode = space;
             

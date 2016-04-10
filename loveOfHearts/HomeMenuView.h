@@ -14,4 +14,6 @@
 
 @property id<HomeMenuProtocol> homeDelegat;
 
+- (void)updateSingalWith:(NSInteger)paramater;
+
 @end

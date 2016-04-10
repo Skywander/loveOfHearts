@@ -79,6 +79,29 @@
     }];
 }
 
++ (void)commandWithAddress:(NSString *)address andParamater:(NSDictionary *)paramater dictBlock:(getDict)getDict{
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager new];
+    
+    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
+    NSLog(@"%@",paramater);
+    
+    [sessionManager POST:[NSString stringWithFormat:@"%@%@",HTTP,address] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        ;
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        ;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"success : %@",responseObject);
+        
+        getDict([responseObject objectForKey:@"data"]);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure : %@",error);
+        
+        getDict(nil);
+    }];
+}
 
 
 
