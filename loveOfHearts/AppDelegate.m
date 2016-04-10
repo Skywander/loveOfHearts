@@ -12,10 +12,15 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CoreLocation/CoreLocation.h>
 
+
+#import "IIViewDeckController.h"
+#import "IISideController.h"
+
 #import "LoginViewController.h"
 #import "AccountMessage.h"
 #import "Mymapview.h"
 #import "Networking.h"
+#import "JKAlert.h"
 #define NotifyActionKey "NotifyAction"
 
 NSString *const NotificationCategoryIdent = @"ACTIONABLE";
@@ -73,10 +78,14 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
         switch (status) {
             case AFNetworkReachabilityStatusUnknown: // 未知网络
                 NSLog(@"未知网络");
+                
+                [JKAlert showMessage:@"未知网络"];
+                
                 break;
                 
             case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
                 NSLog(@"没有网络(断网)");
+                [JKAlert showMessage:@"没有网络(断网)"];
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络

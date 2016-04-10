@@ -123,11 +123,15 @@
 
 - (void)clickNavigationRightView{
     
+    NSInteger type = [self.relationArray indexOfObject:self.relationButton.titleLabel.text];
+    
+    NSString *typeString = [NSString stringWithFormat:@"%ld",type];
+    
     NSDictionary *dict = @{
                             @"userId":accountMessage.userId,
                             @"wid":widTextField.text,
-                            @"relations":@"爷爷",
-                            @"type":@"1",
+                            @"relations":self.relationButton.titleLabel.text,
+                            @"type":typeString,
                            };
     [Networking uploalDataWithAddress:@"bind" dict:dict block:^(int i) {
         ;

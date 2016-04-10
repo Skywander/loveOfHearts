@@ -56,7 +56,7 @@
 
 - (void)initNaviView{
     Navigation *naviview = [Navigation new];
-    [naviview addRightViewWithName:@"保存"];
+    [naviview addRightViewWithName:@"下一步"];
     [naviview setDelegate:self];
     [self.view addSubview:naviview];
 }
@@ -103,7 +103,7 @@
     UITouch *touch = [[event allTouches]anyObject];
     CGPoint point = [touch locationInView:self.view];
 
-    if (!CGRectContainsPoint(mapView.frame, point)) {
+    if (!CGRectContainsPoint(myMapview.frame, point)) {
         return;
     }
     if (1) {

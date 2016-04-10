@@ -8,7 +8,8 @@
 
 #import "HomeTopView.h"
 #import "DB.h"
-#include "AccountMessage.h"
+#import "AccountMessage.h"
+#import "Command.h"
 
 #define SELF_HEIGHT self.frame.size.height
 
@@ -42,9 +43,22 @@
     if (self) {
         [self setBackgroundColor:DEFAULT_PINK];
         
-        [self initLabel];
+        NSDictionary *paramater = @{
+                                    @"wid":[AccountMessage sharedInstance].wid
+                                    };
         
-        [self beginTimer];
+        [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+            if (dict) {
+                AccountMessage *accountMessage = [AccountMessage sharedInstance];
+                
+                [accountMessage setBabyMessage:dict];
+                
+                [self initLabel];
+                
+                [self beginTimer];
+                
+            }
+        }];
 
     }
     return self;
@@ -62,6 +76,7 @@
     //时间标签
     
     [timeLabel setFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.frame.size.height / 2)];
+
     [timeLabel setText:[self getNowTime]];
     [timeLabel setTextAlignment:NSTextAlignmentCenter];
     [timeLabel setTextColor:[UIColor blackColor]];
@@ -139,8 +154,6 @@
 
 - (void)updateTimeLabel{
     [timeLabel setText:[self getNowTime]];
-    
-    NSLog(@"%@",[self getNowTime]);
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
