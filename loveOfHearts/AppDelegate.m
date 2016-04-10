@@ -11,11 +11,6 @@
 #import <SMS_SDK/SMSSDK.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CoreLocation/CoreLocation.h>
-
-
-#import "IIViewDeckController.h"
-#import "IISideController.h"
-
 #import "LoginViewController.h"
 #import "AccountMessage.h"
 #import "Mymapview.h"

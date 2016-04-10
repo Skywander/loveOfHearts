@@ -20,6 +20,10 @@
 
 @property (nonatomic,strong) MAUserLocation *userLocation;
 
+@property (nonatomic,strong) NSString *currentLat;
+
+@property (nonatomic,strong) NSString *currentLng;
+
 @property (weak,nonatomic) id <MapProtocol>mydelegate;
 
 + (instancetype)sharedInstance;

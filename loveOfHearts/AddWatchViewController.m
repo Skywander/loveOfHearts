@@ -10,8 +10,7 @@
 #import "SYQRCodeViewController.h"
 #import "AddWatchByInput.h"
 #import "Navigation.h"
-
-#import "ScanViewController.h";
+#import "ScanViewController.h"
 
 @interface AddWatchViewController()
 {

@@ -12,4 +12,6 @@
 
 - (void)presentPersonInfoView;
 
+- (void)showRightView;
+
 @end

@@ -134,6 +134,12 @@ static Mymapview *mymapview;
 }
 
 - (NSString *)searchPointWithLat:(double)lat andLon:(double)lon{
+    
+    
+    self.currentLat = [NSString stringWithFormat:@"%f",lat];
+    
+    self.currentLng = [NSString stringWithFormat:@"%f",lon];
+    
     //构造AMapReGeocodeSearchRequest对象
     AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
     

@@ -98,8 +98,6 @@
     [outButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [outButton addTarget:self action:@selector(chooseAlarmType:) forControlEvents:UIControlEventTouchUpInside];
     
-
-    
     [self.view addSubview:inButton];
     [self.view addSubview:outButton];
     
@@ -108,9 +106,6 @@
     [self.view addSubview:lineview_1];
     
 }
-
-
-
 
 - (void)chooseAlarmType:(UIButton *)sender {
     [sender setSelected:YES];

@@ -27,7 +27,6 @@
 @synthesize topView;
 - (void)viewDidLoad {
     
-    NSLog(@"view did load");
     [super viewDidLoad];
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
@@ -47,18 +46,28 @@
     [self initMapView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    if (mapView.currentLat) {
+        [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLat doubleValue] forKey:@"lat"];
+        
+        [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLng doubleValue] forKey:@"lon"];
+    }
+}
+
 - (void)initTopView{
     topView = [[HomeTopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
     
     topView.topViewDelegat = self;
     
     [self.view addSubview:topView];
-    
-    [topView.expandButton addTarget:self action:@selector(clickExpandButton) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
 - (void)initMapView{
+    
+    double lat = [[NSUserDefaults standardUserDefaults] doubleForKey:@"lat"];
+    
+    double lon = [[NSUserDefaults standardUserDefaults] doubleForKey:@"lon"];
+    
     mapView = [Mymapview sharedInstance];
         
     [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
@@ -69,7 +78,9 @@
     
     [self.view sendSubviewToBack:mapView];
     
-    [mapView searchPointWithLat:39.5427 andLon:116.2317];
+    NSLog(@"lat lon : %f %f",lat,lon);
+    
+    [mapView searchPointWithLat:lat andLon:lon];
 }
 
 - (void)initHomeMenuView{
@@ -78,20 +89,6 @@
     menuView.homeDelegat = self;
         
     [self.view addSubview:menuView];
-}
-
-
-- (void)clickExpandButton{
-    [self.viewDeckController toggleRightViewAnimated:YES];
-    
-    if (topView.expandButton.tag != 1000) {
-        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
-        
-        topView.expandButton.tag = 1000;
-    }else{
-        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
-        topView.expandButton.tag = 1001;
-    }
 }
 
 - (void)initNotification{
@@ -150,6 +147,17 @@
     }];
 }
 
-
+- (void)showRightView{
+    [self.viewDeckController toggleRightViewAnimated:YES];
+    
+    if (topView.expandButton.tag != 1000) {
+        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
+        
+        topView.expandButton.tag = 1000;
+    }else{
+        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
+        topView.expandButton.tag = 1001;
+    }
+}
 
 @end

@@ -108,6 +108,9 @@
     
     [expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
     [expandButton setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height,(SELF_HEIGHT - BUTTON_WIDTH) / 2,BUTTON_WIDTH, BUTTON_WIDTH)];
+    
+    [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:expandButton];
     
     //powerView
@@ -164,9 +167,12 @@
     if (CGRectContainsPoint(photoView.frame, point)) {
         [self.topViewDelegat presentPersonInfoView];
     }
+    
 }
 
-
+- (void)expand{
+    [self.topViewDelegat showRightView];
+}
 
 
 
