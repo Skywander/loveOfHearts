@@ -35,6 +35,7 @@ static Mymapview *mymapview;
     if (mymapview) {
         [mymapview.mapView removeOverlays:mymapview.mapView.overlays];
         [mymapview.mapView removeAnnotations:mymapview.mapView.annotations];
+//        [mymapview.mapView setShowsUserLocation:NO];
         return mymapview;
     }else {
         mymapview = [[self alloc] init];

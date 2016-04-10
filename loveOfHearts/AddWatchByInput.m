@@ -70,6 +70,10 @@
     [widTextField setLeftViewMode:UITextFieldViewModeAlways];
     [widTextField setBackgroundColor:[UIColor whiteColor]];
     
+    if (self.wid) {
+        [widTextField setText:self.wid];
+    }
+    
     [self.view addSubview:widTextField];
     
     //下拉列表
@@ -101,7 +105,12 @@
 }
 
 - (void)showListView{
-    [listView setHidden:NO];
+    
+    if (listView.hidden) {
+        [listView setHidden:NO];
+    }else{
+        [listView setHidden:YES];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

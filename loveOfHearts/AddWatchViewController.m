@@ -11,6 +11,8 @@
 #import "AddWatchByInput.h"
 #import "Navigation.h"
 
+#import "ScanViewController.h";
+
 @interface AddWatchViewController()
 {
     UIButton *idButton;
@@ -69,24 +71,27 @@
 }
 
 - (void)addWatchByCode {
-    SYQRCodeViewController *qrcodevc = [[SYQRCodeViewController alloc] init];
-    qrcodevc.SYQRCodeSuncessBlock = ^(SYQRCodeViewController *aqrvc,NSString *qrString){
-        //        self.saomiaoLabel.text = qrString;
-                
-        AddWatchByInput *addWatch = [AddWatchByInput new];
-        addWatch.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:addWatch animated:YES];
-    };
-    qrcodevc.SYQRCodeFailBlock = ^(SYQRCodeViewController *aqrvc){
-        //        self.saomiaoLabel.text = @"fail~";
-        [aqrvc dismissViewControllerAnimated:NO completion:nil];
-    };
-    qrcodevc.SYQRCodeCancleBlock = ^(SYQRCodeViewController *aqrvc){
-        [aqrvc dismissViewControllerAnimated:NO completion:nil];
-        //        self.saomiaoLabel.text = @"cancle~";
-    };
 
-    [self.navigationController pushViewController:qrcodevc animated:YES];
+    ScanViewController *_scan = [[ScanViewController alloc]init];
+    
+    [self presentViewController:_scan animated:YES completion:^{
+        ;
+    }];
+
+    [_scan finishingBlock:^(NSString *string) {
+        
+        [_scan dismissViewControllerAnimated:YES completion:^{
+            ;
+        }];
+        
+        AddWatchByInput *addWatchByInput = [AddWatchByInput new];
+        
+        addWatchByInput.wid = string;
+        
+        [self presentViewController:addWatchByInput animated:YES completion:^{
+            ;
+        }];
+    }];
 }
 
 

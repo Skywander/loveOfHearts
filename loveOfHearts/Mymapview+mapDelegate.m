@@ -32,11 +32,21 @@
         return annotationView;
     }
     if ([annotation isKindOfClass:[MAUserLocation class]]) {
-        static NSString *userLocationStyleReuseIndentifier = @"userLocationStyleReuseIndentifier";
-        MAAnnotationView *annotationView = [_mapView dequeueReusableAnnotationViewWithIdentifier:userLocationStyleReuseIndentifier];
-        if (annotationView == nil) {
-            annotationView = [[MAAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:userLocationStyleReuseIndentifier];
+        static NSString *reuseIndetifier = @"userlocationReuseIndetifier";
+        MAPinAnnotationView *annotationView = (MAPinAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        if (annotationView == nil)
+        {
+            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
+        annotationView.pinColor = MAPinAnnotationColorGreen;
+        annotationView.canShowCallout = YES;
+        annotationView.animatesDrop = NO;
+        
+        annotationView.image = [UIImage imageNamed:@"animationView"];
+        
+        [annotationView setFrame:CGRectMake(0, 0, 20, 20)];
+        [annotationView setClipsToBounds:YES];
+        
         return annotationView;
     }
     return nil;

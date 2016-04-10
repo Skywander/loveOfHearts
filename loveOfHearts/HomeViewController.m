@@ -13,7 +13,7 @@
 
 #define START_X 0
 #define START_Y 0
-#define TOP_HEIGHT 44
+#define TOP_HEIGHT 64
 
 @interface HomeViewController ()
 {
@@ -61,7 +61,7 @@
 - (void)initMapView{
     mapView = [Mymapview sharedInstance];
         
-    [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
     
     mapView.mydelegate = self;
     
@@ -73,7 +73,7 @@
 }
 
 - (void)initHomeMenuView{
-    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 74, 45, 225)];
+    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 20 + TOP_HEIGHT, 45, 275)];
     
     menuView.homeDelegat = self;
         
@@ -105,13 +105,19 @@
     
     [topView setImage:image];
     
-    NSLog(@"updateImge");
 }
 
 - (void)updateSignal:(NSNotification *)sender{
-    NSInteger signal = [sender.object integerValue];
+    
+    NSDictionary *dict = (NSDictionary *)sender.object;
+    
+    NSInteger signal = [[dict objectForKey:@"gsm"] integerValue];
     
     [menuView updateSingalWith:signal];
+    
+    NSInteger power = [[dict objectForKey:@"power"] integerValue];
+    
+    [topView setUpdatePower:power];
 }
 
 - (void)didReceiveMemoryWarning {

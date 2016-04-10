@@ -39,19 +39,16 @@
     [super viewDidLoad];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
-        NSLog(@"watchMessage: %@",dict);
-        
         [[AccountMessage sharedInstance] setWatchInfor:dict];
         
         [self initData];
-        [self initView];
         
+        [self initView];
     }];
-    
     
     Navigation *navigation = [Navigation new];
     [self.view addSubview:navigation];
-    
+
 }
 
 - (void)initData{
@@ -98,6 +95,8 @@
     listView.delaysContentTouches = NO;
 
     [self.view addSubview:listView];
+    
+    [self.view sendSubviewToBack:listView];
     
     selectedView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 10, 30, 30)];
     selectedView.image = [UIImage imageNamed:@"yes"];

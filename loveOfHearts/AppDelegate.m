@@ -12,15 +12,10 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "IIViewDeckController.h"
-#import "IISideController.h"
-
 #import "LoginViewController.h"
-
 #import "AccountMessage.h"
-
 #import "Mymapview.h"
-
+#import "Networking.h"
 #define NotifyActionKey "NotifyAction"
 
 NSString *const NotificationCategoryIdent = @"ACTIONABLE";
@@ -70,6 +65,32 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
         
         NSLog(@"%@ record",record);
     }
+    // 1.获得网络监控的管理者
+    AFNetworkReachabilityManager *mgr = [AFNetworkReachabilityManager sharedManager];
+    // 2.设置网络状态改变后的处理
+    [mgr setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        // 当网络状态改变了, 就会调用这个block
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown: // 未知网络
+                NSLog(@"未知网络");
+                break;
+                
+            case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
+                NSLog(@"没有网络(断网)");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
+                NSLog(@"手机自带网络");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
+                NSLog(@"WIFI");
+                break;
+        }
+    }];
+    
+    // 3.开始监控
+    [mgr startMonitoring];
 
     return YES;
 }
@@ -248,11 +269,16 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
         Mymapview *myMayView = [Mymapview sharedInstance];
         [myMayView searchPointWithLat:lat andLon:lng];
         
-        NSString *signal =  [NSString stringWithFormat:@"%@",[data objectForKey:@"gsm"]];
+        NSDictionary *sendMessage = @{
+                                @"gsm":[NSString stringWithFormat:@"%@",[data objectForKey:@"gsm"]],
+                                @"power":[NSString stringWithFormat:@"%@",[data objectForKey:@"power"]]
+                               };
         
-        NSNotification *notification =[NSNotification notificationWithName:@"updateSignal" object:signal userInfo:nil];
+        NSNotification *notification =[NSNotification notificationWithName:@"updateSignal" object:sendMessage userInfo:nil];
         //通过通知中心发送通知
         [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        NSLog(@"send notification");
 
     }
     

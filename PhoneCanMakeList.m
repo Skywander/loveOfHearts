@@ -174,7 +174,6 @@
 - (void)clickNavigationRightView{
     
     phoneNumbersOne = textFields[0].text;
-    phoneNumbersTwo = textFields[5].text;
     
     for (int i = 1; i < 10; i ++) {
         NSString *tempStr = textFields[i].text;
@@ -185,7 +184,7 @@
     NSDictionary *tempDict = [NSDictionary dictionaryWithObjectsAndKeys:
                               userAccount,@"userId",
                               watchID,@"wid",
-                              phoneNumbersOne,@"whitelist1",
+                              phoneNumbersOne,@"whitelist",
                               nil
                               ];
     [Command commandWithAddress:@"watch_whitelist" andParamater:tempDict block:^(NSInteger type) {

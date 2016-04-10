@@ -87,7 +87,7 @@
     return (SCREEN_HEIGHT - 100) / 10;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 9;
 }
 
 

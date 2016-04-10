@@ -15,10 +15,8 @@
 #import "Command.h"
 
 static HistoryFenceList *historyFenceList;
-@interface HistoryFenceList ()
+@interface HistoryFenceList ()<NavigationProtocol>
 {
-    //
-    NSMutableArray *fencesArray;
     NSMutableArray *fencesDataArray;
     NSMutableArray *fencesIDArray;
     NSString *fenceName;
@@ -32,22 +30,24 @@ static HistoryFenceList *historyFenceList;
 
 @implementation HistoryFenceList
 
-@synthesize sections,section0,section1,fencenameList;
+@synthesize fencenameList;
 @synthesize table;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view setBackgroundColor:DEFAULT_COLOR];
+    
+    [self initView];
+    
+    [self initNavigation];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self initData];
-    
-    [self initNavigation];
-    
-    [self initView];
 }
 
 - (void)initView{
@@ -63,20 +63,13 @@ static HistoryFenceList *historyFenceList;
 }
 - (void)initNavigation {
     Navigation *navigationView = [Navigation new];
+    [navigationView addRightViewWithName:@"新建"];
+    [navigationView setDelegate:self];
     [self.view addSubview:navigationView];
 }
 
 - (void)initSection {
-    if (!fencenameList) {
-        fencenameList = [NSMutableArray new];
-    } else{
-        fencenameList = [NSMutableArray arrayWithArray:fencenameList];
-    }
-    section1 = fencenameList;
-    
-    section0 = [NSMutableArray arrayWithObject:@" 创建围栏"];
-    sections = [NSMutableArray arrayWithObjects:section0,fencesArray, nil];
-    
+    fencenameList = [NSMutableArray new];
 }
 - (void)initTable {
     table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -91,12 +84,11 @@ static HistoryFenceList *historyFenceList;
 }
 
 - (void)getWatchMessage {
-    fencesArray = [NSMutableArray new];
-    
     fencesDataArray = [NSMutableArray new];
     
     fencesIDArray = [NSMutableArray new];
-
+    
+    fencenameList = [NSMutableArray new];
     
     accountMessage = [AccountMessage sharedInstance];
     
@@ -119,15 +111,19 @@ static HistoryFenceList *historyFenceList;
         
         for (NSDictionary *dict in dataArray) {
             NSLog(@"%@",dict);
-            [fencesArray addObject:[dict objectForKey:@"fencename"]];
+            [fencenameList addObject:[dict objectForKey:@"fencename"]];
+            
             [fencesDataArray addObject:[dict objectForKey:@"fencearea"]];
             
             [fencesIDArray addObject:[dict objectForKey:@"fid"]];
             
-            [self initView];
+            
+            [table reloadData];
+            
+            NSLog(@"fencenamelist : %@",fencenameList);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
+        NSLog(@"error : %@",error);
     }];
 }
 
@@ -136,14 +132,11 @@ static HistoryFenceList *historyFenceList;
     [super didReceiveMemoryWarning];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return sections.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section ==1) {
-        return [[sections objectAtIndex:section] count] + 1;
-    }
-    return [[sections objectAtIndex:section] count];
+    return fencenameList.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -155,11 +148,7 @@ static HistoryFenceList *historyFenceList;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier: CMainCell];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if ([indexPath section] == 0) {
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"createFenceBackView"]];
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    if ([indexPath row] == 0 &&[indexPath section] == 1) {
+    if ([indexPath row] == 0) {
         cell.textLabel.text = @"围栏列表";
         cell.textLabel.textColor = DEFAULT_FONT_COLOR;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -168,7 +157,7 @@ static HistoryFenceList *historyFenceList;
         [cell setUserInteractionEnabled:NO];
     }
     if ([indexPath row] > 0) {
-        cell.textLabel.text = [[sections objectAtIndex:[indexPath section]]objectAtIndex:[indexPath row] - 1];
+        cell.textLabel.text = [fencenameList objectAtIndex:[indexPath row] - 1];
         cell.textLabel.textColor = [UIColor blackColor];
         cell.textLabel.textAlignment = NSTextAlignmentLeft;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellnoCorner"]];
@@ -180,15 +169,7 @@ static HistoryFenceList *historyFenceList;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] == 0) {
-        NewFenceView *createFence = [NewFenceView new];
-        createFence.hidesBottomBarWhenPushed = YES;
-        [self presentViewController:createFence animated:YES completion:^{
-            ;
-        }];
-        return;
-    }
-    if ([indexPath section] == 1 && [indexPath row] > 0) {
+    if ([indexPath row] > 0) {
         HistoryViewController *history = [HistoryViewController new];
         
         NSLog(@"%ld %ld",[indexPath row],[indexPath section]);
@@ -203,10 +184,19 @@ static HistoryFenceList *historyFenceList;
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] == 0) {
+    if ([indexPath row] == 0) {
         return 50;
     }
     return 40;
 }
 
+
+- (void)clickNavigationRightView{
+    NewFenceView *createFence = [NewFenceView new];
+    createFence.hidesBottomBarWhenPushed = YES;
+    [self presentViewController:createFence animated:YES completion:^{
+        ;
+    }];
+
+}
 @end

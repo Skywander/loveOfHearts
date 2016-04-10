@@ -69,7 +69,7 @@
     
     CGFloat basicMove = 55;
 
-    sosButton = [self buttonWthName:@"      短信开关" andPointY:70];
+    sosButton = [self buttonWthName:@"      短信总开关" andPointY:70];
     
     lowPowerButton = [self buttonWthName:@"     低电报警" andPointY:70 + basicMove];
     
@@ -137,11 +137,11 @@
     NSDictionary *sosDict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"onoroff":[switsState objectAtIndex:0]
+                                @"smsonoff":[switsState objectAtIndex:0]
                               };
-    [Command commandWithAddress:@"watch_sossms" andParamater:sosDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_smsonoff" andParamater:sosDict block:^(NSInteger type) {
         if (type == 100) {
-            accountMessage.tempsossms = [switsState objectAtIndex:0];
+            ;
         }
     }];
     
@@ -178,10 +178,10 @@
     NSDictionary *smsDict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"smsonoff":[switsState objectAtIndex:3]
+                                @"sossms":[switsState objectAtIndex:3]
                               };
     
-    [Command commandWithAddress:@"watch_smsonoff" andParamater:smsDict block:^(NSInteger type) {
+    [Command commandWithAddress:@"watch_sossms" andParamater:smsDict block:^(NSInteger type) {
         if (type == 100) {
             
             accountMessage.tempsmsonoff = [switsState objectAtIndex:3];

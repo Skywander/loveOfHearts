@@ -10,9 +10,6 @@
 
 @interface HistoryFenceList : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property (strong,nonatomic) NSMutableArray *section1;
-@property (strong,nonatomic) NSMutableArray *section0;
-@property (strong,nonatomic) NSArray *sections;
 @property (nonatomic,strong) NSMutableArray *fencenameList;
 
 @property (nonatomic,strong) UITableView *table;

@@ -20,4 +20,6 @@
 
 - (void)setImage:(UIImage *)image;
 
+- (void)setUpdatePower:(NSInteger)paramater;
+
 @end

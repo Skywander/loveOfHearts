@@ -17,5 +17,7 @@
 
 @property (nonatomic,strong) UIButton *relationButton;
 
+@property (nonatomic,strong) NSString *wid;
+
 
 @end

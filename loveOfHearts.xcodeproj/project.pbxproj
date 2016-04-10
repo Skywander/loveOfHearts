@@ -123,6 +123,10 @@
 		D3DE24971C94546C00E85F97 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE24961C94546C00E85F97 /* CFNetwork.framework */; };
 		D3DE24991C94547F00E85F97 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3DE24981C94547F00E85F97 /* CoreTelephony.framework */; };
 		D3DE249C1C9455FC00E85F97 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C96EF31C911B8A00F27D10 /* libz.tbd */; };
+		D3DE65AE1CBA8C8300FEEA25 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DE65AC1CBA8C8300FEEA25 /* ScanViewController.m */; };
+		D3DE65AF1CBA8C8300FEEA25 /* ScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3DE65AD1CBA8C8300FEEA25 /* ScanViewController.xib */; };
+		D3DE65B41CBA8CBD00FEEA25 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DE65B31CBA8CBD00FEEA25 /* BaseViewController.m */; };
+		D3DE65B71CBA8CDC00FEEA25 /* JKAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DE65B61CBA8CDC00FEEA25 /* JKAlert.m */; };
 		D3DF04431C950CB000832CD9 /* PhoneListView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF043F1C950CB000832CD9 /* PhoneListView.m */; };
 		D3DF04441C950CB000832CD9 /* SosphoneSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04411C950CB000832CD9 /* SosphoneSetting.m */; };
 		D3DF044A1C950E2600832CD9 /* Command.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DF04491C950E2600832CD9 /* Command.m */; };
@@ -153,6 +157,16 @@
 		D3E8169B1CB9E4CC00F01613 /* voice_left1.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816971CB9E4CC00F01613 /* voice_left1.png */; };
 		D3E8169C1CB9E4CC00F01613 /* voice_left2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816981CB9E4CC00F01613 /* voice_left2.png */; };
 		D3E8169D1CB9E4CC00F01613 /* voice_left3.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816991CB9E4CC00F01613 /* voice_left3.png */; };
+		D3E816AE1CBA3F3500F01613 /* power10.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A41CBA3F3500F01613 /* power10.png */; };
+		D3E816AF1CBA3F3500F01613 /* power20.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A51CBA3F3500F01613 /* power20.png */; };
+		D3E816B01CBA3F3500F01613 /* power30.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A61CBA3F3500F01613 /* power30.png */; };
+		D3E816B11CBA3F3500F01613 /* power40.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A71CBA3F3500F01613 /* power40.png */; };
+		D3E816B21CBA3F3500F01613 /* power50.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A81CBA3F3500F01613 /* power50.png */; };
+		D3E816B31CBA3F3500F01613 /* power60.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816A91CBA3F3500F01613 /* power60.png */; };
+		D3E816B41CBA3F3500F01613 /* power70.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816AA1CBA3F3500F01613 /* power70.png */; };
+		D3E816B51CBA3F3500F01613 /* power80.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816AB1CBA3F3500F01613 /* power80.png */; };
+		D3E816B61CBA3F3500F01613 /* power90.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816AC1CBA3F3500F01613 /* power90.png */; };
+		D3E816B71CBA3F3500F01613 /* power100.png in Resources */ = {isa = PBXBuildFile; fileRef = D3E816AD1CBA3F3500F01613 /* power100.png */; };
 		D3FEEF991C90FF7A00300710 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D3FEEF981C90FF7A00300710 /* main.m */; };
 		D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA01C90FF7A00300710 /* Main.storyboard */; };
 		D3FEEFA41C90FF7A00300710 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3FEEFA31C90FF7A00300710 /* Assets.xcassets */; };
@@ -368,6 +382,13 @@
 		D3DE24961C94546C00E85F97 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D3DE24981C94547F00E85F97 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D3DE249A1C94556D00E85F97 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		D3DE65AB1CBA8C8300FEEA25 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		D3DE65AC1CBA8C8300FEEA25 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
+		D3DE65AD1CBA8C8300FEEA25 /* ScanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanViewController.xib; sourceTree = "<group>"; };
+		D3DE65B21CBA8CBD00FEEA25 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		D3DE65B31CBA8CBD00FEEA25 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		D3DE65B51CBA8CDC00FEEA25 /* JKAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKAlert.h; sourceTree = "<group>"; };
+		D3DE65B61CBA8CDC00FEEA25 /* JKAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKAlert.m; sourceTree = "<group>"; };
 		D3DF043E1C950CB000832CD9 /* PhoneListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneListView.h; sourceTree = "<group>"; };
 		D3DF043F1C950CB000832CD9 /* PhoneListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneListView.m; sourceTree = "<group>"; };
 		D3DF04401C950CB000832CD9 /* SosphoneSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SosphoneSetting.h; sourceTree = "<group>"; };
@@ -414,6 +435,16 @@
 		D3E816971CB9E4CC00F01613 /* voice_left1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_left1.png; sourceTree = "<group>"; };
 		D3E816981CB9E4CC00F01613 /* voice_left2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_left2.png; sourceTree = "<group>"; };
 		D3E816991CB9E4CC00F01613 /* voice_left3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_left3.png; sourceTree = "<group>"; };
+		D3E816A41CBA3F3500F01613 /* power10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power10.png; sourceTree = "<group>"; };
+		D3E816A51CBA3F3500F01613 /* power20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power20.png; sourceTree = "<group>"; };
+		D3E816A61CBA3F3500F01613 /* power30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power30.png; sourceTree = "<group>"; };
+		D3E816A71CBA3F3500F01613 /* power40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power40.png; sourceTree = "<group>"; };
+		D3E816A81CBA3F3500F01613 /* power50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power50.png; sourceTree = "<group>"; };
+		D3E816A91CBA3F3500F01613 /* power60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power60.png; sourceTree = "<group>"; };
+		D3E816AA1CBA3F3500F01613 /* power70.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power70.png; sourceTree = "<group>"; };
+		D3E816AB1CBA3F3500F01613 /* power80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power80.png; sourceTree = "<group>"; };
+		D3E816AC1CBA3F3500F01613 /* power90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power90.png; sourceTree = "<group>"; };
+		D3E816AD1CBA3F3500F01613 /* power100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power100.png; sourceTree = "<group>"; };
 		D3FEEF941C90FF7A00300710 /* loveOfHearts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = loveOfHearts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FEEF981C90FF7A00300710 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D3FEEFA11C90FF7A00300710 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -567,6 +598,7 @@
 		D362B9171C9679C90037E29E /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D3E816A31CBA3F2700F01613 /* Power */,
 				D31518A31CB80DA500FA872A /* PlayAnimation */,
 				D315189F1CB74D4300FA872A /* logo.png */,
 				D31518B11CB9613F00FA872A /* reset_press.png */,
@@ -767,6 +799,7 @@
 		D3A2A3E31C92A080009B1D0E /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D3DE65A91CBA8C4E00FEEA25 /* Scanner */,
 				D3787F971CB1440C009AE58A /* Entity */,
 				D34348F51CADF72D0095945D /* Protocol */,
 				D3DF04581C9543ED00832CD9 /* ActionView */,
@@ -776,6 +809,8 @@
 				D3FEEFE31C910B4400300710 /* SMS_SDK */,
 				D362B9141C9653790037E29E /* CommentAnimation.h */,
 				D362B9151C9653790037E29E /* CommentAnimation.m */,
+				D3DE65B51CBA8CDC00FEEA25 /* JKAlert.h */,
+				D3DE65B61CBA8CDC00FEEA25 /* JKAlert.m */,
 				D3C96EEE1C911A0E00F27D10 /* Networking.h */,
 				D3C96EEF1C911A0E00F27D10 /* Networking.m */,
 				D3DF04481C950E2600832CD9 /* Command.h */,
@@ -858,6 +893,34 @@
 			path = GtSdkLib;
 			sourceTree = "<group>";
 		};
+		D3DE65A91CBA8C4E00FEEA25 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				D3DE65B01CBA8C8700FEEA25 /* Base */,
+				D3DE65AA1CBA8C7500FEEA25 /* Scan */,
+			);
+			name = Scanner;
+			sourceTree = "<group>";
+		};
+		D3DE65AA1CBA8C7500FEEA25 /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				D3DE65AB1CBA8C8300FEEA25 /* ScanViewController.h */,
+				D3DE65AC1CBA8C8300FEEA25 /* ScanViewController.m */,
+				D3DE65AD1CBA8C8300FEEA25 /* ScanViewController.xib */,
+			);
+			name = Scan;
+			sourceTree = "<group>";
+		};
+		D3DE65B01CBA8C8700FEEA25 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D3DE65B21CBA8CBD00FEEA25 /* BaseViewController.h */,
+				D3DE65B31CBA8CBD00FEEA25 /* BaseViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 		D3DF04291C9502D700832CD9 /* PhoneSettting */ = {
 			isa = PBXGroup;
 			children = (
@@ -931,6 +994,23 @@
 				D3D8C56C1CA27EFF00512F5B /* otherSetting6.png */,
 			);
 			name = OtherSetting;
+			sourceTree = "<group>";
+		};
+		D3E816A31CBA3F2700F01613 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				D3E816A41CBA3F3500F01613 /* power10.png */,
+				D3E816A51CBA3F3500F01613 /* power20.png */,
+				D3E816A61CBA3F3500F01613 /* power30.png */,
+				D3E816A71CBA3F3500F01613 /* power40.png */,
+				D3E816A81CBA3F3500F01613 /* power50.png */,
+				D3E816A91CBA3F3500F01613 /* power60.png */,
+				D3E816AA1CBA3F3500F01613 /* power70.png */,
+				D3E816AB1CBA3F3500F01613 /* power80.png */,
+				D3E816AC1CBA3F3500F01613 /* power90.png */,
+				D3E816AD1CBA3F3500F01613 /* power100.png */,
+			);
+			name = Power;
 			sourceTree = "<group>";
 		};
 		D3FEEF8B1C90FF7A00300710 = {
@@ -1205,11 +1285,14 @@
 				D362B94F1C97AA210037E29E /* signal100.png in Resources */,
 				D362B93B1C96E44F0037E29E /* findWatch.png in Resources */,
 				D3D8C5921CA2A46100512F5B /* SphoneText.png in Resources */,
+				D3E816B21CBA3F3500F01613 /* power50.png in Resources */,
 				D362B95B1C97ABF40037E29E /* -.png in Resources */,
 				D31518B31CB9613F00FA872A /* reset_press.png in Resources */,
 				D362B9211C967A230037E29E /* location.png in Resources */,
+				D3E816B71CBA3F3500F01613 /* power100.png in Resources */,
 				D3D8C57E1CA27F8000512F5B /* otherSelected4.png in Resources */,
 				D3D8C5791CA27F8000512F5B /* otherSelected6.png in Resources */,
+				D3E816B51CBA3F3500F01613 /* power80.png in Resources */,
 				D315189E1CB74A5200FA872A /* delete.png in Resources */,
 				D362B9531C97AB510037E29E /* babyManage.png in Resources */,
 				D3D8C5941CA2A46100512F5B /* Sfences.png in Resources */,
@@ -1220,8 +1303,10 @@
 				D3D8C58F1CA2A46100512F5B /* SbabyManage.png in Resources */,
 				D31518A51CB80DC600FA872A /* voice_right0.png in Resources */,
 				D362B9201C967A230037E29E /* chat.png in Resources */,
+				D3E816AF1CBA3F3500F01613 /* power20.png in Resources */,
 				D3E51B5D1C9D0EBD001732BF /* otherSetting2.png in Resources */,
 				D3D8C56B1CA27EDE00512F5B /* otherSetting5.png in Resources */,
+				D3E816B61CBA3F3500F01613 /* power90.png in Resources */,
 				D3D0250B1C9BDE05002713B1 /* return.png in Resources */,
 				D362B9391C96E44F0037E29E /* fences.png in Resources */,
 				D3D8C5971CA2A46100512F5B /* SotherSetting.png in Resources */,
@@ -1240,10 +1325,12 @@
 				D3E8169C1CB9E4CC00F01613 /* voice_left2.png in Resources */,
 				D3D8C59F1CA3815600512F5B /* tablecell.png in Resources */,
 				D3D8C5911CA2A46100512F5B /* SrelativeNumber.png in Resources */,
+				D3E816B11CBA3F3500F01613 /* power40.png in Resources */,
 				D3E8169B1CB9E4CC00F01613 /* voice_left1.png in Resources */,
 				D31518A01CB74D4300FA872A /* logo.png in Resources */,
 				D3D8C57C1CA27F8000512F5B /* otherSelected9.png in Resources */,
 				D362B94D1C97AA210037E29E /* signal60.png in Resources */,
+				D3E816B01CBA3F3500F01613 /* power30.png in Resources */,
 				D362B93A1C96E44F0037E29E /* historyTrack.png in Resources */,
 				D3D8C57A1CA27F8000512F5B /* otherSelected8.png in Resources */,
 				D362B94B1C97AA210037E29E /* signal20.png in Resources */,
@@ -1253,6 +1340,7 @@
 				D3D8C5931CA2A46100512F5B /* Swhitelist.png in Resources */,
 				D3D8C57B1CA27F8000512F5B /* otherSelected10.png in Resources */,
 				D3E816941CB97C9100F01613 /* username.png in Resources */,
+				D3DE65AF1CBA8C8300FEEA25 /* ScanViewController.xib in Resources */,
 				D362B95A1C97ABF40037E29E /* +.png in Resources */,
 				D362B92C1C96AF9B0037E29E /* zoomout.png in Resources */,
 				D362B93D1C96E44F0037E29E /* exit.png in Resources */,
@@ -1269,10 +1357,13 @@
 				D362B94C1C97AA210037E29E /* signal40.png in Resources */,
 				D362B94E1C97AA210037E29E /* signal80.png in Resources */,
 				D3D8C57D1CA27F8000512F5B /* otherSelected7.png in Resources */,
+				D3E816B31CBA3F3500F01613 /* power60.png in Resources */,
 				D3D8C5A41CA42D7000512F5B /* cellCorner.png in Resources */,
 				D3E8169D1CB9E4CC00F01613 /* voice_left3.png in Resources */,
 				D362B93C1C96E44F0037E29E /* otherSetting.png in Resources */,
 				D3D8C59A1CA2C5EC00512F5B /* yes.png in Resources */,
+				D3E816AE1CBA3F3500F01613 /* power10.png in Resources */,
+				D3E816B41CBA3F3500F01613 /* power70.png in Resources */,
 				D3D8C5801CA27F8000512F5B /* otherSelected2.png in Resources */,
 				D312FFEC1CA7861400558485 /* animationView.png in Resources */,
 				D3FEEFA21C90FF7A00300710 /* Main.storyboard in Resources */,
@@ -1369,6 +1460,7 @@
 				D3D025171C9BEB03002713B1 /* HistoryTrackViewController.m in Sources */,
 				D3D8C5AB1CA438F100512F5B /* DB.m in Sources */,
 				D3E51B511C9CFB92001732BF /* AddWatchByInput.m in Sources */,
+				D3DE65B41CBA8CBD00FEEA25 /* BaseViewController.m in Sources */,
 				D3FEEFE21C910B3400300710 /* NewPasswordViewController.m in Sources */,
 				D3D025191C9BEB03002713B1 /* HistoryFenceList.m in Sources */,
 				D3D8C5A21CA3BF5400512F5B /* PersonInforViewController.m in Sources */,
@@ -1413,6 +1505,8 @@
 				D3D025091C9BDADE002713B1 /* Navigation.m in Sources */,
 				D3A2A3ED1C92A422009B1D0E /* Mymapview.m in Sources */,
 				D3FEEF991C90FF7A00300710 /* main.m in Sources */,
+				D3DE65B71CBA8CDC00FEEA25 /* JKAlert.m in Sources */,
+				D3DE65AE1CBA8C8300FEEA25 /* ScanViewController.m in Sources */,
 				D3E51B4F1C9CFB92001732BF /* AlarmSettingView.m in Sources */,
 				D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */,
 				D3FEEFDA1C910AE100300710 /* LoginViewController.m in Sources */,

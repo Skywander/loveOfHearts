@@ -25,7 +25,6 @@
     UIButton *chatButton;
     UIButton *phoneButton;
     UIButton *selfButton;
-    UIButton *deviceButton;
     
     float CELL_WIDTH;
     BOOL ISEXPAND;
@@ -72,8 +71,6 @@
     phoneButton = [self buttonWithImageName:@"phone"];
     
     selfButton = [self buttonWithImageName:@"self"];
-    
-    deviceButton = [self buttonWithImageName:@"device"];
     
     [self addSubview:menuButton];
         
@@ -133,12 +130,6 @@
         make.left.equalTo(self.mas_left);
         make.height.equalTo(self.mas_width);
     }];
-    [deviceButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
-        make.width.equalTo(self.mas_width);
-        make.left.equalTo(self.mas_left);
-        make.height.equalTo(self.mas_width);
-    }];
 }
 
 - (void)beginAnimation{
@@ -164,8 +155,6 @@
         
         ISEXPAND = true;
     }
-
-    [deviceButton.layer addAnimation:[CommentAnimation animtionToMoveX:[NSNumber numberWithFloat:CELL_WIDTH*6] andTime:0.2] forKey:nil];
     
     [selfButton.layer addAnimation:[CommentAnimation animtionToMoveX:[NSNumber numberWithFloat:CELL_WIDTH*5] andTime:0.2] forKey:nil];
 
@@ -191,12 +180,12 @@
     UITouch *touch = [touches anyObject];
     
     CGPoint point = [touch locationInView:self];
-    
     if (point.y > self.frame.size.width * 5 && point.y < self.frame.size.width * 6) {
         
         [self.homeDelegat passSelectedVaule:4];
         
     }
+
     if (point.y > self.frame.size.width * 4 && point.y < self.frame.size.width * 5) {
         
         [self.homeDelegat passSelectedVaule:3];

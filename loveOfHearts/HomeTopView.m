@@ -12,7 +12,7 @@
 
 #define SELF_HEIGHT self.frame.size.height
 
-#define EXPAND_BUTTON_WIDTH 30
+#define BUTTON_WIDTH 45
 @interface HomeTopView()
 {
     UILabel *nameLabel;
@@ -20,6 +20,8 @@
     UILabel *addressLabel;
     
     UIImageView *photoView;
+    
+    UIImageView *powerView;
     
     NSTimer *timer;
 }
@@ -77,7 +79,7 @@
     
     photoView = [UIImageView new];
     [photoView setBackgroundColor:[UIColor yellowColor]];
-    [photoView setFrame:CGRectMake(4, 4, self.frame.size.height - 8, self.frame.size.height - 8)];
+    [photoView setFrame:CGRectMake(4, 4, BUTTON_WIDTH, BUTTON_WIDTH)];
     
     [photoView setClipsToBounds:YES];
     [photoView.layer setBorderWidth:0.3F];
@@ -90,13 +92,32 @@
     expandButton = [UIButton new];
     
     [expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height,(SELF_HEIGHT - EXPAND_BUTTON_WIDTH) / 2,EXPAND_BUTTON_WIDTH, EXPAND_BUTTON_WIDTH)];
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height,(SELF_HEIGHT - BUTTON_WIDTH) / 2,BUTTON_WIDTH, BUTTON_WIDTH)];
     [self addSubview:expandButton];
+    
+    //powerView
+    powerView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 4 + BUTTON_WIDTH, BUTTON_WIDTH, self.frame.size.height - 4 - BUTTON_WIDTH)];
+    
+    [powerView setImage:[UIImage imageNamed:@"power100"]];
+    
+    [self addSubview:powerView];
     
 }
 
 - (void)setAddress:(NSString *)address{
     [addressLabel setText:address];
+}
+
+- (void)setUpdatePower:(NSInteger)paramater{
+    NSInteger power = (paramater / 10 + 1) * 10;
+    
+    if (power == 110) {
+        power = 100;
+    }
+    
+    NSLog(@"power %ld",power);
+    
+    [powerView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"power%ld",power]]];
 }
 
 - (void)setImage:(UIImage *)image{
@@ -108,6 +129,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd hh:mm"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    
+    if (![[AccountMessage sharedInstance].babyname isEqualToString:@" "]) {
+        dateString = [NSString stringWithFormat:@"%@|%@",[AccountMessage sharedInstance].babyname,dateString];
+    }
    
     return dateString;
 }

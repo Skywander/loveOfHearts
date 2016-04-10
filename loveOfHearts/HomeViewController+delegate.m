@@ -19,9 +19,16 @@
 
 - (void)passSelectedVaule:(NSInteger)selected{
     if(selected == 4){
+        
+        NSLog(@"showUserLocation");
+        
         [[Mymapview sharedInstance].mapView showsUserLocation];
         
-        [[Mymapview sharedInstance].mapView setCenterCoordinate:[Mymapview sharedInstance].userLocation.coordinate animated:YES];
+        MAMapView *mapView = [Mymapview sharedInstance].mapView;
+        
+        [mapView showsUserLocation];
+        
+        [mapView setCenterCoordinate:mapView.userLocation.coordinate];
         
         }
     if (selected == 3) {
