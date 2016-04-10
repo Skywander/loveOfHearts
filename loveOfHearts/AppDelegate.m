@@ -37,16 +37,9 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = NO;
+    manager.enableAutoToolbar = YES;
     //短信验证码
     [SMSSDK registerApp:@"da719593615f" withSecret:@"8fa14cec08625888dd27bfb4df589ac6"];
-    
-    LoginViewController *loginView = [LoginViewController new];
-
-    self.window.rootViewController = loginView;
-    
-    [self.window makeKeyAndVisible];
-    
     
     // [1]:使用APPID/APPKEY/APPSECRENT创建个推实例
     // 该方法需要在主线程中调用

@@ -224,14 +224,14 @@
     }
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return YES;
-}
-
--(BOOL)shouldAutorotate
-{
-    return YES;
-}
+//-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//{
+//    return YES;
+//}
+//
+//-(BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
 
 @end

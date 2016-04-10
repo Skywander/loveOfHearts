@@ -18,9 +18,15 @@
         
         [self setBackgroundColor:DEFAULT_PINK];
         
-        UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 12,20, 20)];
+        UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         
-        [returnButton setBackgroundImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"return"]];
+        
+        [imageView setFrame:CGRectMake(10, 12,20, 20)];
+        
+        [imageView setUserInteractionEnabled:YES];
+        
+        [returnButton addSubview:imageView];
         
         [returnButton addTarget:self action:@selector(returenLastView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -61,5 +67,6 @@
 - (void)expand{
     [self.delegate clickNavigationRightView];
 }
+
 
 @end
