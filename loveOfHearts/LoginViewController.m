@@ -10,7 +10,6 @@
 #import "RegisterViewController.h"
 #import "PasswordViewController.h"
 #import "Networking.h"
-#import "Alert.h"
 #import "HomeViewController.h"
 #import "RightViewController.h"
 
@@ -20,7 +19,7 @@
 @interface LoginViewController (){
     UIView *backView;
     
-    UIView *logoView;
+    UIImageView *logoView;
     
     UITextField *userName;
     UITextField *password;
@@ -74,6 +73,8 @@
     [backView setBackgroundColor:BACKGROUND_COLOR];
     [self.view addSubview:backView];
     
+    logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginLogo"]];
+    
     userName = [UITextField new];
     password = [UITextField new];
 
@@ -126,6 +127,7 @@
     [backView addSubview:userName];
     [backView addSubview:password];
     [backView addSubview:sureButton];
+    [self.view addSubview:logoView];
     
     registerButton = [UIButton new];
     findPasswordButton = [UIButton new];
@@ -162,6 +164,13 @@
     [backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 190));
+    }];
+    
+    [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).with.offset(100);
+        make.right.equalTo(self.view).with.offset(-100);
+        make.top.equalTo(self.view).with.offset(70);
+        make.height.equalTo(@(SCREEN_WIDTH - 200));
     }];
     
     [userName mas_makeConstraints:^(MASConstraintMaker *make) {

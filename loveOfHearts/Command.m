@@ -57,18 +57,6 @@
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"success : %@",responseObject);
-        if ([address isEqualToString:@"whitelist1"]) {
-            [AccountMessage sharedInstance].whitelist1 = [paramater objectForKey:@"whitelist1"];
-        }
-        if ([address isEqualToString:@"whitelist2"]) {
-            [AccountMessage sharedInstance].whitelist2 = [paramater objectForKey:@"whitelist2"];
-        }
-        if ([address isEqualToString:@"sos"]) {
-            [AccountMessage sharedInstance].sos = [paramater objectForKey:@"sos"];
-        }
-        if ([address isEqualToString:@"centernumber"]) {
-            [AccountMessage sharedInstance].centernumber = [paramater objectForKey:@"centerNumber"];
-        }
         
         getInteger([[responseObject objectForKey:@"type"] integerValue]);
   

@@ -39,6 +39,8 @@ typedef void(^JKAlertHandler)(JKAlertItem *item);
 - (void)addButton:(ItemType)type withTitle:(NSString *)title handler:(JKAlertHandler)handler;
 + (void)showMessage:(NSString *)title message:(NSString *)message;
 + (void)showMessage:(NSString *)message;
++ (void)showMessageWithType:(NSInteger)messageType;
+
 -(void)show;
 @end
 

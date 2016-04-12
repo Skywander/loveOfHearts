@@ -12,6 +12,7 @@
 #import "Networking.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
+#import "JKAlert.h"
 
 
 @interface HistoryTrackViewController()<IQActionSheetPickerViewDelegate>
@@ -142,6 +143,14 @@
         NSArray *dataArray = [dict objectForKey:@"data"];
         
         NSMutableArray *pointsArray = [NSMutableArray new];
+        
+        NSLog(@"pointArray : %@",pointsArray);
+        
+        if (pointsArray.count < 1) {
+            [JKAlert showMessage:@"没有历史记录"];
+            
+            return ;
+        }
         
         for (NSDictionary *tempDict in dataArray) {
             NSString *locationLat = [tempDict objectForKey:@"lat"];

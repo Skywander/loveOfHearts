@@ -160,10 +160,10 @@
         NSDictionary *dict = @{
                                 @"userId":userId,
                                 @"wid":wid,
-                                @"turn":timeString
+                                @"turnTime":timeString
                                };
         
-        [Command commandWithAddress:@"watch_turn" andParamater:dict block:^(NSInteger type) {
+        [Command commandWithAddress:@"watch_turnSwitch" andParamater:dict block:^(NSInteger type) {
             if (type == 100) {
                 accountMessage.tempturn = timeString;
             };

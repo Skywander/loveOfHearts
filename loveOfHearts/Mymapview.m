@@ -33,9 +33,6 @@ static Mymapview *mymapview;
 //@synthesize _search;
 + (instancetype) sharedInstance {
     if (mymapview) {
-        [mymapview.mapView removeOverlays:mymapview.mapView.overlays];
-        [mymapview.mapView removeAnnotations:mymapview.mapView.annotations];
-//        [mymapview.mapView setShowsUserLocation:NO];
         return mymapview;
     }else {
         mymapview = [[self alloc] init];
@@ -55,14 +52,14 @@ static Mymapview *mymapview;
     mapView.customizeUserLocationAccuracyCircleRepresentation = YES;//允许定义精度圈的样式
     mapView.showsCompass = NO;
     mapView.showsScale = NO;
-    mapView.showsUserLocation = YES;
+    mapView.showsUserLocation = NO;
     mapView.frame = CGRectMake(0,0, self.frame.size.width,self.frame.size.height);
     mapView.layer.cornerRadius = 5.f;
     
     mapView.zoomLevel = 15;
     
     mapView.touchPOIEnabled = YES;
-    
+        
     [self addSubview:mapView];
     
     [self initZoomView];
@@ -135,6 +132,10 @@ static Mymapview *mymapview;
 
 - (NSString *)searchPointWithLat:(double)lat andLon:(double)lon{
     
+    if (self.pointAnimation) {
+        [mapView removeAnnotation:self.pointAnimation];
+    }
+    
     
     self.currentLat = [NSString stringWithFormat:@"%f",lat];
     
@@ -150,10 +151,14 @@ static Mymapview *mymapview;
     //发起逆地理编码
     [_searchAPI AMapReGoecodeSearch: regeo];
     
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lon);
+    MAPointAnnotation *pointAnimation= [MAPointAnnotation new];
     
-    [mapView addAnnotation:pointAnnotation];
+    pointAnimation.coordinate = CLLocationCoordinate2DMake(lat, lon);
+    
+    self.pointAnimation = pointAnimation;
+    
+    [mapView addAnnotation:pointAnimation];
+    
     [mapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lon)];
     
     return detailAddress;

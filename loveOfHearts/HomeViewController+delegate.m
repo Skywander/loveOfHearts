@@ -26,11 +26,13 @@
         
         MAMapView *mapView = [Mymapview sharedInstance].mapView;
         
-        [mapView showsUserLocation];
-        
-        [mapView setCenterCoordinate:mapView.userLocation.coordinate];
-        
+        if ([mapView showsUserLocation]) {
+            [mapView setShowsUserLocation:NO];
+        }else{
+            [mapView setShowsUserLocation:YES];
+            [mapView setCenterCoordinate:mapView.userLocation.coordinate];
         }
+    }
     if (selected == 3) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://8008808888"]];
         
@@ -59,5 +61,16 @@
     [self presentViewController:personInfoView animated:YES completion:^{
         ;
     }];
+}
+
+- (void)showRightView{
+        
+    if ([self.viewDeckController isSideClosed:IIViewDeckLeftSide]) {
+        [self.viewDeckController toggleRightViewAnimated:YES];
+        [self.topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
+    }else{
+        [self.viewDeckController closeRightViewAnimated:YES];
+        [self.topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
+    }
 }
 @end

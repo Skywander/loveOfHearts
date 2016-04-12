@@ -85,7 +85,7 @@
         
         AddWatchByInput *addWatchByInput = [AddWatchByInput new];
         
-        addWatchByInput.wid = string;
+        addWatchByInput.wid = [string substringFromIndex:4];
         
         [self presentViewController:addWatchByInput animated:YES completion:^{
             ;

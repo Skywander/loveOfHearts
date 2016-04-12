@@ -9,10 +9,10 @@
 #import "SosphoneSetting.h"
 #import "Constant.h"
 #import "Command.h"
-#import "Alert.h"
 #import "Navigation.h"
 #import "AccountMessage.h"
 #import "Networking.h"
+#import "JKAlert.h"
 @interface SosphoneSetting()
 {
     UITextField *textFields[4];
@@ -122,18 +122,15 @@
             
             NSLog(@"TextField:%@ length: %ld",textFields[i].text,textFields[i].text.length);
             
-            [self presentViewController:[Alert getAlertWithTitle:@"输入号码不正确"] animated:YES completion:^{
-                ;
-            }];
+            [JKAlert showMessage:@"输入号码不正确"];
+            
             [textFields[i] becomeFirstResponder];
             newPhoneArray = [NSMutableArray new];
             return;
         }
         
         if (textFields[i].text.length <= 0) {
-            [self presentViewController:[Alert getAlertWithTitle:@"请完善信息"] animated:YES completion:^{
-                ;
-            }];
+            [JKAlert showMessage:@"请完善信息"];
             [textFields[i] becomeFirstResponder];
             newPhoneArray = [NSMutableArray new];
             return;

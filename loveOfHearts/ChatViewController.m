@@ -48,8 +48,11 @@
     
     NSString *fileDirectoryPath;
     NSFileManager *fileManager;
-    NSArray *_voicePlayImages;
-    UIImageView *_voicePlayView;
+    NSArray *_voicePlayLeftImages;
+    UIImageView *_voicePlayLeftView;
+    
+    NSArray *_voicePlayRightImages;
+    UIImageView *_voicePlayRightView;
 }
 @end
 @implementation ChatViewController
@@ -76,7 +79,7 @@
 }
 
 - (void)initUI{
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:DEFAULT_COLOR];
     
     [self.view addSubview:[Navigation new]];
 
@@ -135,9 +138,13 @@
         [fileManager createDirectoryAtPath:fileDirectoryPath withIntermediateDirectories:inter attributes:nil error:nil];
     }
     
-    _voicePlayImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_right0"],[UIImage imageNamed:@"voice_right1"],[UIImage imageNamed:@"voice_right2"],[UIImage imageNamed:@"voice_right3"],nil];
+    _voicePlayLeftImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_right0"],[UIImage imageNamed:@"voice_right1"],[UIImage imageNamed:@"voice_right2"],[UIImage imageNamed:@"voice_right3"],nil];
     
-    _voicePlayView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 16, 30, 30)];
+    _voicePlayRightImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_left0"],[UIImage imageNamed:@"voice_left1"],[UIImage imageNamed:@"voice_left2"],[UIImage imageNamed:@"voice_left3"],nil];
+    
+    _voicePlayLeftView = [[UIImageView alloc] initWithFrame:CGRectMake(90, 18, 30, 30)];
+    
+    _voicePlayRightView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 111, 18, 30, 30)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTable:) name:@"receiveVoice" object:nil];
 
@@ -154,7 +161,7 @@
         
 
         table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        table.backgroundColor = [UIColor whiteColor];
+        table.backgroundColor = DEFAULT_COLOR;
         table.showsVerticalScrollIndicator = NO;
         table.delegate = self;
         table.dataSource = self;
@@ -299,7 +306,7 @@
     
     [cell addSubview:subView];
     
-    [cell setBackgroundColor:[UIColor whiteColor]];
+    [cell setBackgroundColor:DEFAULT_COLOR];
     
     
     
@@ -316,15 +323,18 @@
     
     if ([fileManager fileExistsAtPath:filePath]) {
         
-        NSData *_date = [NSData dataWithContentsOfFile:filePath];
+        NSLog(@"file");
         
-        NSLog(@"get fileName:%@",_date);
+        NSLog(@"filename:%@",_fileName);
         
         [player setSpeakMode:YES];
 
         [player playWithURL:[NSURL URLWithString:filePath]];
         
     }else{
+        
+        NSLog(@"net");
+        
         NSDictionary *paramater = @{
                                     @"wid":[AccountMessage sharedInstance].wid,
                                     @"fileName":_fileName,
@@ -338,15 +348,31 @@
         }];
     }
     
-    [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayView];
-    
-    _voicePlayView.animationImages = _voicePlayImages;
-    
-    _voicePlayView.animationDuration = 1;
-    
-    _voicePlayView.animationRepeatCount = 10;
-    
-    [_voicePlayView startAnimating];
+    if ([[[messageArrays objectAtIndex:messageArrays.count - [indexPath row] - 1] objectForKey:@"fromId"] isEqualToString:accountMessage.wid]) {
+        
+        [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayRightView];
+        
+        _voicePlayRightView.animationImages = _voicePlayRightImages;
+        
+        _voicePlayRightView.animationDuration = 1;
+        
+        _voicePlayRightView.animationRepeatCount = 10;
+        
+        [_voicePlayRightView startAnimating];
+
+    }else{
+        
+        [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayLeftView];
+        
+        _voicePlayLeftView.animationImages = _voicePlayLeftImages;
+        
+        _voicePlayLeftView.animationDuration = 1;
+        
+        _voicePlayLeftView.animationRepeatCount = 10;
+        
+        [_voicePlayLeftView startAnimating];
+
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -368,7 +394,7 @@
     
     NSDictionary *dict = @{
                            @"createdAt":createTime,
-                           @"fileName":voiceName,
+                           @"filename":voiceName,
                            @"fromId":accountMessage.userId,
                            @"isheard":@"0",
                            @"updatedAt":createTime,

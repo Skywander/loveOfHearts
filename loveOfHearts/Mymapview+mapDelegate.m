@@ -18,25 +18,28 @@
         MAPinAnnotationView *annotationView = (MAPinAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
         if (annotationView == nil)
         {
+            NSLog(@"---new---");
             annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
         annotationView.pinColor = MAPinAnnotationColorGreen;
         annotationView.canShowCallout = YES;
         annotationView.animatesDrop = NO;
         
-        annotationView.image = [UIImage imageNamed:@"animationView"];
+        annotationView.image = self.annotationImage;
         
-        [annotationView setFrame:CGRectMake(0, 0, 10, 10)];
+        [annotationView setFrame:CGRectMake(0, 0, 20, 20)];
         [annotationView setClipsToBounds:YES];
         
         return annotationView;
     }
     if ([annotation isKindOfClass:[MAUserLocation class]]) {
-        static NSString *reuseIndetifier = @"userlocationReuseIndetifier";
-        MAPinAnnotationView *annotationView = (MAPinAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        static NSString *_reuseIndetifier = @"userlocationReuseIndetifier";
+        MAPinAnnotationView *annotationView = (MAPinAnnotationView*)[_mapView dequeueReusableAnnotationViewWithIdentifier:_reuseIndetifier];
         if (annotationView == nil)
         {
-            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
+            NSLog(@"---new---");
+            
+            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:_reuseIndetifier];
         }
         annotationView.pinColor = MAPinAnnotationColorGreen;
         annotationView.canShowCallout = YES;

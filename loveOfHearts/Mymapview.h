@@ -20,9 +20,13 @@
 
 @property (nonatomic,strong) MAUserLocation *userLocation;
 
+@property (nonatomic,strong) MAPointAnnotation *pointAnimation;
+
 @property (nonatomic,strong) NSString *currentLat;
 
 @property (nonatomic,strong) NSString *currentLng;
+
+@property (nonatomic,strong) UIImage *annotationImage;
 
 @property (weak,nonatomic) id <MapProtocol>mydelegate;
 

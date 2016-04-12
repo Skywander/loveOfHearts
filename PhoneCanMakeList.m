@@ -8,7 +8,6 @@
 
 #import "PhoneCanMakeList.h"
 #import "Constant.h"
-#import "Alert.h"
 #import "Command.h"
 #import "Navigation.h"
 #import "AccountMessage.h"

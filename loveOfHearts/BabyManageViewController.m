@@ -196,7 +196,7 @@
         UIImageView *imageView = [UIImageView new];
         
         for (UIView *subView in view.subviews) {
-            if ([subView isKindOfClass:[UIImageView class]]) {
+            if ([subView isKindOfClass:[UIImageView class]] && ![subView isMemberOfClass:[selectedView class]]) {
                 imageView = (UIImageView *)subView;
             }
         }
@@ -207,7 +207,7 @@
             
             [Networking getWatchMessageWithParamater:wid block:^(NSDictionary *dict) {
                 
-                [accountMessage setWatchInfor:[dict objectForKey:@"data"]];
+                [accountMessage setWatchInfor:dict];
                 //创建通知
                 NSNotification *notification =[NSNotification notificationWithName:@"HomeviewUpdateImage" object:imageView.image userInfo:nil];
                 //通过通知中心发送通知

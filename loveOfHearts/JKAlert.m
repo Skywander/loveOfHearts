@@ -226,6 +226,15 @@ static const void *AlertObject = &AlertObject;
     [[self class]showMessage:@"提示" message:message];
     
 }
+
+
++ (void)showMessageWithType:(NSInteger)messageType{
+    
+    NSArray *messageArray = [NSArray arrayWithObjects:@"手表正在响铃",@"红花设置成功",@"定位模式设置成功",@"低电短信报警设置成功",@"亲情号码设置成功",@"电话本设置成功",@"白名单设置成功",@"免打扰设置成功",@"计步开关设置成功",@"SOS短信报警设置成功",@"闹钟设置成功",@"中心号码设置成功",@"监听设置成功",@"手环脱落短信报警设置成功",@"短信开关设置成功",@"SOS报警",@"电量过低，请及时充电",@"脱落报警",@"手环绑定成功",@"管理员已同意绑定手环",@"您逆境解绑该手表",@"睡眠翻转设置成功",nil];
+    
+    [[self class]showMessage:@"提示" message:[messageArray objectAtIndex:messageType - 5]];
+
+}
 @end
 
 //fixed UIAlertController Rotation crash bug

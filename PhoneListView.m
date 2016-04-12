@@ -8,11 +8,11 @@
 
 #import "PhoneListView.h"
 #import "Constant.h"
-#import "Alert.h"
 #import "Command.h"
 #import "AccountMessage.h"
 #import "Navigation.h"
 #import "Networking.h"
+#import "JKAlert.h"
 
 @interface PhoneListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NavigationProtocol>
 {
@@ -171,10 +171,7 @@
         NSString *phonetempStr = phoneFields[i].text;
         
         if (phoneFields[i].text.length > 0 && phoneFields[i].text.length != 11) {
-            [self presentViewController:[Alert getAlertWithTitle:@"输入的号码不正确"] animated:YES
-                             completion:^{
-                                 ;
-                             }];
+            [JKAlert showMessage:@"输入号码不正确"];
             pushStringone = [NSString new];
             [phoneFields[i] becomeFirstResponder];
             return;

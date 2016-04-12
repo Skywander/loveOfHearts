@@ -27,6 +27,9 @@
 @synthesize topView;
 - (void)viewDidLoad {
     
+    NSLog(@"screen_width %f",SCREEN_WIDTH);
+
+    
     [super viewDidLoad];
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
@@ -38,6 +41,7 @@
     [self initNotification];
     
     [self getBabyMessage];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -51,6 +55,8 @@
         [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLat doubleValue] forKey:@"lat"];
         
         [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLng doubleValue] forKey:@"lon"];
+   
+        [mapView.mapView setShowsUserLocation:NO];
     }
 }
 
@@ -79,12 +85,13 @@
     [self.view sendSubviewToBack:mapView];
     
     NSLog(@"lat lon : %f %f",lat,lon);
+    mapView.annotationImage = [UIImage imageNamed:@"animationView"];
     
     [mapView searchPointWithLat:lat andLon:lon];
 }
 
 - (void)initHomeMenuView{
-    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 20 + TOP_HEIGHT, 45, 275)];
+    menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 20 + TOP_HEIGHT, 45, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
     
     menuView.homeDelegat = self;
         
@@ -115,6 +122,16 @@
     NSInteger power = [[dict objectForKey:@"power"] integerValue];
     
     [topView setUpdatePower:power];
+    
+    
+    double lat = [[dict objectForKey:@"lat"] doubleValue];
+    
+    double lng = [[dict objectForKey:@"lng"] doubleValue];
+    
+    mapView.annotationImage = [UIImage imageNamed:[NSString stringWithFormat:@"animationView_%@",[dict objectForKey:@"way"]]];
+    
+    [mapView searchPointWithLat:lat andLon:lng];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,19 +162,6 @@
         
         [[AccountMessage sharedInstance] setWatchInfor:dict];
     }];
-}
-
-- (void)showRightView{
-    [self.viewDeckController toggleRightViewAnimated:YES];
-    
-    if (topView.expandButton.tag != 1000) {
-        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
-        
-        topView.expandButton.tag = 1000;
-    }else{
-        [topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
-        topView.expandButton.tag = 1001;
-    }
 }
 
 @end

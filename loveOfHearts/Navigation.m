@@ -20,13 +20,7 @@
         
         UIButton *returnButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"return"]];
-        
-        [imageView setFrame:CGRectMake(10, 12,20, 20)];
-        
-        [imageView setUserInteractionEnabled:YES];
-        
-        [returnButton addSubview:imageView];
+        [returnButton setBackgroundImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
         
         [returnButton addTarget:self action:@selector(returenLastView) forControlEvents:UIControlEventTouchUpInside];
         
@@ -56,6 +50,8 @@
     [expandButton setTitle:name forState:UIControlStateNormal];
     
     [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
     
     [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     

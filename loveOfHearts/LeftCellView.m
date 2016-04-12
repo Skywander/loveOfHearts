@@ -32,9 +32,9 @@
     [dateLabel setFont:[UIFont systemFontOfSize:10]];
     [dateLabel setBackgroundColor:DEFAULT_COLOR];
         
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[AccountMessage sharedInstance].image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     
-    [imageView setFrame:CGRectMake(6, 14, 42, 42)];
+    [imageView setFrame:CGRectMake(6, 0, 42, 42)];
     
     [imageView.layer setCornerRadius:21];
     
@@ -46,11 +46,16 @@
     //play
     UIImageView *playView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_right0"]];
     
-    [playView setFrame:CGRectMake(54, 16, 30, 30)];
+    [playView setFrame:CGRectMake(34, 6, 30, 30)];
     
     [playView setClipsToBounds:YES];
     
-    [leftView addSubview:playView];
+    UIImageView *backView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Left_cellBack"]];
+    [backView setFrame:CGRectMake(50, 12, 42 * 300 / 90.0, 42)];
+    
+    [backView addSubview:playView];
+    
+    [leftView addSubview:backView];
     
     return leftView;
 }

@@ -22,8 +22,6 @@
     UISwitch *swits[5];
     NSMutableArray *switsState;
     
-    UIButton *sureButton;
-    
     AccountMessage *accountMessage ;
 }
 
@@ -77,12 +75,6 @@
     
     
     messageButton = [self buttonWthName:@"      SOS报警" andPointY:70 + basicMove * 3];
-    
-    sureButton = [self buttonWthName:@"确定" andPointY:0];
-    [sureButton setFrame:CGRectMake(6, 70 + basicMove * 5, SCREEN_WIDTH - 12, 50)];
-    [sureButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [sureButton setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentCenter)];
-    [sureButton addTarget:self action:@selector(clickSureButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (UIButton *)buttonWthName:(NSString *)name andPointY:(CGFloat)y {
@@ -118,82 +110,74 @@
     
     return button;
 }
+
 - (void)clickSwitch:(UISwitch *)sender{
+    NSString *userId = accountMessage.userId;
+    NSString *wid = accountMessage.wid;
+    
     if (sender.isOn) {
         switsState[sender.tag] = @"1";
     }
     if (!sender.isOn) {
         switsState[sender.tag] = @"0";
     }
-}
-
-
-- (void)clickSureButton {
-    NSString *userId = accountMessage.userId;
-    NSString *wid = accountMessage.wid;
     
-    NSLog(@"userid : %@ wid : %@",userId,wid);
-    
-    NSDictionary *sosDict = @{
-                                @"userId":userId,
-                                @"wid":wid,
-                                @"smsonoff":[switsState objectAtIndex:0]
-                              };
-    [Command commandWithAddress:@"watch_smsonoff" andParamater:sosDict block:^(NSInteger type) {
-        if (type == 100) {
-            ;
-        }
-    }];
-    
-    accountMessage.tempsossms = [switsState objectAtIndex:0];
-    
-    NSDictionary *lowpowerDict = @{
-                                   @"userId":userId,
-                                   @"wid":wid,
-                                   @"lowbat":[switsState objectAtIndex:1]
-                                   };
-    [Command commandWithAddress:@"watch_lowbatsms" andParamater:lowpowerDict block:^(NSInteger type) {
-        if (type == 100) {
-            accountMessage.templowbat = [switsState objectAtIndex:1];
-        }
-    }];
-    
-    accountMessage.templowbat = [switsState objectAtIndex:1];
-    
-    NSDictionary *offDict = @{
-                                @"userId":userId,
-                                @"wid":wid,
-                                @"remove":[switsState objectAtIndex:2]
-                              };
-    
-    
-    [Command commandWithAddress:@"watch_removesms" andParamater:offDict block:^(NSInteger type) {
-        if (type == 100) {
-            accountMessage.tempremove = [switsState objectAtIndex:2];
-        }
-    }];
-    
-    accountMessage.tempremove = [switsState objectAtIndex:2];
-
-    NSDictionary *smsDict = @{
-                                @"userId":userId,
-                                @"wid":wid,
-                                @"sossms":[switsState objectAtIndex:3]
-                              };
-    
-    [Command commandWithAddress:@"watch_sossms" andParamater:smsDict block:^(NSInteger type) {
-        if (type == 100) {
-            
-            accountMessage.tempsmsonoff = [switsState objectAtIndex:3];
-            
-            [self dismissViewControllerAnimated:YES completion:^{
+    if (sender.tag == 0) {
+        
+        NSDictionary *sosDict = @{
+                                  @"userId":userId,
+                                  @"wid":wid,
+                                  @"smsonoff":[switsState objectAtIndex:0]
+                                  };
+        [Command commandWithAddress:@"watch_smsonoff" andParamater:sosDict block:^(NSInteger type) {
+            if (type == 100) {
                 ;
-            }];
-        }
-    }];
-    
-    accountMessage.tempsmsonoff = [switsState objectAtIndex:3];
-    
+            }
+        }];
+    }
+    if (sender.tag == 1) {
+        
+        NSDictionary *lowpowerDict = @{
+                                       @"userId":userId,
+                                       @"wid":wid,
+                                       @"lowbat":[switsState objectAtIndex:1]
+                                       };
+        [Command commandWithAddress:@"watch_lowbatsms" andParamater:lowpowerDict block:^(NSInteger type) {
+            if (type == 100) {
+                ;
+            }
+        }];
+    }
+    if (sender.tag == 2) {
+        NSDictionary *offDict = @{
+                                  @"userId":userId,
+                                  @"wid":wid,
+                                  @"remove":[switsState objectAtIndex:2]
+                                  };
+        
+        
+        [Command commandWithAddress:@"watch_removesms" andParamater:offDict block:^(NSInteger type) {
+            if (type == 100) {
+                ;
+            }
+        }];
+
+    }
+    if (sender.tag == 3) {
+        NSDictionary *smsDict = @{
+                                  @"userId":userId,
+                                  @"wid":wid,
+                                  @"sossms":[switsState objectAtIndex:3]
+                                  };
+        
+
+        [Command commandWithAddress:@"watch_sossms" andParamater:smsDict block:^(NSInteger type) {
+            if (type == 100) {
+                ;
+            }
+        }];
+
+    }
 }
 
 @end

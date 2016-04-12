@@ -11,7 +11,6 @@
 #import "Constant.h"
 #import "Mymapview.h"
 #import "NewFenceMessage.h"
-#import "Alert.h"
 #import "Navigation.h"
 #import "NavigationProtocol.h"
 

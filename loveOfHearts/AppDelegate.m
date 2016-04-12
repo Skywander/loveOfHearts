@@ -246,29 +246,18 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
     NSInteger type = [[dict objectForKey:@"type"] integerValue];
     
     if (type == 1) {
-         NSInteger number = [[data objectForKey:@"id"] integerValue];
-        
-        [[AccountMessage sharedInstance] updateDataWithNumber:number];
-
-    }
-    
-    if (type == 1) {
         NSDictionary *data = [dict objectForKey:@"data"];
         
         if (![[data objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
             return;
         }
         
-        double lat = [[data objectForKey:@"lat"] doubleValue];
-        
-        double lng = [[data objectForKey:@"lng"] doubleValue];
-        
-        Mymapview *myMayView = [Mymapview sharedInstance];
-        [myMayView searchPointWithLat:lat andLon:lng];
-        
         NSDictionary *sendMessage = @{
                                 @"gsm":[NSString stringWithFormat:@"%@",[data objectForKey:@"gsm"]],
-                                @"power":[NSString stringWithFormat:@"%@",[data objectForKey:@"power"]]
+                                @"power":[NSString stringWithFormat:@"%@",[data objectForKey:@"power"]],
+                                @"lat":[data objectForKey:@"lat"],
+                                @"lng":[data objectForKey:@"lng"],
+                                @"way":[data objectForKey:@"islocation"],
                                };
         
         NSNotification *notification =[NSNotification notificationWithName:@"updateSignal" object:sendMessage userInfo:nil];
@@ -300,6 +289,10 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
         //通过通知中心发送通知
         [[NSNotificationCenter defaultCenter] postNotification:notification];
 
+    }
+    
+    if (type >= 4) {
+        [JKAlert showMessageWithType:type];
     }
     
     // 汇报个推自定义事件
