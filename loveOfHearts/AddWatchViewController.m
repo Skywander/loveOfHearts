@@ -73,6 +73,9 @@
 
     ScanViewController *_scan = [[ScanViewController alloc]init];
     
+    Navigation *navigation = [Navigation new];
+    [_scan.view addSubview:navigation];
+    
     [self presentViewController:_scan animated:YES completion:^{
         ;
     }];

@@ -127,6 +127,7 @@
     
     NSString *typeString = [NSString stringWithFormat:@"%ld",type];
     
+    
     NSDictionary *dict = @{
                             @"userId":accountMessage.userId,
                             @"wid":widTextField.text,
@@ -137,9 +138,13 @@
     NSLog(@"dict : %@",dict);
     
     [Networking uploalDataWithAddress:@"user_addUser" dict:dict block:^(int i) {
-        if (type == 100) {
+        if (i == 100) {
             [AccountMessage sharedInstance].wid = widTextField.text;
         };
+        
+        if (i == 300) {
+            [JKAlert showMessage:@"不存在该手环"];
+        }
     }];
 }
 
