@@ -177,11 +177,7 @@
     
     [Command commandWithAddress:@"watch_mode" andParamater:dict block:^(NSInteger type) {
         if (type == 100){
-            accountMessage.tempmode = space;
-            
-            [self dismissViewControllerAnimated:YES completion:^{
-                ;
-            }];
+            ;
         }
     }];
 }

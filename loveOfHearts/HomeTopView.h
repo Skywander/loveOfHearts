@@ -22,4 +22,6 @@
 
 - (void)setUpdatePower:(NSInteger)paramater;
 
+- (void)updateTimeLabel;
+
 @end

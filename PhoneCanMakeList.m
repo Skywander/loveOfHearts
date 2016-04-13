@@ -189,7 +189,6 @@
     [Command commandWithAddress:@"watch_whitelist" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempwhitelist1 = phoneNumbersOne;
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 

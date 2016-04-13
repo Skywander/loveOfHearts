@@ -10,6 +10,8 @@
 
 #import "Command.h"
 
+#import "JKAlert.h"
+
 @implementation HomeViewController (delegate)
 
 - (void)passValue:(NSString *)string{
@@ -40,6 +42,14 @@
 
     }
     if (selected == 2) {
+        
+        if ([AccountMessage sharedInstance].wid == NULL) {
+            
+            [JKAlert showMessage:@"没有绑定手环"];
+            
+            return;
+        }
+        
         ChatViewController *chatView = [ChatViewController new];
         
         [self presentViewController:chatView animated:YES completion:^{
@@ -47,6 +57,13 @@
         }];
     }
     if (selected == 1) {
+        
+        if ([AccountMessage sharedInstance].wid == NULL) {
+            
+            [JKAlert showMessage:@"没有绑定手环"];
+            
+            return;
+        }
         [Command commandWithName:@"watch_cr" block:^(NSInteger type) {
             if (type == 100) {
                 NSLog(@"success");
@@ -56,6 +73,14 @@
 }
 
 - (void)presentPersonInfoView{
+    
+    if ([AccountMessage sharedInstance].wid == NULL) {
+        
+        [JKAlert showMessage:@"没有绑定手环"];
+        
+        return;
+    }
+    
     PersonInforViewController *personInfoView = [PersonInforViewController new];
     
     [self presentViewController:personInfoView animated:YES completion:^{

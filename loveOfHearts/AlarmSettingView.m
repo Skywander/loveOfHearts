@@ -192,12 +192,6 @@
         if (type == 100) {
             
             accountMessage.tempclock = timeString;
-            
-            [self dismissViewControllerAnimated:YES completion:^{
-                ;
-            }];
-            
-            accountMessage.tempclock = timeString;
 
         }
     }];

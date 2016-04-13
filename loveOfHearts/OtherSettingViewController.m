@@ -51,9 +51,7 @@
     if ([indexPath row] == 6) {
         [Command commandWithName:@"watch_poweroff" block:^(NSInteger type) {
             if (type == 100) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    ;
-                }];
+                ;
             }else{
                 NSLog(@"error");
             }
@@ -71,6 +69,7 @@
         
         return;
     }
+
     
     UIViewController *viewController = [OtherSettingFactory factoryWithTag:(int)[indexPath row]];
     

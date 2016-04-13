@@ -151,8 +151,6 @@
     [Command commandWithAddress:@"watch_sos" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
             accountMessage.tempsos = tempString;
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
     accountMessage.sos = tempString;

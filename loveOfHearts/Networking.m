@@ -25,6 +25,7 @@ AFHTTPSessionManager *manager;
     }
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
     [manager POST:[NSString stringWithFormat:@"%@user_register",HTTP]
        parameters:dict progress:^(NSProgress * _Nonnull uploadProgress) {
            ;
@@ -57,12 +58,13 @@ AFHTTPSessionManager *manager;
         
         if (returnType == 100) {
             
-            NSDictionary *rlist = [responseObject objectForKey:@"data"];
-
-            AccountMessage *accountMessage = [AccountMessage sharedInstance];
-            
-            [accountMessage setUserInfor:rlist];
-    
+            if (![[responseObject objectForKey:@"data"] isEqual:[NSNull null]]) {
+                NSDictionary *rlist = [responseObject objectForKey:@"data"];
+                
+                AccountMessage *accountMessage = [AccountMessage sharedInstance];
+                
+                [accountMessage setUserInfor:rlist];
+            }
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -295,15 +297,23 @@ AFHTTPSessionManager *manager;
 + (void)deleteWatchWithDict:(NSDictionary *)paramater block:(getDict)getDict{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager new];
     
-    [manager POST:[NSString stringWithFormat:@"%@user_deleteUser",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];    
+    [manager POST:[NSString stringWithFormat:@"%@user_deletedUser",HTTP] parameters:paramater constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         ;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         getDict(responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSLog(@"error : %@",error);
         getDict(nil);
     }];
 }
+
 
 @end

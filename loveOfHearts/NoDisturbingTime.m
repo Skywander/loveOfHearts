@@ -271,10 +271,7 @@
                                 };
     [Command commandWithAddress:@"watch_silence" andParamater:paramaters block:^(NSInteger type) {
         if (type == 100) {
-            
-            accountMessage.tempsilencetime = paramater;
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
+            ;
         }
     }];
     

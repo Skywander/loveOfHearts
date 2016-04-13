@@ -102,7 +102,6 @@
     
     messageArrays = [NSMutableArray new];
     
-    
     NSDictionary *dict = @{
                             @"userId":user_id,
                             @"wid":shouhuan_id,
@@ -115,18 +114,25 @@
         
         NSLog(@"DICT : %@",dict);
         
-        NSArray *dataArray = [dict objectForKey:@"data"];
-            
-        NSLog(@"DATAARRAY : %@",dataArray);
+        NSArray *dataArray;
         
-        if (dataArray.count > 1) {
+        if ([[dict objectForKey:@"data"] isKindOfClass:[NSArray class]]) {
+            
+            dataArray = [dict objectForKey:@"data"];
             
             messageArrays = [NSMutableArray arrayWithArray:dataArray];
             
             [self initTable];
 
+
+        }
+        
+        if ([[dict objectForKey:@"data"] isKindOfClass:[NSString class]]) {
+             ;
         }
     }];
+    
+    NSLog(@"after");
     
     fileDirectoryPath = [NSString stringWithFormat:@"%@/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0],accountMessage.wid];
     
@@ -328,8 +334,12 @@
         NSLog(@"filename:%@",_fileName);
         
         [player setSpeakMode:YES];
-
-        [player playWithURL:[NSURL URLWithString:filePath]];
+        
+        [player playWithURL:[NSURL URLWithString:filePath] finished:^{
+            _voicePlayLeftView.animationDuration = 0;
+            
+            _voicePlayRightView.animationDuration = 0;
+        }];
         
     }else{
         
@@ -344,7 +354,12 @@
 
             [data writeToFile:filePath atomically:NO];
             
-            [player playWithURL:[NSURL URLWithString:filePath]];
+            [player playWithURL:[NSURL URLWithString:filePath] finished:^{
+                _voicePlayLeftView.animationDuration = 0;
+                
+                _voicePlayRightView.animationDuration = 0;
+            }];
+
         }];
     }
     

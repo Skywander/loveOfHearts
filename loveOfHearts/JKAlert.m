@@ -217,6 +217,7 @@ static const void *AlertObject = &AlertObject;
     {
         return;
     }
+    
     JKAlert *alert = [[JKAlert alloc]initWithTitle:title andMessage:message style:STYLE_ALERT];
     [alert addButtonWithTitle:@"确定"];
     [alert show];
@@ -230,7 +231,11 @@ static const void *AlertObject = &AlertObject;
 
 + (void)showMessageWithType:(NSInteger)messageType{
     
-    NSArray *messageArray = [NSArray arrayWithObjects:@"手表正在响铃",@"红花设置成功",@"定位模式设置成功",@"低电短信报警设置成功",@"亲情号码设置成功",@"电话本设置成功",@"白名单设置成功",@"免打扰设置成功",@"计步开关设置成功",@"SOS短信报警设置成功",@"闹钟设置成功",@"中心号码设置成功",@"监听设置成功",@"手环脱落短信报警设置成功",@"短信开关设置成功",@"SOS报警",@"电量过低，请及时充电",@"脱落报警",@"手环绑定成功",@"管理员已同意绑定手环",@"您逆境解绑该手表",@"睡眠翻转设置成功",nil];
+    NSArray *messageArray = [NSArray arrayWithObjects:@"手表正在响铃",@"红花设置成功",@"定位模式设置成功",@"低电短信报警设置成功",@"亲情号码设置成功",@"电话本设置成功",@"白名单设置成功",@"免打扰设置成功",@"计步开关设置成功",@"SOS短信报警设置成功",@"闹钟设置成功",@"中心号码设置成功",@"监听设置成功",@"手环脱落短信报警设置成功",@"短信开关设置成功",@"SOS报警",@"电量过低，请及时充电",@"脱落报警",@"手环绑定成功",@"管理员已同意绑定手环",@" ",@"睡眠翻转设置成功",nil];
+    
+    if ([[messageArray objectAtIndex:messageType - 5] isEqualToString:@" "]) {
+        return;
+    }
     
     [[self class]showMessage:@"提示" message:[messageArray objectAtIndex:messageType - 5]];
 

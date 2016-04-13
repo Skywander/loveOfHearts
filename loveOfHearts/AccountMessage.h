@@ -50,6 +50,8 @@
 
 @property (nonatomic,strong) UIImage *image;
 
+@property (nonatomic,strong) JKAlert *alert;
+
 
 //缓存
 @property (nonatomic,strong)NSString *tempbabyage;
@@ -89,5 +91,7 @@
 - (void)updateDataWithNumber:(NSInteger)number;
 
 - (void)setBabyMessage:(NSDictionary *)_dict;
+
+- (void)initBabyMesssage;
 
 @end

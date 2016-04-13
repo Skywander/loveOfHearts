@@ -35,12 +35,20 @@
     [self.view setBackgroundColor:DEFAULT_COLOR];
         
     [self initTopView];
+    
+    NSLog(@"top");
         
     [self initHomeMenuView];
     
+    NSLog(@"menu");
+    
     [self initNotification];
     
+    NSLog(@"noti");
+    
     [self getBabyMessage];
+    
+    NSLog(@"message");
     
 }
 
@@ -85,7 +93,12 @@
     [self.view sendSubviewToBack:mapView];
     
     NSLog(@"lat lon : %f %f",lat,lon);
-    mapView.annotationImage = [UIImage imageNamed:@"animationView"];
+    
+    if(mapView.annotationImage == NULL){
+        
+        mapView.annotationImage = [UIImage imageNamed:@"animationView"];
+
+    }
     
     [mapView searchPointWithLat:lat andLon:lon];
 }
@@ -109,6 +122,23 @@
     
     [topView setImage:image];
     
+    NSDictionary *paramater = @{
+                                @"wid":[AccountMessage sharedInstance].wid
+                                };
+    
+
+    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+        if (![dict isEqual:[NSNull null]]) {
+            AccountMessage *accountMessage = [AccountMessage sharedInstance];
+            
+            [accountMessage setBabyMessage:dict];
+            
+            [topView updateTimeLabel];
+            
+        }else{
+            [[AccountMessage sharedInstance] initBabyMesssage];
+        }
+    }];
 }
 
 - (void)updateSignal:(NSNotification *)sender{
@@ -140,21 +170,27 @@
 
 - (void)getBabyMessage{
     
+    if ([AccountMessage sharedInstance].wid == NULL) {
+        return;
+    }
+    
     
     NSDictionary *paramater = @{
                                 @"wid":[AccountMessage sharedInstance].wid
                                 };
     
     [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-        if (dict) {
+        if (![dict isEqual:[NSNull null]]) {
             AccountMessage *accountMessage = [AccountMessage sharedInstance];
             
             [accountMessage setBabyMessage:dict];
-            
-            [DB getImageWithWatchId:accountMessage.wid filename:accountMessage.head block:^(UIImage *image) {
-                [topView setImage:image];
-            }];
+    
+        }else{
+            [[AccountMessage sharedInstance] initBabyMesssage];
         }
+        [DB getImageWithWatchId:[AccountMessage sharedInstance].wid filename:[AccountMessage sharedInstance].head block:^(UIImage *image) {
+            [topView setImage:image];
+        }];
     }];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {

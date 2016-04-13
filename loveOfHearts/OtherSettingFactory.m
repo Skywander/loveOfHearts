@@ -8,11 +8,13 @@
 //
 
 #import "OtherSettingFactory.h"
+#import "AccountMessage.h"
 
 @implementation OtherSettingFactory
 
 +(UIViewController *)factoryWithTag:(int)i{
     UIViewController *viewController = [UIViewController new];
+
     
     switch (i) {
         case 0:

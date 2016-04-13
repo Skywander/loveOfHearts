@@ -9,6 +9,7 @@
 #import "RightViewController.h"
 #import "RightVieFactory.h"
 #import "Command.h"
+#import "AccountMessage.h"
 
 #define RIGHT_CELL_WIDTH 465/2.0
 
@@ -71,6 +72,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([AccountMessage sharedInstance].wid == NULL && [indexPath row] != 0 && [indexPath row] != 9) {
+        [JKAlert showMessage:@"没有绑定手环"];
+        
+        return;
+    }else{
+        if ([RightVieFactory factoryWithTag:(int)[indexPath row]]) {
+            [self presentViewController:[RightVieFactory factoryWithTag:(int)[indexPath row]] animated:YES completion:^{
+                ;
+            }];
+        }
+    }
+
     if ([indexPath row] == 7) {
         
         [Command commandWithName:@"watch_find" block:^(NSInteger type) {
@@ -88,12 +102,6 @@
         NSLog(@"click 9");
         
         return;
-    }
-    
-    if ([RightVieFactory factoryWithTag:(int)[indexPath row]]) {
-        [self presentViewController:[RightVieFactory factoryWithTag:(int)[indexPath row]] animated:YES completion:^{
-            ;
-        }];
     }
 }
 

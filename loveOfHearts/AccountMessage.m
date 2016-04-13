@@ -98,6 +98,18 @@ static AccountMessage *accountMessage;
 
 }
 
+- (void)initBabyMesssage{
+    self.babyage = @" ";
+    self.babybir = @" ";
+    self.babyheight = @" ";
+    self.babyname = @" ";
+    self.babysex = @" ";
+    self.babyweight = @" ";
+    self.wsim = @" ";
+    self.usim = @" ";
+    self.head = @" ";
+}
+
 - (void)updateDataWithNumber:(NSInteger)number{
     switch (number) {
         case 1000:

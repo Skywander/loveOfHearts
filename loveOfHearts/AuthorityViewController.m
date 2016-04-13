@@ -33,10 +33,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     [self initNavigation];
     
     [self getUserData];
+
 }
+
 
 - (void)initNavigation{
     Navigation *naviView = [Navigation new];
@@ -47,17 +51,21 @@
 - (void)getUserData{
     viewTag = 0;
     
-    AccountMessage *accountMessage = [AccountMessage sharedInstance];
-    NSDictionary *dict = @{
-                           @"wid":accountMessage.wid
-                          };
-    [Networking getUsersMessageWithParamaters:dict block:^(NSDictionary *dict) {
-        usersArray = [dict objectForKey:@"data"];
+    if ([AccountMessage sharedInstance].wid != NULL) {
+        AccountMessage *accountMessage = [AccountMessage sharedInstance];
+        NSDictionary *dict = @{
+                               @"wid":accountMessage.wid
+                               };
+        [Networking getUsersMessageWithParamaters:dict block:^(NSDictionary *dict) {
+            usersArray = [dict objectForKey:@"data"];
+            
+            [self initUI];
+            
+        }];
         
+    }else{
         [self initUI];
-
-    }];
-    
+    }
     _viewDict = [NSMutableDictionary new];
 }
 
@@ -70,7 +78,7 @@
     
     for (NSDictionary *dict in usersArray) {
         NSLog(@"dict : %@",dict);
-        UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y];
+        UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y power:[[dict objectForKey:@"ispowered"] integerValue]];
         
         
         [_viewDict setObject:userView forKey:[dict objectForKey:@"wid"]];
@@ -81,7 +89,7 @@
     }
 }
 
-- (UIView *)viewWithFirstLabel:(NSString *)textOne secondLabel:(NSString *)textTwo relationType:(NSString *)type Admin:(NSString *)admin andY:(float)y{
+- (UIView *)viewWithFirstLabel:(NSString *)textOne secondLabel:(NSString *)textTwo relationType:(NSString *)type Admin:(NSString *)admin andY:(float)y power:(NSInteger)power{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, y, SCREEN_WIDTH - 20, VIEW_HEIGTH)];
     
     [view setBackgroundColor:[UIColor whiteColor]];
@@ -132,17 +140,58 @@
     
     //删除按钮
     
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH * 0.75, VIEW_HEIGTH * 0.25, VIEW_HEIGTH / 2, VIEW_HEIGTH / 2)];
-    
-    [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
-    
-    [deleteButton setUserInteractionEnabled:YES];
-    
-    [deleteButton addTarget:self action:@selector(deleteUser:) forControlEvents:UIControlEventTouchUpInside];
-    
-    deleteButton.tag = viewTag;
-    
-    [view addSubview:deleteButton];
+    if (power == 1) {
+        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH * 0.75, VIEW_HEIGTH * 0.25, VIEW_HEIGTH / 2, VIEW_HEIGTH / 2)];
+        
+        [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+        
+        [deleteButton setUserInteractionEnabled:YES];
+        
+        [deleteButton addTarget:self action:@selector(deleteUser:) forControlEvents:UIControlEventTouchUpInside];
+        
+        deleteButton.tag = viewTag;
+        
+        [view addSubview:deleteButton];
+    }else{
+        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH, VIEW_HEIGTH * 0.1, VIEW_HEIGTH * 0.8, VIEW_HEIGTH*0.35)];
+        [deleteButton setBackgroundColor:[UIColor blueColor]];
+        
+        [deleteButton setTitle:@"拒绝" forState:UIControlStateNormal];
+        
+        [deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        [deleteButton setUserInteractionEnabled:YES];
+        
+        [deleteButton addTarget:self action:@selector(deleteUser:) forControlEvents:UIControlEventTouchUpInside];
+        
+        deleteButton.tag = viewTag;
+        
+        [deleteButton.layer setCornerRadius:3.f];
+        [deleteButton.layer setBorderWidth:0.5f];
+        
+        [view addSubview:deleteButton];
+        
+        //
+        UIButton *agreeButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH, VIEW_HEIGTH * 0.55, VIEW_HEIGTH * 0.8, VIEW_HEIGTH*0.35)];
+        
+        [agreeButton setBackgroundColor:[UIColor blueColor]];
+        
+        [agreeButton setTitle:@"同意" forState:UIControlStateNormal];
+        
+        [agreeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        [agreeButton setUserInteractionEnabled:YES];
+        
+        [agreeButton addTarget:self action:@selector(addUser:) forControlEvents:UIControlEventTouchUpInside];
+        
+        agreeButton.tag = viewTag;
+        
+        [agreeButton.layer setCornerRadius:3.f];
+        
+        [agreeButton.layer setBorderWidth:0.5f];
+        
+        [view addSubview:agreeButton];
+    }
     
     [view.layer setCornerRadius:6.F];
     [view.layer setBorderColor:[UIColor grayColor].CGColor];
@@ -164,7 +213,7 @@
     NSDictionary *paramater = @{
                                 @"userId":[currentDict objectForKey:@"userId"],
                                 @"wid":[currentDict objectForKey:@"wid"],
-                                @"isadmin":[currentDict objectForKey:@"admin"]
+                                @"isAdmin":[currentDict objectForKey:@"admin"]
                                 };
     
     [Networking deleteWatchWithDict:paramater block:^(NSDictionary *dict) {
@@ -174,6 +223,48 @@
             [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
                     [(UIView *)obj removeFromSuperview];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)addUser:(UIButton *)sender{
+    NSDictionary *currentDict = [usersArray objectAtIndex:sender.tag];
+    
+    NSLog(@"%@",currentDict);
+    
+    NSDictionary *paramater = @{
+                                @"userId":[currentDict objectForKey:@"userId"],
+                                @"wid":[currentDict objectForKey:@"wid"],
+                                };
+    [Command commandWithAddress:@"user_authortyUser" andParamater:paramater block:^(NSInteger type) {
+        if (type == 100) {
+            
+            if ([[currentDict objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
+                [AccountMessage sharedInstance].wid = NULL;
+            }
+            
+            [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
+                    UIView *view = (UIView *)obj;
+                    
+                    for (UIView *subview in view.subviews) {
+                        if ([subview isMemberOfClass:[UIButton class]]) {
+                            [subview removeFromSuperview];
+                        }
+                        
+                        
+                        UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH * 0.75, VIEW_HEIGTH * 0.25, VIEW_HEIGTH / 2, VIEW_HEIGTH / 2)];
+                        
+                        [deleteButton setBackgroundImage:[UIImage imageNamed:@"delete"] forState:UIControlStateNormal];
+                        
+                        [deleteButton setUserInteractionEnabled:YES];
+                        
+                        [deleteButton addTarget:self action:@selector(deleteUser:) forControlEvents:UIControlEventTouchUpInside];
+                                                
+                        [view addSubview:deleteButton];
+                    }
                 }
             }];
         }

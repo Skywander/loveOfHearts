@@ -246,6 +246,8 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:password.text forKey:[NSString stringWithFormat:@"%@.password",userName.text]];
                 
+                [AccountMessage sharedInstance].userId = userName.text;
+                
                 RightViewController *rightController = [RightViewController new];
                 
                 RightViewController *leftController = [RightViewController new];

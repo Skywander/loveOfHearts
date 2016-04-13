@@ -130,11 +130,16 @@
     NSDictionary *dict = @{
                             @"userId":accountMessage.userId,
                             @"wid":widTextField.text,
-                            @"relations":self.relationButton.titleLabel.text,
+                            @"relation":self.relationButton.titleLabel.text,
                             @"type":typeString,
                            };
-    [Networking uploalDataWithAddress:@"bind" dict:dict block:^(int i) {
-        ;
+    
+    NSLog(@"dict : %@",dict);
+    
+    [Networking uploalDataWithAddress:@"user_addUser" dict:dict block:^(int i) {
+        if (type == 100) {
+            [AccountMessage sharedInstance].wid = widTextField.text;
+        };
     }];
 }
 

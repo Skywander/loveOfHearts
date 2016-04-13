@@ -43,23 +43,28 @@
     if (self) {
         [self setBackgroundColor:DEFAULT_PINK];
         
-        NSDictionary *paramater = @{
-                                    @"wid":[AccountMessage sharedInstance].wid
-                                    };
-        
-        [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-            if (dict) {
-                AccountMessage *accountMessage = [AccountMessage sharedInstance];
-                
-                [accountMessage setBabyMessage:dict];
-                
-                [self initLabel];
-                
-                [self beginTimer];
-                
-            }
-        }];
-
+        if ([AccountMessage sharedInstance].wid != NULL) {
+            NSDictionary *paramater = @{
+                                        @"wid":[AccountMessage sharedInstance].wid
+                                        };
+            
+            [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+                if (dict) {
+                    AccountMessage *accountMessage = [AccountMessage sharedInstance];
+                    
+                    [accountMessage setBabyMessage:dict];
+                    
+                    [self initLabel];
+                    
+                    [self beginTimer];
+                    
+                }
+            }];
+        }else{
+            [self initLabel];
+            
+            [self beginTimer];
+        }
     }
     return self;
 }
@@ -93,7 +98,7 @@
     //photoView
     
     photoView = [UIImageView new];
-    [photoView setBackgroundColor:[UIColor yellowColor]];
+    [photoView setBackgroundColor:[UIColor whiteColor]];
     [photoView setFrame:CGRectMake(4, 4, BUTTON_WIDTH, BUTTON_WIDTH)];
     
     [photoView setClipsToBounds:YES];
@@ -148,7 +153,7 @@
     [dateFormatter setDateFormat:@"YYYY-MM-dd hh:mm"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     
-    if (![[AccountMessage sharedInstance].babyname isEqualToString:@" "]) {
+    if (![[AccountMessage sharedInstance].babyname isEqualToString:@" "] && [AccountMessage sharedInstance].babyname != NULL) {
         dateString = [NSString stringWithFormat:@"%@|%@",[AccountMessage sharedInstance].babyname,dateString];
     }
    

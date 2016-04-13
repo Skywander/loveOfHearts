@@ -78,16 +78,15 @@
                                 };
     
     [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-        if (dict) {
+        if (![dict isEqual:[NSNull null]]) {
             accountMessage = [AccountMessage sharedInstance];
             
             [accountMessage setBabyMessage:dict];
-            
-            [self initData];
-            
-            [self initUI];
-            
         }
+        
+        [self initData];
+        
+        [self initUI];
     }];
 
 }
@@ -380,9 +379,6 @@
                 //通过通知中心发送通知
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
-                [self dismissViewControllerAnimated:YES completion:^{
-                    ;
-                }];
             }
         }
     }];

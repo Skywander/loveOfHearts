@@ -231,6 +231,11 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
 - (void)GeTuiSdkDidReceivePayloadData:(NSData *)payloadData andTaskId:(NSString *)taskId andMsgId:(NSString *)msgId andOffLine:(BOOL)offLine fromGtAppId:(NSString *)appId {
     // [4]: 收到个推消息
     NSString *payloadMsg = nil;
+    
+    if(offLine){
+        return;
+    }
+    
     if (payloadData) {
         payloadMsg = [[NSString alloc] initWithBytes:payloadData.bytes
                                               length:payloadData.length

@@ -37,11 +37,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
     [self initNavigation];
     
     [self getData];
-    
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    for (UIView *view in self.view.subviews) {
+        [view removeFromSuperview];
+    }
 }
 
 - (void)getData{
@@ -138,19 +146,9 @@
     [view.layer setBorderColor:[UIColor grayColor].CGColor];
     [view.layer setBorderWidth:0.3f];
     
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    singleTap.numberOfTapsRequired = 2;
-    [view addGestureRecognizer:singleTap];
-    
-    
     return view;
 }
 
--(void)handleSingleTap:(UITapGestureRecognizer *)sender
-
-{
-    //
-}
 
 - (void)initNavigation{
     
@@ -196,7 +194,7 @@
         UIImageView *imageView = [UIImageView new];
         
         for (UIView *subView in view.subviews) {
-            if ([subView isKindOfClass:[UIImageView class]] && ![subView isMemberOfClass:[selectedView class]]) {
+            if ([subView isKindOfClass:[UIImageView class]] && subView != selectedView) {
                 imageView = (UIImageView *)subView;
             }
         }
