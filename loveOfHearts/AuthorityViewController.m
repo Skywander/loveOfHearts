@@ -220,6 +220,11 @@
         NSInteger type = [[dict objectForKey:@"type"] integerValue];
         
         if (type == 100) {
+            
+            if ([[currentDict objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
+                [AccountMessage sharedInstance].wid = NULL;
+            }
+            
             [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
                     [(UIView *)obj removeFromSuperview];
@@ -240,10 +245,6 @@
                                 };
     [Command commandWithAddress:@"user_authortyUser" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
-            
-            if ([[currentDict objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
-                [AccountMessage sharedInstance].wid = NULL;
-            }
             
             [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {

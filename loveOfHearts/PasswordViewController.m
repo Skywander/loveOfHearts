@@ -175,21 +175,23 @@
 
 - (void)clickLeftButton{
     
-    [self checkCode];
-    
-    if (codeIsRight) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            //
-        }];
-
-    }
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 - (void)clickSureButton{
     [sureButton setBackgroundColor:DEFAULT_COLOR];
     
-    NewPasswordViewController *newPassword = [NewPasswordViewController new];
-    [self presentViewController:newPassword animated:YES completion:nil];
+    [self checkCode];
+    
+    if (codeIsRight) {
+        [self dismissViewControllerAnimated:YES completion:^{
+           NewPasswordViewController *newPassword = [NewPasswordViewController new];
+          
+          [self presentViewController:newPassword animated:YES completion:nil];
+        }];
+        
+    }
 }
 - (void)clickCodeButton{
     [codeButton setBackgroundColor:DEFAULT_COLOR];

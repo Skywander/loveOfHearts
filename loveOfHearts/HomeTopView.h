@@ -14,7 +14,7 @@
 
 @property (nonatomic,strong) UIButton *expandButton;
 
-@property (nonatomic,strong) id<TopviewProltocol> topViewDelegat;
+@property (nonatomic,weak) id<TopviewProltocol> topViewDelegat;
 
 - (void)setAddress:(NSString *)address;
 
