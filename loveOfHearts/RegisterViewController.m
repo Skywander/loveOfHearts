@@ -242,8 +242,14 @@
         [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
             int type = [[dict objectForKey:@"type"] intValue];
             
+            NSLog(@"register dict : %@",dict);
+            
             if (type == 100) {
-                NSLog(@"register success");
+                [JKAlert showMessage:@"注册成功"];
+            }else if(type == 300){
+                [JKAlert showMessage:@"重复注册"];
+            }else{
+                [JKAlert showMessage:@"注册失败"];
             }
         }];
     }else{

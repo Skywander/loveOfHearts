@@ -237,6 +237,11 @@
         
         [Networking loginwithUsername:userName.text and:password.text block:^(NSDictionary *dict) {
             
+            if (dict == nil) {
+                [JKAlert showMessage:@"登陆失败,请检查网络"];
+            }
+            
+            
             int loginMessage = [[dict objectForKey:@"type"] intValue];
         
             
@@ -265,6 +270,9 @@
                 [self presentViewController:deckController animated:YES completion:^{
                     ;
                 }];
+            }else{
+                [JKAlert showMessage:@"用户名或密码错误"];
+
             }
 
         }];

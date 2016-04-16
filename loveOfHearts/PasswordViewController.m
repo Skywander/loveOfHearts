@@ -150,6 +150,7 @@
         make.left.equalTo(phoneNumber);
         make.right.equalTo(phoneNumber);
         make.top.equalTo(phoneNumber).with.offset(CELL_HEIGHT + OFFSET);
+        make.height.equalTo(phoneNumber);
     }];
     
     [code mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -185,11 +186,9 @@
     [self checkCode];
     
     if (codeIsRight) {
-        [self dismissViewControllerAnimated:YES completion:^{
-           NewPasswordViewController *newPassword = [NewPasswordViewController new];
-          
-          [self presentViewController:newPassword animated:YES completion:nil];
-        }];
+        NewPasswordViewController *newPassword = [NewPasswordViewController new];
+        
+        [self.navigationController pushViewController:newPassword animated:YES];
         
     }
 }
@@ -197,7 +196,7 @@
     [codeButton setBackgroundColor:DEFAULT_COLOR];
 }
 - (void)touchInsideButton:(UIButton *)sender{
-    [sender setBackgroundColor:HIGH_COLOR];
+    [sender setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
