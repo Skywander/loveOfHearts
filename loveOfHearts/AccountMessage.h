@@ -82,6 +82,9 @@
 @property (nonatomic,strong)NSString *tempwhitelist2;
 @property (nonatomic,strong)NSString *tempwsim;
 
+//
+@property (nonatomic) BOOL showHomeView;
+
 + (instancetype)sharedInstance;
 
 - (void)setUserInfor:(NSDictionary *)dict;

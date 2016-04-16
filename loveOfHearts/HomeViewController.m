@@ -50,15 +50,22 @@
     
     NSLog(@"message");
     
+    [AccountMessage sharedInstance].showHomeView = YES;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [AccountMessage sharedInstance].showHomeView = YES;
+    
     self.navigationController.navigationBarHidden = YES;
     
     [self initMapView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [AccountMessage sharedInstance].showHomeView = NO;
+    
     if (mapView.currentLat) {
         [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLat doubleValue] forKey:@"lat"];
         
@@ -67,6 +74,13 @@
         [mapView.mapView setShowsUserLocation:NO];
     }
 }
+
+- (void)didReceiveMemoryWarning {
+    [AccountMessage sharedInstance].showHomeView = NO;
+    
+    [super didReceiveMemoryWarning];
+}
+
 
 - (void)initTopView{
     topView = [[HomeTopView alloc] initWithFrame:CGRectMake(START_X, START_Y, SCREEN_WIDTH, TOP_HEIGHT)];
@@ -91,8 +105,6 @@
     [self.view addSubview:mapView];
     
     [self.view sendSubviewToBack:mapView];
-    
-    NSLog(@"lat lon : %f %f",lat,lon);
     
     if(mapView.annotationImage == NULL){
         
@@ -162,10 +174,6 @@
     
     [mapView searchPointWithLat:lat andLon:lng];
 
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (void)getBabyMessage{

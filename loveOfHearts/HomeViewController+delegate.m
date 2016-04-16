@@ -15,7 +15,11 @@
 @implementation HomeViewController (delegate)
 
 - (void)passValue:(NSString *)string{
+    
+    NSLog(@"passValue : %@， topView:%@",string,self.topView);
+    
     [self.topView setAddress:string];
+    
 }
 
 

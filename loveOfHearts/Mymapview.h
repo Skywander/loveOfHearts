@@ -32,7 +32,7 @@
 
 + (instancetype)sharedInstance;
 
-- (NSString *)searchPointWithLat:(double)lat andLon:(double)lon;
+- (void)searchPointWithLat:(double)lat andLon:(double)lon;
 
 
 - (void)showHistoryTrack:(NSMutableArray *)pointsArray;

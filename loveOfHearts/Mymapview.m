@@ -9,6 +9,7 @@
 #import "Mymapview.h"
 #import "Mymapview+mapDelegate.m"
 #import <Masonry/Masonry.h>
+#import "AccountMessage.h"
 
 #define ZOOMINVALUE 0.3
 
@@ -130,7 +131,7 @@ static Mymapview *mymapview;
     self.userLocation = userLocation;
 }
 
-- (NSString *)searchPointWithLat:(double)lat andLon:(double)lon{
+- (void)searchPointWithLat:(double)lat andLon:(double)lon{
     
     if (self.pointAnimation) {
         [mapView removeAnnotation:self.pointAnimation];
@@ -151,17 +152,18 @@ static Mymapview *mymapview;
     //发起逆地理编码
     [_searchAPI AMapReGoecodeSearch: regeo];
     
-    MAPointAnnotation *pointAnimation= [MAPointAnnotation new];
-    
-    pointAnimation.coordinate = CLLocationCoordinate2DMake(lat, lon);
-    
-    self.pointAnimation = pointAnimation;
-    
-    [mapView addAnnotation:pointAnimation];
-    
-    [mapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lon)];
-    
-    return detailAddress;
+    if ([AccountMessage sharedInstance].showHomeView) {
+        MAPointAnnotation *pointAnimation= [MAPointAnnotation new];
+        
+        pointAnimation.coordinate = CLLocationCoordinate2DMake(lat, lon);
+        
+        self.pointAnimation = pointAnimation;
+        
+        [mapView addAnnotation:pointAnimation];
+        
+        [mapView setCenterCoordinate:CLLocationCoordinate2DMake(lat, lon)];
+    }
+    return;
 
 }
 
