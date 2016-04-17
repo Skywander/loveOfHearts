@@ -13,8 +13,13 @@
 + (void)getImageWithWatchId:(NSString *)watchId filename:(NSString *)filename block:(getImage)getImage{
     //cache
     
-    if ([filename isEqualToString:@" "]) {
-        getImage(nil);
+    if ([filename isEqualToString:@" "] || filename == NULL || filename == nil || [filename isEqualToString:@""]) {
+        
+        UIImage *defaultImage = [UIImage imageNamed:@"child_head"];
+        
+        getImage(defaultImage);
+        
+        return;
     }
     AccountMessage *_accoutMessage = [AccountMessage sharedInstance];
 

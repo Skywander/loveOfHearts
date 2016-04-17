@@ -50,8 +50,8 @@
     
     if ([indexPath row] == 6) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"远程关机"
-                                                                                 message:nil
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"远程关机"
                                                                           preferredStyle:UIAlertControllerStyleAlert
                                               ];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -84,8 +84,8 @@
     
     if ([indexPath row] == 5) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"打开监听"
-                                                                                 message:nil
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"打开监听"
                                                                           preferredStyle:UIAlertControllerStyleAlert
                                               ];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

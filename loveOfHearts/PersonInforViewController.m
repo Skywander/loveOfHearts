@@ -343,24 +343,67 @@
 - (void)clickNavigationRightView{
     
     NSLog(@"head : %@",head);
-        
+    
+    if (head == NULL) {
+        head = @" ";
+    }
+    
+    NSString *birthday = birthdaySubButton.titleLabel.text;
+    
+    if (birthday == NULL) {
+        birthday = @" ";
+    }
+    
+    NSString *remark = remarkTextField.text;
+    
+    if (remark == NULL) {
+        remark = @" ";
+    }
+    
+    NSString *height = heightTextField.text;
+    
+    if (height == NULL) {
+        height = @" ";
+    }
+    
+    NSString *weight = weightTextField.text;
+    
+    if (weight == NULL) {
+        weight = @" ";
+    }
+    
+    NSString *usim = usimTextField.text;
+    
+    if (usim == NULL) {
+        usim = @" ";
+    }
+    
+    NSString *wsim = wsimTextField.text;
+    
+    if (wsim == NULL) {
+        wsim = @" ";
+    }
+    
     NSDictionary *paramater = @{
                                 @"wid":accountMessage.wid,
                                 @"head":head,
                                 @"babysex":[NSString stringWithFormat:@"%ld",(long)sexSubButton.tag],
                                 @"babyage":@"10",
-                                @"babybir":birthdaySubButton.titleLabel.text,
-                                @"babyname":remarkTextField.text,
-                                @"babyheight":heightTextField.text,
-                                @"babyweight":weightTextField.text,
-                                @"usim":usimTextField.text,
-                                @"wsim":wsimTextField.text
+                                @"babybir":birthday,
+                                @"babyname":remark,
+                                @"babyheight":height,
+                                @"babyweight":weight,
+                                @"usim":usim,
+                                @"wsim":wsim
                                 };
     
     NSLog(@"paramater : %@",paramater);
     
     [Networking updateWatchInfoWithDict:paramater block:^(int i) {
         if (i == 100) {
+            
+            [JKAlert showMessage:@"成功更新宝贝信息"];
+            
             if (UploadImageSuccess) {
                 accountMessage.image = portraitImage;
                 
@@ -380,6 +423,8 @@
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
             }
+        }else{
+            [JKAlert showMessage:@"更新宝贝信息失败"];
         }
     }];
 }

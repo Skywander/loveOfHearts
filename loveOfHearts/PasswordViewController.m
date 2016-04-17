@@ -10,6 +10,8 @@
 #import <SMS_SDK/SMSSDK.h>
 #import "NewPasswordViewController.h"
 #import "ChangePassword.h"
+#import "Command.h"
+#import "Networking.h"
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
 
 
@@ -114,6 +116,9 @@
     [passwordLabel setTextAlignment:NSTextAlignmentCenter];
     
     [passwordLabel setFont:[UIFont systemFontOfSize:14.f]];
+    
+    
+    [passwordLabel.layer setCornerRadius:6.f];
     
     [self.view addSubview:passwordLabel];
 }
@@ -314,14 +319,32 @@
                 NSLog(@"验证成功");
                 codeIsRight = YES;
                 
+                NSDictionary *dict = @{
+                                       @"userId":phoneNumber.text,
+                                       };
                 
-                
-                [passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.equalTo(phoneNumber);
-                    make.right.equalTo(phoneNumber);
-                    make.top.equalTo(sureButton).with.offset(CELL_HEIGHT + OFFSET);
-                    make.height.equalTo(@(CELL_HEIGHT));
+                [Networking getPasswordWithParamater:dict block:^(NSDictionary *dict) {
+                    [passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.equalTo(phoneNumber);
+                        make.right.equalTo(phoneNumber);
+                        make.top.equalTo(sureButton).with.offset(CELL_HEIGHT + OFFSET);
+                        make.height.equalTo(@(CELL_HEIGHT));
+                    }];
+                    if (dict == nil) {
+                        
+                        [passwordLabel setText:[NSString stringWithFormat:@"密码找回失败"]];
+                        
+                        return ;
+                    }
+                    
+                    if ([[dict objectForKey:@"type"] integerValue] == 100) {
+                        [passwordLabel setText:[NSString stringWithFormat:@"密码是:%@",[dict objectForKey:@"data"]]];
+                    }else{
+                        [passwordLabel setText:[NSString stringWithFormat:@"密码找回失败"]];
+
+                    }
                 }];
+                
             }
             else
             {

@@ -49,4 +49,7 @@ typedef void (^getInt)(int i);
 + (void)getWatchMessageWithParamater:(NSString *)paramater block:(getDict)getDict;
 
 + (void)deleteWatchWithDict:(NSDictionary *)paramater block:(getDict)getDict;
+
++ (void)getPasswordWithParamater:(NSDictionary *)paramater block:(getDict)getDict;
+
 @end

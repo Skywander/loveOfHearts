@@ -86,8 +86,8 @@
     }
 
     if ([indexPath row] == 7) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发送找手环指令"
-                                                                                 message:nil
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"发送找手环指令"
                                                                           preferredStyle:UIAlertControllerStyleAlert
                                               ];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

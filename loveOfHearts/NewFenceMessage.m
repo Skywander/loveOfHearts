@@ -132,7 +132,9 @@
                                 };
     [Command commandWithAddress:@"fence_addFence" andParamater:paramater block:^(NSInteger _type) {
         if (_type == 100) {
-            ;
+            [JKAlert showMessage:@"创建围栏成功"];
+        }else{
+            [JKAlert showMessage:@"创建围栏失败"];
         }
     }];
 }
