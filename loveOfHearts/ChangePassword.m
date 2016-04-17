@@ -99,7 +99,7 @@
     
     [textField setPlaceholder:text];
     
-    UIImageView *leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginPassword.png"]];
+    UIImageView *leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userpassword"]];
     [leftView setFrame:CGRectMake(6, 6, 24, 24)];
     [leftView setClipsToBounds:YES];
     [textField setLeftViewMode:UITextFieldViewModeAlways];
@@ -126,7 +126,9 @@
     
     [Command commandWithAddress:@"user_passwdreset" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
-            ;
+            [JKAlert showMessage:@"修改成功"];
+        }else{
+            [JKAlert showMessage:@"修改失败"];
         }
     }];
     

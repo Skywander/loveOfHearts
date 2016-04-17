@@ -13,6 +13,6 @@ pod "AFNetworking"
 pod “ViewDeck”
 
 
-target :loveOfHeartsTests, :exclusive => true do
+target :相册管理器Tests, :exclusive => true do
 # pod 'Kiwi'
 end

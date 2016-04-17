@@ -205,6 +205,8 @@
             
             [Networking getWatchMessageWithParamater:wid block:^(NSDictionary *dict) {
                 
+                accountMessage.wid = wid;
+                
                 [accountMessage setWatchInfor:dict];
                 //创建通知
                 NSNotification *notification =[NSNotification notificationWithName:@"HomeviewUpdateImage" object:imageView.image userInfo:nil];

@@ -49,22 +49,65 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 6) {
-        [Command commandWithName:@"watch_poweroff" block:^(NSInteger type) {
-            if (type == 100) {
-                ;
-            }else{
-                NSLog(@"error");
-            }
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"远程关机"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert
+                                              ];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [Command commandWithName:@"watch_poweroff" block:^(NSInteger type) {
+                if (type == 100) {
+                    ;
+                }else{
+                    NSLog(@"error");
+                }
+            }];
+            
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                             }];
+        [alertController addAction:sureAction];
+        [alertController addAction:cancelAction];
+
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
         }];
         
         return;
     }
     
     if ([indexPath row] == 5) {
-        [Command commandWithName:@"watch_monitor" block:^(NSInteger type) {
-            if (type == 100) {
-                NSLog(@"success");
-            }
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"打开监听"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert
+                                              ];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [Command commandWithName:@"watch_monitor" block:^(NSInteger type) {
+                if (type == 100) {
+                    NSLog(@"success");
+                }
+            }];
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                             }];
+        [alertController addAction:sureAction];
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
         }];
         
         return;

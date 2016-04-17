@@ -73,7 +73,6 @@ static AccountMessage *accountMessage;
     self.turn = [dict objectForKey:@"turn"];
     self.whitelist1 = [dict objectForKey:@"whitelist1"];
     self.whitelist2 = [dict objectForKey:@"whitelist2"];
-    self.wid = [dict objectForKey:@"wid"];
 }
 
 - (void)setBabyMessage:(NSDictionary *)_dict{

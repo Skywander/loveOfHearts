@@ -98,7 +98,7 @@
         
         _polygonView.lineWidth = 2.f;
         _polygonView.strokeColor = DEFAULT_PINK;
-        _polygonView.fillColor = DEFAULT_PINK;
+        _polygonView.fillColor = [UIColor clearColor];
         _polygonView.lineJoinType = kMALineJoinMiter;//连接类型
         
         return _polygonView;

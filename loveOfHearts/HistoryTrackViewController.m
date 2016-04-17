@@ -106,6 +106,9 @@
     
     mapView = mymapView.mapView;
     
+    mymapView.annotationImage = [UIImage imageNamed:@"defaultanimationView"];
+
+    
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
     

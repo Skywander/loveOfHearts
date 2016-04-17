@@ -69,7 +69,9 @@
     
     NSString *silenceTime = accountMessage.silencetime;
     
-    if (![silenceTime isEqualToString:@" "]) {
+    NSLog(@"silence : %@",silenceTime);
+    
+    if (![silenceTime isEqualToString:@" "] && silenceTime != NULL) {
         NSArray *silenceArray = [silenceTime componentsSeparatedByString:@","];
         
         timeArray = [NSMutableArray new];

@@ -48,7 +48,7 @@
 
 //网络
 
-#define HTTP @"http://182.92.129.202:8080/XGBDPlatforms/"
+#define HTTP @"http://xgbdlbs.com/XGBDPlatforms/"
 
 
 //地图

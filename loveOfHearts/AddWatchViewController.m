@@ -88,7 +88,9 @@
         
         AddWatchByInput *addWatchByInput = [AddWatchByInput new];
         
-        addWatchByInput.wid = [string substringFromIndex:4];
+        NSRange range = {4,10};
+        
+        addWatchByInput.wid = [string substringWithRange:range];
         
         [self presentViewController:addWatchByInput animated:YES completion:^{
             ;

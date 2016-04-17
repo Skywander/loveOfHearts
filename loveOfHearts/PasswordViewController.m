@@ -9,7 +9,9 @@
 #import "PasswordViewController.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "NewPasswordViewController.h"
+#import "ChangePassword.h"
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]
+
 
 @interface PasswordViewController (){
     UITextField *phoneNumber;
@@ -18,6 +20,7 @@
     UIView *codeView;
     UITextField *code;
     UIButton *codeButton;
+    UILabel *passwordLabel;
     
     //验证码
     NSMutableArray* _areaArray;
@@ -103,6 +106,16 @@
     [sureButton addTarget:self action:@selector(touchInsideButton:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:sureButton];
+    
+    passwordLabel = [UILabel new];
+    
+    [passwordLabel setBackgroundColor:[UIColor whiteColor]];
+    
+    [passwordLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [passwordLabel setFont:[UIFont systemFontOfSize:14.f]];
+    
+    [self.view addSubview:passwordLabel];
 }
 
 - (void)initNavigation{
@@ -181,16 +194,10 @@
 }
 
 - (void)clickSureButton{
-    [sureButton setBackgroundColor:DEFAULT_COLOR];
+    [sureButton setBackgroundColor:[UIColor whiteColor]];
     
     [self checkCode];
-    
-    if (codeIsRight) {
-        NewPasswordViewController *newPassword = [NewPasswordViewController new];
         
-        [self.navigationController pushViewController:newPassword animated:YES];
-        
-    }
 }
 - (void)clickCodeButton{
     [codeButton setBackgroundColor:DEFAULT_COLOR];
@@ -306,6 +313,15 @@
                 
                 NSLog(@"验证成功");
                 codeIsRight = YES;
+                
+                
+                
+                [passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(phoneNumber);
+                    make.right.equalTo(phoneNumber);
+                    make.top.equalTo(sureButton).with.offset(CELL_HEIGHT + OFFSET);
+                    make.height.equalTo(@(CELL_HEIGHT));
+                }];
             }
             else
             {

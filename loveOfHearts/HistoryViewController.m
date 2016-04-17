@@ -102,6 +102,8 @@
     myMapview = [Mymapview sharedInstance];
     [myMapview setFrame:CGRectMake(0, 64,SCREEN_WIDTH,SCREEN_HEIGHT - 84)];
     
+    myMapview.annotationImage = [UIImage imageNamed:@"defaultanimationView"];
+    
     mapView = myMapview.mapView;
     
     

@@ -51,6 +51,20 @@
     
     accountMessage = [AccountMessage sharedInstance];
     
+    if (accountMessage.smsonoff == NULL) {
+        accountMessage.smsonoff = @"0";
+    }
+    
+    if (accountMessage.lowbat == NULL) {
+        accountMessage.lowbat = @"0";
+    }
+    if (accountMessage.remove == NULL) {
+        accountMessage.remove = @"0";
+    }
+    if (accountMessage.sossms == NULL) {
+        accountMessage.sossms = @"0";
+    }
+    
     [switsState addObject:accountMessage.smsonoff];
     [switsState addObject:accountMessage.lowbat];
     [switsState addObject:accountMessage.remove];

@@ -98,7 +98,7 @@
     
     mapView = [Mymapview sharedInstance];
         
-    [mapView setFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
+    [mapView setFrame:CGRectMake(0, TOP_HEIGHT + 20, SCREEN_WIDTH, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
     
     mapView.mydelegate = self;
     
@@ -140,7 +140,7 @@
     
 
     [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-        if (![dict isEqual:[NSNull null]]) {
+        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
             AccountMessage *accountMessage = [AccountMessage sharedInstance];
             
             [accountMessage setBabyMessage:dict];
@@ -188,7 +188,8 @@
                                 };
     
     [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-        if (![dict isEqual:[NSNull null]]) {
+        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
+            
             AccountMessage *accountMessage = [AccountMessage sharedInstance];
             
             [accountMessage setBabyMessage:dict];
@@ -202,9 +203,9 @@
     }];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
-        NSLog(@"watchMessage: %@",dict);
-        
-        [[AccountMessage sharedInstance] setWatchInfor:dict];
+        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
+            [[AccountMessage sharedInstance] setWatchInfor:dict];
+        }
     }];
 }
 

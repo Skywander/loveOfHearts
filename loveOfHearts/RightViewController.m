@@ -86,12 +86,33 @@
     }
 
     if ([indexPath row] == 7) {
-        
-        [Command commandWithName:@"watch_find" block:^(NSInteger type) {
-            if (type == 100) {
-                NSLog(@"send success");
-            }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"发送找手环指令"
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert
+                                              ];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [Command commandWithName:@"watch_find" block:^(NSInteger type) {
+                if (type == 100) {
+                    NSLog(@"send success");
+                }
+            }];
+            
         }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                             }];
+        [alertController addAction:sureAction];
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+        
     }
     
     if ([indexPath row] == 9) {

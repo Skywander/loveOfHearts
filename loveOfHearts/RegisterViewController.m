@@ -232,39 +232,43 @@
 
 }
 - (void)registerAccount{
-    if (codeIsRight) {
-        
-        NSLog(@"code is rightn");
-        NSDictionary *paramater = @{
-                                    @"userId":phoneNumber,
-                                    @"userPw":password.text,
-                                    };
-        [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
-            int type = [[dict objectForKey:@"type"] intValue];
-            
-            NSLog(@"register dict : %@",dict);
-            
-            if (type == 100) {
-                [JKAlert showMessage:@"注册成功"];
-            }else if(type == 300){
-                [JKAlert showMessage:@"重复注册"];
-            }else{
-                [JKAlert showMessage:@"注册失败"];
-            }
-        }];
-    }else{
-        NSLog(@"code is wrong");
-    }
+    
+    [self checkCode];
+    
+    
+//    if (codeIsRight) {
+//        
+//        NSLog(@"code is rightn");
+//        NSDictionary *paramater = @{
+//                                    @"userId":phoneNumber,
+//                                    @"userPw":password.text,
+//                                    };
+//        [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
+//            int type = [[dict objectForKey:@"type"] intValue];
+//            
+//            NSLog(@"register dict : %@",dict);
+//            
+//            if (type == 100) {
+//                [JKAlert showMessage:@"注册成功"];
+//            }else if(type == 300){
+//                [JKAlert showMessage:@"重复注册"];
+//            }else{
+//                [JKAlert showMessage:@"注册失败"];
+//            }
+//        }];
+//    }else{
+//        NSLog(@"code is wrong");
+//    }
 }
 
 
 
 - (void)touchInside:(UIButton *)sender{
-    [sender setBackgroundColor:HIGH_COLOR];
+    [sender setBackgroundColor:[UIColor whiteColor]];
 }
 - (void)getCode{
     
-    [codeButton setBackgroundColor:[UIColor whiteColor]];
+    [codeButton setBackgroundColor:HIGH_COLOR];
     
     int compareResult = 0;
     for (int i = 0; i<_areaArray.count; i++)
@@ -364,6 +368,25 @@
                 
                 NSLog(@"验证成功");
                 codeIsRight = YES;
+                
+                NSLog(@"code is rightn");
+                NSDictionary *paramater = @{
+                                            @"userId":phoneNumber,
+                                            @"userPw":password.text,
+                                            };
+                [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
+                    int type = [[dict objectForKey:@"type"] intValue];
+                    
+                    NSLog(@"register dict : %@",dict);
+                    
+                    if (type == 100) {
+                        [JKAlert showMessage:@"注册成功"];
+                    }else if(type == 300){
+                        [JKAlert showMessage:@"重复注册"];
+                    }else{
+                        [JKAlert showMessage:@"注册失败"];
+                    }
+                }];
             }
             else
             {

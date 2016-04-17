@@ -80,9 +80,14 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"success : %@",responseObject);
+        NSLog(@"success : %@",[responseObject objectForKey:@"data"]);
         
-        getDict([responseObject objectForKey:@"data"]);
+        if (![[responseObject objectForKey:@"data"] isEqual:[NSNull null]] && [responseObject objectForKey:@"data"] != nil) {
+            getDict([responseObject objectForKey:@"data"]);
+
+        }else{
+            getDict(nil);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure : %@",error);

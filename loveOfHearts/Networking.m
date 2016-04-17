@@ -285,9 +285,13 @@ AFHTTPSessionManager *manager;
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSLog(@"responseObject");
+        NSLog(@"%@",responseObject);
         
-        getDict([responseObject objectForKey:@"data"]);
+        if([[responseObject objectForKey:@"data"] isKindOfClass:[NSDictionary class]]){
+            getDict([responseObject objectForKey:@"data"]);
+        }else{
+            getDict(nil);
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         getDict(nil);

@@ -56,9 +56,13 @@
     
     pedo = accountMessage.pedo;
     
+    if ([pedo isEqualToString:@" "] || pedo == NULL) {
+        pedo = @"0";
+    }
+    
     roll = accountMessage.turn;
     
-    if ([roll isEqualToString:@" "] || [roll isEqualToString:@"00:00-00:00"]) {
+    if ([roll isEqualToString:@" "] || [roll isEqualToString:@"00:00-00:00"] || roll == NULL) {
         roll = @"0";
     }
     

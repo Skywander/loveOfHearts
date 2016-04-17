@@ -8,6 +8,7 @@
 
 #import "NewPasswordViewController.h"
 #import <Masonry/Masonry.h>
+#import "Command.h"
 
 #define LABEL_COLOR [UIColor grayColor]
 
@@ -140,7 +141,12 @@
 }
 
 - (void)clickSureButton{
-    [sureButton setBackgroundColor:DEFAULT_COLOR];
+    [sureButton setBackgroundColor:[UIColor whiteColor]];
+    
+
+    
+    
+    
 }
 - (void)touchInsideButton:(UIButton *)sender{
     [sender setBackgroundColor:HIGH_COLOR];

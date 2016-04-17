@@ -58,6 +58,10 @@
                     
                     [self beginTimer];
                     
+                }else{
+                    [self initLabel];
+                    
+                    [self beginTimer];
                 }
             }];
         }else{
