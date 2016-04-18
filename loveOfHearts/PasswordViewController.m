@@ -215,7 +215,7 @@
 
 - (void)getCode{
     
-    [codeButton setBackgroundColor:DEFAULT_COLOR];
+    [codeButton setBackgroundColor:[UIColor whiteColor]];
     
     int compareResult = 0;
     for (int i = 0; i<_areaArray.count; i++)

@@ -11,7 +11,6 @@
 #import "Command.h"
 #import <AFNetworking/AFNetworking.h>
 #import "AccountMessage.h"
-#import "Rail.h"
 #import "HistoryFenceList.h"
 #import "AccountMessage.h"
 

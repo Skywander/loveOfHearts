@@ -26,24 +26,24 @@
 - (void)passSelectedVaule:(NSInteger)selected{
     if(selected == 4){
         
-        NSLog(@"showUserLocation");
-        
-        [[Mymapview sharedInstance].mapView showsUserLocation];
-        
         MAMapView *mapView = [Mymapview sharedInstance].mapView;
         
         if ([mapView showsUserLocation]) {
+            
             [mapView setShowsUserLocation:NO];
+            
         }else{
             [mapView setShowsUserLocation:YES];
+            
             [mapView setCenterCoordinate:mapView.userLocation.coordinate];
         }
     }
     if (selected == 3) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://8008808888"]];
+    
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://0"]];
         
-        NSLog(@"tele");
-
+        return;
+        
     }
     if (selected == 2) {
         
@@ -93,11 +93,8 @@
 }
 
 - (void)showRightView{
-        
-    if ([self.viewDeckController isSideClosed:IIViewDeckLeftSide]) {
-        [self.viewDeckController toggleRightViewAnimated:YES];
-    }else{
-        [self.viewDeckController closeRightViewAnimated:YES];
-    }
+
+    [self.viewDeckController toggleRightViewAnimated:YES];
+
 }
 @end

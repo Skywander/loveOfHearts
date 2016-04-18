@@ -442,7 +442,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [self dismissViewControllerAnimated:YES completion:nil];
-    //    NSLog(@"%@",info);
+
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [portraitView setImage:image];
     UIImage *addPic = image;
@@ -464,6 +464,7 @@
     NSDate *date = [NSDate new];
     
     NSDateFormatter  *formatter=[[NSDateFormatter alloc] init];
+    
     formatter.dateFormat = @"YYYYMMddHHddss";
     
     NSString *dateString =  [formatter stringFromDate:date];

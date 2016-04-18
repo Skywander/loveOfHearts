@@ -143,7 +143,6 @@
 }
 
 - (void)clickNavigationRightView{
-    NSLog(@"clickMakeSureButton");
     
     NSString *fenceData;
     
@@ -162,6 +161,7 @@
     }
     
     if (i < 3) {
+        
         [JKAlert showMessage:@"请圈定围栏(至少需要3个点)"];
         
         return;

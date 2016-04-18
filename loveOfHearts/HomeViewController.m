@@ -27,34 +27,31 @@
 @synthesize topView;
 - (void)viewDidLoad {
     
-    NSLog(@"screen_width %f",SCREEN_WIDTH);
-
-    
     [super viewDidLoad];
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
         
     [self initTopView];
     
-    NSLog(@"top");
-        
     [self initHomeMenuView];
-    
-    NSLog(@"menu");
     
     [self initNotification];
     
-    NSLog(@"noti");
-    
     [self getBabyMessage];
     
-    NSLog(@"message");
-    
     [AccountMessage sharedInstance].showHomeView = YES;
+    
+    if ([AccountMessage sharedInstance].wid != NULL) {
+        
+        [Command commandWithName:@"watch_cr" block:^(NSInteger type) {
+            ;
+        }];
+    }
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
     [AccountMessage sharedInstance].showHomeView = YES;
     
     self.navigationController.navigationBarHidden = YES;
@@ -68,22 +65,17 @@
     
     [AccountMessage sharedInstance].homeAnimationImage = mapView.annotationImage;
 
-    
     [AccountMessage sharedInstance].showHomeView = NO;
     
     if (mapView.currentLat) {
+        
         [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLat doubleValue] forKey:@"lat"];
         
         [[NSUserDefaults standardUserDefaults] setDouble:[mapView.currentLng doubleValue] forKey:@"lon"];
    
         [mapView.mapView setShowsUserLocation:NO];
+        
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [AccountMessage sharedInstance].showHomeView = NO;
-    
-    [super didReceiveMemoryWarning];
 }
 
 
@@ -108,6 +100,7 @@
     mapView.mydelegate = self;
     
     [mapView.mapView removeOverlays:mapView.mapView.overlays];
+    
     [mapView.mapView removeAnnotations:mapView.mapView.annotations];
 
     
@@ -117,17 +110,19 @@
     
     if([AccountMessage sharedInstance].homeAnimationImage != nil){
         
-        NSLog(@"image not nil");
-        
         mapView.annotationImage = [AccountMessage sharedInstance].homeAnimationImage;
+        
     }else{
+        
         mapView.annotationImage = [UIImage imageNamed:@"animationView"];
+        
     }
     
     [mapView searchPointWithLat:lat andLon:lon];
 }
 
 - (void)initHomeMenuView{
+    
     menuView = [[HomeMenuView alloc] initWithFrame:CGRectMake(4, 20 + TOP_HEIGHT, 45, SCREEN_HEIGHT - TOP_HEIGHT - 20)];
     
     menuView.homeDelegat = self;
@@ -193,27 +188,6 @@
     if ([AccountMessage sharedInstance].wid == NULL) {
         return;
     }
-    
-    
-//    NSDictionary *paramater = @{
-//                                @"wid":[AccountMessage sharedInstance].wid
-//                                };
-    
-//    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-//        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
-//            
-//            AccountMessage *accountMessage = [AccountMessage sharedInstance];
-//            
-//            [accountMessage setBabyMessage:dict];
-//    
-//        }else{
-//            [[AccountMessage sharedInstance] initBabyMesssage];
-//        }
-//        
-//        [DB getImageWithWatchId:[AccountMessage sharedInstance].wid filename:[AccountMessage sharedInstance].head block:^(UIImage *image) {
-//            [topView setImage:image];
-//        }];
-//    }];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {

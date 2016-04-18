@@ -81,7 +81,6 @@
 		D3D0251B1C9BEB03002713B1 /* NewFenceMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025161C9BEB03002713B1 /* NewFenceMessage.m */; };
 		D3D025241C9BEB8A002713B1 /* IQActionSheetPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */; };
 		D3D025251C9BEB8A002713B1 /* IQActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D025231C9BEB8A002713B1 /* IQActionSheetViewController.m */; };
-		D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */ = {isa = PBXBuildFile; fileRef = D3D0253B1C9C0CBB002713B1 /* Rail.m */; };
 		D3D8C56B1CA27EDE00512F5B /* otherSetting5.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C56A1CA27EDE00512F5B /* otherSetting5.png */; };
 		D3D8C56D1CA27EFF00512F5B /* otherSetting6.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C56C1CA27EFF00512F5B /* otherSetting6.png */; };
 		D3D8C5781CA27F8000512F5B /* otherSelected5.png in Resources */ = {isa = PBXBuildFile; fileRef = D3D8C56E1CA27F8000512F5B /* otherSelected5.png */; };
@@ -339,8 +338,6 @@
 		D3D025211C9BEB8A002713B1 /* IQActionSheetPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetPickerView.m; sourceTree = "<group>"; };
 		D3D025221C9BEB8A002713B1 /* IQActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQActionSheetViewController.h; sourceTree = "<group>"; };
 		D3D025231C9BEB8A002713B1 /* IQActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQActionSheetViewController.m; sourceTree = "<group>"; };
-		D3D0253A1C9C0CBA002713B1 /* Rail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rail.h; sourceTree = "<group>"; };
-		D3D0253B1C9C0CBB002713B1 /* Rail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rail.m; sourceTree = "<group>"; };
 		D3D8C56A1CA27EDE00512F5B /* otherSetting5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = otherSetting5.png; sourceTree = "<group>"; };
 		D3D8C56C1CA27EFF00512F5B /* otherSetting6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = otherSetting6.png; sourceTree = "<group>"; };
 		D3D8C56E1CA27F8000512F5B /* otherSelected5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = otherSelected5.png; sourceTree = "<group>"; };
@@ -867,8 +864,6 @@
 				D3D025141C9BEB03002713B1 /* NewFenceView.m */,
 				D3D025151C9BEB03002713B1 /* NewFenceMessage.h */,
 				D3D025161C9BEB03002713B1 /* NewFenceMessage.m */,
-				D3D0253A1C9C0CBA002713B1 /* Rail.h */,
-				D3D0253B1C9C0CBB002713B1 /* Rail.m */,
 			);
 			name = MapView;
 			sourceTree = "<group>";
@@ -1512,7 +1507,6 @@
 				D3E51B501C9CFB92001732BF /* NoDisturbingTime.m in Sources */,
 				D386B0E61CAE5329001EC590 /* RightCellView.m in Sources */,
 				D3E51B4D1C9CFB92001732BF /* ChangePassword.m in Sources */,
-				D3D0253C1C9C0CBB002713B1 /* Rail.m in Sources */,
 				D3DF045B1C9543FE00832CD9 /* SYQRCodeViewController.m in Sources */,
 				D3E51B2C1C9CECC0001732BF /* AuthorityViewController.m in Sources */,
 				D3787F7E1CB00554009AE58A /* PRNAmrPlayer.m in Sources */,
