@@ -115,7 +115,7 @@
     [sureButton setBackgroundColor:[UIColor whiteColor]];
     [sureButton setTitle:@"登录" forState:UIControlStateNormal];
     [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
     [sureButton.layer setCornerRadius:CORNER_RIDUS];
     
@@ -277,11 +277,12 @@
 
         }];
     }
+    [sureButton setBackgroundColor:[UIColor whiteColor]];
 }
 
 
 - (void)touchInsideButton:(UIButton *)sender{
-    [sender setBackgroundColor:HIGH_COLOR];
+    [sender setBackgroundColor:DEFAULT_COLOR];
 }
 
 - (void)register{

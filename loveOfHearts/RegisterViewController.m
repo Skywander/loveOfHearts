@@ -92,7 +92,7 @@
     [sureButton setBackgroundColor:[UIColor whiteColor]];
     [sureButton setTitle:@"注册" forState:UIControlStateNormal];
     [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [sureButton setTitleColor:DEFAULT_COLOR forState:UIControlStateHighlighted];
+    [sureButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
     [sureButton.layer setCornerRadius:CORNER_RIDUS];
     
@@ -210,14 +210,13 @@
 }
 
 - (void)clickSureButton{
-    [sureButton setBackgroundColor:DEFAULT_COLOR];
-    if (password.text.length <= 6) {
-        NSLog(@"密码太短");
-        return;
-    }
+    
+    [sureButton setBackgroundColor:[UIColor whiteColor]];
     
     if (![password.text isEqualToString:passwordAgain.text]) {
-        NSLog(@"两次输入不一致");
+
+        [JKAlert showMessage:@"两次密码不一致"];
+        
         return;
     }
     
@@ -235,40 +234,16 @@
     
     [self checkCode];
     
-    
-//    if (codeIsRight) {
-//        
-//        NSLog(@"code is rightn");
-//        NSDictionary *paramater = @{
-//                                    @"userId":phoneNumber,
-//                                    @"userPw":password.text,
-//                                    };
-//        [Networking registerwithDict:paramater block:^(NSDictionary *dict) {
-//            int type = [[dict objectForKey:@"type"] intValue];
-//            
-//            NSLog(@"register dict : %@",dict);
-//            
-//            if (type == 100) {
-//                [JKAlert showMessage:@"注册成功"];
-//            }else if(type == 300){
-//                [JKAlert showMessage:@"重复注册"];
-//            }else{
-//                [JKAlert showMessage:@"注册失败"];
-//            }
-//        }];
-//    }else{
-//        NSLog(@"code is wrong");
-//    }
 }
 
 
 
 - (void)touchInside:(UIButton *)sender{
-    [sender setBackgroundColor:[UIColor whiteColor]];
+    [sender setBackgroundColor:DEFAULT_COLOR];
 }
 - (void)getCode{
     
-    [codeButton setBackgroundColor:HIGH_COLOR];
+    [codeButton setBackgroundColor:[UIColor whiteColor]];
     
     int compareResult = 0;
     for (int i = 0; i<_areaArray.count; i++)
@@ -359,6 +334,8 @@
     if(code.text.length != 4)
     {
         [self alertWithTitle:@"验证码错误"];
+        
+        return;
     }
     else
     {
@@ -421,8 +398,8 @@
 
 
 - (void)alertWithTitle:(NSString *)title{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                             message:nil
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                             message:title
                                                                       preferredStyle:UIAlertControllerStyleAlert
                                           ];
     UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
