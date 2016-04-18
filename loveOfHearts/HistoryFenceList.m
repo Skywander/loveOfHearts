@@ -38,23 +38,16 @@ static HistoryFenceList *historyFenceList;
     
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    [self initView];
-    
     [self initNavigation];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
     
     [self initData];
 }
 
-- (void)initView{
-    
-    [self initSection];
-    [self initTable];
-}
 
 - (void)initData{
     user_id = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
@@ -68,10 +61,9 @@ static HistoryFenceList *historyFenceList;
     [self.view addSubview:navigationView];
 }
 
-- (void)initSection {
-    fencenameList = [NSMutableArray new];
-}
+
 - (void)initTable {
+    
     table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     table.backgroundColor = DEFAULT_COLOR;
     table.showsVerticalScrollIndicator = NO;
@@ -84,6 +76,7 @@ static HistoryFenceList *historyFenceList;
 }
 
 - (void)getWatchMessage {
+    
     fencesDataArray = [NSMutableArray new];
     
     fencesIDArray = [NSMutableArray new];
@@ -120,10 +113,14 @@ static HistoryFenceList *historyFenceList;
             NSLog(@"fencenamelist : %@",fencenameList);
         }
         
-        [table reloadData];
-
+        if (!table) {
+            [self initTable];
+        }else{
+            [table reloadData];
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error : %@",error);
+
     }];
 }
 
@@ -193,7 +190,7 @@ static HistoryFenceList *historyFenceList;
 
 - (void)clickNavigationRightView{
     NewFenceView *createFence = [NewFenceView new];
-    createFence.hidesBottomBarWhenPushed = YES;
+
     [self presentViewController:createFence animated:YES completion:^{
         ;
     }];
