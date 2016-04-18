@@ -32,7 +32,7 @@
     [dateLabel setFont:[UIFont systemFontOfSize:10]];
     [dateLabel setBackgroundColor:DEFAULT_COLOR];
         
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[AccountMessage sharedInstance].image];
     
     [imageView setFrame:CGRectMake(6, 0, 42, 42)];
     

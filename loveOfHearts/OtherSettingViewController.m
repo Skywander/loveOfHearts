@@ -42,6 +42,7 @@
     listView.dataSource = self;
     listView.delegate = self;
     [self.view addSubview:listView];
+    [self.view sendSubviewToBack:listView];
     
     Navigation *navigatioinView = [Navigation new];
     [self.view addSubview:navigatioinView];
@@ -49,6 +50,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([indexPath row] == 6) {
+        
+        if ([AccountMessage sharedInstance].isAdmin != 1) {
+            [JKAlert showMessage:@"您不是管理员"];
+            
+            return;
+        }
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
                                                                                  message:@"远程关机"
@@ -84,8 +91,15 @@
     
     if ([indexPath row] == 5) {
         
+        if ([AccountMessage sharedInstance].isAdmin != 1) {
+            [JKAlert showMessage:@"您不是管理员"];
+            
+            return;
+        }
+
+        
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
-                                                                                 message:@"打开监听"
+                                                                                 message:@"打开监听(需要提前设置中心号码)"
                                                                           preferredStyle:UIAlertControllerStyleAlert
                                               ];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

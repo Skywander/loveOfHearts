@@ -46,7 +46,7 @@
     [self.view addSubview:navigation];
     
     //列表
-    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 90, SCREEN_WIDTH * 4 / 5.0, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
+    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 90, SCREEN_WIDTH * 2 / 3.0 - 20, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     listView.scrollEnabled = NO;
     [listView setBackgroundColor:DEFAULT_COLOR];
     listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -68,7 +68,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return (SCREEN_HEIGHT - 100) / 10.0;
+    return (SCREEN_HEIGHT - 150) / 10.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -87,7 +87,7 @@
 
     if ([indexPath row] == 7) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
-                                                                                 message:@"发送找手环指令"
+                                                                                 message:@"手表会响铃一分钟,按任意键停止"
                                                                           preferredStyle:UIAlertControllerStyleAlert
                                               ];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -116,12 +116,30 @@
     }
     
     if ([indexPath row] == 9) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            ;
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"确定退出当前用户?"
+                                                                          preferredStyle:UIAlertControllerStyleAlert
+                                              ];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
         }];
         
-        NSLog(@"click 9");
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                             }];
+        [alertController addAction:sureAction];
+        [alertController addAction:cancelAction];
         
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
         return;
     }
 }

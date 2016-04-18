@@ -17,6 +17,8 @@
         
         UIImage *defaultImage = [UIImage imageNamed:@"child_head"];
         
+        [AccountMessage sharedInstance].image = defaultImage;
+        
         getImage(defaultImage);
         
         return;

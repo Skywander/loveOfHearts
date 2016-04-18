@@ -22,14 +22,11 @@
     
     UILabel *passwordLabel;
     UILabel *passwordAgainLabel;
-    
-    UITextField *oldTextField;
     UITextField *newTextField;
     UITextField *newAgainTextField;
     
     UIButton *sureButton;
     
-    NSString *oldPassword;
     NSString *newPassword;
     
     AccountMessage *accountMessage;
@@ -59,13 +56,11 @@
     
     basicMove = 40;
     
-    oldTextField = [self textFieldWithPlaceholder:@"输入原秘密" andPointY:basicY];
+    newTextField = [self textFieldWithPlaceholder:@"输入新密码" andPointY:basicY];
     
-    newTextField = [self textFieldWithPlaceholder:@"输入新密码" andPointY:basicY + basicMove];
+    newAgainTextField = [self textFieldWithPlaceholder:@"重新输入新密码" andPointY:basicY + basicMove ];
     
-    newAgainTextField = [self textFieldWithPlaceholder:@"重新输入新密码" andPointY:basicY + basicMove * 2];
-    
-    sureButton = [[UIButton alloc] initWithFrame:CGRectMake(6, basicMove * 3 + basicY, SCREEN_WIDTH - 12, 36)];
+    sureButton = [[UIButton alloc] initWithFrame:CGRectMake(6, basicMove * 2 + basicY, SCREEN_WIDTH - 12, 36)];
     [sureButton setBackgroundColor:[UIColor whiteColor]];
     [sureButton setTitle:@"确定" forState:UIControlStateNormal];
     [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -99,8 +94,10 @@
     
     [textField setPlaceholder:text];
     
+    [textField setSecureTextEntry:YES];
+    
     UIImageView *leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"userpassword"]];
-    [leftView setFrame:CGRectMake(6, 6, 24, 24)];
+    [leftView setFrame:CGRectMake(0, 0, 36, 36)];
     [leftView setClipsToBounds:YES];
     [textField setLeftViewMode:UITextFieldViewModeAlways];
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ICON_WIDTH, ICON_WIDTH)];
@@ -119,7 +116,6 @@
     
     NSDictionary *paramater = @{
                                 @"userId":accountMessage.userId,
-                                @"userPw":oldTextField.text,
                                 @"confirm":newTextField.text
                                 };
     

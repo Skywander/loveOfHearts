@@ -117,11 +117,11 @@ static HistoryFenceList *historyFenceList;
             
             [fencesIDArray addObject:[dict objectForKey:@"fid"]];
             
-            
-            [table reloadData];
-            
             NSLog(@"fencenamelist : %@",fencenameList);
         }
+        
+        [table reloadData];
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error : %@",error);
     }];

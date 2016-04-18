@@ -71,7 +71,7 @@ AFHTTPSessionManager *manager;
         NSLog(@"error : %@",error);
     }];
 }
-+ (void)addWatchWithParamaters:(NSDictionary *)paramaters{
++ (void)addWatchWithParamaters:(NSDictionary *)paramaters block:(getDict)getDict{
     NSLog(@"%@",paramaters);
     
     if (!manager) {
@@ -82,9 +82,14 @@ AFHTTPSessionManager *manager;
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         ;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        getDict(responseObject);
+        
         NSLog(@"%@",responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        getDict(nil);
         NSLog(@"%@",error);
     }];
 }
@@ -161,6 +166,7 @@ AFHTTPSessionManager *manager;
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         getDict(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        getDict(nil);
         NSLog(@"%@",error);
     }];
 

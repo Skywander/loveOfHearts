@@ -115,8 +115,12 @@
     //addView
     expandButton = [UIButton new];
     
-    [expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - self.frame.size.height,(SELF_HEIGHT - BUTTON_WIDTH) / 2,BUTTON_WIDTH, BUTTON_WIDTH)];
+    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - BUTTON_WIDTH - 10,(SELF_HEIGHT - BUTTON_WIDTH) / 2,BUTTON_WIDTH, BUTTON_WIDTH)];
+    [expandButton setTitle:@"菜单" forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     
     [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
     
@@ -128,6 +132,8 @@
     [powerView setImage:[UIImage imageNamed:@"power100"]];
     
     [self addSubview:powerView];
+    
+    [self getImage];
     
 }
 
@@ -157,7 +163,7 @@
     [dateFormatter setDateFormat:@"YYYY-MM-dd hh:mm"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     
-    if (![[AccountMessage sharedInstance].babyname isEqualToString:@" "] && [AccountMessage sharedInstance].babyname != NULL) {
+    if (![[AccountMessage sharedInstance].babyname isEqualToString:@""] && [AccountMessage sharedInstance].babyname != NULL) {
         dateString = [NSString stringWithFormat:@"%@|%@",[AccountMessage sharedInstance].babyname,dateString];
     }
    
@@ -181,6 +187,38 @@
 
 - (void)expand{
     [self.topViewDelegat showRightView];
+}
+
+- (void)getImage{
+    
+    if (![[AccountMessage sharedInstance].wid isKindOfClass:[NSString class]]) {
+        [DB getImageWithWatchId:@" " filename:@" " block:^(UIImage *image) {
+            [photoView setImage:image];
+        }];
+        
+        return;
+    }
+    
+    NSDictionary *paramater = @{
+                                @"wid":[AccountMessage sharedInstance].wid
+                                };
+    
+    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
+            
+            AccountMessage *accountMessage = [AccountMessage sharedInstance];
+            
+            [accountMessage setBabyMessage:dict];
+            
+        }else{
+            [[AccountMessage sharedInstance] initBabyMesssage];
+        }
+        
+        [DB getImageWithWatchId:[AccountMessage sharedInstance].wid filename:[AccountMessage sharedInstance].head block:^(UIImage *image) {
+            [photoView setImage:image];
+        }];
+    }];
+
 }
 
 

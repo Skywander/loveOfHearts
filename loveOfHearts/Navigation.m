@@ -51,7 +51,7 @@
     
     [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [expandButton setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+    [expandButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
     [expandButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
     

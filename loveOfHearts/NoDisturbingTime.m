@@ -43,6 +43,12 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
+    Navigation *navigation = [Navigation new];
+    [self.view addSubview:navigation];
+
+    
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         NSLog(@"watchMessage: %@",dict);
         
@@ -87,11 +93,6 @@
 }
 
 - (void)initUI{
-    [self.view setBackgroundColor:DEFAULT_COLOR];
-    
-    Navigation *navigation = [Navigation new];
-    [self.view addSubview:navigation];
-    
     //标题
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(6, 70, SCREEN_WIDTH, 40)];
     
@@ -237,6 +238,13 @@
 }
 
 - (void)clickSureButton{
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     paramater = [NSString new];
     for (int i = 1; i < 5; i ++) {
         NSString *firstTitle = buttons[i*2 - 2].titleLabel.text;
@@ -276,8 +284,6 @@
             ;
         }
     }];
-    
-    accountMessage.tempsilencetime = paramater;
 }
 
 @end

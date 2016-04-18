@@ -126,6 +126,13 @@
 }
 
 - (void)clickSwitch:(UISwitch *)sender{
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     NSString *userId = accountMessage.userId;
     NSString *wid = accountMessage.wid;
     

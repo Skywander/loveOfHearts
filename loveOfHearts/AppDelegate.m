@@ -296,7 +296,15 @@ NSString *const NotificationActionTwoIdent = @"ACTION_TWO";
 
     }
     
-    if (type >= 4) {
+    if (type == 4) {
+        if ([[dict objectForKey:@"data"] integerValue] == 1) {
+            [JKAlert showMessage:@"手表上线了"];
+        }else{
+            [JKAlert showMessage:@"手表下线了"];
+        }
+    }
+    
+    if (type > 4) {
         [JKAlert showMessageWithType:type];
     }
     

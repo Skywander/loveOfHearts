@@ -34,6 +34,15 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    
+    
+    Navigation *navigationView = [Navigation new];
+    
+    [self.view addSubview:navigationView];
+
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         NSLog(@"watchMessage: %@",dict);
         
@@ -56,7 +65,7 @@
     
     centerNumber = accountMessage.centernumber;
     
-    nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"监听号码设置", nil];
+    nameArray = [NSArray arrayWithObjects:@"1号键电话(SOS1)",@"2号键电话(SOS2)",@"3号键号码(SOS3)",@"中心号码设置", nil];
     
     newPhoneArray = [NSMutableArray new];
 
@@ -69,7 +78,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6, basicY + i * basicMove, SCREEN_WIDTH / 2 - 6, 36)];
         [label setText:[nameArray objectAtIndex:i]];
         [label setTextAlignment:NSTextAlignmentCenter];
-        [label setFont:[UIFont systemFontOfSize:14]];
+        [label setFont:[UIFont systemFontOfSize:15]];
         [label setTextColor:[UIColor blackColor]];
         
         [self.view addSubview:label];
@@ -104,14 +113,16 @@
     [sureButton.layer setCornerRadius:6.f];
     
     [self.view addSubview:sureButton];
-    
-    
-    Navigation *navigationView = [Navigation new];
-    
-    [self.view addSubview:navigationView];
 }
 
 - (void)clickSureButton {
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     
     for (int i = 0; i < 4; i ++) {
         [newPhoneArray addObject:textFields[i].text];
@@ -150,7 +161,6 @@
     
     [Command commandWithAddress:@"watch_sos" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
-            accountMessage.tempsos = tempString;
         }
     }];
     accountMessage.sos = tempString;
@@ -164,7 +174,6 @@
         
         [Command commandWithAddress:@"watch_center" andParamater:paramater block:^(NSInteger type) {
             if (type == 100) {
-                accountMessage.tempcenternumber = textFields[3].text;
             }
         }];
 }

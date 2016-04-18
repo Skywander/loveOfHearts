@@ -78,14 +78,18 @@
     
     for (NSDictionary *dict in usersArray) {
         NSLog(@"dict : %@",dict);
-        UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y power:[[dict objectForKey:@"ispowered"] integerValue]];
         
-        
-        [_viewDict setObject:userView forKey:[dict objectForKey:@"wid"]];
-        
-        y+=90;
-        
-        [self.view addSubview:userView];
+        if ([[dict objectForKey:@"ispowered"] integerValue] != 0 || [AccountMessage sharedInstance].isAdmin == 1) {
+            UIView *userView = [self viewWithFirstLabel:[dict objectForKey:@"userId"] secondLabel:[dict objectForKey:@"wid"] relationType:[dict objectForKey:@"relationship"] Admin:[dict objectForKey:@"admin"] andY:y power:[[dict objectForKey:@"ispowered"] integerValue]];
+            
+            
+            [_viewDict setObject:userView forKey:[dict objectForKey:@"wid"]];
+            
+            y+=90;
+            
+            [self.view addSubview:userView];
+
+        }
     }
 }
 
@@ -153,6 +157,7 @@
         
         [view addSubview:deleteButton];
     }else{
+        
         UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 20) - VIEW_HEIGTH, VIEW_HEIGTH * 0.1, VIEW_HEIGTH * 0.8, VIEW_HEIGTH*0.35)];
         [deleteButton setBackgroundColor:[UIColor blueColor]];
         
@@ -204,8 +209,6 @@
 
 - (void)deleteUser:(UIButton *)sender{
     
-    NSLog(@"delete at %ld",sender.tag);
-    
     NSDictionary *currentDict = [usersArray objectAtIndex:sender.tag];
     
     NSLog(@"%@",currentDict);
@@ -216,22 +219,49 @@
                                 @"isAdmin":[currentDict objectForKey:@"admin"]
                                 };
     
-    [Networking deleteWatchWithDict:paramater block:^(NSDictionary *dict) {
-        NSInteger type = [[dict objectForKey:@"type"] integerValue];
-        
-        if (type == 100) {
+    if ([[currentDict objectForKey:@"userId"] isEqualToString:[AccountMessage sharedInstance].userId] || [AccountMessage sharedInstance].isAdmin == 1){
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                                 message:@"删除该用户？"
+                                                                          preferredStyle:UIAlertControllerStyleAlert
+                                              ];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            if ([[currentDict objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
-                [AccountMessage sharedInstance].wid = NULL;
-            }
-            
-            [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-                if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
-                    [(UIView *)obj removeFromSuperview];
+            [Networking deleteWatchWithDict:paramater block:^(NSDictionary *dict) {
+                NSInteger type = [[dict objectForKey:@"type"] integerValue];
+                
+                if (type == 100) {
+                    
+                    if ([[currentDict objectForKey:@"wid"] isEqualToString:[AccountMessage sharedInstance].wid]) {
+                        [AccountMessage sharedInstance].wid = NULL;
+                    }
+                    
+                    [_viewDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+                        if ([key isEqualToString:[currentDict objectForKey:@"wid"]]) {
+                            [(UIView *)obj removeFromSuperview];
+                        }
+                    }];
                 }
             }];
-        }
-    }];
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消"
+                                                               style:UIAlertActionStyleCancel
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 
+                                                             }];
+        [alertController addAction:sureAction];
+        [alertController addAction:cancelAction];
+        
+        
+        [self presentViewController:alertController animated:YES completion:^{
+            
+        }];
+
+    }else{
+        [JKAlert showMessage:@"你没有权限删除该用户"];
+    }
+    
+    return;
 }
 
 - (void)addUser:(UIButton *)sender{

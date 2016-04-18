@@ -65,7 +65,9 @@
     
     [Command commandWithAddress:@"fence_deletedFence" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
-            ;
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
         }
     }];
 }

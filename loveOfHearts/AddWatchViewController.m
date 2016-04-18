@@ -35,7 +35,7 @@
     
     [self.view addSubview:navigation];
     
-    idButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 74, SCREEN_WIDTH - 12, 36)];
+    idButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 116, SCREEN_WIDTH - 12, 36)];
     [idButton setTitle:@"通过ID添加手表" forState:UIControlStateNormal];
     [idButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [idButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];
@@ -47,8 +47,7 @@
     [idButton addTarget:self action:@selector(addWatchByID) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:idButton];
-    
-    codeButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 116, SCREEN_WIDTH - 12, 36)];
+    codeButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 74, SCREEN_WIDTH - 12, 36)];
     [codeButton setTitle:@"扫描二维码添加手表" forState:UIControlStateNormal];
     [codeButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [codeButton setTitleColor:DEFAULT_FONT_COLOR forState:UIControlStateHighlighted];

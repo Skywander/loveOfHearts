@@ -41,9 +41,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    [mapView removeOverlays:mapView.overlays];
-    [mapView removeAnnotations:mapView.annotations];
 }
 
 - (void)initUI {
@@ -67,6 +64,9 @@
     myMapview.annotationImage = [UIImage imageNamed:@"defaultanimationView"];
     
     mapView = myMapview.mapView;
+    
+    [mapView removeOverlays:mapView.overlays];
+    [mapView removeAnnotations:mapView.annotations];
     
     [self.view addSubview:myMapview];
     [self.view sendSubviewToBack:myMapview];
@@ -147,7 +147,9 @@
     
     NSString *fenceData;
     
-    for (int i = 0; i < tapcount; i++) {
+    int i = 0;
+    
+    for (i = 0; i < tapcount; i++) {
         double pointX =  touchPoints[i].latitude;
         double pointY = touchPoints[i].longitude;
         
@@ -158,6 +160,14 @@
         
         fenceData = [NSString stringWithFormat:@"%@;%@",fenceData,tempStr];
     }
+    
+    if (i < 3) {
+        [JKAlert showMessage:@"请圈定围栏(至少需要3个点)"];
+        
+        return;
+    }
+    
+    
     NewFenceMessage *fenceMessage = [NewFenceMessage new];
     
     fenceMessage.fenceData = fenceData;

@@ -39,7 +39,7 @@
     
     //头像
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[AccountMessage sharedInstance].image];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     
     [imageView setFrame:CGRectMake(SCREEN_WIDTH - 48, 0, 42, 42)];
     

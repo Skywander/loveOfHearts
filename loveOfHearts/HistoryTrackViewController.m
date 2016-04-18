@@ -17,9 +17,6 @@
 
 @interface HistoryTrackViewController()<IQActionSheetPickerViewDelegate>
 {
-    
-    UIButton *searchButton;
-    
     IQActionSheetPickerView *picker;
     
     MAMapView *mapView;
@@ -72,22 +69,6 @@
     
     [navigation addSubview:dateButton];
     
-    //搜索
-    
-    searchButton = [UIButton new];
-    
-    [searchButton setFrame:CGRectMake(SCREEN_WIDTH - NAVIGATION_HEIGHT, 0, NAVIGATION_HEIGHT, NAVIGATION_HEIGHT)];
-    
-    [searchButton setTitle:@"搜索" forState:UIControlStateNormal];
-    
-    [searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [searchButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    
-    [searchButton addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
-    
-    [navigation addSubview:searchButton];
-    
     [self initDatePicker];
     
     [self initMapview];
@@ -125,10 +106,7 @@
     formatter.dateFormat = @"YYYY-MM-dd";
     
     [dateButton setTitle:[formatter stringFromDate:date] forState:UIControlStateNormal];
-}
-
-
-- (void)search{
+    
     [mapView removeOverlays:mapView.overlays];
     [mapView removeAnnotations:mapView.annotations];
     
@@ -143,31 +121,22 @@
     NSLog(@"paramater : %@",paramater);
     
     [Networking getHistoryTrack:paramater block:^(NSDictionary *dict) {
+        
+        NSLog(@"returnDict : %@",dict);
+        
         NSArray *dataArray = [dict objectForKey:@"data"];
         
-        NSMutableArray *pointsArray = [NSMutableArray new];
-        
-        NSLog(@"pointArray : %@",pointsArray);
-        
-        if (pointsArray.count < 1) {
+        if (dataArray.count < 1) {
             [JKAlert showMessage:@"没有历史记录"];
             
             return ;
         }
+    
+        [mymapView showHistoryTrack:[NSMutableArray arrayWithArray:dataArray]];
         
-        for (NSDictionary *tempDict in dataArray) {
-            NSString *locationLat = [tempDict objectForKey:@"lat"];
-            
-            NSString *locationLon = [tempDict objectForKey:@"lng"];
-            
-            [pointsArray addObject:locationLat];
-            [pointsArray addObject:locationLon];
-            
-        }
-        [mymapView showHistoryTrack:pointsArray];
-
         
     }];
+
 }
 
 - (void)chooseDate{

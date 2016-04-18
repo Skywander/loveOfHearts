@@ -56,7 +56,7 @@
     
     pedo = accountMessage.pedo;
     
-    if ([pedo isEqualToString:@" "] || pedo == NULL) {
+    if (pedo == NULL) {
         pedo = @"0";
     }
     
@@ -132,6 +132,12 @@
 }
 
 - (void)clickSwitch:(UISwitch *)sender{
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     if (sender.isOn) {
         switsState[sender.tag] = @"1";
     }
@@ -147,7 +153,6 @@
                                };
         [Command commandWithAddress:@"watch_pedo" andParamater:dict block:^(NSInteger type) {
             if (type == 100) {
-                accountMessage.temppedo = [switsState objectAtIndex:0];;
             }
         }];
     }
@@ -169,7 +174,6 @@
         
         [Command commandWithAddress:@"watch_turnSwitch" andParamater:dict block:^(NSInteger type) {
             if (type == 100) {
-                accountMessage.tempturn = timeString;
             };
         }];
     }

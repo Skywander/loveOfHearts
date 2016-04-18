@@ -38,6 +38,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self initNavigation];
+    
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         NSLog(@"watchMessage: %@",dict);
         
@@ -99,7 +103,7 @@
 
     [self.view addSubview:phoneListView];
     
-    [self initNavigation];
+    [self.view sendSubviewToBack:phoneListView];
 }
 - (void)initNavigation{
     
@@ -110,7 +114,6 @@
     [navigationView setDelegate:self];
     
     [self.view addSubview:navigationView];
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,14 +127,16 @@
     [cell setBackgroundColor:DEFAULT_COLOR];
     
     if ([indexPath section] == 0) {
-        UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(1, 2, 60,(SCREEN_HEIGHT - 100)/10 - 4)];
+        UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(1, 2, 65,(SCREEN_HEIGHT - 150)/10 - 4)];
         
         [_label setText:[NSString stringWithFormat:@"白名单%ld",(long)[indexPath row] + 1]];
                 
-        [_label setFont:[UIFont systemFontOfSize:14]];
+        [_label setFont:[UIFont systemFontOfSize:15]];
+        
+        [_label setTextAlignment:NSTextAlignmentCenter];
         
         
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(60, 2, SCREEN_WIDTH - 74, (SCREEN_HEIGHT - 100) / 10 - 4)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(65, 2, SCREEN_WIDTH - 74, (SCREEN_HEIGHT - 150) / 10 - 4)];
         
         if (phoneNumbersList.count > [indexPath row]) {
             
@@ -172,6 +177,13 @@
 
 - (void)clickNavigationRightView{
     
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
+    
     phoneNumbersOne = textFields[0].text;
     
     for (int i = 1; i < 10; i ++) {
@@ -188,7 +200,7 @@
                               ];
     [Command commandWithAddress:@"watch_whitelist" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
-            accountMessage.tempwhitelist1 = phoneNumbersOne;
+
         }
     }];
 
@@ -203,7 +215,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (SCREEN_HEIGHT - 100) / 10;
+    return (SCREEN_HEIGHT - 150) / 10;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

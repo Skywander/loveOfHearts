@@ -103,6 +103,13 @@
 }
 
 - (void)addRedFlower {
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     int num = 0;
     if (flower_count) {
         num = [flower_count intValue];
@@ -123,6 +130,13 @@
 }
 
 - (void)clearRedFlowers {
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     flower_count = [NSString stringWithFormat:@"%d",0];
     
     [countLabel setText:[NSString stringWithFormat:@"小红花的数量 : %d",0]];
@@ -132,6 +146,7 @@
 }
 
 - (void)makeSureChange{
+    
 
     NSDictionary *dict = @{
                             @"userId":accountMessage.userId,
@@ -141,10 +156,7 @@
     
     [Command commandWithAddress:@"watch_flower" andParamater:dict block:^(NSInteger type) {
         if (type == 100) {
-            accountMessage.tempflower = flower_count;
         }
     }];
-    
-    accountMessage.tempflower = flower_count;
 }
 @end

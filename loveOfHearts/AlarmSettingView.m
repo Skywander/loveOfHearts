@@ -30,6 +30,9 @@
     NSString *secondOn;
     NSString *thirdOn;
     
+    CGFloat basicY;
+    CGFloat basicMove;
+    
     //timepicker
     IQActionSheetPickerView *picker;
     
@@ -41,6 +44,11 @@
 @synthesize alarmArray,switsState;
 - (void)viewDidLoad{
     [super viewDidLoad];
+    
+    Navigation *navigation = [Navigation new];
+    [self.view addSubview:navigation];
+    
+    [self.view setBackgroundColor:DEFAULT_COLOR];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         NSLog(@"watchMessage: %@",dict);
@@ -103,11 +111,8 @@
 - (void)initUI {
     [self.view setBackgroundColor:DEFAULT_COLOR];
     
-    Navigation *navigation = [Navigation new];
-    [self.view addSubview:navigation];
-    
-    CGFloat basicY = 70;
-    CGFloat basicMove = 54;
+    basicY = 70;
+    basicMove = 54;
     
     firstAlarm = [self buttonWthName:@"00:00   " andPointY:basicY];
     
@@ -134,6 +139,15 @@
     [button.layer setBorderColor:[UIColor grayColor].CGColor];
     [button.layer setBorderWidth:0.3f];
     
+    if (![name isEqualToString:@"确定"]) {
+        
+        UIImageView *clockImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"clock"]];
+        
+        [clockImage setFrame:CGRectMake(20, 10, basicMove - 20, basicMove - 20)];
+        
+        [button addSubview:clockImage];
+
+    }
 
     if (y != 0) {
         [button addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -180,7 +194,14 @@
 }
 
 - (void)clickSureButton {
-    NSString *timeString = [NSString stringWithFormat:@"%@-%@-1-0000000,%@-%@-1-0000000,%@-%@-1-0000000",firstAlarm.titleLabel.text,[switsState objectAtIndex:0],secondAlarm.titleLabel.text,[switsState objectAtIndex:1],thirdAlarm.titleLabel.text,[switsState objectAtIndex:2]];
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
+    NSString *timeString = [NSString stringWithFormat:@"%@-%@-1-1111111,%@-%@-1-1111111,%@-%@-1-1111111",firstAlarm.titleLabel.text,[switsState objectAtIndex:0],secondAlarm.titleLabel.text,[switsState objectAtIndex:1],thirdAlarm.titleLabel.text,[switsState objectAtIndex:2]];
     
     NSDictionary *paramater = @{
                                 @"userId":[[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"],
@@ -191,8 +212,6 @@
     [Command commandWithAddress:@"watch_clock" andParamater:paramater block:^(NSInteger type) {
         if (type == 100) {
             
-            accountMessage.tempclock = timeString;
-
         }
     }];
 }
@@ -217,15 +236,5 @@
             break;
     }
 }
-
-//-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-//{
-//    return YES;
-//}
-//
-//-(BOOL)shouldAutorotate
-//{
-//    return YES;
-//}
 
 @end

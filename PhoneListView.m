@@ -38,6 +38,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    Navigation *navigationView = [Navigation new];
+    [navigationView setDelegate:self];
+    [navigationView addRightViewWithName:@"保存"];
+    [self.view addSubview:navigationView];
+
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         NSLog(@"watchMessage: %@",dict);
         
@@ -73,11 +80,7 @@
     [listView setDataSource:self];
     [listView setDelegate:self];
     [self.view addSubview:listView];
-    
-    Navigation *navigationView = [Navigation new];
-    [navigationView setDelegate:self];
-    [navigationView addRightViewWithName:@"保存"];
-    [self.view addSubview:navigationView];
+    [self.view sendSubviewToBack:listView];
     
     backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [backView setBackgroundColor:[UIColor clearColor]];
@@ -94,7 +97,7 @@
     }
     if ([indexPath section] == 0) {
         
-        UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(1, 1, (SCREEN_WIDTH  - 15)/ 3,(SCREEN_HEIGHT - 100) / 10 - 2)];
+        UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(1, 1, (SCREEN_WIDTH  - 15)/ 3,(SCREEN_HEIGHT - 150) / 10 - 2)];
         [nameField setDelegate:self];
         [nameField setBackgroundColor:[UIColor whiteColor]];
         [nameField setKeyboardType:UIKeyboardTypeNumberPad];
@@ -110,7 +113,7 @@
         
         [cell addSubview:nameField];
         
-        UITextField *phoneField = [[UITextField alloc] initWithFrame:CGRectMake(2 + (SCREEN_WIDTH - 15)/ 3, 1, (SCREEN_WIDTH - 15)/ 3 * 2, (SCREEN_HEIGHT - 100) / 10)];
+        UITextField *phoneField = [[UITextField alloc] initWithFrame:CGRectMake(2 + (SCREEN_WIDTH - 15)/ 3, 1, (SCREEN_WIDTH - 15)/ 3 * 2, (SCREEN_HEIGHT - 150) / 10)];
         [phoneField setDelegate:self];
         [phoneField setBackgroundColor:[UIColor whiteColor]];
         [phoneField setKeyboardType:UIKeyboardTypeNumberPad];
@@ -153,10 +156,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (SCREEN_HEIGHT - 100) / 10;
+    return (SCREEN_HEIGHT - 150) / 10;
 }
 
 - (void)clickNavigationRightView{
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
 
     [self.view bringSubviewToFront:backView];
     
@@ -170,12 +180,6 @@
         NSString *nametempStr = nameFields[i].text;
         NSString *phonetempStr = phoneFields[i].text;
         
-        if (phoneFields[i].text.length > 0 && phoneFields[i].text.length != 11) {
-            [JKAlert showMessage:@"输入号码不正确"];
-            pushStringone = [NSString new];
-            [phoneFields[i] becomeFirstResponder];
-            return;
-        }
         
         pushStringone = [NSString stringWithFormat:@"%@,%@,%@",pushStringone,nametempStr,phonetempStr];
     }
@@ -189,7 +193,6 @@
         
         [Command commandWithAddress:@"watch_phb" andParamater:tempDict block:^(NSInteger type) {
             if (type == 100) {
-                [AccountMessage sharedInstance].tempphb = pushStringone;
             }
         }];
     

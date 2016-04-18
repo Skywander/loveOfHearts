@@ -20,6 +20,8 @@
     CGFloat basicMove;
     
     UITextField *widTextField;
+    
+    UITextField *_widTextField;
         
     NSString *relation;
     
@@ -67,6 +69,7 @@
     UIImageView *userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
     [userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
     [widTextField setLeftView:userLeftView];
+    [widTextField setPlaceholder:@"请输入手表Id"];
     [widTextField setLeftViewMode:UITextFieldViewModeAlways];
     [widTextField setBackgroundColor:[UIColor whiteColor]];
     
@@ -76,8 +79,27 @@
     
     [self.view addSubview:widTextField];
     
+    
+    _widTextField = [[UITextField alloc] initWithFrame:CGRectMake(5, basicY + basicMove, SCREEN_WIDTH - 10,40)];
+    
+    [_widTextField.layer setCornerRadius:CORNER_RIDUS];
+    [_widTextField setKeyboardType:UIKeyboardTypeDefault];
+    
+    UIImageView *_userLeftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"username"]];
+    [_userLeftView setFrame:CGRectMake(0, 0, 50, 50)];
+    [_widTextField setLeftView:_userLeftView];
+    [_widTextField setPlaceholder:@"请确认手表Id"];
+    [_widTextField setLeftViewMode:UITextFieldViewModeAlways];
+    [_widTextField setBackgroundColor:[UIColor whiteColor]];
+    
+    if (self.wid) {
+        [_widTextField setText:self.wid];
+    }
+    
+    [self.view addSubview:_widTextField];
+    
     //下拉列表
-    self.relationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, basicY + basicMove, SCREEN_WIDTH - 10, 40)];
+    self.relationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, basicY + basicMove * 2, SCREEN_WIDTH - 10, 40)];
     
     [self.relationButton setBackgroundColor:[UIColor whiteColor]];
     
@@ -94,7 +116,7 @@
     
     [self.view addSubview:self.relationButton];
     
-    listView = [[UITableView alloc] initWithFrame:CGRectMake(5, basicMove * 2 + basicY, SCREEN_WIDTH - 10, 360)];
+    listView = [[UITableView alloc] initWithFrame:CGRectMake(5, basicMove * 3 + basicY, SCREEN_WIDTH - 10, 360)];
     listView.dataSource = self;
     listView.delegate = self;
     listView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -123,27 +145,42 @@
 
 - (void)clickNavigationRightView{
     
+    if (![widTextField.text isEqualToString:_widTextField.text]) {
+        [JKAlert showMessage:@"两次输入不一致"];
+        
+        return;
+    }
+    NSString *relations = self.relationButton.titleLabel.text;
+    
+    if ([relations isEqualToString:@"选择关系"]) {
+        relations = @"其它";
+    }
+
+    
     NSInteger type = [self.relationArray indexOfObject:self.relationButton.titleLabel.text];
     
     NSString *typeString = [NSString stringWithFormat:@"%ld",type];
     
-    
     NSDictionary *dict = @{
                             @"userId":accountMessage.userId,
                             @"wid":widTextField.text,
-                            @"relation":self.relationButton.titleLabel.text,
+                            @"relation":relations,
                             @"type":typeString,
                            };
     
     NSLog(@"dict : %@",dict);
     
-    [Networking uploalDataWithAddress:@"user_addUser" dict:dict block:^(int i) {
-        if (i == 100) {
-            [AccountMessage sharedInstance].wid = widTextField.text;
-        };
+    [Networking addWatchWithParamaters:dict block:^(NSDictionary *dict) {
         
-        if (i == 300) {
-            [JKAlert showMessage:@"不存在该手环"];
+        if ([[dict objectForKey:@"type"] integerValue] == 100) {
+            if ([[dict objectForKey:@"data"] integerValue] == 1) {
+                [JKAlert showMessage:@"绑定成功"];
+            }else{
+                [JKAlert showMessage:@"等待管理员同意"];
+            }
+
+        }else{
+            [JKAlert showMessage:@"绑定失败"];
         }
     }];
 }

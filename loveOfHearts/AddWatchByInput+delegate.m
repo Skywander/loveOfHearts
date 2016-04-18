@@ -39,6 +39,8 @@
     NSString *tempStr = [self.relationArray objectAtIndex:[indexPath row]];
     [self.relationButton setTitle:tempStr forState:UIControlStateNormal];
     
+    [self.listView setHidden:YES];
+    
     return;
 }
 

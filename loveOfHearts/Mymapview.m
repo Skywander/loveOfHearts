@@ -167,8 +167,22 @@ static Mymapview *mymapview;
 
 }
 
-- (void)showHistoryTrack:(NSMutableArray *)pointsArray{
+- (void)showHistoryTrack:(NSMutableArray *)dataArray{
     //空值检测
+    
+    NSMutableArray *pointsArray = [NSMutableArray new];
+    
+    for (NSDictionary *tempDict in dataArray) {
+        NSString *locationLat = [tempDict objectForKey:@"lat"];
+        
+        NSString *locationLon = [tempDict objectForKey:@"lng"];
+        
+        [pointsArray addObject:locationLat];
+        [pointsArray addObject:locationLon];
+        
+    }
+
+    
     if (pointsArray.count <= 0) {
         NSLog(@"track not exist");
         
@@ -181,6 +195,8 @@ static Mymapview *mymapview;
     
     [mapView addAnnotation:basePoint];
     //对之后的点进行遍历
+    
+    
     for (int i = 2; i < pointsArray.count; i = i + 2) {
         //获取遍历点 到 基点的距离
         MAPointAnnotation *currentPoint = [[MAPointAnnotation alloc] init];
@@ -199,6 +215,8 @@ static Mymapview *mymapview;
             commonPolylineCoords[1] = currentPoint.coordinate;
             
             MAPolyline *polyline = [MAPolyline polylineWithCoordinates:commonPolylineCoords count:2];
+            
+            self.annotationImage = [UIImage imageNamed:[NSString stringWithFormat:@"animationView_%@",[[dataArray objectAtIndex:i / 2] objectForKey:@"islocation"]]];
             
             [mapView addAnnotation:currentPoint];
             [mapView addOverlay:polyline];

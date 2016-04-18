@@ -259,7 +259,6 @@
                 
                 HomeViewController *centerController = [HomeViewController new];
                 
-                
                 deckController = [[IIViewDeckController alloc] initWithCenterViewController:[[UINavigationController alloc] initWithRootViewController:centerController]
                                                                          leftViewController:[IISideController autoConstrainedSideControllerWithViewController:
                                                                                              leftController]
@@ -267,12 +266,13 @@
                 
                 deckController.navigationController.navigationBar.hidden = YES;
                 
+                deckController.rightSize = SCREEN_WIDTH * 1 / 3.0;
+                
                 [self presentViewController:deckController animated:YES completion:^{
                     ;
                 }];
             }else{
                 [JKAlert showMessage:@"用户名或密码错误"];
-
             }
 
         }];

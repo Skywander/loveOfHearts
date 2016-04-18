@@ -262,6 +262,14 @@
                            @"maxResult":[NSString stringWithFormat:@"%d",10]
                            };
     [Networking getallrecordesWithDict:dict block:^(NSDictionary *dict) {
+        
+        if (![[dict objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
+            
+            [refreshViewController endRefreshing];
+
+            return ;
+        }
+        
         NSArray *dataArray = [dict objectForKey:@"data"];
         
         getVoiceStartLocation += 10;
@@ -364,6 +372,17 @@
     }
     
     if ([[[messageArrays objectAtIndex:messageArrays.count - [indexPath row] - 1] objectForKey:@"fromId"] isEqualToString:accountMessage.wid]) {
+
+        [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayLeftView];
+        
+        _voicePlayLeftView.animationImages = _voicePlayLeftImages;
+        
+        _voicePlayLeftView.animationDuration = 1;
+        
+        _voicePlayLeftView.animationRepeatCount = 10;
+        
+        [_voicePlayLeftView startAnimating];
+    }else{
         
         [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayRightView];
         
@@ -374,18 +393,6 @@
         _voicePlayRightView.animationRepeatCount = 10;
         
         [_voicePlayRightView startAnimating];
-
-    }else{
-        
-        [[tableView cellForRowAtIndexPath:indexPath] addSubview:_voicePlayLeftView];
-        
-        _voicePlayLeftView.animationImages = _voicePlayLeftImages;
-        
-        _voicePlayLeftView.animationDuration = 1;
-        
-        _voicePlayLeftView.animationRepeatCount = 10;
-        
-        [_voicePlayLeftView startAnimating];
 
     }
 }

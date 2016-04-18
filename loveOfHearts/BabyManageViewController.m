@@ -207,6 +207,16 @@
                 
                 accountMessage.wid = wid;
                 
+                [deviceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    NSDictionary *tempDict = (NSDictionary *)obj;
+                    
+                    if ([[tempDict objectForKey:@"wid"] isEqualToString:wid]) {
+                        [AccountMessage sharedInstance].admin = [tempDict objectForKey:@"admin"];
+                        
+                        [AccountMessage sharedInstance].isAdmin = [[tempDict objectForKey:@"admin"] integerValue];
+                    }
+                }];
+                
                 [accountMessage setWatchInfor:dict];
                 //创建通知
                 NSNotification *notification =[NSNotification notificationWithName:@"HomeviewUpdateImage" object:imageView.image userInfo:nil];

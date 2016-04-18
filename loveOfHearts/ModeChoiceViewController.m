@@ -155,6 +155,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+
     [[tableView.visibleCells objectAtIndex:[indexPath row]] addSubview:selectedView];
     
     NSString *space = [NSString new];

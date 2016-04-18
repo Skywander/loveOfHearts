@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
-               BuildableName = "loveOfHearts.app"
-               BlueprintName = "loveOfHearts"
-               ReferencedContainer = "container:loveOfHearts.xcodeproj">
+               BlueprintIdentifier = "D398F7631CABDF0100B8F236"
+               BuildableName = "TEST002"
+               BlueprintName = "TEST002"
+               ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,34 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3FEEFAC1C90FF7A00300710"
-               BuildableName = "loveOfHeartsTests.xctest"
-               BlueprintName = "loveOfHeartsTests"
-               ReferencedContainer = "container:loveOfHearts.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3FEEFB71C90FF7A00300710"
-               BuildableName = "loveOfHeartsUITests.xctest"
-               BlueprintName = "loveOfHeartsUITests"
-               ReferencedContainer = "container:loveOfHearts.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
-            BuildableName = "loveOfHearts.app"
-            BlueprintName = "loveOfHearts"
-            ReferencedContainer = "container:loveOfHearts.xcodeproj">
+            BlueprintIdentifier = "D398F7631CABDF0100B8F236"
+            BuildableName = "TEST002"
+            BlueprintName = "TEST002"
+            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -75,19 +55,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
-            BuildableName = "loveOfHearts.app"
-            BlueprintName = "loveOfHearts"
-            ReferencedContainer = "container:loveOfHearts.xcodeproj">
+            BlueprintIdentifier = "D398F7631CABDF0100B8F236"
+            BuildableName = "TEST002"
+            BlueprintName = "TEST002"
+            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "NO">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -101,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
-            BuildableName = "loveOfHearts.app"
-            BlueprintName = "loveOfHearts"
-            ReferencedContainer = "container:loveOfHearts.xcodeproj">
+            BlueprintIdentifier = "D398F7631CABDF0100B8F236"
+            BuildableName = "TEST002"
+            BlueprintName = "TEST002"
+            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

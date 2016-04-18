@@ -73,6 +73,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:DEFAULT_COLOR];
+    
+    Navigation *navigation = [Navigation new];
+    
+    [navigation addRightViewWithName:@"保存"];
+    
+    [navigation setDelegate:self];
+    
+    [self.view addSubview:navigation];
+    
+    
     NSDictionary *paramater = @{
                                 @"wid":[AccountMessage sharedInstance].wid
                                 };
@@ -130,15 +141,6 @@
 
 
 - (void)initUI {
-    [self.view setBackgroundColor:DEFAULT_COLOR];
-    
-    Navigation *navigation = [Navigation new];
-    
-    [navigation addRightViewWithName:@"保存"];
-    
-    [navigation setDelegate:self];
-    
-    [self.view addSubview:navigation];
     
     basicMove = 55;
     basicY = 144;
@@ -342,46 +344,52 @@
 
 - (void)clickNavigationRightView{
     
+    if ([AccountMessage sharedInstance].isAdmin != 1) {
+        [JKAlert showMessage:@"您不是管理员"];
+        
+        return;
+    }
+    
     NSLog(@"head : %@",head);
     
     if (head == NULL) {
-        head = @" ";
+        head = @"";
     }
     
     NSString *birthday = birthdaySubButton.titleLabel.text;
     
     if (birthday == NULL) {
-        birthday = @" ";
+        birthday = @"";
     }
     
     NSString *remark = remarkTextField.text;
     
     if (remark == NULL) {
-        remark = @" ";
+        remark = @"";
     }
     
     NSString *height = heightTextField.text;
     
     if (height == NULL) {
-        height = @" ";
+        height = @"";
     }
     
     NSString *weight = weightTextField.text;
     
     if (weight == NULL) {
-        weight = @" ";
+        weight = @"";
     }
     
     NSString *usim = usimTextField.text;
     
     if (usim == NULL) {
-        usim = @" ";
+        usim = @"";
     }
     
     NSString *wsim = wsimTextField.text;
     
     if (wsim == NULL) {
-        wsim = @" ";
+        wsim = @"";
     }
     
     NSDictionary *paramater = @{
@@ -403,6 +411,9 @@
         if (i == 100) {
             
             [JKAlert showMessage:@"成功更新宝贝信息"];
+            
+            accountMessage.babyname = remark;
+            
             
             if (UploadImageSuccess) {
                 accountMessage.image = portraitImage;

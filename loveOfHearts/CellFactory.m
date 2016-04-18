@@ -18,9 +18,9 @@
     UIView *view;
     
     if ([fromId isEqualToString:[AccountMessage sharedInstance].userId]) {
-        view = [LeftCellView initWithDict:dict];
-    } else{
         view = [RightCellView initWithDict:dict];
+    } else{
+        view = [LeftCellView initWithDict:dict];
     }
     
     return view;

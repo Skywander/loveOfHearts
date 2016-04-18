@@ -96,10 +96,8 @@
         
     if ([self.viewDeckController isSideClosed:IIViewDeckLeftSide]) {
         [self.viewDeckController toggleRightViewAnimated:YES];
-        [self.topView.expandButton setBackgroundImage:[UIImage imageNamed:@"-"] forState:UIControlStateNormal];
     }else{
         [self.viewDeckController closeRightViewAnimated:YES];
-        [self.topView.expandButton setBackgroundImage:[UIImage imageNamed:@"+"] forState:UIControlStateNormal];
     }
 }
 @end

@@ -213,6 +213,7 @@ static const void *AlertObject = &AlertObject;
 
 + (void)showMessage:(NSString *)title message:(NSString *)message
 {
+    
     if (message == nil)
     {
         return;
@@ -221,11 +222,11 @@ static const void *AlertObject = &AlertObject;
     JKAlert *alert = [[JKAlert alloc]initWithTitle:title andMessage:message style:STYLE_ALERT];
     [alert addButtonWithTitle:@"确定"];
     [alert show];
-    
 }
 + (void)showMessage:(NSString *)message{
-    [[self class]showMessage:@"提示" message:message];
     
+    [[self class]showMessage:@"提示" message:message];
+
 }
 
 
@@ -238,6 +239,8 @@ static const void *AlertObject = &AlertObject;
     }
     
     [[self class]showMessage:@"提示" message:[messageArray objectAtIndex:messageType - 5]];
+    
+    
 
 }
 @end

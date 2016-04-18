@@ -8,8 +8,6 @@
 
 #import "PasswordViewController.h"
 #import <SMS_SDK/SMSSDK.h>
-#import "NewPasswordViewController.h"
-#import "ChangePassword.h"
 #import "Command.h"
 #import "Networking.h"
 #define HIGH_COLOR [UIColor colorWithRed:226/255.0 green:226/255.0 blue:226/255.0 alpha:1]

@@ -58,11 +58,16 @@
     [AccountMessage sharedInstance].showHomeView = YES;
     
     self.navigationController.navigationBarHidden = YES;
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
     [self initMapView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
+    [AccountMessage sharedInstance].homeAnimationImage = mapView.annotationImage;
+
     
     [AccountMessage sharedInstance].showHomeView = NO;
     
@@ -102,14 +107,21 @@
     
     mapView.mydelegate = self;
     
+    [mapView.mapView removeOverlays:mapView.mapView.overlays];
+    [mapView.mapView removeAnnotations:mapView.mapView.annotations];
+
+    
     [self.view addSubview:mapView];
     
     [self.view sendSubviewToBack:mapView];
     
-    if(mapView.annotationImage == NULL){
+    if([AccountMessage sharedInstance].homeAnimationImage != nil){
         
+        NSLog(@"image not nil");
+        
+        mapView.annotationImage = [AccountMessage sharedInstance].homeAnimationImage;
+    }else{
         mapView.annotationImage = [UIImage imageNamed:@"animationView"];
-
     }
     
     [mapView searchPointWithLat:lat andLon:lon];
@@ -183,24 +195,25 @@
     }
     
     
-    NSDictionary *paramater = @{
-                                @"wid":[AccountMessage sharedInstance].wid
-                                };
+//    NSDictionary *paramater = @{
+//                                @"wid":[AccountMessage sharedInstance].wid
+//                                };
     
-    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
-        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
-            
-            AccountMessage *accountMessage = [AccountMessage sharedInstance];
-            
-            [accountMessage setBabyMessage:dict];
-    
-        }else{
-            [[AccountMessage sharedInstance] initBabyMesssage];
-        }
-        [DB getImageWithWatchId:[AccountMessage sharedInstance].wid filename:[AccountMessage sharedInstance].head block:^(UIImage *image) {
-            [topView setImage:image];
-        }];
-    }];
+//    [Command commandWithAddress:@"user_getBabyInfo" andParamater:paramater dictBlock:^(NSDictionary *dict) {
+//        if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {
+//            
+//            AccountMessage *accountMessage = [AccountMessage sharedInstance];
+//            
+//            [accountMessage setBabyMessage:dict];
+//    
+//        }else{
+//            [[AccountMessage sharedInstance] initBabyMesssage];
+//        }
+//        
+//        [DB getImageWithWatchId:[AccountMessage sharedInstance].wid filename:[AccountMessage sharedInstance].head block:^(UIImage *image) {
+//            [topView setImage:image];
+//        }];
+//    }];
     
     [Networking getWatchMessageWithParamater:[AccountMessage sharedInstance].wid block:^(NSDictionary *dict) {
         if (![dict isEqual:[NSNull null]] && [dict isKindOfClass:[NSDictionary class]]) {

@@ -27,6 +27,8 @@
     
     NSString *type;
     NSString *fencename;
+    
+    BOOL hasCommit;
 }
 
 @end
@@ -120,6 +122,11 @@
 }
 
 - (void)clickNavigationRightView{
+    
+    if (hasCommit) {
+        return;
+    }
+    
     AccountMessage *accountMessage = [AccountMessage sharedInstance];
     
     NSDictionary *paramater = @{
@@ -132,7 +139,12 @@
                                 };
     [Command commandWithAddress:@"fence_addFence" andParamater:paramater block:^(NSInteger _type) {
         if (_type == 100) {
+            hasCommit = YES;
             [JKAlert showMessage:@"创建围栏成功"];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                ;
+            }];
         }else{
             [JKAlert showMessage:@"创建围栏失败"];
         }

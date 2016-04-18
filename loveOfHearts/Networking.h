@@ -24,7 +24,7 @@ typedef void (^getInt)(int i);
 
 + (void)loginwithUsername:(NSString *)username and:(NSString *)password block:(getDict)getDict;
 
-+ (void)addWatchWithParamaters:(NSDictionary *)paramaters;
++ (void)addWatchWithParamaters:(NSDictionary *)paramaters block:(getDict)getDict;
 
 + (void)getDevicesMessageWithParamaters:(NSDictionary *)paramater  block:(getDict)getDict;
 
