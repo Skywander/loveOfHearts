@@ -13,7 +13,7 @@
 
 + (UIView *)initWithDict:(NSDictionary *)dict{
         
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(6, 0, SCREEN_WIDTH - 12, 62)];
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(3, 0, SCREEN_WIDTH - 6, 62)];
     
     [leftView setBackgroundColor:DEFAULT_COLOR];
     
@@ -40,9 +40,10 @@
     
     [imageView setClipsToBounds:YES];
     
-    [leftView addSubview:imageView];
-    
     [leftView addSubview:dateLabel];
+    
+    [leftView addSubview:imageView];
+
     //play
     UIImageView *playView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"voice_right0"]];
     

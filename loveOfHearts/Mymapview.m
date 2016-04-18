@@ -184,7 +184,6 @@ static Mymapview *mymapview;
 
     
     if (pointsArray.count <= 0) {
-        NSLog(@"track not exist");
         
         return;
     }

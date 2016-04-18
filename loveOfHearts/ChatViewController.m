@@ -261,11 +261,17 @@
                            @"firstResult":[NSString stringWithFormat:@"%ld",(long)getVoiceStartLocation],
                            @"maxResult":[NSString stringWithFormat:@"%d",10]
                            };
+    
+    NSLog(@"%@",dict);
+    
     [Networking getallrecordesWithDict:dict block:^(NSDictionary *dict) {
         
-        if (![[dict objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"dict : %@,response",dict);
+        
+        if ([[dict objectForKey:@"data"] isKindOfClass:[NSString class]]) {
             
             [refreshViewController endRefreshing];
+            
 
             return ;
         }

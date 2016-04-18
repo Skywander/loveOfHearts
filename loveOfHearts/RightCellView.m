@@ -45,6 +45,10 @@
     
     [imageView.layer setCornerRadius:21];
     
+    [imageView.layer setBorderColor:[UIColor grayColor].CGColor];
+    
+    [imageView.layer setBorderWidth:0.3f];
+    
     [imageView setClipsToBounds:YES];
     
     [rightView addSubview:imageView];
