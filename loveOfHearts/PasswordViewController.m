@@ -297,7 +297,7 @@
     
 }
 - (void)touchInside:(UIButton *)sender{
-    [sender setBackgroundColor:HIGH_COLOR];
+    [sender setBackgroundColor:[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0]];
 }
 - (void)checkCode{
     [self.view endEditing:YES];

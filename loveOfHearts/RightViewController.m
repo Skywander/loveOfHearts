@@ -19,6 +19,10 @@
 {
     NSArray *cellNames;
     
+    CGFloat _basicCellWidth;
+    
+    CGFloat _basicCellHeight;
+    
 }
 @end
 
@@ -34,6 +38,10 @@
 
 - (void)initData{
     cellNames = [NSArray arrayWithObjects:@"babyManage",@"authority",@"relativeNumber",@"phoneText",@"whitelist",@"fences",@"historyTrack",@"findWatch",@"otherSetting",@"exit", nil];
+    
+    _basicCellHeight = (SCREEN_HEIGHT - 100) / 10.0;
+    
+    _basicCellWidth = _basicCellHeight * 456 / 95;
 }
 
 - (void) initUI {
@@ -46,7 +54,7 @@
     [self.view addSubview:navigation];
     
     //列表
-    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 90, SCREEN_WIDTH * 2 / 3.0 - 20, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
+    UITableView *listView = [[UITableView alloc] initWithFrame:CGRectMake(10, 90, _basicCellWidth, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     listView.scrollEnabled = NO;
     [listView setBackgroundColor:DEFAULT_COLOR];
     listView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -68,7 +76,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return (SCREEN_HEIGHT - 150) / 10.0;
+    return _basicCellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

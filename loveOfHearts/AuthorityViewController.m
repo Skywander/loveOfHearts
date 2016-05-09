@@ -43,6 +43,9 @@
 
 
 - (void)initNavigation{
+    
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     Navigation *naviView = [Navigation new];
     
     [self.view addSubview:naviView];

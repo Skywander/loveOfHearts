@@ -239,7 +239,7 @@
 
 
 - (void)touchInside:(UIButton *)sender{
-    [sender setBackgroundColor:DEFAULT_COLOR];
+    [sender setBackgroundColor:[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0]];
 }
 - (void)getCode{
     

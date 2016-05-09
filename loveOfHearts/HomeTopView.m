@@ -10,6 +10,7 @@
 #import "DB.h"
 #import "AccountMessage.h"
 #import "Command.h"
+#import <Masonry/Masonry.h>
 
 #define SELF_HEIGHT self.frame.size.height
 
@@ -114,17 +115,26 @@
     
     //addView
     expandButton = [UIButton new];
+
+    [expandButton setBackgroundImage:[UIImage imageNamed:@"read_more"] forState:UIControlStateNormal];
     
-    [expandButton setFrame:CGRectMake(SCREEN_WIDTH - BUTTON_WIDTH - 10,(SELF_HEIGHT - BUTTON_WIDTH) / 2,BUTTON_WIDTH, BUTTON_WIDTH)];
-    [expandButton setTitle:@"菜单" forState:UIControlStateNormal];
+    [expandButton setBackgroundImage:[UIImage imageNamed:@"read_more_click"] forState:UIControlStateHighlighted];
     
-    [expandButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    
-    [expandButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    
+    [expandButton setClipsToBounds:YES];
+        
     [expandButton addTarget:self action:@selector(expand) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:expandButton];
+    
+    [expandButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).with.offset(-10);
+        
+        make.top.equalTo(self).with.offset(15);
+        
+        make.bottom.equalTo(self).with.offset(-15);
+        
+        make.width.equalTo(@(SELF_HEIGHT - 30));
+    }];
     
     //powerView
     powerView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 4 + BUTTON_WIDTH, BUTTON_WIDTH, self.frame.size.height - 4 - BUTTON_WIDTH)];

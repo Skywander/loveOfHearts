@@ -36,6 +36,10 @@
     NSString *userPassword;
     
     IIViewDeckController* deckController;
+    
+    CGFloat _basicCellWidth;
+    
+    CGFloat _basicCellHeiht;
 }
 
 @end
@@ -58,6 +62,11 @@
     NSString *tempID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userAccount"];
     
     NSString *tempPassword = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@.password",tempID]];
+    
+    
+    _basicCellHeiht = (SCREEN_HEIGHT - 100.0) / 10;
+    
+    _basicCellWidth = _basicCellHeiht * 456.0 / 95;
     
     
     if (tempID && tempPassword) {
@@ -169,7 +178,7 @@
     [logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).with.offset(100);
         make.right.equalTo(self.view).with.offset(-100);
-        make.top.equalTo(self.view).with.offset(70);
+        make.bottom.equalTo(backView).with.offset(-190);
         make.height.equalTo(@(SCREEN_WIDTH - 200));
     }];
     
@@ -266,7 +275,10 @@
                 
                 deckController.navigationController.navigationBar.hidden = YES;
                 
-                deckController.rightSize = SCREEN_WIDTH * 1 / 3.0;
+                
+                NSLog(@"basicCellWidth : %f",_basicCellWidth);
+                
+                deckController.rightSize = SCREEN_WIDTH - _basicCellWidth - 20;
                 
                 [self presentViewController:deckController animated:YES completion:^{
                     ;
@@ -282,7 +294,7 @@
 
 
 - (void)touchInsideButton:(UIButton *)sender{
-    [sender setBackgroundColor:DEFAULT_COLOR];
+    [sender setBackgroundColor:[UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1.0]];
 }
 
 - (void)register{
