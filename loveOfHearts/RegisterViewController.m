@@ -21,6 +21,7 @@
     UIView *codeView;
     UIButton *codeButton;
     UIButton *sureButton;
+    UIButton *delegateButton;
     
     //验证码
     NSMutableArray* _areaArray;
@@ -100,6 +101,15 @@
     [sureButton addTarget:self action:@selector(touchInside:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:sureButton];
+    
+    
+    delegateButton = [UIButton new];
+    [delegateButton setBackgroundColor:DEFAULT_COLOR];
+    [delegateButton setTitle:@"注册即视为同意用户协议" forState:UIControlStateNormal];
+    [delegateButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [delegateButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [self.view addSubview:delegateButton];
+    
 }
 
 - (void)initNavigation{
@@ -197,6 +207,12 @@
         make.right.equalTo(username);
         make.left.equalTo(username);
         make.top.equalTo(codeView).with.offset(CELL_HEIGHT + OFFSET);
+        make.height.equalTo(@(CELL_HEIGHT));
+    }];
+    [delegateButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(username);
+        make.left.equalTo(username);
+        make.top.equalTo(sureButton).with.offset(CELL_HEIGHT + OFFSET);
         make.height.equalTo(@(CELL_HEIGHT));
     }];
 }

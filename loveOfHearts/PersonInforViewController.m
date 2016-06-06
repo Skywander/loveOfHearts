@@ -182,7 +182,7 @@
     
     weightButton = [self buttonWithName:@"   体重" andPointY:basicY + basicMove * 5];
     
-    wsimButton = [self buttonWithName:@"  手表SMI卡号" andPointY:basicY + basicMove * 6];
+    wsimButton = [self buttonWithName:@"  手表SIM卡号" andPointY:basicY + basicMove * 6];
     
     usimButton = [self buttonWithName:@"   手机SIM卡号" andPointY:basicY + basicMove * 7];
     
