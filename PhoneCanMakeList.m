@@ -177,6 +177,8 @@
 
 - (void)clickNavigationRightView{
     
+    NSLog(@"click");
+    
     if ([AccountMessage sharedInstance].isAdmin != 1) {
         [JKAlert showMessage:@"您不是管理员"];
         
@@ -200,7 +202,7 @@
                               ];
     [Command commandWithAddress:@"watch_whitelist" andParamater:tempDict block:^(NSInteger type) {
         if (type == 100) {
-
+            NSLog(@"set success");
         }
     }];
 
@@ -220,7 +222,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     currentField = textField;
-    [backView setHidden:NO];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

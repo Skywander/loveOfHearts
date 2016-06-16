@@ -118,7 +118,13 @@
         
     }
     
-    [mapView searchPointWithLat:lat andLon:lon];
+
+    if (lat != 0) {
+        [mapView searchPointWithLat:lat andLon:lon];
+    }else{
+        [mapView searchPointWithLat:45.742445 andLon:126.636379];
+    }
+    
 }
 
 - (void)initHomeMenuView{

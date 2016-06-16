@@ -145,6 +145,14 @@
     basicMove = 55;
     basicY = 144;
     
+    NSLog(@"height : %f",[UIScreen mainScreen].bounds.size.height);
+    
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        basicMove = 42;
+        
+        NSLog(@"height");
+    }
+    
     portraitButton = [[UIButton alloc] initWithFrame:CGRectMake(6, 70, SCREEN_WIDTH - 12, 70)];
     
     [portraitButton setBackgroundColor:[UIColor whiteColor]];
@@ -201,7 +209,7 @@
 
 - (UIButton *)buttonWithName:(NSString *)name andPointY:(CGFloat)y {
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, 50)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(6, y, SCREEN_WIDTH - 12, basicMove - 5)];
     [button setBackgroundColor:[UIColor whiteColor]];
     
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -216,7 +224,7 @@
     
     
     if (y == basicY) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         
         [textField setTextAlignment:NSTextAlignmentRight];
         [textField setTextColor:[UIColor grayColor]];
@@ -228,7 +236,7 @@
         remarkTextField = textField;
     }
     if (y == basicY + basicMove) {
-        channelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        channelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         [channelLabel setText:shouhuan_id];
         
         [channelLabel setTextAlignment:NSTextAlignmentRight];
@@ -238,7 +246,7 @@
     }
     
     if (y == basicY + basicMove * 2) {
-        birthdaySubButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        birthdaySubButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         [birthdaySubButton setTitle:_birthday forState:UIControlStateNormal];
         [birthdaySubButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
         [birthdaySubButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -257,7 +265,7 @@
         [button addSubview:sexSubButton];
     }
     if (y == basicY + basicMove * 4) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         
         [textField setTextAlignment:NSTextAlignmentRight];
         [textField setTextColor:[UIColor grayColor]];
@@ -270,7 +278,7 @@
     }
 
     if (y == basicY + basicMove * 5) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         
         [textField setTextAlignment:NSTextAlignmentRight];
         [textField setTextColor:[UIColor grayColor]];
@@ -283,7 +291,7 @@
     }
 
     if (y == basicY + basicMove * 6) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         
         [textField setTextAlignment:NSTextAlignmentRight];
         [textField setTextColor:[UIColor grayColor]];
@@ -296,7 +304,7 @@
     }
 
     if (y == basicY + basicMove * 7) {
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 50)];
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, basicMove - 5)];
         
         [textField setTextAlignment:NSTextAlignmentRight];
         [textField setTextColor:[UIColor grayColor]];

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D398F7581CABDED000B8F236"
-               BuildableName = "TEST"
-               BlueprintName = "TEST"
-               ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
+               BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
+               BuildableName = "&#x7231;&#x4e4b;&#x5fc3;.app"
+               BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;"
+               ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,21 +28,41 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D3FEEFAC1C90FF7A00300710"
+               BuildableName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xctest"
+               BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;Tests"
+               ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D3FEEFB71C90FF7A00300710"
+               BuildableName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xctest"
+               BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;UITests"
+               ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D398F7581CABDED000B8F236"
-            BuildableName = "TEST"
-            BlueprintName = "TEST"
-            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
+            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
+            BuildableName = "&#x7231;&#x4e4b;&#x5fc3;.app"
+            BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;"
+            ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,12 +75,19 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D398F7581CABDED000B8F236"
-            BuildableName = "TEST"
-            BlueprintName = "TEST"
-            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
+            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
+            BuildableName = "&#x7231;&#x4e4b;&#x5fc3;.app"
+            BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;"
+            ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "NSZombieEnabled"
+            value = "YES"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -74,10 +101,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D398F7581CABDED000B8F236"
-            BuildableName = "TEST"
-            BlueprintName = "TEST"
-            ReferencedContainer = "container:&#x7231;&#x4e4b;&#x5fc3;.xcodeproj">
+            BlueprintIdentifier = "D3FEEF931C90FF7A00300710"
+            BuildableName = "&#x7231;&#x4e4b;&#x5fc3;.app"
+            BlueprintName = "&#x7231;&#x5fc3;&#x5b88;&#x62a4;"
+            ReferencedContainer = "container:&#x7231;&#x5fc3;&#x5b88;&#x62a4;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

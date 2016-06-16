@@ -148,7 +148,7 @@
     
     _voicePlayRightImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"voice_left0"],[UIImage imageNamed:@"voice_left1"],[UIImage imageNamed:@"voice_left2"],[UIImage imageNamed:@"voice_left3"],nil];
     
-    _voicePlayLeftView = [[UIImageView alloc] initWithFrame:CGRectMake(90, 18, 30, 30)];
+    _voicePlayLeftView = [[UIImageView alloc] initWithFrame:CGRectMake(87, 18, 30, 30)];
     
     _voicePlayRightView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 111, 18, 30, 30)];
     
